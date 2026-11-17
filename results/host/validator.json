@@ -1,0 +1,86 @@
+{
+  "kind": "HANDWRITTEN_VALIDATOR_FIXTURES_NOT_MODEL_OUTPUTS",
+  "valid_cases": 3,
+  "valid_accepted": 3,
+  "invalid_cases": 12,
+  "invalid_rejected": 12,
+  "live_llama_rejection_rate": null,
+  "live_llama_fallback_rate": null,
+  "outcomes": [
+    {
+      "expected": "accept",
+      "accepted": true,
+      "rule": "ACCEPTED"
+    },
+    {
+      "expected": "accept",
+      "accepted": true,
+      "rule": "ACCEPTED"
+    },
+    {
+      "expected": "accept",
+      "accepted": true,
+      "rule": "ACCEPTED"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "EMPTY"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "CERTAINTY"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "SENSITIVE_OR_LINK"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "SENSITIVE_OR_LINK"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "UNSUPPORTED_OR_INSTRUCTION"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "UNSUPPORTED_OR_INSTRUCTION"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "CERTAINTY"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "FORMAT"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "SENSITIVE_OR_LINK"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "UNICODE_OR_CONTROL"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "UNICODE_OR_CONTROL"
+    },
+    {
+      "expected": "reject",
+      "accepted": false,
+      "rule": "FORMAT"
+    }
+  ]
+}

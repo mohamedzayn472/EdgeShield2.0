@@ -1,0 +1,203 @@
+{
+  "kind": "UBUNTU_HOST_OPTIMIZATION_STUDY",
+  "hardware_verified_pi4": false,
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "machine": "x86_64",
+  "python": "3.10.12",
+  "detector": "/home/zayn/Projects/edgeshield/models/detector_v2.json",
+  "cold_cli_startup": {
+    "cold_subprocess_wall_ms": {
+      "n": 5,
+      "median": 509.5891119999578,
+      "p95": 634.8010809999778,
+      "min": 455.5125249999037,
+      "max": 634.8010809999778
+    },
+    "cold_subprocess_peak_rss_bytes": {
+      "n": 5,
+      "median": 116871168,
+      "p95": 117051392,
+      "min": 116318208,
+      "max": 117051392
+    }
+  },
+  "loader_and_preprocessing": {
+    "cold_load_ms": 29.964300000074218,
+    "cached_load_with_sha256_verify_ms": {
+      "n": 10,
+      "median": 0.9845375000168133,
+      "p95": 1.7543120000027557,
+      "min": 0.970764999919993,
+      "max": 1.7543120000027557
+    },
+    "indicators_per_message_ms_over_holdout": {
+      "n": 10,
+      "median": 0.055779750000235225,
+      "p95": 0.058101454545645866,
+      "min": 0.05495658333323015,
+      "max": 0.058101454545645866
+    },
+    "assess_per_message_ms_over_holdout": {
+      "n": 10,
+      "median": 0.6434011439397858,
+      "p95": 0.7110946136363467,
+      "min": 0.6274771212116376,
+      "max": 0.7110946136363467
+    },
+    "holdout_message_count": 132
+  },
+  "advisory_policy_holdout_rates": {
+    "always": {
+      "invoked_count": 132,
+      "total_count": 132,
+      "invocation_rate": 1.0,
+      "skipped_rate": 0.0
+    },
+    "elevated": {
+      "invoked_count": 104,
+      "total_count": 132,
+      "invocation_rate": 0.7878787878787878,
+      "skipped_rate": 0.21212121212121215
+    },
+    "uncertain": {
+      "invoked_count": 0,
+      "total_count": 132,
+      "invocation_rate": 0.0,
+      "skipped_rate": 1.0
+    },
+    "off": {
+      "invoked_count": 0,
+      "total_count": 132,
+      "invocation_rate": 0.0,
+      "skipped_rate": 1.0
+    }
+  },
+  "llama_child_memory": {
+    "returncode": 0,
+    "child_peak_rss_kib": 1666932,
+    "child_peak_rss_mib": 1627.86328125
+  },
+  "cpu_thread_scaling": {
+    "1": {
+      "cpu_threads": 1,
+      "repetitions": 5,
+      "llama_validated_count": 5,
+      "llama_ms": {
+        "n": 5,
+        "median": 4257.7229969999735,
+        "p95": 4663.0795210001,
+        "min": 4060.4807890001666,
+        "max": 4663.0795210001
+      },
+      "model_load_ms": {
+        "n": 5,
+        "median": 1636,
+        "p95": 1814,
+        "min": 1596,
+        "max": 1814
+      },
+      "prefill_ms": {
+        "n": 5,
+        "median": 1412,
+        "p95": 1602,
+        "min": 1332,
+        "max": 1602
+      },
+      "time_to_first_token_ms": {
+        "n": 5,
+        "median": 1412,
+        "p95": 1602,
+        "min": 1332,
+        "max": 1602
+      },
+      "decode_tokens_per_second": {
+        "n": 5,
+        "median": 37.1353,
+        "p95": 37.7358,
+        "min": 29.985,
+        "max": 37.7358
+      }
+    },
+    "2": {
+      "cpu_threads": 2,
+      "repetitions": 5,
+      "llama_validated_count": 5,
+      "llama_ms": {
+        "n": 5,
+        "median": 3408.034799999996,
+        "p95": 4359.7801169999,
+        "min": 3308.420610999974,
+        "max": 4359.7801169999
+      },
+      "model_load_ms": {
+        "n": 5,
+        "median": 1568,
+        "p95": 2361,
+        "min": 1548,
+        "max": 2361
+      },
+      "prefill_ms": {
+        "n": 5,
+        "median": 778,
+        "p95": 885,
+        "min": 709,
+        "max": 885
+      },
+      "time_to_first_token_ms": {
+        "n": 5,
+        "median": 778,
+        "p95": 885,
+        "min": 709,
+        "max": 885
+      },
+      "decode_tokens_per_second": {
+        "n": 5,
+        "median": 44.9102,
+        "p95": 45.7666,
+        "min": 42.9799,
+        "max": 45.7666
+      }
+    },
+    "4": {
+      "cpu_threads": 4,
+      "repetitions": 5,
+      "llama_validated_count": 5,
+      "llama_ms": {
+        "n": 5,
+        "median": 3155.8847080000305,
+        "p95": 3609.720516000152,
+        "min": 3055.752599000016,
+        "max": 3609.720516000152
+      },
+      "model_load_ms": {
+        "n": 5,
+        "median": 1608,
+        "p95": 2045,
+        "min": 1551,
+        "max": 2045
+      },
+      "prefill_ms": {
+        "n": 5,
+        "median": 506,
+        "p95": 537,
+        "min": 463,
+        "max": 537
+      },
+      "time_to_first_token_ms": {
+        "n": 5,
+        "median": 506,
+        "p95": 537,
+        "min": 463,
+        "max": 537
+      },
+      "decode_tokens_per_second": {
+        "n": 5,
+        "median": 48.8599,
+        "p95": 49.0196,
+        "min": 47.9452,
+        "max": 49.0196
+      }
+    }
+  },
+  "parent_peak_rss_bytes": 406577152
+}

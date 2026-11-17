@@ -1,0 +1,4064 @@
+{
+  "kind": "GENUINE_EXECUTORCH_HOST_RUN",
+  "suite": "evidence",
+  "machine": "x86_64",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "model": "/home/zayn/Projects/edgeshield/build/executorch/llama3_2.pte",
+  "runner": "executorch.extension.llm.runner.TextLLMRunner (pybind, persistent, reset per case)",
+  "runner_construct_ms": 117.11418200002299,
+  "distinct_evidence_cases": 148,
+  "weighted_cases": 432,
+  "validator_accepted_distinct": 148,
+  "validator_accepted_weighted": 432,
+  "validator_reasons_weighted": {
+    "ACCEPTED": 432
+  },
+  "llama_choice_equals_template_weighted": 280,
+  "deterministic_rerun_first_case": true,
+  "generate_wall_ms": {
+    "median": 634.9114924998958,
+    "max": 3307.089033000011,
+    "min": 457.4070789999496
+  },
+  "cases": [
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 26,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 3307.089033000011,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890408524,
+        "inference_end_ms": 1794890409338,
+        "prompt_eval_end_ms": 1794890408912,
+        "first_token_ms": 1794890408912
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 60,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 608.9291530001901,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890409339,
+        "inference_end_ms": 1794890409948,
+        "prompt_eval_end_ms": 1794890409636,
+        "first_token_ms": 1794890409636
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "UPI_COLLECT_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 647.7519120001034,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890409948,
+        "inference_end_ms": 1794890410596,
+        "prompt_eval_end_ms": 1794890410283,
+        "first_token_ms": 1794890410283
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "KYC_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 6,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Identity verification wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Identity verification wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 752.3341070000242,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890410596,
+        "inference_end_ms": 1794890411348,
+        "prompt_eval_end_ms": 1794890410933,
+        "first_token_ms": 1794890410933
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "UPI_COLLECT_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Payment collection wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Payment collection wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 762.3634760000186,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890411349,
+        "inference_end_ms": 1794890412111,
+        "prompt_eval_end_ms": 1794890411689,
+        "first_token_ms": 1794890411689
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.001,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 608.9976099999603,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890412111,
+        "inference_end_ms": 1794890412720,
+        "prompt_eval_end_ms": 1794890412400,
+        "first_token_ms": 1794890412400
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 12,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Delivery-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Delivery-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 761.3430569999764,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890412720,
+        "inference_end_ms": 1794890413481,
+        "prompt_eval_end_ms": 1794890413060,
+        "first_token_ms": 1794890413060
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 6,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 663.4579189999386,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890413482,
+        "inference_end_ms": 1794890414145,
+        "prompt_eval_end_ms": 1794890413816,
+        "first_token_ms": 1794890413816
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "URGENCY",
+          "OTP_REQUEST",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. A code sharing request appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. A code sharing request appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 667.21927399999,
+      "stats": {
+        "num_prompt_tokens": 183,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890414145,
+        "inference_end_ms": 1794890414812,
+        "prompt_eval_end_ms": 1794890414497,
+        "first_token_ms": 1794890414497
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "OTP_REQUEST",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. A code sharing request appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. A code sharing request appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 654.9745740001072,
+      "stats": {
+        "num_prompt_tokens": 169,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890414813,
+        "inference_end_ms": 1794890415467,
+        "prompt_eval_end_ms": 1794890415154,
+        "first_token_ms": 1794890415154
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "OTP_REQUEST",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. A code sharing request appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. A code sharing request appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 646.131276999995,
+      "stats": {
+        "num_prompt_tokens": 169,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890415468,
+        "inference_end_ms": 1794890416114,
+        "prompt_eval_end_ms": 1794890415806,
+        "first_token_ms": 1794890415806
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 14,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 463.40041300004486,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890416114,
+        "inference_end_ms": 1794890416577,
+        "prompt_eval_end_ms": 1794890416389,
+        "first_token_ms": 1794890416389
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 457.4070789999496,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890416577,
+        "inference_end_ms": 1794890417035,
+        "prompt_eval_end_ms": 1794890416848,
+        "first_token_ms": 1794890416848
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 6,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 596.9130099999802,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890417035,
+        "inference_end_ms": 1794890417632,
+        "prompt_eval_end_ms": 1794890417339,
+        "first_token_ms": 1794890417339
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "UPI_COLLECT_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 10,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Payment collection wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Payment collection wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 598.5259039998709,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890417632,
+        "inference_end_ms": 1794890418230,
+        "prompt_eval_end_ms": 1794890417937,
+        "first_token_ms": 1794890417937
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 4,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Job-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Job-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 605.444628999976,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890418231,
+        "inference_end_ms": 1794890418836,
+        "prompt_eval_end_ms": 1794890418544,
+        "first_token_ms": 1794890418544
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.998,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Job-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Job-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 590.7949539998754,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890418836,
+        "inference_end_ms": 1794890419427,
+        "prompt_eval_end_ms": 1794890419138,
+        "first_token_ms": 1794890419138
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Job-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Job-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 594.2073520000122,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890419427,
+        "inference_end_ms": 1794890420021,
+        "prompt_eval_end_ms": 1794890419731,
+        "first_token_ms": 1794890419731
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "PRIZE_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 4,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 622.6697759998387,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890420022,
+        "inference_end_ms": 1794890420644,
+        "prompt_eval_end_ms": 1794890420352,
+        "first_token_ms": 1794890420352
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "PRIZE_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 627.4022400000376,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890420644,
+        "inference_end_ms": 1794890421271,
+        "prompt_eval_end_ms": 1794890420980,
+        "first_token_ms": 1794890420980
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "THREAT_OF_BLOCK",
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 660.5953079999836,
+      "stats": {
+        "num_prompt_tokens": 181,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890421272,
+        "inference_end_ms": 1794890421932,
+        "prompt_eval_end_ms": 1794890421642,
+        "first_token_ms": 1794890421642
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Identity verification wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Identity verification wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 646.0840779998307,
+      "stats": {
+        "num_prompt_tokens": 181,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890421933,
+        "inference_end_ms": 1794890422578,
+        "prompt_eval_end_ms": 1794890422286,
+        "first_token_ms": 1794890422286
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 9,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 529.6064079998359,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890422579,
+        "inference_end_ms": 1794890423108,
+        "prompt_eval_end_ms": 1794890422915,
+        "first_token_ms": 1794890422915
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "URGENCY"
+        ],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 596.9760489999771,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890423108,
+        "inference_end_ms": 1794890423705,
+        "prompt_eval_end_ms": 1794890423413,
+        "first_token_ms": 1794890423413
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 617.9693040000984,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890423706,
+        "inference_end_ms": 1794890424323,
+        "prompt_eval_end_ms": 1794890424013,
+        "first_token_ms": 1794890424013
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 692.6091620000534,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890424324,
+        "inference_end_ms": 1794890425016,
+        "prompt_eval_end_ms": 1794890424721,
+        "first_token_ms": 1794890424721
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 533.9513039998565,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890425016,
+        "inference_end_ms": 1794890425550,
+        "prompt_eval_end_ms": 1794890425360,
+        "first_token_ms": 1794890425360
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "THREAT_OF_BLOCK",
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 654.2975249999472,
+      "stats": {
+        "num_prompt_tokens": 181,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890425550,
+        "inference_end_ms": 1794890426205,
+        "prompt_eval_end_ms": 1794890425910,
+        "first_token_ms": 1794890425910
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY",
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 547.776057999954,
+      "stats": {
+        "num_prompt_tokens": 181,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890426205,
+        "inference_end_ms": 1794890426752,
+        "prompt_eval_end_ms": 1794890426564,
+        "first_token_ms": 1794890426564
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 589.5823850000852,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890426753,
+        "inference_end_ms": 1794890427342,
+        "prompt_eval_end_ms": 1794890427056,
+        "first_token_ms": 1794890427056
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 5,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 606.8174480001289,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890427343,
+        "inference_end_ms": 1794890427949,
+        "prompt_eval_end_ms": 1794890427659,
+        "first_token_ms": 1794890427659
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "UPI_COLLECT_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Payment collection wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Payment collection wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 591.8760790000306,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890427949,
+        "inference_end_ms": 1794890428541,
+        "prompt_eval_end_ms": 1794890428251,
+        "first_token_ms": 1794890428251
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 8,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 664.1312629999447,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890428541,
+        "inference_end_ms": 1794890429205,
+        "prompt_eval_end_ms": 1794890428893,
+        "first_token_ms": 1794890428893
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.001,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 765.6339299999217,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890429206,
+        "inference_end_ms": 1794890429971,
+        "prompt_eval_end_ms": 1794890429551,
+        "first_token_ms": 1794890429551
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.001,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 4,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 662.2918860000482,
+      "stats": {
+        "num_prompt_tokens": 174,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890429971,
+        "inference_end_ms": 1794890430634,
+        "prompt_eval_end_ms": 1794890430317,
+        "first_token_ms": 1794890430317
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 27,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 657.7590280001004,
+      "stats": {
+        "num_prompt_tokens": 174,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890430634,
+        "inference_end_ms": 1794890431291,
+        "prompt_eval_end_ms": 1794890430983,
+        "first_token_ms": 1794890430983
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 6,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 669.2201939999904,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890431292,
+        "inference_end_ms": 1794890431961,
+        "prompt_eval_end_ms": 1794890431635,
+        "first_token_ms": 1794890431635
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 715.8212780000213,
+      "stats": {
+        "num_prompt_tokens": 213,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890431961,
+        "inference_end_ms": 1794890432677,
+        "prompt_eval_end_ms": 1794890432360,
+        "first_token_ms": 1794890432360
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "DELIVERY_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Delivery-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Delivery-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 820.4518049999479,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890432677,
+        "inference_end_ms": 1794890433497,
+        "prompt_eval_end_ms": 1794890433049,
+        "first_token_ms": 1794890433049
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "JOB_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 685.2506580000863,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890433498,
+        "inference_end_ms": 1794890434183,
+        "prompt_eval_end_ms": 1794890433868,
+        "first_token_ms": 1794890433868
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.0,
+        "indicators": [
+          "THREAT_OF_BLOCK"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Account restriction wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Account restriction wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 774.6371350001482,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890434183,
+        "inference_end_ms": 1794890434958,
+        "prompt_eval_end_ms": 1794890434538,
+        "first_token_ms": 1794890434538
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY",
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 656.6721809999763,
+      "stats": {
+        "num_prompt_tokens": 182,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890434958,
+        "inference_end_ms": 1794890435614,
+        "prompt_eval_end_ms": 1794890435317,
+        "first_token_ms": 1794890435317
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 9,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 639.4468609998967,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890435615,
+        "inference_end_ms": 1794890436254,
+        "prompt_eval_end_ms": 1794890435957,
+        "first_token_ms": 1794890435957
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 634.632598999815,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890436254,
+        "inference_end_ms": 1794890436889,
+        "prompt_eval_end_ms": 1794890436597,
+        "first_token_ms": 1794890436597
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 27,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 512.1112210001684,
+      "stats": {
+        "num_prompt_tokens": 155,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890436889,
+        "inference_end_ms": 1794890437401,
+        "prompt_eval_end_ms": 1794890437213,
+        "first_token_ms": 1794890437213
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "DELIVERY_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 5,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 635.1903859999766,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890437401,
+        "inference_end_ms": 1794890438036,
+        "prompt_eval_end_ms": 1794890437744,
+        "first_token_ms": 1794890437744
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 6,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 497.23865000009937,
+      "stats": {
+        "num_prompt_tokens": 155,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890438037,
+        "inference_end_ms": 1794890438534,
+        "prompt_eval_end_ms": 1794890438344,
+        "first_token_ms": 1794890438344
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 532.7497809998931,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890438534,
+        "inference_end_ms": 1794890439066,
+        "prompt_eval_end_ms": 1794890438880,
+        "first_token_ms": 1794890438880
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "JOB_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 523.6886480001886,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890439067,
+        "inference_end_ms": 1794890439590,
+        "prompt_eval_end_ms": 1794890439403,
+        "first_token_ms": 1794890439403
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "PRIZE_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 6,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 656.8859410001551,
+      "stats": {
+        "num_prompt_tokens": 182,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890439591,
+        "inference_end_ms": 1794890440247,
+        "prompt_eval_end_ms": 1794890439955,
+        "first_token_ms": 1794890439955
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY",
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Identity verification wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Identity verification wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 681.834439000113,
+      "stats": {
+        "num_prompt_tokens": 210,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890440248,
+        "inference_end_ms": 1794890440929,
+        "prompt_eval_end_ms": 1794890440639,
+        "first_token_ms": 1794890440639
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "URGENCY",
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 592.8792259999227,
+      "stats": {
+        "num_prompt_tokens": 210,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890440930,
+        "inference_end_ms": 1794890441522,
+        "prompt_eval_end_ms": 1794890441333,
+        "first_token_ms": 1794890441333
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY",
+          "THREAT_OF_BLOCK",
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 704.8125730000265,
+      "stats": {
+        "num_prompt_tokens": 224,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890441523,
+        "inference_end_ms": 1794890442227,
+        "prompt_eval_end_ms": 1794890441932,
+        "first_token_ms": 1794890441932
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "DELIVERY_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 4,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 648.6853769999925,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890442228,
+        "inference_end_ms": 1794890442876,
+        "prompt_eval_end_ms": 1794890442583,
+        "first_token_ms": 1794890442583
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "URGENCY",
+          "DELIVERY_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Urgent wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 667.7329160002046,
+      "stats": {
+        "num_prompt_tokens": 182,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890442876,
+        "inference_end_ms": 1794890443544,
+        "prompt_eval_end_ms": 1794890443248,
+        "first_token_ms": 1794890443248
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 561.6117340000528,
+      "stats": {
+        "num_prompt_tokens": 182,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890443544,
+        "inference_end_ms": 1794890444106,
+        "prompt_eval_end_ms": 1794890443909,
+        "first_token_ms": 1794890443909
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.007,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 606.5594429999237,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890444106,
+        "inference_end_ms": 1794890444712,
+        "prompt_eval_end_ms": 1794890444402,
+        "first_token_ms": 1794890444402
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.011,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 615.8428779999667,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890444713,
+        "inference_end_ms": 1794890445328,
+        "prompt_eval_end_ms": 1794890445014,
+        "first_token_ms": 1794890445014
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.008,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 622.9294720001235,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890445329,
+        "inference_end_ms": 1794890445951,
+        "prompt_eval_end_ms": 1794890445639,
+        "first_token_ms": 1794890445639
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.002,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 610.1713119999204,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890445952,
+        "inference_end_ms": 1794890446562,
+        "prompt_eval_end_ms": 1794890446253,
+        "first_token_ms": 1794890446253
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.012,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 614.3484239998998,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890446562,
+        "inference_end_ms": 1794890447176,
+        "prompt_eval_end_ms": 1794890446863,
+        "first_token_ms": 1794890446863
+      }
+    },
+    {
+      "evidence": {
+        "band": "UNCERTAIN",
+        "score": 0.253,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector is uncertain. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector is uncertain. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 581.9958489998953,
+      "stats": {
+        "num_prompt_tokens": 151,
+        "num_generated_tokens": 13,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890447176,
+        "inference_end_ms": 1794890447758,
+        "prompt_eval_end_ms": 1794890447480,
+        "first_token_ms": 1794890447480
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.064,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 785.6941160000588,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890447759,
+        "inference_end_ms": 1794890448544,
+        "prompt_eval_end_ms": 1794890448129,
+        "first_token_ms": 1794890448129
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.094,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 766.5485719999197,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890448544,
+        "inference_end_ms": 1794890449311,
+        "prompt_eval_end_ms": 1794890448894,
+        "first_token_ms": 1794890448894
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.368,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 614.3090069999744,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890449311,
+        "inference_end_ms": 1794890449925,
+        "prompt_eval_end_ms": 1794890449629,
+        "first_token_ms": 1794890449629
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.1,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "UPI_COLLECT_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 671.3735690000249,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890449925,
+        "inference_end_ms": 1794890450597,
+        "prompt_eval_end_ms": 1794890450282,
+        "first_token_ms": 1794890450282
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.347,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 612.377017999961,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890450597,
+        "inference_end_ms": 1794890451209,
+        "prompt_eval_end_ms": 1794890450915,
+        "first_token_ms": 1794890450915
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.997,
+        "indicators": [
+          "URGENCY",
+          "LINK_PRESENT"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 538.6013359998287,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890451210,
+        "inference_end_ms": 1794890451748,
+        "prompt_eval_end_ms": 1794890451560,
+        "first_token_ms": 1794890451560
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.977,
+        "indicators": [
+          "LINK_PRESENT"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 510.42546600001515,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890451748,
+        "inference_end_ms": 1794890452258,
+        "prompt_eval_end_ms": 1794890452057,
+        "first_token_ms": 1794890452057
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.998,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 534.6505530001195,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890452259,
+        "inference_end_ms": 1794890452793,
+        "prompt_eval_end_ms": 1794890452604,
+        "first_token_ms": 1794890452604
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "LINK_PRESENT",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 530.0953890000528,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890452794,
+        "inference_end_ms": 1794890453323,
+        "prompt_eval_end_ms": 1794890453134,
+        "first_token_ms": 1794890453134
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.993,
+        "indicators": [
+          "LINK_PRESENT"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 496.18640700009564,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890453324,
+        "inference_end_ms": 1794890453820,
+        "prompt_eval_end_ms": 1794890453635,
+        "first_token_ms": 1794890453635
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.998,
+        "indicators": [
+          "LINK_PRESENT"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 500.8113690000755,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890453820,
+        "inference_end_ms": 1794890454321,
+        "prompt_eval_end_ms": 1794890454135,
+        "first_token_ms": 1794890454135
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.997,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 511.1627399999179,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890454321,
+        "inference_end_ms": 1794890454832,
+        "prompt_eval_end_ms": 1794890454644,
+        "first_token_ms": 1794890454644
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.998,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 466.10307100013415,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890454832,
+        "inference_end_ms": 1794890455298,
+        "prompt_eval_end_ms": 1794890455110,
+        "first_token_ms": 1794890455110
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.983,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 465.9728049998648,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890455299,
+        "inference_end_ms": 1794890455764,
+        "prompt_eval_end_ms": 1794890455576,
+        "first_token_ms": 1794890455576
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.989,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 465.9288339998966,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890455765,
+        "inference_end_ms": 1794890456230,
+        "prompt_eval_end_ms": 1794890456043,
+        "first_token_ms": 1794890456043
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.002,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 684.0270210000199,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890456231,
+        "inference_end_ms": 1794890456915,
+        "prompt_eval_end_ms": 1794890456592,
+        "first_token_ms": 1794890456592
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.191,
+        "indicators": [
+          "OTP_REQUEST",
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. A code sharing request appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. A code sharing request appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 849.6174029999111,
+      "stats": {
+        "num_prompt_tokens": 215,
+        "num_generated_tokens": 21,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890456915,
+        "inference_end_ms": 1794890457764,
+        "prompt_eval_end_ms": 1794890457322,
+        "first_token_ms": 1794890457322
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.021,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 689.185494999947,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890457765,
+        "inference_end_ms": 1794890458454,
+        "prompt_eval_end_ms": 1794890458130,
+        "first_token_ms": 1794890458130
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.007,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 680.7188370000858,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890458454,
+        "inference_end_ms": 1794890459134,
+        "prompt_eval_end_ms": 1794890458813,
+        "first_token_ms": 1794890458813
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.005,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 672.6800529997945,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890459135,
+        "inference_end_ms": 1794890459807,
+        "prompt_eval_end_ms": 1794890459495,
+        "first_token_ms": 1794890459495
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.001,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 677.8532579999137,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890459808,
+        "inference_end_ms": 1794890460485,
+        "prompt_eval_end_ms": 1794890460171,
+        "first_token_ms": 1794890460171
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.921,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 636.8071659999259,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890460486,
+        "inference_end_ms": 1794890461122,
+        "prompt_eval_end_ms": 1794890460832,
+        "first_token_ms": 1794890460832
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.631,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 653.8602220000485,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890461123,
+        "inference_end_ms": 1794890461776,
+        "prompt_eval_end_ms": 1794890461478,
+        "first_token_ms": 1794890461478
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.956,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 637.0266809999521,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890461777,
+        "inference_end_ms": 1794890462413,
+        "prompt_eval_end_ms": 1794890462121,
+        "first_token_ms": 1794890462121
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.966,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 642.8401900000154,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890462414,
+        "inference_end_ms": 1794890463056,
+        "prompt_eval_end_ms": 1794890462759,
+        "first_token_ms": 1794890462759
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.953,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 638.5608120001507,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890463057,
+        "inference_end_ms": 1794890463695,
+        "prompt_eval_end_ms": 1794890463399,
+        "first_token_ms": 1794890463399
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.962,
+        "indicators": [
+          "THREAT_OF_BLOCK",
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Account restriction wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 667.0924959998956,
+      "stats": {
+        "num_prompt_tokens": 182,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890463695,
+        "inference_end_ms": 1794890464362,
+        "prompt_eval_end_ms": 1794890464069,
+        "first_token_ms": 1794890464069
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.001,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 689.7802679998222,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890464363,
+        "inference_end_ms": 1794890465052,
+        "prompt_eval_end_ms": 1794890464713,
+        "first_token_ms": 1794890464713
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.004,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 671.618307000017,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890465052,
+        "inference_end_ms": 1794890465724,
+        "prompt_eval_end_ms": 1794890465406,
+        "first_token_ms": 1794890465406
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.005,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 639.4385139999486,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890465724,
+        "inference_end_ms": 1794890466363,
+        "prompt_eval_end_ms": 1794890466040,
+        "first_token_ms": 1794890466040
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.107,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 629.917973999909,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890466364,
+        "inference_end_ms": 1794890466993,
+        "prompt_eval_end_ms": 1794890466677,
+        "first_token_ms": 1794890466677
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.013,
+        "indicators": [
+          "UPI_COLLECT_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Payment collection wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Payment collection wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 782.099928999969,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890466994,
+        "inference_end_ms": 1794890467776,
+        "prompt_eval_end_ms": 1794890467358,
+        "first_token_ms": 1794890467358
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.015,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 625.1004190000913,
+      "stats": {
+        "num_prompt_tokens": 147,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890467776,
+        "inference_end_ms": 1794890468401,
+        "prompt_eval_end_ms": 1794890468089,
+        "first_token_ms": 1794890468089
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.001,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 672.4954720000369,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890468401,
+        "inference_end_ms": 1794890469074,
+        "prompt_eval_end_ms": 1794890468757,
+        "first_token_ms": 1794890468757
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.025,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 669.0276449999146,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890469074,
+        "inference_end_ms": 1794890469743,
+        "prompt_eval_end_ms": 1794890469427,
+        "first_token_ms": 1794890469427
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.033,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 690.0775379999686,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890469743,
+        "inference_end_ms": 1794890470433,
+        "prompt_eval_end_ms": 1794890470101,
+        "first_token_ms": 1794890470101
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.161,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 668.7109800000144,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890470433,
+        "inference_end_ms": 1794890471102,
+        "prompt_eval_end_ms": 1794890470789,
+        "first_token_ms": 1794890470789
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.003,
+        "indicators": [
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 675.2365739998822,
+      "stats": {
+        "num_prompt_tokens": 172,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890471102,
+        "inference_end_ms": 1794890471777,
+        "prompt_eval_end_ms": 1794890471458,
+        "first_token_ms": 1794890471458
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.154,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "JOB_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 677.9731529998116,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890471777,
+        "inference_end_ms": 1794890472455,
+        "prompt_eval_end_ms": 1794890472137,
+        "first_token_ms": 1794890472137
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.008,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 810.8626989999266,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890472456,
+        "inference_end_ms": 1794890473266,
+        "prompt_eval_end_ms": 1794890472818,
+        "first_token_ms": 1794890472818
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.016,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 818.116886000098,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890473267,
+        "inference_end_ms": 1794890474084,
+        "prompt_eval_end_ms": 1794890473662,
+        "first_token_ms": 1794890473662
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.002,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 792.759905000139,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890474085,
+        "inference_end_ms": 1794890474877,
+        "prompt_eval_end_ms": 1794890474440,
+        "first_token_ms": 1794890474440
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.012,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 777.7379239998936,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890474878,
+        "inference_end_ms": 1794890475655,
+        "prompt_eval_end_ms": 1794890475233,
+        "first_token_ms": 1794890475233
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.004,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 798.0579249999664,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890475656,
+        "inference_end_ms": 1794890476453,
+        "prompt_eval_end_ms": 1794890476011,
+        "first_token_ms": 1794890476011
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.006,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "DELIVERY_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 783.0708879998838,
+      "stats": {
+        "num_prompt_tokens": 192,
+        "num_generated_tokens": 20,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890476454,
+        "inference_end_ms": 1794890477237,
+        "prompt_eval_end_ms": 1794890476812,
+        "first_token_ms": 1794890476812
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.822,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 610.1976200000081,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890477237,
+        "inference_end_ms": 1794890477847,
+        "prompt_eval_end_ms": 1794890477554,
+        "first_token_ms": 1794890477554
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.94,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 608.0523310001809,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890477847,
+        "inference_end_ms": 1794890478455,
+        "prompt_eval_end_ms": 1794890478167,
+        "first_token_ms": 1794890478167
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.926,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 609.7758660000636,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890478456,
+        "inference_end_ms": 1794890479065,
+        "prompt_eval_end_ms": 1794890478772,
+        "first_token_ms": 1794890478772
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.632,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 617.0682750000651,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890479065,
+        "inference_end_ms": 1794890479682,
+        "prompt_eval_end_ms": 1794890479389,
+        "first_token_ms": 1794890479389
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.9,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 626.058434000015,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890479683,
+        "inference_end_ms": 1794890480308,
+        "prompt_eval_end_ms": 1794890480001,
+        "first_token_ms": 1794890480001
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.889,
+        "indicators": [
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 610.2587020000101,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890480309,
+        "inference_end_ms": 1794890480919,
+        "prompt_eval_end_ms": 1794890480629,
+        "first_token_ms": 1794890480629
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.99,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 468.7665429999015,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890480919,
+        "inference_end_ms": 1794890481388,
+        "prompt_eval_end_ms": 1794890481201,
+        "first_token_ms": 1794890481201
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.967,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 476.60873200015885,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890481388,
+        "inference_end_ms": 1794890481864,
+        "prompt_eval_end_ms": 1794890481679,
+        "first_token_ms": 1794890481679
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.972,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 472.19580599994515,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890481865,
+        "inference_end_ms": 1794890482337,
+        "prompt_eval_end_ms": 1794890482150,
+        "first_token_ms": 1794890482150
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.98,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 468.5829989998638,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890482337,
+        "inference_end_ms": 1794890482806,
+        "prompt_eval_end_ms": 1794890482619,
+        "first_token_ms": 1794890482619
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.945,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 471.323294000058,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890482806,
+        "inference_end_ms": 1794890483277,
+        "prompt_eval_end_ms": 1794890483088,
+        "first_token_ms": 1794890483088
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.993,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 540.2461920000405,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890483277,
+        "inference_end_ms": 1794890483817,
+        "prompt_eval_end_ms": 1794890483626,
+        "first_token_ms": 1794890483626
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.98,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 533.660521999991,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890483818,
+        "inference_end_ms": 1794890484351,
+        "prompt_eval_end_ms": 1794890484165,
+        "first_token_ms": 1794890484165
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "URGENCY",
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 561.9495690000349,
+      "stats": {
+        "num_prompt_tokens": 181,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890484351,
+        "inference_end_ms": 1794890484913,
+        "prompt_eval_end_ms": 1794890484726,
+        "first_token_ms": 1794890484726
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.997,
+        "indicators": [
+          "LINK_PRESENT",
+          "BANK_IMPERSONATION"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 534.7169629999371,
+      "stats": {
+        "num_prompt_tokens": 167,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890484914,
+        "inference_end_ms": 1794890485448,
+        "prompt_eval_end_ms": 1794890485260,
+        "first_token_ms": 1794890485260
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 1.0,
+        "indicators": [
+          "PRIZE_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 5,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 628.4926850000829,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890485448,
+        "inference_end_ms": 1794890486077,
+        "prompt_eval_end_ms": 1794890485765,
+        "first_token_ms": 1794890485765
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.999,
+        "indicators": [
+          "PRIZE_LURE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Prize-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 629.2150110000421,
+      "stats": {
+        "num_prompt_tokens": 153,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890486077,
+        "inference_end_ms": 1794890486706,
+        "prompt_eval_end_ms": 1794890486399,
+        "first_token_ms": 1794890486399
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.007,
+        "indicators": [
+          "UPI_COLLECT_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 717.7492749999601,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890486706,
+        "inference_end_ms": 1794890487424,
+        "prompt_eval_end_ms": 1794890487107,
+        "first_token_ms": 1794890487107
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.012,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 674.3058710001151,
+      "stats": {
+        "num_prompt_tokens": 174,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890487424,
+        "inference_end_ms": 1794890488098,
+        "prompt_eval_end_ms": 1794890487785,
+        "first_token_ms": 1794890487785
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.005,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 684.4733479999832,
+      "stats": {
+        "num_prompt_tokens": 174,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890488099,
+        "inference_end_ms": 1794890488783,
+        "prompt_eval_end_ms": 1794890488464,
+        "first_token_ms": 1794890488464
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.014,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 677.4231869999312,
+      "stats": {
+        "num_prompt_tokens": 174,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890488783,
+        "inference_end_ms": 1794890489460,
+        "prompt_eval_end_ms": 1794890489146,
+        "first_token_ms": 1794890489146
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.006,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 687.7449859998706,
+      "stats": {
+        "num_prompt_tokens": 174,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890489461,
+        "inference_end_ms": 1794890490148,
+        "prompt_eval_end_ms": 1794890489829,
+        "first_token_ms": 1794890489829
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.004,
+        "indicators": [
+          "THREAT_OF_BLOCK",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 696.9174640000801,
+      "stats": {
+        "num_prompt_tokens": 193,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890490149,
+        "inference_end_ms": 1794890490845,
+        "prompt_eval_end_ms": 1794890490520,
+        "first_token_ms": 1794890490520
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.003,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 2,
+      "raw_generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 677.808769999956,
+      "stats": {
+        "num_prompt_tokens": 174,
+        "num_generated_tokens": 15,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890490846,
+        "inference_end_ms": 1794890491523,
+        "prompt_eval_end_ms": 1794890491211,
+        "first_token_ms": 1794890491211
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.998,
+        "indicators": [
+          "DELIVERY_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 637.832016999937,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890491524,
+        "inference_end_ms": 1794890492161,
+        "prompt_eval_end_ms": 1794890491872,
+        "first_token_ms": 1794890491872
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.995,
+        "indicators": [
+          "DELIVERY_LURE",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Delivery-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 654.0565230000084,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890492162,
+        "inference_end_ms": 1794890492815,
+        "prompt_eval_end_ms": 1794890492513,
+        "first_token_ms": 1794890492513
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.998,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 3,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 537.9421390000516,
+      "stats": {
+        "num_prompt_tokens": 155,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890492816,
+        "inference_end_ms": 1794890493353,
+        "prompt_eval_end_ms": 1794890493159,
+        "first_token_ms": 1794890493159
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.996,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 530.7157909999205,
+      "stats": {
+        "num_prompt_tokens": 155,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890493354,
+        "inference_end_ms": 1794890493884,
+        "prompt_eval_end_ms": 1794890493688,
+        "first_token_ms": 1794890493688
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.992,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 527.1674980001535,
+      "stats": {
+        "num_prompt_tokens": 155,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890493885,
+        "inference_end_ms": 1794890494412,
+        "prompt_eval_end_ms": 1794890494223,
+        "first_token_ms": 1794890494223
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.994,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 509.0087040000526,
+      "stats": {
+        "num_prompt_tokens": 155,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890494412,
+        "inference_end_ms": 1794890494921,
+        "prompt_eval_end_ms": 1794890494732,
+        "first_token_ms": 1794890494732
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.895,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 648.3127320000222,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890494921,
+        "inference_end_ms": 1794890495569,
+        "prompt_eval_end_ms": 1794890495279,
+        "first_token_ms": 1794890495279
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.972,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 627.605069999845,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890495570,
+        "inference_end_ms": 1794890496197,
+        "prompt_eval_end_ms": 1794890495909,
+        "first_token_ms": 1794890495909
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.968,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 640.848306999942,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890496197,
+        "inference_end_ms": 1794890496838,
+        "prompt_eval_end_ms": 1794890496545,
+        "first_token_ms": 1794890496545
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.979,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 643.8572619999832,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890496838,
+        "inference_end_ms": 1794890497482,
+        "prompt_eval_end_ms": 1794890497187,
+        "first_token_ms": 1794890497187
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.989,
+        "indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk. Bank-related wording appears.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 640.6690920000528,
+      "stats": {
+        "num_prompt_tokens": 168,
+        "num_generated_tokens": 14,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890497482,
+        "inference_end_ms": 1794890498123,
+        "prompt_eval_end_ms": 1794890497831,
+        "first_token_ms": 1794890497831
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.95,
+        "indicators": [
+          "HINGLISH_CUE"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 506.5729039999951,
+      "stats": {
+        "num_prompt_tokens": 155,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890498123,
+        "inference_end_ms": 1794890498629,
+        "prompt_eval_end_ms": 1794890498443,
+        "first_token_ms": 1794890498443
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.874,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 467.3431650001021,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890498630,
+        "inference_end_ms": 1794890499097,
+        "prompt_eval_end_ms": 1794890498913,
+        "first_token_ms": 1794890498913
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.951,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 460.1595389999602,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890499097,
+        "inference_end_ms": 1794890499557,
+        "prompt_eval_end_ms": 1794890499373,
+        "first_token_ms": 1794890499373
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.857,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 515.4240629999549,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890499558,
+        "inference_end_ms": 1794890500073,
+        "prompt_eval_end_ms": 1794890499880,
+        "first_token_ms": 1794890499880
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.803,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 487.64624900013587,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890500073,
+        "inference_end_ms": 1794890500560,
+        "prompt_eval_end_ms": 1794890500373,
+        "first_token_ms": 1794890500373
+      }
+    },
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.777,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "WHY: The detector estimates elevated risk.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": true,
+      "generate_wall_ms": 470.9854970001288,
+      "stats": {
+        "num_prompt_tokens": 134,
+        "num_generated_tokens": 9,
+        "model_load_start_ms": 1794890406031,
+        "model_load_end_ms": 1794890408524,
+        "inference_start_ms": 1794890500561,
+        "inference_end_ms": 1794890501032,
+        "prompt_eval_end_ms": 1794890500845,
+        "first_token_ms": 1794890500845
+      }
+    }
+  ],
+  "pi_status": "PENDING_HARDWARE",
+  "scope": "Structured evidence only; host diagnostic, not app adapter, not quality or Pi evaluation"
+}

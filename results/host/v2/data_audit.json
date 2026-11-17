@@ -1,0 +1,10 @@
+{
+  "status": "PASSED",
+  "method": "canonical and char3-5 cosine>=0.90; no model predictions",
+  "development_n": 432,
+  "heldout_n": 132,
+  "excluded": [],
+  "excluded_ids": [],
+  "development_sha256": "af618573f3124a6182fd6e6a8bc29b881dd6d2cb17684d0be58d98afe9d81605",
+  "holdout_sha256": "a2eb49623715b7cf3b84c6d2afda29c6f50fe07b65a4820ad52753ea1681ff1e"
+}

@@ -1,0 +1,20 @@
+{
+  "status": "FAILED",
+  "checks": {
+    "linux": true,
+    "aarch64_64bit": false,
+    "python_3_11_for_wheelhouse": false,
+    "glibc_at_least_2_27": true,
+    "raspberry_pi_4_model_b": false,
+    "ram_at_least_6_gib": true,
+    "free_disk_at_least_3_gib": true
+  },
+  "machine": "x86_64",
+  "os": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "device_model": "UNAVAILABLE",
+  "glibc": "2.35",
+  "memory_kib": 15575788,
+  "runtime": "NOT_CHECKED",
+  "inference": "NOT_EXECUTED"
+}

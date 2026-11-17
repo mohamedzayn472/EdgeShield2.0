@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "executorch_revision": "985c1ceccc8bb8b6a32294f71aeb5d2f299562f7",
+  "target_arch": "aarch64",
+  "model_family": "Llama-3.2-1B-Instruct",
+  "tokenizer_format": "tiktoken_model",
+  "seq_len": 768,
+  "max_new_tokens": 48,
+  "cpu_threads": 2,
+  "timeout_seconds": 120,
+  "max_output_bytes": 65536,
+  "stdout_mode": "prompt_echo",
+  "artifacts": {
+    "runner": {
+      "path": "../models/llama/pi5-aarch64/llama_main",
+      "sha256": "GENERATE_ON_PI5_WITH_CREATE_MANIFEST_PY"
+    },
+    "model": {
+      "path": "../models/llama/llama3_2.pte",
+      "sha256": "c31e4d376f349de85b4422a8c0405d88f21145709f0e17168b06d809ffe5e8a2"
+    },
+    "tokenizer": {
+      "path": "../models/llama/tokenizer.model",
+      "sha256": "82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55"
+    },
+    "shared_libraries": [
+      {
+        "path": "../models/llama/pi5-aarch64/libllama_runner.so",
+        "sha256": "GENERATE_ON_PI5_WITH_CREATE_MANIFEST_PY"
+      }
+    ]
+  }
+}

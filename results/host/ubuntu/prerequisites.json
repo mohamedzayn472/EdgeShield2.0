@@ -1,0 +1,22 @@
+{
+  "os": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "machine": "x86_64",
+  "python": "3.10.12",
+  "os_release": "PRETTY_NAME=\"Ubuntu 22.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"22.04\"\nVERSION=\"22.04.5 LTS (Jammy Jellyfish)\"\nVERSION_CODENAME=jammy\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=jammy\n",
+  "memory": "total        used        free      shared  buff/cache   available\nMem:            14Gi       4.0Gi       4.4Gi        80Mi       6.5Gi        10Gi\nSwap:          2.0Gi          0B       2.0Gi",
+  "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/nvme0n1p6   98G   41G   53G  44% /home/zayn/Projects/edgeshield",
+  "cmake": "cmake version 3.22.1\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).",
+  "compiler": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "git_repository": false,
+  "inherited_pythonpath_issue": "ROS Humble pytest plugins; resolved by scripts/host_python.sh",
+  "tools": {
+    "git": "/usr/bin/git",
+    "gcc": "/usr/bin/gcc",
+    "g++": "/usr/bin/g++",
+    "ninja": "/usr/bin/ninja",
+    "make": "/usr/bin/make",
+    "strace": "/usr/bin/strace",
+    "ip": "/usr/sbin/ip",
+    "time": "/usr/bin/time"
+  }
+}

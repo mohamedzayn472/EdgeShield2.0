@@ -1,0 +1,108 @@
+{
+  "kind": "GENUINE_EXECUTORCH_HOST_RUN",
+  "suite": "smoke",
+  "machine": "x86_64",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "model": "/home/zayn/Projects/edgeshield/build/executorch/llama3_2.pte",
+  "runner": "executorch.extension.llm.runner.TextLLMRunner (pybind, persistent, reset per case)",
+  "runner_construct_ms": 105.00947799982896,
+  "distinct_evidence_cases": 3,
+  "weighted_cases": 3,
+  "validator_accepted_distinct": 1,
+  "validator_accepted_weighted": 1,
+  "validator_reasons_weighted": {
+    "FORMAT": 2,
+    "ACCEPTED": 1
+  },
+  "llama_choice_equals_template_weighted": 0,
+  "deterministic_rerun_first_case": true,
+  "generate_wall_ms": {
+    "median": 631.4378849997411,
+    "max": 3349.985654000193,
+    "min": 568.2003900001291
+  },
+  "cases": [
+    {
+      "evidence": {
+        "band": "SCAM",
+        "score": 0.95,
+        "indicators": [
+          "OTP_REQUEST",
+          "LINK_PRESENT"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "The detector estimates elevated risk.<|eot_id|>",
+      "generated_text": "The detector estimates elevated risk.",
+      "validator_accepted": false,
+      "validator_reason": "FORMAT",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 3349.985654000193,
+      "stats": {
+        "num_prompt_tokens": 112,
+        "num_generated_tokens": 6,
+        "model_load_start_ms": 1794876270254,
+        "model_load_end_ms": 1794876272964,
+        "inference_start_ms": 1794876272964,
+        "inference_end_ms": 1794876273603,
+        "prompt_eval_end_ms": 1794876273450,
+        "first_token_ms": 1794876273450
+      }
+    },
+    {
+      "evidence": {
+        "band": "LEGITIMATE",
+        "score": 0.05,
+        "indicators": [],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "The detector estimates lower risk, without authenticating the sender.<|eot_id|>",
+      "generated_text": "The detector estimates lower risk, without authenticating the sender.",
+      "validator_accepted": false,
+      "validator_reason": "FORMAT",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 631.4378849997411,
+      "stats": {
+        "num_prompt_tokens": 86,
+        "num_generated_tokens": 12,
+        "model_load_start_ms": 1794876270254,
+        "model_load_end_ms": 1794876272964,
+        "inference_start_ms": 1794876273604,
+        "inference_end_ms": 1794876274235,
+        "prompt_eval_end_ms": 1794876273927,
+        "first_token_ms": 1794876273927
+      }
+    },
+    {
+      "evidence": {
+        "band": "UNCERTAIN",
+        "score": 0.5,
+        "indicators": [
+          "URGENCY"
+        ],
+        "schema_version": 1
+      },
+      "weight": 1,
+      "raw_generated_text": "WHY: The detector is uncertain.<|eot_id|>",
+      "generated_text": "WHY: The detector is uncertain.",
+      "validator_accepted": true,
+      "validator_reason": "ACCEPTED",
+      "matches_template_fallback": false,
+      "generate_wall_ms": 568.2003900001291,
+      "stats": {
+        "num_prompt_tokens": 93,
+        "num_generated_tokens": 8,
+        "model_load_start_ms": 1794876270254,
+        "model_load_end_ms": 1794876272964,
+        "inference_start_ms": 1794876274235,
+        "inference_end_ms": 1794876274803,
+        "prompt_eval_end_ms": 1794876274592,
+        "first_token_ms": 1794876274592
+      }
+    }
+  ],
+  "pi_status": "PENDING_HARDWARE",
+  "scope": "Structured evidence only; host diagnostic, not app adapter, not quality or Pi evaluation"
+}

@@ -1,0 +1,27 @@
+{
+  "source_sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+  "rows": 5574,
+  "skipped": 0,
+  "splits": {
+    "train": {
+      "0": 2410,
+      "1": 360
+    },
+    "calibration": {
+      "1": 63,
+      "0": 480
+    },
+    "validation": {
+      "0": 953,
+      "1": 160
+    },
+    "test": {
+      "1": 164,
+      "0": 984
+    }
+  },
+  "groups": 4962,
+  "near_duplicate_cosine_threshold": 0.9,
+  "leakage_check": "PASSED",
+  "seed": 20261115
+}

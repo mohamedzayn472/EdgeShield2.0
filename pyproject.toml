@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools==80.9.0", "wheel==0.45.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "edgeshield"
+version = "0.1.0"
+description = "Local SMS risk detection with evidence-only ExecuTorch explanations"
+requires-python = ">=3.10,<3.14"
+dependencies = ["scikit-learn==1.7.2", "numpy==2.2.6", "scipy==1.15.3", "joblib==1.5.2", "threadpoolctl==3.6.0"]
+
+[project.scripts]
+edgeshield = "edgeshield.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"

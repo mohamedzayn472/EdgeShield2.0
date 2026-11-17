@@ -1,0 +1,4 @@
+# Preserve the exact bytes recorded by frozen evidence/checksum manifests.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Deployment shell scripts must remain executable text on Linux.
+*.sh text eol=lf

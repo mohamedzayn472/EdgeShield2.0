@@ -1,0 +1,18 @@
+{
+  "status": "PENDING_HARDWARE",
+  "device": "Raspberry Pi 4 Model B 8 GB",
+  "role": "BACKUP_TARGET",
+  "inference_verified": false,
+  "offline_verified": false,
+  "measurements": null,
+  "staged_host_assets": {
+    "pte_model": "models/llama/llama3_2.pte",
+    "pte_sha256": "c31e4d376f349de85b4422a8c0405d88f21145709f0e17168b06d809ffe5e8a2",
+    "tokenizer": "models/llama/tokenizer.model",
+    "tokenizer_sha256": "82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55",
+    "pi4_bookworm_runtime": "models/llama/pi4-aarch64/ (Arm GNU 12.2.rel1, Cortex-A72, GLIBC <= 2.34)",
+    "pi4_glibc238_archive": "models/llama/pi4-aarch64-glibc238/ (Arm GNU 14.3.rel1, Cortex-A72, GLIBC <= 2.38)",
+    "wheelhouse_cp311": "wheelhouse/pi4-cp311/"
+  },
+  "reason": "Bookworm-compatible aarch64 binaries, model assets, and backup deployment bundle are staged on host; physical Raspberry Pi 4 hardware verification remains PENDING_HARDWARE."
+}

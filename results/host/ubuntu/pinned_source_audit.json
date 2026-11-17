@@ -1,0 +1,14 @@
+{
+  "setup-release-1.5.sh": {
+    "matches": true,
+    "upstream_path": "examples/raspberry_pi/setup.sh"
+  },
+  "llama_xnnpack_spinquant.yaml": {
+    "matches": true,
+    "upstream_path": "examples/models/llama/config/llama_xnnpack_spinquant.yaml"
+  },
+  "llama-main.cpp": {
+    "matches": true,
+    "upstream_path": "examples/models/llama/main.cpp"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "tokenizer_class": "pytorch_tokenizers.tiktoken.TiktokenTokenizer",
+  "vocab": 128256,
+  "bos": 128000,
+  "eos": 128001,
+  "samples": [
+    {
+      "band": "LEGITIMATE",
+      "indicator_count": 0,
+      "prompt_tokens": 86,
+      "first_token": 128000,
+      "tokens_with_48_generation": 134
+    },
+    {
+      "band": "LEGITIMATE",
+      "indicator_count": 12,
+      "prompt_tokens": 382,
+      "first_token": 128000,
+      "tokens_with_48_generation": 430
+    },
+    {
+      "band": "UNCERTAIN",
+      "indicator_count": 0,
+      "prompt_tokens": 79,
+      "first_token": 128000,
+      "tokens_with_48_generation": 127
+    },
+    {
+      "band": "UNCERTAIN",
+      "indicator_count": 12,
+      "prompt_tokens": 291,
+      "first_token": 128000,
+      "tokens_with_48_generation": 339
+    },
+    {
+      "band": "SCAM",
+      "indicator_count": 0,
+      "prompt_tokens": 79,
+      "first_token": 128000,
+      "tokens_with_48_generation": 127
+    },
+    {
+      "band": "SCAM",
+      "indicator_count": 12,
+      "prompt_tokens": 303,
+      "first_token": 128000,
+      "tokens_with_48_generation": 351
+    }
+  ],
+  "scope": "Empty and all-indicator prompts for each band; not inference"
+}

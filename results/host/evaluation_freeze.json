@@ -1,0 +1,19 @@
+{
+  "created_at_utc": "2026-11-16T00:24:49.871642+00:00",
+  "purpose": "Laptop baseline evaluation freeze; not a claim of final submission or hardware freeze",
+  "model_sha256": "9163c20783d76eb1c3cea637dea844e4d1c7d61bec976cd64cb0b69a20cd4c72",
+  "file_sha256": {
+    "src/edgeshield/detector.py": "81f9635af6922be5e006b6e63d4f5a28e3e0888a3742a2e4e2af022f11ad15b3",
+    "src/edgeshield/datasets.py": "ea65aaccb2a0e1ea793dae7088c2e5f240be29e936b9ab142d2f8b6b15d66d5c",
+    "src/edgeshield/privacy.py": "355a17706401fbd33d05dec0d89ef8cc60b166f3d52b7c21745aa29c06fc0cdb",
+    "scripts/train_detector.py": "98472579842bad7a88bdf928734a4dd27d6b3e639fcf03c49a0f3dcc14e4e859",
+    "scripts/prepare_dataset.py": "3d95699b15a8833fa9e8af87f9c71bf195ed78ecd0ea2838cee50cca633817cd",
+    "scripts/evaluate_detector.py": "f9d897c9c4f123de9101af5c5b1fecf9b6f0bc40fe83e6f9e4ff8e4dfd0a6867",
+    "docs/EVALUATION.md": "d4aaac4655e5fccf24a0fbb3d82e8ab1cfe5f546cb4381892decdc780bc6b818",
+    "data/processed/test.jsonl": "0a16c00127babc12186ff700d2caa59654f48f7233b969297c3b48f00dc77f32",
+    "data/synthetic/indian_sms.jsonl": "555e4891a9203eb90ff5287200944f324dfad348025462a450b81bf10e303f2c",
+    "data/processed/train.jsonl": "df2f575971baa01f50fdfcc7852aaf0e5ee200b5af6337ca47b8ba29d56bad3f",
+    "data/processed/calibration.jsonl": "7a985628a3115bd0d2497b16dbb106ca61b91b611c9e88f93bea5d334f2b91aa",
+    "data/processed/validation.jsonl": "9e8b1483297906d8f93f6f44c61fb00d6bd7946b2b5b9151804f4ca01731864f"
+  }
+}

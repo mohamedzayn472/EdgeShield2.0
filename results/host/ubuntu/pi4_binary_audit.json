@@ -1,0 +1,132 @@
+{
+  "kind": "PI4_AARCH64_CROSS_BUILD_ELF_AUDIT",
+  "hardware_executed": false,
+  "binaries": {
+    "llama_main": {
+      "path": "models/llama/pi4-aarch64/llama_main",
+      "bytes": 7097336,
+      "sha256": "4c3e62805c8f4ca63c19a10a3977d8f89e106e17abf5947dc725d4463e16ae39",
+      "file": "models/llama/pi4-aarch64/llama_main: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, for GNU/Linux 3.7.0, stripped",
+      "elf_machine": "AArch64",
+      "needed_shared_libraries": [
+        "libllama_runner.so",
+        "libatomic.so.1",
+        "libstdc++.so.6",
+        "libm.so.6",
+        "libgcc_s.so.1",
+        "libc.so.6"
+      ],
+      "glibc_versions_required": [
+        "GLIBC_2.17",
+        "GLIBC_2.27",
+        "GLIBC_2.29",
+        "GLIBC_2.32",
+        "GLIBC_2.34",
+        "GLIBC_2.38"
+      ],
+      "max_glibc_required": "GLIBC_2.38",
+      "glibcxx_versions_required": [
+        "GLIBCXX_3.4",
+        "GLIBCXX_3.4.9",
+        "GLIBCXX_3.4.11",
+        "GLIBCXX_3.4.14",
+        "GLIBCXX_3.4.15",
+        "GLIBCXX_3.4.17",
+        "GLIBCXX_3.4.18",
+        "GLIBCXX_3.4.20",
+        "GLIBCXX_3.4.21",
+        "GLIBCXX_3.4.22",
+        "GLIBCXX_3.4.29",
+        "GLIBCXX_3.4.30",
+        "GLIBCXX_3.4.31"
+      ],
+      "max_glibcxx_required": "GLIBCXX_3.4.31",
+      "cxxabi_versions_required": [
+        "CXXABI_1.3",
+        "CXXABI_1.3.1",
+        "CXXABI_1.3.13",
+        "CXXABI_1.3.15",
+        "CXXABI_1.3.3",
+        "CXXABI_1.3.5",
+        "CXXABI_1.3.7",
+        "CXXABI_1.3.8",
+        "CXXABI_1.3.9"
+      ],
+      "symbols_requiring_glibc_gt_2_36": [
+        "129: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND fmod@GLIBC_2.38 (20)",
+        "190: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_strtoull@GLIBC_2.38 (15)",
+        "259: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND fmodf@GLIBC_2.38 (20)",
+        "294: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_strtol@GLIBC_2.38 (15)",
+        "64: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_strtoll@GLIBC_2.38 (15)"
+      ]
+    },
+    "libllama_runner.so": {
+      "path": "models/llama/pi4-aarch64/libllama_runner.so",
+      "bytes": 4374680,
+      "sha256": "6606e8a84196b4d47f38f936a502427364bcf26203f9a79c5aa895da793b5663",
+      "file": "models/llama/pi4-aarch64/libllama_runner.so: ELF 64-bit LSB shared object, ARM aarch64, version 1 (GNU/Linux), dynamically linked, with debug_info, not stripped",
+      "elf_machine": "AArch64",
+      "needed_shared_libraries": [
+        "libatomic.so.1",
+        "libstdc++.so.6",
+        "libm.so.6",
+        "libgcc_s.so.1",
+        "libc.so.6"
+      ],
+      "glibc_versions_required": [
+        "GLIBC_2.17",
+        "GLIBC_2.27",
+        "GLIBC_2.29",
+        "GLIBC_2.32",
+        "GLIBC_2.33",
+        "GLIBC_2.34",
+        "GLIBC_2.38"
+      ],
+      "max_glibc_required": "GLIBC_2.38",
+      "glibcxx_versions_required": [
+        "GLIBCXX_3.4",
+        "GLIBCXX_3.4.9",
+        "GLIBCXX_3.4.11",
+        "GLIBCXX_3.4.14",
+        "GLIBCXX_3.4.15",
+        "GLIBCXX_3.4.17",
+        "GLIBCXX_3.4.18",
+        "GLIBCXX_3.4.19",
+        "GLIBCXX_3.4.20",
+        "GLIBCXX_3.4.21",
+        "GLIBCXX_3.4.26",
+        "GLIBCXX_3.4.29",
+        "GLIBCXX_3.4.31",
+        "GLIBCXX_3.4.32"
+      ],
+      "max_glibcxx_required": "GLIBCXX_3.4.32",
+      "cxxabi_versions_required": [
+        "CXXABI_1.3",
+        "CXXABI_1.3.1",
+        "CXXABI_1.3.11",
+        "CXXABI_1.3.15",
+        "CXXABI_1.3.2",
+        "CXXABI_1.3.5",
+        "CXXABI_1.3.7",
+        "CXXABI_1.3.8",
+        "CXXABI_1.3.9"
+      ],
+      "symbols_requiring_glibc_gt_2_36": [
+        "190: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_strtoul@GLIBC_2.38 (14)",
+        "211: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_strtoull@GLIBC_2.38 (14)",
+        "318: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_strtol@GLIBC_2.38 (14)",
+        "49: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_sscanf@GLIBC_2.38 (14)",
+        "64: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __isoc23_strtoll@GLIBC_2.38 (14)"
+      ]
+    }
+  },
+  "toolchain_cmake_arch_flags": [
+    "set(CMAKE_CROSSCOMPILING TRUE)",
+    "set(CMAKE_C_COMPILER \"${TOOLCHAIN_PATH}/bin/aarch64-none-linux-gnu-gcc\")",
+    "set(CMAKE_CXX_COMPILER \"${TOOLCHAIN_PATH}/bin/aarch64-none-linux-gnu-g++\")",
+    "set(ARCH_FLAGS \"-march=armv8-a -mtune=cortex-a72\")",
+    "set(CMAKE_C_FLAGS \"${CMAKE_C_FLAGS} ${ARCH_FLAGS}\" CACHE STRING \"\" FORCE)",
+    "set(CMAKE_CXX_FLAGS \"${CMAKE_CXX_FLAGS} ${ARCH_FLAGS}\" CACHE STRING \"\" FORCE)"
+  ],
+  "toolchain_sysroot_libc_exists": true
+}

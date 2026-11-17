@@ -1,0 +1,1 @@
+Requires target aarch64; never copy host venv.

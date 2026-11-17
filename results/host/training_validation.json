@@ -1,0 +1,26 @@
+{
+  "partition": "validation",
+  "calibration_comparison": {
+    "uncalibrated": {
+      "brier": 0.03711040655073457,
+      "log_loss": 0.1845600338041694
+    },
+    "sigmoid": {
+      "brier": 0.0195610750699569,
+      "log_loss": 0.06374683398304326
+    }
+  },
+  "calibration_selected": true,
+  "thresholds": [
+    0.175,
+    0.6
+  ],
+  "threshold_status": "SELECTED_ON_VALIDATION",
+  "serialization_parity": "PASSED",
+  "n": 1113,
+  "validation_observed_false_positive_rate": 0.008394543546694649,
+  "validation_missed_positive_fraction": 0.04375,
+  "validation_abstention_rate": 0.027852650494159928,
+  "heldout_test": "NOT_EXECUTED",
+  "model_sha256": "9163c20783d76eb1c3cea637dea844e4d1c7d61bec976cd64cb0b69a20cd4c72"
+}

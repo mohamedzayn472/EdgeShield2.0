@@ -1,0 +1,7 @@
+..................s..................................................... [ 42%]
+........................................................................ [ 84%]
+...........................                                              [100%]
+- generated xml file: /home/zayn/Projects/edgeshield/results/host/ubuntu/pytest.xml -
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_detector.py:71: Corpus excluded from transfer bundle; reproduce local dataset preparation to run split audit
+170 passed, 1 skipped in 1.10s

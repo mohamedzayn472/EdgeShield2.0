@@ -1,0 +1,115 @@
+{
+  "kind": "READ_ONLY_REPRODUCTION_UBUNTU_HOST",
+  "platform": "Linux-6.8.0-136-generic-x86_64-with-glibc2.35",
+  "python": "3.10.12",
+  "freeze_hash_check": {
+    "src/edgeshield/detector_v2.py": "MATCH",
+    "src/edgeshield/privacy.py": "MATCH",
+    "src/edgeshield/datasets.py": "MATCH",
+    "scripts/train_detector_v2.py": "MATCH",
+    "scripts/evaluate_detector_v2.py": "MATCH",
+    "scripts/audit_v2_data.py": "MATCH",
+    "docs/EVALUATION_V2.md": "MATCH",
+    "docs/V2_FINAL_EVALUATION.md": "MATCH",
+    "results/host/v2/data_audit.json": "MATCH",
+    "data/synthetic/v2_development.jsonl": "MATCH",
+    "data/synthetic/v2_holdout.jsonl": "MATCH",
+    "models/detector_v2.json": "MATCH",
+    "models/detector_v2.json.sha256": "MATCH"
+  },
+  "all_frozen_hashes_match": true,
+  "overall": {
+    "n": 120,
+    "scams_detected": 50,
+    "scams": 60,
+    "scams_assigned_legitimate": 10,
+    "false_alarms": 1,
+    "legitimate": 60,
+    "uncertain": 0
+  },
+  "english": {
+    "n": 60,
+    "scams_detected": 26,
+    "scams": 30,
+    "scams_assigned_legitimate": 4,
+    "false_alarms": 0,
+    "legitimate": 30,
+    "uncertain": 0
+  },
+  "hinglish": {
+    "n": 60,
+    "scams_detected": 24,
+    "scams": 30,
+    "scams_assigned_legitimate": 6,
+    "false_alarms": 1,
+    "legitimate": 30,
+    "uncertain": 0
+  },
+  "per_case_band_mismatches_vs_recorded": [],
+  "max_abs_score_diff_vs_recorded": 5.551115123125783e-17,
+  "missed_scams": [
+    {
+      "id": "v2h049",
+      "language": "english",
+      "score": 0.018346586316528836
+    },
+    {
+      "id": "v2h050",
+      "language": "english",
+      "score": 0.03750134634710722
+    },
+    {
+      "id": "v2h056",
+      "language": "english",
+      "score": 0.04327712634003825
+    },
+    {
+      "id": "v2h057",
+      "language": "english",
+      "score": 0.17890483931251147
+    },
+    {
+      "id": "v2h091",
+      "language": "hinglish",
+      "score": 0.033750038566385684
+    },
+    {
+      "id": "v2h100",
+      "language": "hinglish",
+      "score": 0.16917821550855616
+    },
+    {
+      "id": "v2h102",
+      "language": "hinglish",
+      "score": 0.05887388433863876
+    },
+    {
+      "id": "v2h106",
+      "language": "hinglish",
+      "score": 0.0632388377434868
+    },
+    {
+      "id": "v2h108",
+      "language": "hinglish",
+      "score": 0.024770041100259165
+    },
+    {
+      "id": "v2h118",
+      "language": "hinglish",
+      "score": 0.17572187453744106
+    }
+  ],
+  "false_alarms": [
+    {
+      "id": "v2h066",
+      "language": "hinglish",
+      "score": 0.2900472823018639
+    }
+  ],
+  "thresholds": {
+    "low": 0.25,
+    "high": 0.275
+  },
+  "uci_regression": "NOT_AVAILABLE (raw UCI corpus excluded from transfer bundle)",
+  "scope": "Synthetic AI-assisted holdout only; not real-world validation"
+}

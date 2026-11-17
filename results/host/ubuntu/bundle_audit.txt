@@ -1,0 +1,1 @@
+PASSED: 130 bundle files match manifest. This proves integrity, not authenticity or hardware compatibility.

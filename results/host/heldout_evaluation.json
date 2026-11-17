@@ -1,0 +1,588 @@
+{
+  "protocol_sha256": "d4aaac4655e5fccf24a0fbb3d82e8ab1cfe5f546cb4381892decdc780bc6b818",
+  "model_sha256": "9163c20783d76eb1c3cea637dea844e4d1c7d61bec976cd64cb0b69a20cd4c72",
+  "scope": "HOST detector evaluation; UCI spam proxy; synthetic cases are not evidence of real-world Indian accuracy",
+  "uci": {
+    "n": 1148,
+    "precision": 0.9801324503311258,
+    "recall": 0.9024390243902439,
+    "f1": 0.9396825396825397,
+    "false_positive_rate": 0.003048780487804878,
+    "false_negative_legitimate_rate": 0.042682926829268296,
+    "abstention_rate": 0.016550522648083623,
+    "coverage": 0.9834494773519163,
+    "confusion_matrix_2_by_3": [
+      [
+        971,
+        10,
+        3
+      ],
+      [
+        7,
+        9,
+        148
+      ]
+    ],
+    "rows": [
+      "ham_or_legitimate",
+      "spam_or_synthetic_scam"
+    ],
+    "columns": [
+      "LEGITIMATE",
+      "UNCERTAIN",
+      "SCAM"
+    ],
+    "brier_score": 0.013071127810762534,
+    "binary_0_5_confusion_matrix": [
+      [
+        980,
+        4
+      ],
+      [
+        13,
+        151
+      ]
+    ],
+    "errors_and_abstentions": [
+      {
+        "id": "uci-00153",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.3275051041498375,
+        "family": null
+      },
+      {
+        "id": "uci-00305",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.38420847716823814,
+        "family": null
+      },
+      {
+        "id": "uci-00421",
+        "label": 0,
+        "band": "SCAM",
+        "score": 0.6987396332240761,
+        "family": null
+      },
+      {
+        "id": "uci-00672",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.550283949520555,
+        "family": null
+      },
+      {
+        "id": "uci-00694",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.22343935306628948,
+        "family": null
+      },
+      {
+        "id": "uci-00815",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.16628456998751504,
+        "family": null
+      },
+      {
+        "id": "uci-00869",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.005425986119408016,
+        "family": null
+      },
+      {
+        "id": "uci-01082",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.2507199994775837,
+        "family": null
+      },
+      {
+        "id": "uci-01318",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.5501925750769774,
+        "family": null
+      },
+      {
+        "id": "uci-01460",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.1033975282082134,
+        "family": null
+      },
+      {
+        "id": "uci-01500",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.100855880096231,
+        "family": null
+      },
+      {
+        "id": "uci-01501",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.5733730645792292,
+        "family": null
+      },
+      {
+        "id": "uci-02340",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.31927296307063835,
+        "family": null
+      },
+      {
+        "id": "uci-02364",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.1751552253967428,
+        "family": null
+      },
+      {
+        "id": "uci-02774",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.007763403805237824,
+        "family": null
+      },
+      {
+        "id": "uci-03132",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.20064951947351106,
+        "family": null
+      },
+      {
+        "id": "uci-03270",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.01412652787805168,
+        "family": null
+      },
+      {
+        "id": "uci-03742",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.01412652787805168,
+        "family": null
+      },
+      {
+        "id": "uci-03848",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.1751552253967428,
+        "family": null
+      },
+      {
+        "id": "uci-03860",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.5501925750769774,
+        "family": null
+      },
+      {
+        "id": "uci-03894",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.4289670403187904,
+        "family": null
+      },
+      {
+        "id": "uci-04283",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.44387096033812407,
+        "family": null
+      },
+      {
+        "id": "uci-04382",
+        "label": 0,
+        "band": "SCAM",
+        "score": 0.7838453824440029,
+        "family": null
+      },
+      {
+        "id": "uci-04702",
+        "label": 0,
+        "band": "SCAM",
+        "score": 0.8304177227592575,
+        "family": null
+      },
+      {
+        "id": "uci-04862",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.1808397371688508,
+        "family": null
+      },
+      {
+        "id": "uci-04949",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.13704818567000893,
+        "family": null
+      },
+      {
+        "id": "uci-05336",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.01412652787805168,
+        "family": null
+      },
+      {
+        "id": "uci-05372",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.2009302139079845,
+        "family": null
+      },
+      {
+        "id": "uci-05539",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.10268076051670343,
+        "family": null
+      }
+    ]
+  },
+  "synthetic_indian_hinglish": {
+    "n": 24,
+    "precision": 1.0,
+    "recall": 0.08333333333333333,
+    "f1": 0.15384615384615385,
+    "false_positive_rate": 0.0,
+    "false_negative_legitimate_rate": 0.5833333333333334,
+    "abstention_rate": 0.375,
+    "coverage": 0.625,
+    "confusion_matrix_2_by_3": [
+      [
+        7,
+        5,
+        0
+      ],
+      [
+        7,
+        4,
+        1
+      ]
+    ],
+    "rows": [
+      "ham_or_legitimate",
+      "spam_or_synthetic_scam"
+    ],
+    "columns": [
+      "LEGITIMATE",
+      "UNCERTAIN",
+      "SCAM"
+    ],
+    "brier_score": 0.3493386383611468,
+    "binary_0_5_confusion_matrix": [
+      [
+        11,
+        1
+      ],
+      [
+        10,
+        2
+      ]
+    ],
+    "errors_and_abstentions": [
+      {
+        "id": "synthetic-upi_confirmation-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.19122800763214667,
+        "family": "upi_confirmation"
+      },
+      {
+        "id": "synthetic-delivery_status-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.5929453166426496,
+        "family": "delivery_status"
+      },
+      {
+        "id": "synthetic-otp_protection-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.24139486830294893,
+        "family": "otp_protection"
+      },
+      {
+        "id": "synthetic-bank_receipt-0",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.2097157642023507,
+        "family": "bank_receipt"
+      },
+      {
+        "id": "synthetic-job_advance-1",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.5858630780211272,
+        "family": "job_advance"
+      },
+      {
+        "id": "synthetic-upi_collect-0",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.10069222576448235,
+        "family": "upi_collect"
+      },
+      {
+        "id": "synthetic-upi_collect-1",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.0181278947650405,
+        "family": "upi_collect"
+      },
+      {
+        "id": "synthetic-parcel_fee-0",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.11747270657519497,
+        "family": "parcel_fee"
+      },
+      {
+        "id": "synthetic-parcel_fee-1",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.2746738595236999,
+        "family": "parcel_fee"
+      },
+      {
+        "id": "synthetic-kyc_code-0",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.03829858230576631,
+        "family": "kyc_code"
+      },
+      {
+        "id": "synthetic-kyc_code-1",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.02851903575843609,
+        "family": "kyc_code"
+      },
+      {
+        "id": "synthetic-police_threat-0",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.42287973223319253,
+        "family": "police_threat"
+      },
+      {
+        "id": "synthetic-police_threat-1",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.13376874939816966,
+        "family": "police_threat"
+      },
+      {
+        "id": "synthetic-relative_payment-0",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.05037864672650109,
+        "family": "relative_payment"
+      },
+      {
+        "id": "synthetic-relative_payment-1",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.2817966228693405,
+        "family": "relative_payment"
+      },
+      {
+        "id": "synthetic-hiring_notice-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.4563372091852827,
+        "family": "hiring_notice"
+      }
+    ]
+  },
+  "synthetic_hinglish": {
+    "n": 10,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "false_positive_rate": 0.0,
+    "false_negative_legitimate_rate": 0.8333333333333334,
+    "abstention_rate": 0.3,
+    "coverage": 0.7,
+    "confusion_matrix_2_by_3": [
+      [
+        2,
+        2,
+        0
+      ],
+      [
+        5,
+        1,
+        0
+      ]
+    ],
+    "rows": [
+      "ham_or_legitimate",
+      "spam_or_synthetic_scam"
+    ],
+    "columns": [
+      "LEGITIMATE",
+      "UNCERTAIN",
+      "SCAM"
+    ],
+    "brier_score": 0.5161579682721674,
+    "binary_0_5_confusion_matrix": [
+      [
+        4,
+        0
+      ],
+      [
+        6,
+        0
+      ]
+    ],
+    "errors_and_abstentions": [
+      {
+        "id": "synthetic-otp_protection-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.24139486830294893,
+        "family": "otp_protection"
+      },
+      {
+        "id": "synthetic-bank_receipt-0",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.2097157642023507,
+        "family": "bank_receipt"
+      },
+      {
+        "id": "synthetic-upi_collect-0",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.10069222576448235,
+        "family": "upi_collect"
+      },
+      {
+        "id": "synthetic-upi_collect-1",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.0181278947650405,
+        "family": "upi_collect"
+      },
+      {
+        "id": "synthetic-kyc_code-0",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.03829858230576631,
+        "family": "kyc_code"
+      },
+      {
+        "id": "synthetic-kyc_code-1",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.02851903575843609,
+        "family": "kyc_code"
+      },
+      {
+        "id": "synthetic-relative_payment-0",
+        "label": 1,
+        "band": "LEGITIMATE",
+        "score": 0.05037864672650109,
+        "family": "relative_payment"
+      },
+      {
+        "id": "synthetic-relative_payment-1",
+        "label": 1,
+        "band": "UNCERTAIN",
+        "score": 0.2817966228693405,
+        "family": "relative_payment"
+      }
+    ]
+  },
+  "synthetic_legitimate": {
+    "n": 12,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "false_positive_rate": 0.0,
+    "false_negative_legitimate_rate": null,
+    "abstention_rate": 0.4166666666666667,
+    "coverage": 0.5833333333333334,
+    "confusion_matrix_2_by_3": [
+      [
+        7,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "rows": [
+      "ham_or_legitimate",
+      "spam_or_synthetic_scam"
+    ],
+    "columns": [
+      "LEGITIMATE",
+      "UNCERTAIN",
+      "SCAM"
+    ],
+    "brier_score": 0.060535310497673134,
+    "binary_0_5_confusion_matrix": [
+      [
+        11,
+        1
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "errors_and_abstentions": [
+      {
+        "id": "synthetic-upi_confirmation-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.19122800763214667,
+        "family": "upi_confirmation"
+      },
+      {
+        "id": "synthetic-delivery_status-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.5929453166426496,
+        "family": "delivery_status"
+      },
+      {
+        "id": "synthetic-otp_protection-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.24139486830294893,
+        "family": "otp_protection"
+      },
+      {
+        "id": "synthetic-bank_receipt-0",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.2097157642023507,
+        "family": "bank_receipt"
+      },
+      {
+        "id": "synthetic-hiring_notice-1",
+        "label": 0,
+        "band": "UNCERTAIN",
+        "score": 0.4563372091852827,
+        "family": "hiring_notice"
+      }
+    ]
+  },
+  "pi4": "PENDING_HARDWARE"
+}

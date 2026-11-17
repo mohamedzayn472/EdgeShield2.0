@@ -1,0 +1,14 @@
+{
+  "upstream_expected_md5": [
+    "b82906df613ca762058e3ca39ac2e23a",
+    "b82906df613ca762058e3ca39ac2e23a"
+  ],
+  "lengths": [
+    32,
+    32
+  ],
+  "valid_md5_literals": true,
+  "official_sha256": "ddeaff1ea60d4135acba271b0143d9f5add02b68ab9e9be39672d1965c12e82f",
+  "download_status": "INCOMPLETE; HTTP 503 on resume and retries; archive not extracted",
+  "action": "Obtain complete official archive, verify published SHA-256 and upstream MD5 before extraction. A mismatch must be investigated, never bypassed."
+}

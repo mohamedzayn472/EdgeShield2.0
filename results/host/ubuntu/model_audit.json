@@ -1,0 +1,84 @@
+{
+  "path": "/home/zayn/EdgeShield/models/llama-spinquant",
+  "files": [
+    {
+      "file": ".gitattributes",
+      "bytes": 1519,
+      "sha256": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+      "download_revision": "b8c08c95d0476ccb6fc86e9410818d602ecca19d",
+      "download_etag": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+      "etag_matches": true,
+      "upstream_matches": true
+    },
+    {
+      "file": "README.md",
+      "bytes": 40241,
+      "sha256": "707e6719b8237dee2cb9f93202bf02cc51bc33d076c10f6699df5bfa8cc23d10",
+      "download_revision": "b8c08c95d0476ccb6fc86e9410818d602ecca19d",
+      "download_etag": "310946eb240c90bd6811285fab0d4abfb1ae8326",
+      "etag_matches": true,
+      "upstream_matches": true
+    },
+    {
+      "file": "config.json",
+      "bytes": 27,
+      "sha256": "dac77eadc3b999fa812bf1e1fe84d2175976f64f058a7f1844bde52f6a17eee8",
+      "download_revision": "b8c08c95d0476ccb6fc86e9410818d602ecca19d",
+      "download_etag": "79b5f0f5a9dad9941bd9d61aaaac300d86912ef9",
+      "etag_matches": true,
+      "upstream_matches": true
+    },
+    {
+      "file": "consolidated.00.pth",
+      "bytes": 1621294320,
+      "sha256": "c14adb6bf48fd9e81fdc14ebad5ef0ea9f98d50ca3419b28f0b788149c4ef2a5",
+      "download_revision": "b8c08c95d0476ccb6fc86e9410818d602ecca19d",
+      "download_etag": "c14adb6bf48fd9e81fdc14ebad5ef0ea9f98d50ca3419b28f0b788149c4ef2a5",
+      "etag_matches": true,
+      "upstream_matches": true
+    },
+    {
+      "file": "params.json",
+      "bytes": 273,
+      "sha256": "44ef8d02aaf4a2f071b65552c0a93ae8f79cbe50df8e545c377eee45d350b17e",
+      "download_revision": "b8c08c95d0476ccb6fc86e9410818d602ecca19d",
+      "download_etag": "836fd323cba310aa134e212dcf25b52abc9a9d41",
+      "etag_matches": true,
+      "upstream_matches": true
+    },
+    {
+      "file": "tokenizer.model",
+      "bytes": 2183982,
+      "sha256": "82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55",
+      "download_revision": "b8c08c95d0476ccb6fc86e9410818d602ecca19d",
+      "download_etag": "82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55",
+      "etag_matches": true,
+      "upstream_matches": true
+    }
+  ],
+  "params": {
+    "dim": 2048,
+    "n_layers": 16,
+    "n_heads": 32,
+    "n_kv_heads": 8,
+    "vocab_size": 128256,
+    "ffn_dim_multiplier": 1.5,
+    "multiple_of": 256,
+    "norm_eps": 1e-05,
+    "rope_theta": 500000.0,
+    "use_scaled_rope": true,
+    "quantization_args": {
+      "group_size": 32
+    }
+  },
+  "tokenizer": {
+    "format": "base64 token plus integer rank (tiktoken BPE)",
+    "entries": 128000,
+    "unique_tokens": 128000,
+    "contiguous_ranks": true
+  },
+  "license": "llama3.2; agreement and acceptable use policy embedded in model README; account acceptance not independently established",
+  "verified_repository": "meta-llama/Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8",
+  "verified_revision": "b8c08c95d0476ccb6fc86e9410818d602ecca19d",
+  "license_confirmation": "User confirmed approved access and acceptance of Llama 3.2 license in this chat on 2026-11-16"
+}
