@@ -9,6 +9,9 @@ description = "Local SMS risk detection with evidence-only ExecuTorch explanatio
 requires-python = ">=3.10,<3.14"
 dependencies = ["scikit-learn==1.7.2", "numpy==2.2.6", "scipy==1.15.3", "joblib==1.5.2", "threadpoolctl==3.6.0"]
 
+[project.optional-dependencies]
+dev = ["pytest==8.4.2"]
+
 [project.scripts]
 edgeshield = "edgeshield.cli:main"
 

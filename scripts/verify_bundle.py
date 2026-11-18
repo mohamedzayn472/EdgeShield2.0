@@ -22,14 +22,22 @@ def _verify_entries(root: Path, manifest_path: Path, *, allow_prefix: str = "") 
         if not target.is_relative_to(root) or str(relative) in seen:
             raise ValueError("Escaping or duplicate manifest entry")
         seen.add(str(relative))
-        if target.stat().st_size != item["bytes"]:
-            raise ValueError("Bundle file size mismatch")
+        if not target.exists():
+            raise FileNotFoundError(f"Missing manifest entry: {relative}")
+        actual_bytes = target.stat().st_size
+        if actual_bytes != item["bytes"]:
+            raise ValueError(
+                f"Bundle file size mismatch for {relative}: expected {item['bytes']} bytes, got {actual_bytes} bytes"
+            )
         with target.open("rb") as handle:
             digest = hashlib.sha256()
             for chunk in iter(lambda: handle.read(1024 * 1024), b""):
                 digest.update(chunk)
-        if digest.hexdigest() != item["sha256"]:
-            raise ValueError("Bundle file checksum mismatch")
+        actual_sha = digest.hexdigest()
+        if actual_sha != item["sha256"]:
+            raise ValueError(
+                f"Bundle file checksum mismatch for {relative}: expected {item['sha256']}, got {actual_sha}"
+            )
     return len(entries)
 
 
@@ -50,15 +58,15 @@ def main(argv=None):
     args = p.parse_args(argv)
     try:
         count = verify(args.root)
-    except (OSError, ValueError, KeyError, TypeError):
-        print("FAILED: bundle manifest missing, unsafe or mismatched. Use a trusted, unmodified transfer archive.")
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        print(f"FAILED: bundle manifest missing, unsafe or mismatched ({exc}). Use a trusted, unmodified transfer archive.")
         return 1
     print(f"PASSED: {count} bundle files match manifest. This proves integrity, not authenticity or hardware compatibility.")
     if args.check_runtime:
         try:
             runtime_count = verify_runtime(args.root)
-        except (OSError, ValueError, KeyError, TypeError):
-            print("FAILED: runtime manifest missing, unsafe or mismatched in models/llama/.")
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            print(f"FAILED: runtime manifest missing, unsafe or mismatched in models/llama/ ({exc}).")
             return 1
         print(
             f"PASSED: {runtime_count} staged aarch64 runtime assets match models/llama/RUNTIME_MANIFEST.json. "

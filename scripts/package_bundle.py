@@ -120,6 +120,7 @@ def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None]:
     manifest_path.write_text(json.dumps(runtime_manifest, indent=2), encoding="utf-8")
 
     archive_info = None
+    runners_archive_info = None
     if present:
         archive = dest / "edgeshield-aarch64-llama-runtime-private.zip"
         with zipfile.ZipFile(archive, "w", allowZip64=True) as z:
@@ -129,7 +130,19 @@ def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None]:
                 z.write(p, "edgeshield/" + rel, compress_type=comp)
             z.write(manifest_path, "edgeshield/models/llama/RUNTIME_MANIFEST.json", compress_type=zipfile.ZIP_DEFLATED)
         archive_info = {"file": archive.name, "bytes": archive.stat().st_size, "sha256": sha256_file(archive)}
-    return runtime_manifest, archive_info
+
+        runners_archive = dest / "edgeshield-aarch64-runners-only.zip"
+        with zipfile.ZipFile(runners_archive, "w", compression=zipfile.ZIP_DEFLATED) as z:
+            for rel, p in present:
+                if p.suffix != ".pte":
+                    z.write(p, "edgeshield/" + rel)
+            z.write(manifest_path, "edgeshield/models/llama/RUNTIME_MANIFEST.json")
+        runners_archive_info = {
+            "file": runners_archive.name,
+            "bytes": runners_archive.stat().st_size,
+            "sha256": sha256_file(runners_archive),
+        }
+    return runtime_manifest, archive_info, runners_archive_info
 
 
 def main():
@@ -165,11 +178,12 @@ def main():
     dest.mkdir(exist_ok=True)
     pi5_archive = _build_source_zip(dest / "edgeshield-pi5-preparation.zip", paths, manifest_text)
     pi4_archive = _build_source_zip(dest / "edgeshield-pi4-preparation.zip", paths, manifest_text)
-    runtime_manifest, runtime_archive = _build_private_runtime_bundle(dest)
+    runtime_manifest, runtime_archive, runners_archive = _build_private_runtime_bundle(dest)
 
     private_inventory = {
         **runtime_manifest,
         "archive": runtime_archive,
+        "runners_only_archive": runners_archive,
         "excludes": ["models/llama/host-x86_64/*", ".venv-host/*", "build/*", "data/raw/*", "data/processed/*"],
     }
     (dest / "PRIVATE_RUNTIME_INVENTORY.json").write_text(json.dumps(private_inventory, indent=2), encoding="utf-8")
@@ -181,6 +195,7 @@ def main():
             "pi5_source_bundle": pi5_archive,
             "pi4_source_bundle": pi4_archive,
             "private_aarch64_runtime_bundle": runtime_archive,
+            "private_aarch64_runners_only_bundle": runners_archive,
         },
         "private_runtime_complete": runtime_manifest["complete"],
         "private_runtime_missing": runtime_manifest["missing"],
@@ -191,6 +206,7 @@ def main():
         "pi5_archive": pi5_archive,
         "pi4_archive": pi4_archive,
         "runtime_archive": runtime_archive,
+        "runners_archive": runners_archive,
         "private_runtime_complete": runtime_manifest["complete"],
     }, indent=2))
 

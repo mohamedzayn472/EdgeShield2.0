@@ -1,7 +1,15 @@
+a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598  ./exceptiongroup-1.3.1-py3-none-any.whl
+9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7  ./iniconfig-2.3.1-py3-none-any.whl
 4e1f0bdbb987e6d843c70cf43714cb276623def372df3c22fe5266b2670bc241  ./joblib-1.5.2-py3-none-any.whl
 f92729c95468a2f4f15e9bb94c432a9229d0d50de67304399627a943201baa2f  ./numpy-2.2.6-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c  ./packaging-26.3-py3-none-any.whl
+7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec  ./pluggy-1.7.0-py3-none-any.whl
+2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9  ./pygments-2.21.0-py3-none-any.whl
+872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79  ./pytest-8.4.2-py3-none-any.whl
 7a4c328a71785382fe3fe676a9ecf2c86189249beff90bf85e22bdb7efaf9ae0  ./scikit_learn-1.7.2-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
 79167bba085c31f38603e11a267d862957cbb3ce018d8b38f79ac043bc92d825  ./scipy-1.15.3-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
 062d34222ad13e0cc312a4c02d73f059e86a4acbfbdea8f8f76b28c99f306922  ./setuptools-80.9.0-py3-none-any.whl
 43a0b8fd5a2928500110039e43a5eed8480b918967083ea48dc3ab9f13c4a7fb  ./threadpoolctl-3.6.0-py3-none-any.whl
+32a7b79ac57a2e83670ce329ccf675798bc5a2094783a63676866b70503f2e2b  ./tomli-2.5.0-py3-none-any.whl
+481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8  ./typing_extensions-4.16.0-py3-none-any.whl
 708e7481cc80179af0e556bbf0cc00b8444c7321e2700b8d8580231d13017248  ./wheel-0.45.1-py3-none-any.whl

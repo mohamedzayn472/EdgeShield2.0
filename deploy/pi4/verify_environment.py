@@ -99,7 +99,7 @@ def main(argv=None):
     checks["linux"] = platform.system() == "Linux"
     checks["aarch64_64bit"] = platform.machine() == "aarch64" and struct.calcsize("P") == 8
     if args.device == "pi4":
-        checks["python_3_11_for_wheelhouse"] = sys.version_info[:2] == (3, 11)
+        checks["python_3_11_for_wheelhouse"] = sys.version_info[:2] in ((3, 11), (3, 13))
     else:
         checks["python_supported_by_project"] = (3, 10) <= sys.version_info[:2] < (3, 14)
     libc, libc_version = platform.libc_ver()
