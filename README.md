@@ -1181,17 +1181,43 @@ mentoring slides 03 and 11, which recommend a complete
 on-device security workflow and identify scam SMS as a
 valid primary scenario.
 
-| Security application | Phase | Implementation status |
+| Security application | Phase / Branch | Implementation status |
 | :--- | :--- | :--- |
-| Pasted SMS scam detection | Phase 1 | ✅ VERIFIED |
-| Evidence-constrained SMS advisory | Phase 1 | ✅ VERIFIED |
-| Independent phishing URL classification | Phase 2 roadmap | ⚠️ PENDING — future work |
-| Network intrusion detection | Phase 2 roadmap | ⚠️ PENDING — future work |
-| Malware analysis | Phase 2 roadmap | ⚠️ PENDING — future work |
+| Pasted SMS scam detection | Phase 1 (`main`) | ✅ VERIFIED |
+| Evidence-constrained SMS advisory | Phase 1 (`main`) | ✅ VERIFIED |
+| Standalone phishing URL detection | In Progress (`feat/phishing-url`) | 🚧 IN PROGRESS — Pi 5 (8 GB) prototype benchmarked |
+| Network traffic anomaly & intrusion detection | Phase 2 blueprint | 📐 DESIGNED — `NOT_IMPLEMENTED` ([Plan](docs/NETWORK_TRAFFIC_PLAN.md)) |
+| Malware analysis | Future scope | ⚠️ DEFERRED |
 
+On `main`, EdgeShield implements pasted SMS analysis only.
 A `LINK_PRESENT` cue within an SMS is not independent URL
 classification and must not be interpreted as a completed
 phishing URL detection capability.
+
+### Multi-Surface PS3 Progress (Phishing URLs & Phase 2 Network Plan)
+
+Alongside our completed **16 GB Raspberry Pi 5** offline SMS submission (`main`), we evaluated an **in-progress** standalone Phishing URL prototype (`UrlDetectorV1`, separate branch `feat/phishing-url`) on a **physical Raspberry Pi 5 Model B Rev 1.1 (8 GB, AArch64, Debian 13 Trixie, `6.18.50+rpt-rpi-2712`, `glibc 2.41`, Python `3.13.5`)**, and finalized our **Phase 2 Network Traffic Plan (`NOT_IMPLEMENTED`)**:
+
+#### Phishing URL Prototype — Measured Pi 5 (8 GB) Benchmarks (`In Progress`, USB Archive `edgeshield_url_transfer/`)
+
+| Benchmark Stage | Dataset / Scope | Key Measured Results (Pi 5 8 GB) |
+| :--- | :--- | :--- |
+| **Unit Tests** | `82` URL detector tests | **`82/82` passed**, `0` failed (`1.35 s`) |
+| **Stress Suite** | `139` URLs (`79` benign / `60` phish + fuzz) | **`0/79` benign `SCAM` FP** (`77` `LEGITIMATE`, `2` `UNCERTAIN`: `zoom.us`, `localhost:8000`); **`60/60` (`100%`)** phish `SCAM`; `14/14` malformed rejected; `11/11` bypass checks passed; `0` sentinel leaks; `0` network calls; **`1.1098 ms`** med (`1.3329 ms` p95) |
+| **Temporal Evaluation** | `1,881` (`1,404` neg / `477` pos) | `83.47%` acc · `93.36%` prec · **`55.97%` `SCAM` recall** · `1.35%` FPR · `69.99%` F1 · `10.37%` abstention · `0.93168` ROC-AUC · `0.07891` Brier · confusion `[[1303, 82, 19], [97, 113, 267]]` · `1.0983 ms` med |
+| **General Holdout** | `200` (`100` neg / `100` pos, separate set) | `99.50%` acc · `100%` prec · `100%` recall · `0%` FPR · `0.50%` abstention · `1.000` ROC-AUC · `0.00286` Brier · `1.1019 ms` med |
+| **Indian Holdout** | `75` (`25` neg / `50` pos, separate set) | `100%` acc · `100%` prec · `100%` recall · `0%` FPR · `1.000` ROC-AUC · `0.00068` Brier · `1.1501 ms` med |
+| **Llama Runtime & Resources** | `4/4` URL demo + standalone KYC spoof (`0.9999996` `SCAM`) | **`4/4` Llama `Validated / ACCEPTED`** (~`2.20 ms` avg detector, ~`6.286 s` avg Llama; standalone `6,652.06 ms` Llama); Max RSS **`1,409,328 KB`** (~`1.34 GiB`), `0` swap, `0` socket msgs, `52–66 °C`, **`throttled=0x0`** |
+| **Controlled Network Checks** | `tcpdump 4.99.5` + `strace -f -e trace=network` (`wlan0`) | With Chromium terminated: **`0` packets captured** (`0` dropped) over `45 s` during full `4/4` Llama demo (`edgeshield_no_chromium.pcap`); `5` pkts in control ping (`capture_control.pcap`); **`0` matches** for `socket()`/`connect()`/`sendto()`/`recvfrom()` in `edgeshield_process_network.trace`; USB SHA-256 **`12/12 OK`** (URL) & **`8/8 OK`** (network-traffic) |
+
+> [!NOTE]
+> **Strict Scoped Interpretation (URL Prototype):** Temporal recall is **`55.97%`** (`97/477` missed as `LEGITIMATE`, `113/477` `UNCERTAIN`)—this must **not** be reported as 100% phishing detection. General (`200`) and Indian (`75`) holdouts are separate benchmark slices and do not establish universal real-world detection. Validation status `ACCEPTED` covers explanation formatting only (never URL safety), and the `45 s` zero-packet capture / `strace` check apply solely to those observed runs rather than proving global network impossibility.
+
+#### Phase 2 Network Traffic Anomaly & Intrusion Plan (`NOT_IMPLEMENTED`)
+
+- **Dataset Integrity & Anti-Shortcut Protocol:** Restricts `NSL-KDD` strictly to a historical sanity baseline; combines DistriNet-corrected `CICIDS2017` and `NF-UNSW-NB15-v2` into a **28-feature encryption-agnostic L3/L4 header-only flow schema** (dropping all IPs, flow IDs, timestamps, raw source ports, and `sttl`/`dttl`/`ct_state_ttl`), calibrated on consented `snaplen=96` Indian lab VLAN traffic (UPI polling, CGNAT, WebRTC UDP, mDNS/SSDP).
+- **Two-Tier Capture & Dual-Head Detector (`Cores 0–1`):** Kernel BPF (`snaplen=96`) `libpcap`/`NFStream` C-ring + `16,384`-entry LRU table (`<= 32 MB`, early `k=8` trigger) feeding a JSON `HistGradientBoostingClassifier` + Shrinkage Mahalanobis OOD gate with 8 closed ASCII cue IDs (`SYN_FLOOD_PATTERN`, `VOLUMETRIC_AMPLIFICATION`, `EXFILTRATION_ASYMMETRY`, `BRUTE_FORCE_BURST`, `PORT_SCAN_SWEEP`, `PERIODIC_BEACON_CADENCE`, `SLOW_STALL_SESSION`, `ANOMALOUS_FLOW_PROFILE`).
+- **Episode Coalescing & Safe Guidance (`Cores 2–3`):** A `30 s` `EpisodeCoalescer` aggregates scan/flood bursts into 1 incident before calling Llama (`cpu_threads=2`), preventing thermal/LLM self-DoS, with app-owned `NET_ADVICE` (zero auto-blocking). Full design & `M1–M4` roadmap: [docs/NETWORK_TRAFFIC_PLAN.md](docs/NETWORK_TRAFFIC_PLAN.md) · [docs/REPORT.md](docs/REPORT.md#7-multi-surface-ps3-progress--phishing-url-prototype-in-progress--phase-2-network-traffic-plan).
 
 ### Why the engineering approach matters
 
@@ -1242,38 +1268,40 @@ from outstanding validation.
 
 ### Current limitations
 
-- Synthetic evaluation does not establish real-world accuracy.
-- Historical UCI spam examples do not fully represent modern
-  Indian scam messages.
-- The detector score is not a calibrated real-world scam probability.
-- Indicator matches are observable cues, not verified identities.
-- Low estimated risk does not establish message safety.
-- Explanation-validator acceptance does not establish detector accuracy.
-- Sustained passive cooling produced thermal throttling in the
-  historical V2 benchmark.
-- Current Phase 1 functionality is limited to pasted SMS analysis.
-- Independent phishing URL classification, network intrusion detection
-  and malware analysis are not implemented Phase 1 capabilities.
+#### 1. Scam SMS (`DetectorV8` — Phase 1 Verified on Pi 5 16 GB)
+- Synthetic and UCI spam-proxy evaluations do not establish real-world Indian SMS fraud accuracy; scores are not calibrated real-world probabilities.
+- Human review of synthetic labels, real-world Indian SMS calibration, and the 5-person clarity study remain pending.
+- Indicator matches are observable lexical cues, never verified sender identities; low risk never establishes safety, and validator acceptance does not prove detector truth.
+- Sustained passive cooling triggered thermal throttling (`83.7 °C`, `throttled_after=0xe0008`) in the historical V2 benchmark (sustained V8 thermal testing pending); current Phase 1 `main` analyzes pasted SMS only.
+
+#### 2. Phishing URLs (`UrlDetectorV1` — In Progress on Separate Pi 5 8 GB Branch)
+- Prototype remains on `feat/phishing-url` (not merged into `main`), with raw Pi 5 8 GB evidence archived on USB (`edgeshield_url_transfer/`, `12/12` + `8/8 OK`).
+- Temporal evaluation recall is **`55.97%`** (`97/477` positive URLs classified `LEGITIMATE`, `113/477` `UNCERTAIN`) and must not be presented as 100% detection; General (`200`) and Indian (`75`) holdouts are separate benchmark slices.
+- `2/79` benign stress-test URLs (`zoom.us`, `localhost:8000`) returned `UNCERTAIN`.
+- Offline string inspection performs zero DNS/WHOIS/HTML verification, and typosquat checks cover distinctive `>= 5`-character brand stems only.
+- The `45 s` Chromium-terminated `tcpdump` (`0` pkts) and `strace` (`0` matched `socket`/`connect`/`sendto`/`recvfrom`) establish zero observed traffic/calls in those specific runs, not global network shutdown or universal network-inability proof.
+
+#### 3. Network Traffic Anomaly & Intrusion (`NetDetectorV1` — Phase 2 Blueprint)
+- **`NOT_IMPLEMENTED` in Phase 1:** Zero packet capture or flow classifier code exists on `main`; `< 0.5 ms`, `< 0.5%` LAN FPR, and `M1–M4` items are planned targets, not measured results.
+- Header-only capture (`snaplen=96`) excludes encrypted TLS/QUIC payload inspection by privacy design; live multi-device sensing requires port mirroring and `CAP_NET_RAW`; human-only `NET_ADVICE` excludes auto-blocking; local calibration awaits consented Indian lab VLAN traffic.
 
 ### Development roadmap
 
 ```mermaid
 flowchart TD
-    A["Phase 1<br/>Local SMS risk assessment and advisory"]
+    A["Phase 1 (Complete on main)<br/>Local SMS risk assessment and advisory (Pi 5 16 GB)"]
 
-    B["Human label review"]
-    C["Real-world detector calibration"]
-    D["Sustained V8 thermal evaluation"]
+    B["Human label review &<br/>real-world SMS calibration"]
+    C["Sustained V8 thermal evaluation"]
 
-    E["Phase 2 roadmap<br/>Independent phishing URL classification"]
-    F["Phase 2 roadmap<br/>Network intrusion detection"]
-    G["Phase 2 roadmap<br/>Malware analysis"]
+    E["In Progress (feat/phishing-url)<br/>Standalone URL classifier (Pi 5 8 GB prototype benchmarked)"]
+    F["Phase 2 Plan (Designed, NOT_IMPLEMENTED)<br/>Header-only C-ring NIDS + EpisodeCoalescer"]
+    G["Future Scope<br/>Local malware analysis"]
 
     A --> B
-    B --> C
-    A --> D
+    A --> C
 
-    C -.-> E
+    B -.-> E
     A -.-> F
     A -.-> G
 ```
@@ -1282,18 +1310,15 @@ flowchart TD
 | :--- | :--- | :--- |
 | Detector validation | Human label review and real-world calibration | ⚠️ PENDING |
 | Thermal validation | Sustained V8 evaluation and assessment of cooling requirements | ⚠️ PENDING |
-| Phase 2 — Phishing URLs | Independent URL risk classification beyond SMS indicators | ⚠️ PENDING |
-| Phase 2 — Network intrusion | On-device network intrusion detection | ⚠️ PENDING |
-| Phase 2 — Malware | Local malware-analysis capabilities | ⚠️ PENDING |
+| Phishing URLs (`feat/phishing-url`) | Improve temporal recall (`55.97%` baseline on Pi 5 8 GB) before merging into `main` | 🚧 IN PROGRESS |
+| Phase 2 — Network intrusion | Implement `NetDetectorV1`, `libpcap`/`NFStream` C-ring, and `EpisodeCoalescer` ([Plan](docs/NETWORK_TRAFFIC_PLAN.md)) | 📐 DESIGNED (`NOT_IMPLEMENTED`) |
+| Phase 2 — Malware | Local malware-analysis capabilities | ⚠️ DEFERRED |
 
-Independent phishing URL classification, network intrusion detection,
-and malware analysis are Phase 2 roadmap items rather than
-completed Phase 1 features.
-
-The diagram represents proposed development directions,
-not a committed delivery schedule.
+The diagram represents current branch status and proposed
+development directions, not a committed delivery schedule.
 
 [Limitations](docs/LIMITATIONS.md) ·
+[Network Traffic Plan](docs/NETWORK_TRAFFIC_PLAN.md) ·
 [Project Status](PROJECT_STATUS.md)
 
 ---
@@ -1510,7 +1535,8 @@ Additional source attribution is documented in
 | [V3 Evaluation Report](docs/V3_EVALUATION_REPORT.md) | Earlier detector evaluation |
 | [V2 Results](docs/V2_RESULTS.md) | Historical detector results |
 | [Security & Privacy](docs/SECURITY.md) | Privacy boundary and security considerations |
-| [Limitations](docs/LIMITATIONS.md) | Known limitations and outstanding validation |
+| [Limitations](docs/LIMITATIONS.md) | Known limitations across all three PS3 pillars |
+| [Phase 2 Network Traffic Plan](docs/NETWORK_TRAFFIC_PLAN.md) | Phase 2 `--mode net` architecture, datasets, and roadmap (`NOT_IMPLEMENTED`) |
 
 </details>
 

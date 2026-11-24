@@ -1,30 +1,48 @@
-# Limitations and Open Release Blockers (20 November 2026)
+# Limitations Across All Three PS3 Pillars (24 November 2026)
 
-## Open Phase 1 release gates
+A verified prototype is not the same as a production-ready security system. EdgeShield deliberately separates completed offline hardware verification from in-progress prototyping, unimplemented Phase 2 plans, and open submission gates.
 
-- **`PENDING_HARDWARE` (V3 Pi 5 device verification):** Archived Pi 5 B0 and offline runs measured frozen **V2** (`f37c3dd9060b89ead7ea6bbf1c393b22fff7cfc18ed5d85126e977e03daea6a6`). An authorized offline Pi 5 smoke/demo capture running **V3** (`b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910`) into a new results directory is still required before recommending submission.
-- **`MISSING` (On-device demo video):** No actual disconnected Raspberry Pi 5 video recording is present in the workspace. A laptop or template-fallback capture cannot substitute for showing at least one genuine `Llama (validated)` response on the disconnected Pi 5 running the V3 release candidate.
-- **`BLOCKED` (Team/portal items):** Root `LICENSE` approval, team/mentor details, account-gated submission form field/limit verification, authorized GitHub publication, and final form submission by **23 November 2026**.
+---
 
-## Hardware and thermal limits (Verified Pi 5 B0)
+## 1. Pillar 1 — Scam SMS / Smishing (`DetectorV8`, Phase 1 Complete & Verified)
 
-- **Passive-heatsink thermal throttling (`VERIFIED`):** During the 605.4 s continuous back-to-back B0 benchmark on an open **Raspberry Pi 5 Model B (16 GB, passive heatsink)**, SoC temperature peaked at **83.7 °C** and triggered throttling (`throttled_after=0xe0008`). By contrast, a 5-request burst (`benchmark-short.json`) peaked at `69.95 °C` (`throttled=0x0`). Active cooling is recommended for sustained continuous loads.
-- **Cold-load subprocess latency:** Each `ExecuTorchAdvisor` invocation launches `llama_main`, verifies SHA-256 hashes, loads the ~1.00 GiB `.pte` (`~1.22 s` median), runs prefill (`3.20 s` median TTFT), and decodes (`13.49 tok/s` median), producing **6.81 s p95** full-response latency (`1.44 GB` / `1.34 GiB` peak runner RSS, `0 B` swap). Detector verdict and `DO:` advice appear immediately in `<2 ms`. Reaching an internal 2-second latency goal and persistent-runner designs remain ongoing engineering work.
+### Hardware, Latency & Thermal Limits (`Pi 5 16 GB`)
+- **Passive-heatsink thermal throttling (`VERIFIED`):** Under `605.4 s` of continuous back-to-back B0 inference (`results/pi5/archive/20261118-B0-full/`, archived Detector V2) on an open **Raspberry Pi 5 Model B (16 GB)** with a passive heatsink, SoC temperature rose from `59.3 °C` to **`83.7 °C`** and triggered thermal throttling (`throttled_after=0xe0008`). Short 5-request offline bursts remained cooler with zero throttling (`<= 72.7 °C` max on V8 offline `results/pi5/v8-device-20261124/` and `69.95 °C` on B0 short burst, `throttled=0x0`). Active cooling is recommended for sustained continuous LLM workloads; sustained continuous thermal characterization on V8 remains pending.
+- **Cold-load subprocess latency:** Each `ExecuTorchAdvisor` call spawns an isolated `llama_main` process, verifies SHA-256 digests, loads the ~`1.00 GiB` `.pte` file (~`1.21 s` median), runs prefill (`3.17 s` median TTFT), and decodes (`13.25 tok/s` median), giving **`6.51 s` median / `6.85 s` p95** full response latency (`1.44 GB` / `1.34 GiB` peak RSS, `0 B` swap). Statistical risk verdicts and `DO:` advice appear immediately in `1.80 ms` median before Llama runs.
 
-## Detection and evaluation limits
+### Detection, Evaluation & Privacy Limits
+- **Synthetic & spam-proxy evaluation:** `DetectorV8` (`99.17%` synthetic holdout accuracy, `0.83%` FPR, `[[119, 0, 1], [0, 1, 119]]`) was developed and tested on UCI SMS Spam Collection proxies plus AI-assisted synthetic Indian/Hinglish banking, OTP, UPI, delivery, and KYC templates. Synthetic holdouts do **not** establish real-world Indian SMS fraud accuracy, and scores are **not** calibrated real-world probabilities.
+- **Pending human studies:** Independent human review of synthetic labels, representative consented real-message calibration, and the 5-person explanation clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`) remain pending.
+- **Lexical cues & non-authentication:** Clause-level cue IDs (`BANK_IMPERSONATION`, `KYC_IMPERSONATION`, `OTP_REQUEST`, `LINK_PRESENT`, etc.) match observable wording only and never authenticate sender identity or inspect destination URLs on `main`; a low risk score never proves a message is safe.
+- **Validator scope & OS trust boundary:** Validator acceptance (`5/5` on V8 offline Pi 5; `91/91` in archived B0) proves strict template compliance against structured `Evidence`, never whether the detector's underlying risk verdict is true. Application no-history guarantees do not extend to terminal scrollback, shell history, swap, or OS crash dumps, and SHA-256 checks detect manifest mismatch against a trusted manifest rather than a compromised OS.
 
-- **Preserved V1 failure (`FAILED`, archived):** V1 (`models/detector.json`, `9163c207...`) detected only `1/12` synthetic scams and `0/6` Hinglish scams (`docs/DETECTOR_FINDINGS.md`).
-- **Archived V2 limits (`VERIFIED`, `f37c3dd9...`):** On `120` labeled fresh synthetic messages (`12` ambiguous excluded; `results/host/v2/heldout_evaluation.json`), V2 detected `50/60` scams (`83.33%` recall; `26/30` English, `24/30` Hinglish) with `1/60` false positive (`1.67%` FPR; `1/30` Hinglish `v2h066`), assigned **`LEGITIMATE` to 10/60 scams** (`4` English, `6` Hinglish) with **0 abstentions** (`thresholds: [0.25, 0.275]`), and produced `19/80` false positives (`23.75%` FPR) on `v3_holdout`.
-- **Current V3 statistical & coverage limits (`b2b2126b...`, `thresholds: [0.65, 0.75]`):** Across identical-row audits (`results/host/v3/full_v2_v3_regression_audit.json`), V3 introduces `4` regressions vs. V2 on `v2_holdout` (`v2h001`/`v2h017` `UNCERTAIN`; `v2h018`/`v2h079` `SCAM`), `8` on `uci_test` (`3` missed, `5` abstained), and `2` on `indian_sms` test (`24` labeled). In fresh diagnostics, V3 shows false alarms on educational anti-fraud advisories (`0.928` `SCAM` EN, `0.711` `UNCERTAIN` HI) and false reassurance on family-impersonation scams (`0.344`–`0.397` `LEGITIMATE`) and some read-aloud/Hinglish-OV requests (`0.284`–`0.563`) because zero anti-fraud or family-impersonation families exist in `v3_development.jsonl`. Addressing those statistically requires a separate, independently authored **V4** development/calibration/validation/fresh-holdout round.
-- **Domain shift & proxy labels:** UCI spam/ham and AI-assisted synthetic Indian/Hinglish messages do not establish real-world Indian SMS fraud accuracy. Scores are not calibrated real-world fraud probabilities.
-- **Pending human studies:** Independent human label review of synthetic examples, representative consented real-message evaluation, and the 5-person clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`, `PENDING_PARTICIPANTS`) remain unfinished.
-- **Keyword cues:** Clause-level indicators (`BANK_IMPERSONATION`, `KYC_IMPERSONATION`, `OTP_REQUEST`, `LINK_PRESENT`, etc.) are lexical cues only, never proof of sender identity, fraud, or malicious URL destinations, and never override statistical verdicts.
+---
 
-## Explanation and privacy limits
+## 2. Pillar 2 — Phishing URL Detection (`UrlDetectorV1`, In Progress Prototype on Pi 5 8 GB)
 
-- **Controlled grammar:** The validator (`src/edgeshield/validator.py`) enforces exact approved band prefixes plus at most one supported cue sentence. Validator acceptance (`91/91` on Pi 5 B0) proves wording compliance against structured `Evidence`, not truth of the detector's underlying risk verdict.
-- **OS trust boundary:** SHA-256 manifests verify integrity against a trusted manifest, not source authenticity on a compromised host. EdgeShield's no-history policy applies to application storage; OS swap, shell history, terminal scrollback, and crash dumps remain outside application guarantees.
+The standalone phishing URL classifier resides on local experimental branch `feat/phishing-url` (**not merged into `main`**) and was benchmarked separately on a physical **Raspberry Pi 5 Model B Rev 1.1 (8 GB RAM, Debian 13 Trixie, `6.18.50+rpt-rpi-2712`, `glibc 2.41`, Python 3.13.5)**, with raw artifacts archived on the Pi 5 handover USB (`edgeshield_url_transfer/`, `12/12 OK` URL files + `8/8 OK` network-traffic files):
 
-## Deferred PS3 capabilities (Future scope)
+- **Moderate temporal recall (`55.97%`):** On the `1,881`-URL time-split temporal evaluation (`1,404` negative / `477` positive, confusion `[[1303, 82, 19], [97, 113, 267]]`, `83.47%` accuracy, `1.35%` FPR, `0.93168` ROC-AUC), `97/477` (`20.34%`) positive URLs were misclassified as `LEGITIMATE` and `113/477` as `UNCERTAIN`. Do **not** report temporal evaluation as 100% phishing detection.
+- **Separate holdout sets:** General Holdout (`200`: `99.50%` acc, `100%` recall, `0%` FPR) and Indian Holdout (`75`: `100%` acc) are separate synthetic/curated evaluation slices and must not be merged with temporal results or cited as proof of universal real-world detection.
+- **Benign abstentions:** `2/79` benign stress-test URLs (`zoom.us` and `localhost:8000`) fell into `UNCERTAIN` (still `0/79` `SCAM` false positives).
+- **Offline lexical-only boundary:** Without DNS, WHOIS, TLS certificate inspection, or HTML retrieval, compromised legitimate websites lacking structural/brand anomalies are inherently difficult to distinguish, and offline typosquat checks intentionally inspect distinctive `>= 5`-character brand stems only (excluding 3-character stems such as `sbi`, `bob`, `pnb` to avoid everyday word false positives).
+- **Scoped offline/network-traffic evidence:** While `4/4` URL + Llama runs completed (`ACCEPTED`, `1,409,328 KB` / ~`1.34 GiB` max RSS, `0` swap, `throttled=0x0`), the `45 s` Chromium-terminated `tcpdump` capture (`0` packets in `edgeshield_no_chromium.pcap`), `capture_control.pcap` (`5` packets verifying capture), and `strace` check (`0` `socket()`, `connect()`, `sendto()`, `recvfrom()` matches) show no observed packets or monitored calls in those specific runs—they do **not** establish global network disablement or prove every execution path is permanently incapable of network access.
 
-- Aligned with PS3 mentoring slides 03 and 11 (one complete scam SMS workflow for Phase 1), independent phishing URL classification, network intrusion detection, malware behavior analysis, call filtering, automatic inbox integration, and a GUI dashboard remain future scope (`NOT_IMPLEMENTED`).
+---
+
+## 3. Pillar 3 — Network Traffic Anomaly & Intrusion Detection (`NetDetectorV1`, Phase 2 Plan)
+
+Per project scope, Network Traffic Anomaly & Intrusion Detection (`--mode net`) is **designed as a Phase 2 blueprint (`NOT_IMPLEMENTED`)** documented in [docs/NETWORK_TRAFFIC_PLAN.md](NETWORK_TRAFFIC_PLAN.md):
+
+- **Zero code implemented in Phase 1:** `NetDetectorV1`, `libpcap`/`NFStream` C-ring capture, and `models/net_detector_v1.json` do not exist on `main`. All throughput, `< 0.5 ms` per-flow latency, `< 0.5%` LAN FPR, and `M1–M4` items are **planned design targets**, not measured Phase 1 results.
+- **No Deep Packet Inspection (DPI) / TLS decryption:** By privacy-first design (`snaplen=96`, L3/L4 bidirectional flow headers only), the planned detector cannot inspect encrypted HTTP/QUIC application payloads.
+- **Placement & privilege prerequisites:** Live multi-device LAN monitoring requires router/switch port-mirroring and `CAP_NET_RAW` / `root` capability (offline `.pcap` audit mode runs unprivileged).
+- **Human-in-the-loop containment only:** Autonomous `iptables` blocking is excluded to prevent attackers with spoofed source IPs from causing self-DoS lockouts.
+- **Pending local calibration:** Threshold tuning against Indian broadband/CGNAT (`100.64.0.0/10`), UPI polling, WebRTC calls, and mDNS/SSDP traffic awaits a consented Indian lab VLAN collection campaign.
+
+---
+
+## 4. Open Phase 1 Submission Gates (As of 24 November 2026)
+
+- **Disconnected Pi 5 hardware demo video (`❌ MISSING`):** Still requires on-device video recording showing Ethernet/Wi-Fi down and at least one visible `Llama (validated)` response.
+- **Final packaging & portal submission (`⚠️ PENDING`):** Populate team/mentor placeholders where applicable, confirm exported PDF/DOCX technical report (`<= 10 MB`), confirm final public GitHub submission URL, submit via official portal, and archive `submission/RECEIPT.md`.

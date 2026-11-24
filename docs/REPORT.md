@@ -16,7 +16,7 @@ EdgeShield enforces a strict architectural separation between **detection**, **e
 - **On-Device Llama Reasoning via ExecuTorch:** Meta `Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8` executes locally on the Raspberry Pi 5 CPU through ExecuTorch (XNNPACK backend, `pi5-cortex-a76-native` runner, 2 CPU threads) to produce a short `WHY:` explanation.
 - **Controlled Validation & Deterministic Advice:** Every LLM output passes a strict validator (`src/edgeshield/validator.py`). Unaccepted, timed-out, unavailable, or policy-skipped generations fall back to an explicitly labeled `Template fallback`. Application code—never the LLM—supplies every `DO:` recommended action (`src/edgeshield/recommendations.py`).
 
-**Phase 1 Scope:** Following the official challenge brief and the supplied PS3 mentoring guidance (slides 03 and 11, which recommend one complete, testable on-device security workflow and name scam SMS as a valid primary scenario), Phase 1 delivers the complete on-device SMS workflow. Standalone phishing URL classification, network intrusion detection, and malware behavior analysis are explicitly scoped as future work.
+**Multi-Surface PS3 Scope:** Following the official challenge brief and PS3 mentoring guidance (slides 03 and 11), Phase 1 delivers **Scam SMS Detection (`DetectorV8`)** as the complete, hardware-verified offline primary workflow on a physical Raspberry Pi 5 (16 GB). In addition, **Section 7** transparently reports our **in-progress** standalone **Phishing URL Detection prototype (`UrlDetectorV1`)** evaluated on a physical Raspberry Pi 5 (8 GB) on separate branch `feat/phishing-url` (not merged into `main`), together with our **Phase 2 Network Traffic Anomaly & Intrusion Detection Plan (`NetDetectorV1`, `NOT_IMPLEMENTED`, [NETWORK_TRAFFIC_PLAN.md](NETWORK_TRAFFIC_PLAN.md))** and explicit limitations across all three PS3 surfaces. Malware behavior analysis remains future scope.
 
 ---
 
@@ -80,7 +80,7 @@ Verified directly from physical device captures in `results/pi5/archive/20261118
 
 ## 4. Measured Physical Raspberry Pi 5 Performance (Archived B0 — Detector V2 `f37c3dd9...`)
 
-All 12 files in `results/pi5/archive/20261118-B0-full/` pass `sha256sum -c SHA256SUMS` and are preserved untouched (`detector_sha256: f37c3dd9060b89ead7ea6bbf1c393b22fff7cfc18ed5d85126e977e03daea6a6`, V2). Benchmarks execute 5 fixed synthetic fixtures to measure system latency, memory, stability, and explanation validation—never detection accuracy. Physical Pi 5 offline detector & test verification for **V8 (`4d348155...`)** is recorded in `results/pi5/v8-offline-20261124/` (Template fallback), while **V8 + ExecuTorch Llama** on Pi 5 remains `PENDING_HARDWARE`.
+All 12 files in `results/pi5/archive/20261118-B0-full/` pass `sha256sum -c SHA256SUMS` and are preserved untouched (`detector_sha256: f37c3dd9060b89ead7ea6bbf1c393b22fff7cfc18ed5d85126e977e03daea6a6`, V2). Benchmarks execute 5 fixed synthetic fixtures to measure system latency, memory, stability, and explanation validation—never detection accuracy. Current offline **V8 (`4d348155...`) + ExecuTorch Llama** verification and offline detector/pytest verification on Raspberry Pi 5 (16 GB) are complete and documented in **Section 5** (`results/pi5/v8-device-20261124/` and `results/pi5/v8-offline-20261124/`).
 
 | Metric | Measured Pi 5 Result | Workload & Source File |
 |---|---|---|
@@ -185,9 +185,74 @@ Source: `results/host/v2/heldout_evaluation.json` (reproduced bit-for-bit on Ubu
 
 ---
 
-## 7. Reproduction Instructions
+## 7. Multi-Surface PS3 Progress — Phishing URL Prototype (In Progress) & Phase 2 Network Traffic Plan
 
-### 7.1 Verify Public Source & Run Tests (Any Linux Host, Python 3.10–3.13)
+### 7.1 Multi-Surface PS3 Status Overview
+
+| PS3 Threat Surface | Component / Branch | Status | Target / Tested Pi 5 Hardware | Evidence / Plan Link |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Scam SMS / Smishing** | `DetectorV8` (`main`) | ✅ **COMPLETE & VERIFIED** | Raspberry Pi 5 Model B **16 GB** (`aarch64`, offline `lo` only) | `results/pi5/v8-device-20261124/`, Sections 3–6 |
+| **2. Phishing URLs** | `UrlDetectorV1` (`feat/phishing-url` branch, separate from `main`) | 🚧 **IN PROGRESS (PI 5 BENCHMARKED)** | Raspberry Pi 5 Model B Rev 1.1 **8 GB** (`aarch64`, Debian 13 Trixie `6.18.50+rpt-rpi-2712`, `glibc 2.41`, Python `3.13.5`) | Handover archive `edgeshield_url_transfer/` (USB: `12/12 OK` URL + `8/8 OK` network-traffic) |
+| **3. Network Traffic Anomaly & Intrusion** | `NetDetectorV1` (`--mode net`, planned) | 📐 **DESIGNED (`NOT_IMPLEMENTED`)** | Engineered around Raspberry Pi 5 Cortex-A76 core budget (Cores `0–1` sensor, Cores `2–3` Llama) | [NETWORK_TRAFFIC_PLAN.md](NETWORK_TRAFFIC_PLAN.md) |
+
+### 7.2 Phishing URL Detection Progress (In Progress — Pi 5 8 GB Prototype Handover)
+
+An experimental standalone phishing URL detector (`UrlDetectorV1`, kept on the local `feat/phishing-url` branch while `main` retains the clean SMS-only Phase 1 deliverable) was deployed and evaluated on a **physical Raspberry Pi 5 Model B Rev 1.1 (8 GB RAM, AArch64, Debian GNU/Linux 13 Trixie, kernel `6.18.50+rpt-rpi-2712`, GLIBC `2.41`, Python `3.13.5`)** inside `~/edgeshield-url` using the shared virtual environment (`~/edgeshield/.venv`). All 12 URL evaluation files (`url-v1-device/SHA256SUMS`: `12/12 OK`) and all 8 network-traffic capture/trace files (`network-traffic/SHA256SUMS`: `8/8 OK`) were checksum-verified on the Pi 5 handover USB (`edgeshield_url_transfer/`).
+
+#### Quantitative Evaluation on Physical Raspberry Pi 5 (8 GB)
+
+| Evaluation Suite | Dataset Size (Neg / Pos) | Accuracy | Precision | Recall (`SCAM`) | FPR | F1 | Abstention | ROC-AUC | Brier | Latency (Med / P95 / Max) |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| **Unit Tests** | `82` tests | `82/82` passed (`0` failed, `1.35 s`) | — | — | — | — | — | — | — | — |
+| **Stress Test** | `139` (`79` benign / `60` phish + fuzz) | `77/79` benign `LEGITIMATE`, `2` `UNCERTAIN` (`zoom.us`, `localhost:8000`) | — | **`60/60` (`100%`)** hard phish `SCAM` | **`0/79` (`0%`)** benign `SCAM` | — | — | — | — | **`1.1098 ms`** / `1.3329 ms` / `3.2401 ms` |
+| **Temporal Evaluation** *(Time-split)* | `1,881` (`1,404` / `477`) | **83.47%** | **93.36%** | **55.97%** *(+`113` `UNCERTAIN`)* | **1.35%** | **69.99%** | **10.37%** | **0.93168** | **0.07891** | **`1.0983 ms`** / `1.2618 ms` / `2.1916 ms` |
+| **General Holdout** *(Separate set)* | `200` (`100` / `100`) | **99.50%** | **100%** | **100%** | **0%** | **100%** | **0.50%** | **1.000** | **0.00286** | **`1.1019 ms`** / `1.3278 ms` / `3.4057 ms` |
+| **Indian Holdout** *(Separate set)* | `75` (`25` / `50`) | **100%** | **100%** | **100%** | **0%** | **100%** | **0%** | **1.000** | **0.00068** | **`1.1501 ms`** / `1.3762 ms` / `1.4396 ms` |
+
+- **Temporal confusion matrix (`1,881`):** `[[1303, 82, 19], [97, 113, 267]]`. Stress security checks additionally verified `14/14` malformed URLs rejected, `11/11` policy-bypass checks passed, `0` prompt-injection sentinel leaks, and `0` network calls attempted.
+- **On-device Llama Runtime & Resources (`Pi 5 8 GB`):**
+  - **4-scenario URL demo** (legitimate SBI, phishing SBI subdomain, legitimate NPCI, numeric-IP `.apk` phishing): **`4/4` Llama response `Validated / ACCEPTED`**, average detector latency **~`2.20 ms`**, average Llama inference **~`6.286 s`**.
+  - **Single phishing URL (`http://sbi.kyc-verify-account.xyz/netbanking/login.php?session=9281`):** `SCAM` (score `0.9999996315941981`, `3.1838 ms` detector, `0.1566 ms` evidence), **`Validated / ACCEPTED`** (`6,652.0643 ms` Llama inference, `0.5261 ms` validation). *(Here `ACCEPTED` refers strictly to validator acceptance of the Llama response, never that the URL is safe.)*
+  - **Measured process resources:** User CPU `40.89 s`, System CPU `1.98 s`, Elapsed `27.04 s` (`158%` CPU), Max RSS **`1,409,328 KB` (~`1.34 GiB`)**, Swap used `0`, Socket messages sent `0` / received `0`, exit `0`; temperatures `~52–66 °C` during later checks, final **`throttled=0x0`**.
+
+#### Controlled Network Traffic & Syscall Verification (`Pi 5 8 GB`, `wlan0` `192.168.137.45`)
+
+Packet capture (`tcpdump 4.99.5`, `libpcap 1.10.5`) and `strace -f -e trace=network` checks were run to observe network behavior during `--mode url --demo` execution:
+
+| Observation File | Scope & Condition | Measured Result | Interpretation |
+|---|---|---|---|
+| `baseline.pcap` (`~195 KB`) | `60 s` background baseline capture | `334` pkts (`0` dropped); DNS `chatgpt.com`, `ws.chatgpt.com`, TCP SYN `172.64.148.235:443` | Establishes device background traffic when EdgeShield is idle |
+| `edgeshield_run.pcap` (`~328 KB`) / `edgeshield_isolated.pcap` (`~171 KB`) | `90 s` general demo / initial isolated capture | `609` pkts / `315` pkts (background DNS e.g. `ab.chatgpt.com`, `optimizationguide-pa.googleapis.com`) | Confounded by background browser/OS processes; not attributable solely to EdgeShield |
+| **`edgeshield_no_chromium.pcap`** | `45 s` controlled capture with Chromium terminated during full 4-case URL + Llama demo | **`0` packets captured (`0` received by filter, `0` dropped)**; `4/4` Llama `ACCEPTED` | Zero packets observed on `wlan0` during that 45 s demo run |
+| `capture_control.pcap` | `tcpdump` control test pinging gateway `192.168.137.1` | `5` packets captured (`8` received by filter, `0` dropped; ICMP echo + traffic) | Confirms `tcpdump` capture filter functioned properly |
+| **`edgeshield_process_network.trace`** | `strace -f -e trace=network` on `--mode url --demo --runtime-config configs/inference.json` | **`0` matches** for `socket()`, `connect()`, `sendto()`, `recvfrom()` | Traced Python & child Llama processes issued none of those monitored syscalls during that run |
+
+### 7.3 Phase 2 Network Traffic Anomaly & Intrusion Detection Plan (`NOT_IMPLEMENTED`)
+
+Per challenge guidance, network traffic anomaly and intrusion detection is **not implemented in Phase 1 (`NOT_IMPLEMENTED`)** and is architected for Phase 2 PoC to plug directly into EdgeShield's `Evidence` boundary, `ExecuTorchAdvisor`, and `validator.py` without modifying `llama3_2.pte` or `llama_main` ([NETWORK_TRAFFIC_PLAN.md](NETWORK_TRAFFIC_PLAN.md)):
+
+1. **Dataset Integrity & Anti-Shortcut Protocol:** Restricts `NSL-KDD` strictly to a historical sanity baseline. Primary training harmonizes **DistriNet-corrected CICIDS2017** (eliminating broken `CICFlowMeter` TCP appendices and label corruption documented by Engelen et al., 2021) and **UNSW-NB15** (`NF-v2`) into a **28-feature encryption-agnostic L3/L4 header-only bidirectional flow schema** (Sarhan et al., 2022). Non-causal lab shortcuts (IPs, flow IDs, timestamps, raw source ports, and `sttl`/`dttl`/`ct_state_ttl`, per Arp et al., USENIX Security 2022) are hard-dropped, ports map to 7 coarse service buckets, and splits are strictly chronological and host-disjoint. Thresholds calibrate on consented, header-only (`snaplen=96`) Indian lab VLAN traces (UPI/mobile banking polling, CGNAT `100.64.0.0/10`, symmetric WebRTC UDP, mDNS/SSDP discovery, OTT bursts).
+2. **Two-Tier Capture & Zero-Pickle Dual-Head Detector (`Cores 0–1`):** Supports unprivileged `.pcap` / `--net-stdin` replay and live kernel BPF capture (`snaplen=96`, `libpcap`/`NFStream` C-ring, `16,384`-flow LRU `<= 32 MB`) with an early `k=8` packet trigger, avoiding pure-Python `Scapy` GIL packet drops. Head 1 (JSON-exported Platt-calibrated `HistGradientBoostingClassifier`, target `< 0.5 ms`) pairs with Head 2 (per-protocol Ledoit-Wolf shrinkage Mahalanobis OOD gate) plus 8 closed ASCII cue IDs (`SYN_FLOOD_PATTERN`, `VOLUMETRIC_AMPLIFICATION`, `EXFILTRATION_ASYMMETRY`, `BRUTE_FORCE_BURST`, `PORT_SCAN_SWEEP`, `PERIODIC_BEACON_CADENCE`, `SLOW_STALL_SESSION`, `ANOMALOUS_FLOW_PROFILE`).
+3. **Episode Coalescing & Safe Containment (`Cores 2–3`):** Informed by measured Pi 5 inference latency (`6.51–6.70 s` median) and sustained passive thermal limits (`83.7 °C` / `0xe0008`), an `EpisodeCoalescer` aggregates correlated flood/scan alerts over a `30 s` window into one incident before invoking Llama (`cpu_threads=2`), preventing alert-storm self-DoS. App-owned `NET_ADVICE` gives human-in-the-loop router/device checks with zero autonomous `iptables` IP blocking.
+
+### 7.4 Explicit Limitations Across All Three PS3 Pillars
+
+1. **Scam SMS / Smishing (`DetectorV8` — Phase 1 Verified):** Verified on a **16 GB Pi 5** (`results/pi5/v8-device-20261124/`), but evaluation rests on UCI spam proxies and AI-assisted synthetic Indian/Hinglish datasets; human label review, real-world calibration, 5-person clarity study, and sustained V8 cooling characterization (given B0 `83.7 °C` passive throttling) remain pending, and lexical cues never authenticate senders.
+2. **Phishing URLs (`UrlDetectorV1` — In Progress on 8 GB Pi 5 Prototype):**
+   - Maintained on `feat/phishing-url` (outside `main`), with raw Pi 5 8 GB evidence preserved on the handover USB (`edgeshield_url_transfer/`).
+   - **Temporal recall is `55.97%`** (`97/477` positive URLs classified `LEGITIMATE`, `113/477` `UNCERTAIN`) — must **not** be reported as 100% phishing detection; General Holdout (`200`) and Indian Holdout (`75`) are separate benchmark sets and do not prove universal accuracy.
+   - `2/79` benign stress URLs (`zoom.us`, `localhost:8000`) scored `UNCERTAIN`.
+   - Offline inspection uses URL strings only (no DNS, WHOIS, or HTML inspection); `detect_brand_typosquat` covers `>= 5`-char brand stems only.
+   - Controlled `45 s` no-Chromium `tcpdump` (`0` pkts) and `strace` (`0` matched `socket`/`connect`/`sendto`/`recvfrom`) confirm zero observed traffic/monitored calls in those specific runs, **not** global OS network shutdown or universal proof that every execution path is permanently incapable of network I/O.
+3. **Network Traffic Anomaly & Intrusion Detection (`NetDetectorV1` — Phase 2 Plan):**
+   - **`NOT_IMPLEMENTED` in Phase 1** — zero packet capture or flow classifier code is shipped on `main`; all targets (`< 0.5 ms`, `< 0.5%` LAN FPR, `M1–M4`) are design gates awaiting Phase 2 implementation.
+   - Header-only capture (`snaplen=96`) excludes encrypted L7 payload inspection by design; live multi-device capture requires switch port-mirroring and `CAP_NET_RAW`; human-only advice excludes auto-blocking; real-world thresholds await consented Indian lab VLAN collection.
+
+---
+
+## 8. Reproduction Instructions
+
+### 8.1 Verify Public Source & Run Tests (Any Linux Host, Python 3.10–3.13)
 
 ```bash
 python3 scripts/verify_bundle.py
@@ -201,7 +266,7 @@ printf '%s\n' 'Cedar Bank test: Your OTP is 000000.' | \
 # Expected without gated Llama assets: V8 detector verdict (4d348155...) + labeled "Template fallback"
 ```
 
-### 7.2 Reproduce Full On-Device Llama Execution on Raspberry Pi 5
+### 8.2 Reproduce Full On-Device Llama Execution on Raspberry Pi 5
 
 1. Obtain lawful gated access to `meta-llama/Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8` (rev `b8c08c95d0476ccb6fc86e9410818d602ecca19d`) under the Meta Llama 3.2 Community License.
 2. Export `llama3_2.pte` and cross-compile `pi5-aarch64/llama_main` and `libllama_runner.so` from ExecuTorch `985c1ceccc8bb8b6a32294f71aeb5d2f299562f7` per [docs/EXECUTORCH.md](EXECUTORCH.md).
@@ -220,8 +285,8 @@ bash deploy/pi5/offline_verify.sh
 
 ---
 
-## 8. Remaining Release Gates (As of 24 November 2026)
+## 9. Remaining Release Gates (As of 24 November 2026)
 
-- **Pi 5 V8 + ExecuTorch Llama (`VERIFIED`):** Completed offline in `results/pi5/v8-device-20261124/` (`8/8 OK`). *(Optional: collect `offline_competition_test.sh` and clean-folder `setup.sh --offline` log if cited.)*
+- **Pi 5 V8 + ExecuTorch Llama (`VERIFIED`):** Completed offline in `results/pi5/v8-device-20261124/` (`8/8 OK`) on 16 GB Pi 5, plus separate in-progress URL prototype handover on 8 GB Pi 5 and Phase 2 Network Traffic Plan documented in Section 7 and [NETWORK_TRAFFIC_PLAN.md](NETWORK_TRAFFIC_PLAN.md).
 - **Disconnected Pi 5 demo video (`MISSING`):** Record and review actual on-device playback showing disconnected network state and at least one visible `Llama (validated)` response.
-- **License, PDF/DOCX export & GitHub publication:** Root `LICENSE` (MIT for original EdgeShield code/V8 detector; Meta Llama 3.2 Community License for Llama weights/tokenizer; BSD for ExecuTorch; "Built with Llama" attribution added). Populate team/mentor details, export final report as PDF/DOCX (`<= 10 MB`), push clean public repository on GitHub (including final report, excluding gated Llama weights/tokenizer), submit through official form, and archive `submission/RECEIPT.md`.
+- **License, PDF/DOCX export & GitHub publication:** Root `LICENSE` (MIT for original EdgeShield code/V8 detector; Meta Llama 3.2 Community License for Llama weights/tokenizer; BSD for ExecuTorch; "Built with Llama" attribution added). Populate team/mentor details, export final report as PDF/DOCX (`<= 10 MB`), confirm final public repository state, submit through official form, and archive `submission/RECEIPT.md`.
