@@ -1552,10 +1552,7 @@ Additional source attribution is documented in
 | [Sources](docs/SOURCES.md) | Project references |
 | [Data Sources](docs/SOURCES_DATA.md) | Dataset provenance |
 
-Historical Raspberry Pi 4 cross-compilation scripts remain
-under `deploy/pi4/` for reference.
-
-The primary verified deployment is Raspberry Pi 5.
+The verified target hardware is Raspberry Pi 5.
 
 </details>
 

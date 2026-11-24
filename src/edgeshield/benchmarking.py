@@ -536,7 +536,7 @@ def main(argv=None):
         "effective_settings": _effective_settings(advisor),
         "machine": platform.machine(), "python": platform.python_version(), "cpu_count": os.cpu_count(),
         "device_model": _device_model(),
-        "hardware_verified_pi4": False, "hardware_verified_pi5": False,
+        "hardware_verified_pi5": False,
         "note": "Host or unverified results unless separately verified with device diagnostics. Python RSS/CPU exclude runner subprocess; runner_child_peak_rss_bytes tracks RUSAGE_CHILDREN peak RSS.",
         "fixtures": fixtures_desc,
         "fixture_set": args.fixtures,

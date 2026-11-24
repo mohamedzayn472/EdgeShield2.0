@@ -62,6 +62,5 @@ Manifest SHA-256 hashes are verified before every call. Shared-library loading i
   - `smoke_test.txt`: `4/4` `Llama (validated)`; `fallback_smoke.jsonl`: `2/2` labeled `Template fallback`.
   - `benchmark.json` (B0 sustained, 605.4 s, `n=91`): `91/91` validator-accepted advisories (`0` fallbacks), `6.81 s` p95 full response, `1.44 GB` (`1.34 GiB`) peak runner RSS, `0 B` swap, `83.7 °C` peak passive-heatsink temp with throttling (`0xe0008`).
 - **Ubuntu x86_64 host (`VERIFIED`):** `261 passed` pytest (`tests/test_runtime.py` exercises child timeout, output bounding, error sanitization, and protocol parsing); `432/432` dev, `132/132` holdout, and `20/20` comparison validator acceptance on host x86_64 plus V3 `Llama (validated)` host E2E runs (`results/host/v3/e2e_host_llama_validation.txt`).
-- **Historical Pi 4 reference:** Earlier Pi 4 Cortex-A72 cross-compilation scripts and Bookworm binary audits remain under `deploy/pi4/` for reference only; verified competition hardware is Raspberry Pi 5.
 
 Arm-Examples LLM-Runner was reviewed as a reference only and is not used (its README pins ExecuTorch v1.4.1 and defaults to another backend).

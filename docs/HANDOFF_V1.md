@@ -41,7 +41,7 @@ Provision a 64-bit Pi4 Model B 8GB OS with CPython3.11 (the prepared wheelhouse 
 bash deploy/pi4/setup.sh
 ```
 
-It verifies the bundled manifest, checks target identity/ABI/RAM/disk, then installs local dependencies with `--no-index`. It will reject this Windows host. Provision genuine runtime assets following [PI4_DEPLOYMENT.md](PI4_DEPLOYMENT.md), create `configs/inference.json` with `create_manifest.py`, then:
+It verifies the bundled manifest, checks target identity/ABI/RAM/disk, then installs local dependencies with `--no-index`. It will reject this Windows host. Provision genuine runtime assets following `PI4_DEPLOYMENT.md` *(removed in Pi 5-only cleanup; see [PI5_DEPLOYMENT.md](PI5_DEPLOYMENT.md))*, create `configs/inference.json` with `create_manifest.py`, then:
 
 ```bash
 .venv/bin/python deploy/pi4/verify_environment.py --runtime configs/inference.json --output results/pi4/environment.json

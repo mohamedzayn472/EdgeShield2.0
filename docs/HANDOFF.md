@@ -1,4 +1,4 @@
-> **Phase 2 Update (17 November 2026):** Argon stabilization, Bookworm-compatible (`GLIBC <= 2.34`) Pi 4 `aarch64` cross-compilation, 20-case Llama-vs-template host comparison (`20/20` accepted), `--demo` polish, updated docs/submission assets, and bundle verification are complete. Read [ARGON_COMPLETION_REPORT.md](ARGON_COMPLETION_REPORT.md) and [OPUS_TO_ARGON_HANDOFF.md](OPUS_TO_ARGON_HANDOFF.md). Physical Pi 4 hardware tests remain `PENDING_HARDWARE`. Historical Windows results below remain unchanged.
+> **Phase 2 Update (17 November 2026):** Argon stabilization, 20-case Llama-vs-template host comparison (`20/20` accepted), `--demo` polish, and updated docs/submission assets are complete (see `ARGON_COMPLETION_REPORT.md` / `OPUS_TO_ARGON_HANDOFF.md` historical archive notes; target deployment has since been unified exclusively to **Raspberry Pi 5** in [PI5_DEPLOYMENT.md](PI5_DEPLOYMENT.md)). Historical Windows results below remain unchanged.
 
 # Current technical handoff — v2
 
@@ -23,7 +23,7 @@ Host benchmark on Windows: 100 real iterations, detector median 0.443 ms and p95
 
 `dist/edgeshield-pi4-preparation.zip` is regenerated and verified against `BUNDLE_MANIFEST.json` (`scripts/verify_bundle.py`), and `models/llama/` is staged separately for transfer.
 
-The Pi4 is available, with setup deferred to the lab visit. Follow [ARGON_COMPLETION_REPORT.md](ARGON_COMPLETION_REPORT.md), [PI4_DEPLOYMENT.md](PI4_DEPLOYMENT.md), and [LAB_CHECKLIST.md](LAB_CHECKLIST.md). On the prepared Pi, run:
+The target hardware was later unified exclusively on **Raspberry Pi 5**; follow [PI5_DEPLOYMENT.md](PI5_DEPLOYMENT.md) (`deploy/pi5/setup.sh`). *(Historical pre-Pi 5 lab note preserved below.)*
 
 ```bash
 python3 scripts/verify_bundle.py

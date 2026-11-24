@@ -134,7 +134,7 @@ def test_pi5_create_manifest_profiles_and_force(tmp_path, monkeypatch):
     spec.loader.exec_module(cm)
 
     llama_dir = tmp_path / "models" / "llama"
-    for sub in ("pi5-aarch64", "pi5-aarch64-glibc238", "pi4-aarch64"):
+    for sub in ("pi5-aarch64", "pi5-aarch64-glibc238"):
         d = llama_dir / sub
         d.mkdir(parents=True)
         (d / "llama_main").write_bytes(f"runner-{sub}".encode())
@@ -152,22 +152,18 @@ def test_pi5_create_manifest_profiles_and_force(tmp_path, monkeypatch):
     assert cfg["artifacts"]["runner"]["path"] == "../models/llama/pi5-aarch64/llama_main"
 
     with pytest.raises(SystemExit):
-        cm.main(["--profile", "pi4-on-pi5", "--output", str(out)])
-
-    cm.main(["--profile", "pi4-on-pi5", "--output", str(out), "--force"])
-    cfg2 = json.loads(out.read_text(encoding="utf-8"))
-    assert cfg2["artifacts"]["runner"]["path"] == "../models/llama/pi4-aarch64/llama_main"
+        cm.main(["--profile", "pi5-glibc238", "--output", str(out)])
 
     cm.main(["--profile", "pi5-glibc238", "--output", str(out), "--force"])
-    cfg3 = json.loads(out.read_text(encoding="utf-8"))
-    assert cfg3["artifacts"]["runner"]["path"] == "../models/llama/pi5-aarch64-glibc238/llama_main"
+    cfg2 = json.loads(out.read_text(encoding="utf-8"))
+    assert cfg2["artifacts"]["runner"]["path"] == "../models/llama/pi5-aarch64-glibc238/llama_main"
 
 
 def test_verify_environment_runner_device_compatibility(tmp_path, monkeypatch):
     import importlib.util
     from pathlib import Path
 
-    spec = importlib.util.spec_from_file_location("verify_environment", Path("deploy/pi4/verify_environment.py"))
+    spec = importlib.util.spec_from_file_location("verify_environment", Path("deploy/pi5/verify_environment.py"))
     ve = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(ve)
 
@@ -215,25 +211,25 @@ def test_verify_environment_runner_device_compatibility(tmp_path, monkeypatch):
     monkeypatch.setattr(ve, "_readelf_max_glibc", lambda paths: "GLIBC_2.34")
 
     pi5_cfg = make_cfg("pi5-aarch64")
-    pi4_cfg = make_cfg("pi4-aarch64")
+    pi5_238_cfg = make_cfg("pi5-aarch64-glibc238")
+    host_cfg = make_cfg("host-x86_64")
 
     out_pi5 = tmp_path / "out_pi5.json"
-    ve.main(["--device", "pi5", "--runtime", str(pi5_cfg), "--output", str(out_pi5)])
+    ve.main(["--runtime", str(pi5_cfg), "--output", str(out_pi5)])
     r5 = json.loads(out_pi5.read_text(encoding="utf-8"))
     assert r5["checks"]["runner_compatible_with_device"] is True
     assert r5["runner_profile"] == "pi5-cortex-a76-native"
 
-    out_pi4_on_pi5 = tmp_path / "out_pi4_on_pi5.json"
-    ve.main(["--device", "pi5", "--runtime", str(pi4_cfg), "--output", str(out_pi4_on_pi5)])
-    r45 = json.loads(out_pi4_on_pi5.read_text(encoding="utf-8"))
-    assert r45["checks"]["runner_compatible_with_device"] is True
-    assert r45["runner_profile"] == "pi4-cortex-a72-runtime-on-pi5"
-    assert "Pi4-built" in r45["runner_note"]
+    out_pi5_238 = tmp_path / "out_pi5_238.json"
+    ve.main(["--runtime", str(pi5_238_cfg), "--output", str(out_pi5_238)])
+    r5_238 = json.loads(out_pi5_238.read_text(encoding="utf-8"))
+    assert r5_238["checks"]["runner_compatible_with_device"] is True
+    assert r5_238["runner_profile"] == "pi5-cortex-a76-native"
 
-    out_pi5_on_pi4 = tmp_path / "out_pi5_on_pi4.json"
-    ve.main(["--device", "pi4", "--runtime", str(pi5_cfg), "--output", str(out_pi5_on_pi4)])
-    r54 = json.loads(out_pi5_on_pi4.read_text(encoding="utf-8"))
-    assert r54["checks"]["runner_compatible_with_device"] is False
+    out_host = tmp_path / "out_host.json"
+    ve.main(["--runtime", str(host_cfg), "--output", str(out_host)])
+    r_host = json.loads(out_host.read_text(encoding="utf-8"))
+    assert r_host["checks"]["runner_compatible_with_device"] is False
 
 
 def test_bounded_run_kills_and_reaps_child_on_base_exception(tmp_path):

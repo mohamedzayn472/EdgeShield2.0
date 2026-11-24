@@ -102,9 +102,8 @@ stays below 2048. These six checks are recorded in `tokenizer_prompt_check.json`
 They verify tokenization, not generation or inference quality.
 
 On 17 November the work completed export, native host inference verification,
-prompt/validator tuning, core optimizations, and Pi 4 cross-compilation on
-Ubuntu x86_64. See [OPUS_TO_ARGON_HANDOFF.md](OPUS_TO_ARGON_HANDOFF.md) for the
-complete Phase 1 engineering handoff.
+prompt/validator tuning, core optimizations, and Arm cross-compilation on
+Ubuntu x86_64 (`OPUS_TO_ARGON_HANDOFF.md` historical milestone note).
 
 ### Verified export, host inference, and optimizations (17 November 2026)
 
@@ -203,6 +202,6 @@ with `max_glibc_required: GLIBC_2.34`, `max_glibcxx_required: GLIBCXX_3.4.30`, a
 `symbols_requiring_glibc_gt_2_36: []` (`pi4_bookworm_binary_audit.json`), and staged
 `models/llama/` alongside `llama3_2.pte`, `tokenizer.model`, `LICENSE_AND_NOTICE.md`,
 and `pi4-runtime-manifest.json`. The earlier `14.3.rel1` build is archived under
-`models/llama/pi4-aarch64-glibc238/`. See [ARGON_COMPLETION_REPORT.md](ARGON_COMPLETION_REPORT.md)
+`models/llama/pi4-aarch64-glibc238/`. (`ARGON_COMPLETION_REPORT.md` historical milestone note)
 for Argon's 20-case comparison (`20/20` accepted), `averages_ms` benchmarks, `--demo --llama`
 verification, and `176 passed, 1 skipped` test suite.

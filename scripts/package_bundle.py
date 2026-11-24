@@ -104,14 +104,10 @@ def _runtime_provenance(rel: str) -> dict[str, str]:
         return {"role": "tokenizer", "provenance": f"Official Meta tiktoken tokenizer from {MODEL_PROVENANCE['repository']}@{MODEL_PROVENANCE['revision']}"}
     if rel == "models/llama/LICENSE_AND_NOTICE.md":
         return {"role": "license_notice", "provenance": "Meta Llama 3.2 Community License Agreement and attribution notice"}
-    if rel.startswith("models/llama/pi5-aarch64/"):
+    if rel.startswith("models/llama/pi5-aarch64/") or rel in {"models/llama/llama_main", "models/llama/libllama_runner.so"}:
         return {"role": "pi5_native_bookworm_trixie", "provenance": "Cross-compiled Arm GNU 12.2.rel1 (-march=armv8.2-a+dotprod+fp16 -mtune=cortex-a76, GLIBC <= 2.34)"}
     if rel.startswith("models/llama/pi5-aarch64-glibc238/"):
         return {"role": "pi5_native_glibc238", "provenance": "Cross-compiled Arm GNU 14.3.rel1 (-march=armv8.2-a+dotprod+fp16 -mtune=cortex-a76, KleidiAI ON, GLIBC <= 2.38)"}
-    if rel.startswith("models/llama/pi4-aarch64/") or rel in {"models/llama/llama_main", "models/llama/libllama_runner.so"}:
-        return {"role": "pi4_bookworm_backup", "provenance": "Cross-compiled Arm GNU 12.2.rel1 (-march=armv8-a -mtune=cortex-a72, GLIBC <= 2.34)"}
-    if rel.startswith("models/llama/pi4-aarch64-glibc238/"):
-        return {"role": "pi4_glibc238_archive", "provenance": "Cross-compiled Arm GNU 14.3.rel1 (-march=armv8-a -mtune=cortex-a72, GLIBC <= 2.38)"}
     if rel.endswith("-runtime-manifest.json"):
         return {"role": "profile_manifest", "provenance": "Target artifact SHA-256 reference manifest"}
     return {"role": "runtime_asset", "provenance": "Staged target runtime asset"}
@@ -123,16 +119,11 @@ def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None]:
         "models/llama/llama3_2.pte",
         "models/llama/tokenizer.model",
         "models/llama/LICENSE_AND_NOTICE.md",
-        "models/llama/llama_main",
-        "models/llama/libllama_runner.so",
         "models/llama/pi5-aarch64/llama_main",
         "models/llama/pi5-aarch64/libllama_runner.so",
-        "models/llama/pi4-aarch64/llama_main",
-        "models/llama/pi4-aarch64/libllama_runner.so",
-        "models/llama/pi4-aarch64-glibc238/llama_main",
-        "models/llama/pi4-aarch64-glibc238/libllama_runner.so",
+        "models/llama/pi5-aarch64-glibc238/llama_main",
+        "models/llama/pi5-aarch64-glibc238/libllama_runner.so",
         "models/llama/pi5-runtime-manifest.json",
-        "models/llama/pi4-runtime-manifest.json",
     ]
     present = []
     missing = []
@@ -151,8 +142,7 @@ def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None]:
         entry = {"path": rel, "bytes": p.stat().st_size, "sha256": digest, **meta}
         entries.append(entry)
         if p.name == "llama_main":
-            profile = "pi4-aarch64-default" if rel == "models/llama/llama_main" else p.parent.name
-            binaries[rel] = {"profile": profile, "sha256": digest, "bytes": p.stat().st_size}
+            binaries[rel] = {"profile": p.parent.name, "sha256": digest, "bytes": p.stat().st_size}
 
     runtime_manifest = {
         "kind": "PRIVATE_LICENSED_AARCH64_LLAMA_RUNTIME_MANIFEST",
@@ -210,7 +200,6 @@ def main(argv=None):
     manifest = {
         "kind": "SOURCE_AND_DETECTOR_BUNDLE",
         "primary_target": "Raspberry Pi 5 Model B 16 GB (aarch64)",
-        "backup_target": "Raspberry Pi 4 Model B 8 GB (aarch64)",
         "default_detector": DEFAULT_DETECTOR_REL,
         "complete_llama_deployment": False,
         "missing": [
@@ -221,7 +210,6 @@ def main(argv=None):
         ],
         "wheelhouse_targets": [
             "wheelhouse/pi5-cp313-aarch64/: CPython 3.13 aarch64 Linux (Raspberry Pi OS Trixie); cross-downloaded on Ubuntu, not executed on target",
-            "wheelhouse/pi4-cp311/: CPython 3.11 aarch64 Linux GLIBC >= 2.27 (Raspberry Pi OS Bookworm; also seeds Pi 5 cp311); not executed on target",
         ],
         "entries": entries,
     }
@@ -229,13 +217,9 @@ def main(argv=None):
 
     dest = args.output_dir.resolve()
     dest.mkdir(parents=True, exist_ok=True)
-    if dest == (ROOT / "dist").resolve():
-        (ROOT / "BUNDLE_MANIFEST.json").write_text(manifest_text, encoding="utf-8")
-    else:
-        (dest / "BUNDLE_MANIFEST.json").write_text(manifest_text, encoding="utf-8")
+    (dest / "BUNDLE_MANIFEST.json").write_text(manifest_text, encoding="utf-8")
 
     pi5_archive = _build_source_zip(dest / "edgeshield-pi5-preparation.zip", paths, manifest_text)
-    pi4_archive = _build_source_zip(dest / "edgeshield-pi4-preparation.zip", paths, manifest_text)
     if args.source_only:
         runtime_manifest = {"complete": False, "missing": ["skipped via --source-only"], "binaries": {}, "entries": []}
         runtime_archive = None
@@ -257,7 +241,6 @@ def main(argv=None):
         "archive": pi5_archive,
         "archives": {
             "pi5_source_bundle": pi5_archive,
-            "pi4_source_bundle": pi4_archive,
             "private_aarch64_runtime_bundle": runtime_archive,
             "private_aarch64_runners_only_bundle": runners_archive,
         },
@@ -268,7 +251,6 @@ def main(argv=None):
     print(json.dumps({
         "files": len(entries),
         "pi5_archive": pi5_archive,
-        "pi4_archive": pi4_archive,
         "runtime_archive": runtime_archive,
         "runners_archive": runners_archive,
         "private_runtime_complete": runtime_manifest["complete"],

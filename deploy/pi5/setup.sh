@@ -135,13 +135,6 @@ if ! "$PYTHON" -m venv .venv; then
   exit 2
 fi
 
-if [[ ! -f "$WHEELS/SHA256SUMS" && "$TAG" == "cp311" && -d "wheelhouse/pi4-cp311" ]]; then
-  echo "Seeding $WHEELS from bundled wheelhouse/pi4-cp311..."
-  mkdir -p "$WHEELS"
-  cp -f wheelhouse/pi4-cp311/*.whl "$WHEELS/"
-  (cd "$WHEELS" && sha256sum ./*.whl > SHA256SUMS)
-fi
-
 CACHE_VALID=false
 if [[ -f "$WHEELS/SHA256SUMS" ]] && (cd "$WHEELS" && sha256sum --check SHA256SUMS >/dev/null 2>&1); then
   CACHE_VALID=true

@@ -19,11 +19,6 @@ PROFILES = {
         "library": Path("models/llama/pi5-aarch64-glibc238/libllama_runner.so"),
         "description": "Dedicated Pi 5 Cortex-A76 runtime with KleidiAI (GLIBC <= 2.38, Trixie/Ubuntu 24.04+)",
     },
-    "pi4-on-pi5": {
-        "runner": Path("models/llama/pi4-aarch64/llama_main"),
-        "library": Path("models/llama/pi4-aarch64/libllama_runner.so"),
-        "description": "Pi 4-built Cortex-A72 runtime reused on Pi 5 for baseline/initial validation (GLIBC <= 2.34)",
-    },
 }
 
 

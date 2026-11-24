@@ -8,8 +8,8 @@ spec.loader.exec_module(bundle)
 
 
 @pytest.mark.parametrize("name", [".venv/Scripts/python.exe", ".python/runtime", "data/raw/SMSCollection", "data/processed/test.jsonl",
-                                  "models/llama/model.pte", "deploy/pi4/tokenizer.model", "configs/.env", "docs/secret.pem",
-                                  "deploy/pi4/llama_main", "src/edgeshield/__pycache__/foo.pyc", "configs/tokenizer.json"])
+                                  "models/llama/model.pte", "deploy/pi5/tokenizer.model", "configs/.env", "docs/secret.pem",
+                                  "deploy/pi5/llama_main", "src/edgeshield/__pycache__/foo.pyc", "configs/tokenizer.json"])
 def test_private_and_incompatible_assets_excluded(name):
     assert not bundle.included(bundle.ROOT / name)
 
@@ -24,8 +24,8 @@ def test_private_and_incompatible_assets_excluded(name):
                                   "models/detector_v6.json", "models/detector_v6.json.sha256",
                                   "models/detector_v7.json", "models/detector_v7.json.sha256",
                                   "models/detector_v8.json", "models/detector_v8.json.sha256",
-                                  "data/synthetic/examples.jsonl", "deploy/pi4/README.md", "deploy/pi5/setup.sh",
-                                  "requirements/pi5.txt", "results/pi4/STATUS.json", "results/pi5/STATUS.json",
+                                  "data/synthetic/examples.jsonl", "deploy/pi5/README.md", "deploy/pi5/setup.sh",
+                                  "requirements/pi5.txt", "results/pi5/STATUS.json",
                                   "wheelhouse/pi5-cp313-aarch64/SHA256SUMS"])
 def test_transfer_assets_included(name):
     assert bundle.included(bundle.ROOT / name)

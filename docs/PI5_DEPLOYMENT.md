@@ -46,7 +46,7 @@ Expected private runtime layout under `models/llama/`:
 - `models/llama/pi5-aarch64/libllama_runner.so` (SHA-256 `d45f39fd3b7f53bb511190fedab971933d176a3431c73f53f9fd87ad39496731`)
 - `models/llama/LICENSE_AND_NOTICE.md`
 
-Generate the verified two-thread Pi 5 manifest using `deploy/pi5/create_manifest.py` (supports `--profile pi5` [default, Cortex-A76 `GLIBC <= 2.34`], `--profile pi5-glibc238`, or `--profile pi4-on-pi5`, plus `--cpu-threads 1..4` [default `2`], `--timeout-seconds` [default `120`], `--output` [default `configs/inference.json`], and `--force`):
+Generate the verified two-thread Pi 5 manifest using `deploy/pi5/create_manifest.py` (supports `--profile pi5` [default, Cortex-A76 `GLIBC <= 2.34`] or `--profile pi5-glibc238`, plus `--cpu-threads 1..4` [default `2`], `--timeout-seconds` [default `120`], `--output` [default `configs/inference.json`], and `--force`):
 
 ```bash
 chmod u+x models/llama/pi5-aarch64/llama_main

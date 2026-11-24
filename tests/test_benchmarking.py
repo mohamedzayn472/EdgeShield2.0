@@ -37,7 +37,6 @@ def test_benchmarking_main_averages_and_policy(tmp_path):
     assert set(report["averages_ms"]) == {"detector_ms", "evidence_ms", "llama_ms", "validation_ms", "total_ms"}
     assert report["averages_ms"]["detector_ms"] >= 0
     assert report["averages_ms"]["llama_ms"] is None
-    assert report["hardware_verified_pi4"] is False
     assert report["hardware_verified_pi5"] is False
     for key in ("runner_child_peak_rss_bytes", "min_mem_available_bytes", "max_swap_used_bytes", "temperature_c", "throttled_before", "throttled_after"):
         assert key in report
@@ -149,11 +148,11 @@ def test_benchmarking_stale_stats_fix_and_accounting(tmp_path, monkeypatch):
     assert row1["model_load_ms"] is None
 
 
-def test_benchmarking_pi4_argv_preserves_legacy_contract(tmp_path):
+def test_benchmarking_cli_argv_preserves_contract(tmp_path):
     import json
     from edgeshield.benchmarking import main as bench_main
 
-    out = tmp_path / "pi4.json"
+    out = tmp_path / "bench.json"
     rc = bench_main(["--duration", "0.2", "--repetitions", "2", "--advisory-policy", "off", "--output", str(out)])
     assert rc == 0
     report = json.loads(out.read_text(encoding="utf-8"))

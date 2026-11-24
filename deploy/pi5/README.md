@@ -9,7 +9,7 @@ Primary verified deployment target: **Raspberry Pi 5 Model B Rev 1.1, 16 GB RAM,
    `bash deploy/pi5/setup.sh` (or `--offline` when using a pre-populated `wheelhouse/pi5-cp*-aarch64/` cache)
 4. Generate `configs/inference.json` (default: `--profile pi5`, dedicated Cortex-A76 `GLIBC <= 2.34`, 2 CPU threads):
    `.venv/bin/python deploy/pi5/create_manifest.py --profile pi5`
-   *(Optional profiles: `--profile pi5-glibc238` or `--profile pi4-on-pi5`.)*
+   *(Optional profile: `--profile pi5-glibc238`.)*
 5. Run smoke test, diagnostics, short/sustained benchmarks, and local-console offline trace:
    - `bash deploy/pi5/smoke_test.sh`
    - `bash deploy/pi5/launch.sh --repeat` (interactive CLI) or `bash deploy/pi5/launch.sh --demo`
