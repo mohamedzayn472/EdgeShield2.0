@@ -2,50 +2,47 @@
 
 <div align="center">
 
-<!--
-HERO BANNER
-Save the supplied SVG as assets/banner.svg.
-Uncomment the image below once the file is committed.
-
-<img src="assets/banner.svg" width="100%" alt="EdgeShield — Private intelligence. Safer decisions.">
--->
-
-<h1>EdgeShield</h1>
+<img src="assets/readme/hero.gif" width="100%" alt="EdgeShield animated banner">
 
 <h3>Private intelligence. Safer decisions.</h3>
 
-<p>
-  <strong>On-device SMS scam detection and evidence-constrained AI advisory.</strong>
-</p>
+<p>On-device SMS scam detection and evidence-constrained AI advisory.</p>
+
+<strong>Bharat AI-SoC Challenge 2026–27 (2nd Edition)</strong>
 
 <p>
-  Bharat AI-SoC Challenge 2026–27 (2nd Edition)<br>
-  PS3: On-device threat, phishing &amp; scam detection<br>
-  Cybersecurity &amp; Digital Safety · Open Qualifying
+PS3: On-device threat, phishing &amp; scam detection<br>
+Cybersecurity &amp; Digital Safety · Open Qualifying
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/static/v1?label=Hardware&amp;message=Raspberry%20Pi%205&amp;color=A22846&amp;style=flat-square&amp;logo=raspberrypi&amp;logoColor=white" alt="Raspberry Pi 5" />
-  <img src="https://img.shields.io/static/v1?label=Runtime&amp;message=ExecuTorch&amp;color=EE4C2C&amp;style=flat-square&amp;logo=pytorch&amp;logoColor=white" alt="ExecuTorch" />
-  <img src="https://img.shields.io/static/v1?label=Built%20with&amp;message=Llama&amp;color=0467DF&amp;style=flat-square&amp;logo=meta&amp;logoColor=white" alt="Built with Llama" />
+<img src="assets/readme/technology.png" width="100%" alt="Technology stack">
+
+<br>
+
+<img src="assets/readme/metrics.png" width="100%" alt="Verified performance dashboard">
+
+<p>
+<sub>Synthetic evaluation does not establish real-world accuracy.</sub>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/static/v1?label=Inference&amp;message=CPU%20Only&amp;color=475569&amp;style=flat-square" alt="CPU Only" />
-  <img src="https://img.shields.io/static/v1?label=Offline&amp;message=Verified&amp;color=16865C&amp;style=flat-square" alt="Offline Verified" />
-  <img src="https://img.shields.io/static/v1?label=Python&amp;message=3.13&amp;color=3776AB&amp;style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.13" />
-  <img src="https://img.shields.io/static/v1?label=Licensing&amp;message=MIT%20%2F%20Llama&amp;color=64748B&amp;style=flat-square" alt="Licensing" />
-</p>
+<h3>Built with Llama</h3>
 
-**Detect locally. Explain intelligently. Keep private data on the device.**
+<strong>Verified on physical Raspberry Pi 5 · 16 GB · CPU-only</strong>
+
+</div>
+
+---
+
+
+<div align="center">
 
 [Fast Lane](#judges-fast-lane) ·
 [Compliance](#challenge-compliance-matrix) ·
 [Architecture](#architecture) ·
-[Verified Results](#verified-results) ·
-[Privacy](#privacy-and-security)
+[Results](#verified-results) ·
+[Engineering Journey](#engineering-journey)
 
-[Engineering Journey](#engineering-journey) ·
+[Privacy](#privacy-and-security) ·
 [Quick Start](#quick-start) ·
 [Evidence](#reproducibility-and-evidence) ·
 [Documentation](#documentation)
@@ -1450,7 +1447,7 @@ against their local copies of the archived artifacts.
 <h3>Built with Llama</h3>
 
 <p align="center">
-  <img src="https://img.shields.io/static/v1?label=Built%20with&amp;message=Llama&amp;color=0467DF&amp;style=for-the-badge&amp;logo=meta&amp;logoColor=white" alt="Built with Llama" />
+<img src="assets/readme/llama.png" width="440" alt="Built with Llama">
 </p>
 
 </div>
