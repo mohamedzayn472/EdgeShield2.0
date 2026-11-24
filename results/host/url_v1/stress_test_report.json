@@ -1,0 +1,121 @@
+{
+  "model_version": "edgeshield-url-char-lexical-lr-v1",
+  "detector_sha256": "779cf74fd2ac1ac8c634649a468c7dea57eeb66d15d5c20574bf5072faa1f4a0",
+  "thresholds": [
+    0.3,
+    0.65
+  ],
+  "hard_benign": {
+    "total": 79,
+    "legitimate": 77,
+    "uncertain": 2,
+    "false_positive_scam": 0,
+    "false_positive_rate": 0.0,
+    "by_bucket": {
+      "indian_banking_logins": {
+        "n": 14,
+        "legitimate": 14,
+        "uncertain": 0,
+        "false_positive_scam": 0
+      },
+      "indian_gov_upi_telecom": {
+        "n": 18,
+        "legitimate": 18,
+        "uncertain": 0,
+        "false_positive_scam": 0
+      },
+      "global_auth_login": {
+        "n": 8,
+        "legitimate": 8,
+        "uncertain": 0,
+        "false_positive_scam": 0
+      },
+      "kyc_phishing_edu_news": {
+        "n": 12,
+        "legitimate": 12,
+        "uncertain": 0,
+        "false_positive_scam": 0
+      },
+      "deep_tech_cloud_commerce": {
+        "n": 27,
+        "legitimate": 25,
+        "uncertain": 2,
+        "false_positive_scam": 0
+      }
+    },
+    "false_positives": [],
+    "uncertain_cases": [
+      {
+        "bucket": "deep_tech_cloud_commerce",
+        "url": "https://zoom.us/j/98765432100",
+        "score": 0.4321,
+        "cues": []
+      },
+      {
+        "bucket": "deep_tech_cloud_commerce",
+        "url": "https://localhost:8000/api/health",
+        "score": 0.5712,
+        "cues": []
+      }
+    ]
+  },
+  "hard_phishing": {
+    "total": 60,
+    "scam": 60,
+    "uncertain": 0,
+    "missed_legitimate": 0,
+    "scam_recall": 1.0,
+    "by_bucket": {
+      "indian_bank_kyc_upi_gov": {
+        "n": 19,
+        "scam": 19,
+        "uncertain": 0,
+        "missed_legitimate": 0
+      },
+      "ip_obfuscation": {
+        "n": 5,
+        "scam": 5,
+        "uncertain": 0,
+        "missed_legitimate": 0
+      },
+      "at_and_punycode": {
+        "n": 4,
+        "scam": 4,
+        "uncertain": 0,
+        "missed_legitimate": 0
+      },
+      "shorteners_subdomains_extensions": {
+        "n": 10,
+        "scam": 10,
+        "uncertain": 0,
+        "missed_legitimate": 0
+      },
+      "abused_hosting_and_evasion": {
+        "n": 12,
+        "scam": 12,
+        "uncertain": 0,
+        "missed_legitimate": 0
+      },
+      "typosquat_and_leetspeak": {
+        "n": 10,
+        "scam": 10,
+        "uncertain": 0,
+        "missed_legitimate": 0
+      }
+    },
+    "misses": [],
+    "uncertain_cases": []
+  },
+  "security_and_fuzz": {
+    "malformed_rejected": "14/14",
+    "verified_policy_bypass_checks": "11/11",
+    "prompt_injection_sentinel_leaks": 0,
+    "network_calls_attempted": 0
+  },
+  "latency_ms": {
+    "n": 139,
+    "median": 0.6053,
+    "p95": 0.7361,
+    "max": 1.5538
+  }
+}

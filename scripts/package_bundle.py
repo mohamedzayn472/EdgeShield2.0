@@ -64,6 +64,8 @@ def included(path):
                 "detector_v7.json.sha256",
                 "detector_v8.json",
                 "detector_v8.json.sha256",
+                "url_detector_v1.json",
+                "url_detector_v1.json.sha256",
             })
 
 

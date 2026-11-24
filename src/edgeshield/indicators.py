@@ -1,4 +1,5 @@
 """Observable lexical cues, never proof of fraud or sender identity."""
+import ipaddress
 import re
 from urllib.parse import urlsplit
 from .privacy import normalize_sms
@@ -16,6 +17,12 @@ DESCRIPTIONS = {
     "PRIZE_LURE": "Prize-related wording appears",
     "JOB_LURE": "Job-related wording appears",
     "HINGLISH_CUE": "Romanized Hindi wording appears",
+    "IP_HOST_URL": "A numeric network address host appears",
+    "PUNYCODE_OR_AT_URL": "Obfuscated host or credential syntax appears",
+    "SUSPICIOUS_TLD_URL": "An elevated-risk top-level domain appears",
+    "DEEP_SUBDOMAIN_URL": "Deeply nested subdomain structure appears",
+    "BRAND_SPOOF_URL": "Brand-like login or verification path wording appears",
+    "RISKY_EXTENSION_URL": "Executable or archive download path wording appears",
 }
 
 HIGH_RISK_INDICATORS = frozenset({
@@ -573,3 +580,349 @@ def detect_indicators(text: str) -> tuple[str, ...]:
         found.add("BANK_IMPERSONATION")
 
     return tuple(name for name in DESCRIPTIONS if name in found)
+
+
+URL_SHORTENERS = SHORTENERS | {"ow.ly", "rebrand.ly", "tiny.cc"}
+SUSPICIOUS_TLDS = frozenset({
+    "xyz", "top", "click", "icu", "buzz", "cfd", "sbs", "rest",
+    "tk", "ml", "ga", "cf", "gq", "vip", "win", "loan", "work", "zip", "mov",
+})
+RISKY_EXTENSIONS = frozenset({".apk", ".exe", ".scr", ".msi", ".bat", ".cmd", ".vbs", ".jar"})
+TRUSTED_MULTI_SLD = frozenset({
+    "co.in", "org.in", "gov.in", "nic.in", "ac.in", "net.in", "edu.in", "res.in",
+    "co.uk", "org.uk", "ac.uk", "com.au", "co.jp", "com.sg",
+})
+_CC_SECOND_LEVEL_CATEGORIES = frozenset({"com", "co", "org", "net", "gov", "edu", "ac", "nic", "res", "mil", "sch"})
+TRUSTED_INDIAN_GOV_BANK_SUFFIXES = (".gov.in", ".nic.in", ".ac.in", ".res.in", ".edu.in", ".sbi", ".rbi.org.in", ".npci.org.in")
+ABUSED_HOSTING_SUFFIXES = (
+    ".web.app", ".firebaseapp.com", ".pages.dev", ".vercel.app",
+    ".ngrok-free.app", ".workers.dev", ".netlify.app", ".r2.dev",
+    ".herokuapp.com", ".blogspot.com", ".github.io",
+    ".weebly.com", ".gitbook.io", ".replit.app", ".trycloudflare.com", ".framer.app",
+)
+BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
+    "sbi": ("sbi.co.in", "onlinesbi.sbi", "bank.sbi", "sbi.co"),
+    "onlinesbi": ("onlinesbi.sbi", "sbi.co.in"),
+    "hdfc": ("hdfcbank.com", "hdfc.com"),
+    "hdfcbank": ("hdfcbank.com",),
+    "icici": ("icicibank.com", "icici.com"),
+    "icicibank": ("icicibank.com",),
+    "axis": ("axisbank.com", "axisbank.co.in"),
+    "axisbank": ("axisbank.com", "axisbank.co.in"),
+    "kotak": ("kotak.com", "kotakbank.com"),
+    "kotakbank": ("kotak.com", "kotakbank.com"),
+    "canarabank": ("canarabank.com", "canarabank.in"),
+    "bob": ("bankofbaroda.in", "bobibanking.com"),
+    "pnb": ("pnbindia.in", "netpnb.com"),
+    "indusind": ("indusind.com",),
+    "yesbank": ("yesbank.in",),
+    "paytm": ("paytm.com", "paytm.in"),
+    "phonepe": ("phonepe.com",),
+    "gpay": ("pay.google.com", "google.com"),
+    "npci": ("npci.org.in",),
+    "uidai": ("uidai.gov.in",),
+    "aadhaar": ("uidai.gov.in",),
+    "incometax": ("incometax.gov.in", "incometaxindiaefiling.gov.in"),
+    "parivahan": ("parivahan.gov.in",),
+    "echallan": ("parivahan.gov.in", "echallan.parivahan.gov.in"),
+    "epfo": ("epfindia.gov.in",),
+    "fastag": ("ihmcl.co.in", "npci.org.in"),
+    "irctc": ("irctc.co.in",),
+    "indiapost": ("indiapost.gov.in",),
+    "digilocker": ("digilocker.gov.in",),
+    "flipkart": ("flipkart.com",),
+    "coinbase": ("coinbase.com",),
+    "facebook": ("facebook.com", "fb.com"),
+    "instagram": ("instagram.com",),
+    "linkedin": ("linkedin.com",),
+    "dropbox": ("dropbox.com",),
+    "fedex": ("fedex.com",),
+    "paypal": ("paypal.com",),
+    "microsoft": ("microsoft.com", "live.com", "office.com", "microsoftonline.com"),
+    "apple": ("apple.com", "icloud.com"),
+    "google": ("google.com", "googleapis.com", "googleusercontent.com", "gstatic.com", "googlevideo.com"),
+    "netflix": ("netflix.com",),
+    "amazon": ("amazon.com", "amazon.in", "amazonaws.com"),
+    "whatsapp": ("whatsapp.com",),
+    "github": ("github.com",),
+}
+VERIFIED_OFFICIAL_DOMAINS: frozenset[str] = frozenset(
+    dom for doms in BRAND_OFFICIAL_DOMAINS.values() for dom in doms
+)
+
+_LEET_L_MAP = str.maketrans({"0": "o", "1": "l", "3": "e", "4": "a", "5": "s", "7": "t", "8": "b"})
+_LEET_I_MAP = str.maketrans({"0": "o", "1": "i", "3": "e", "4": "a", "5": "s", "7": "t", "8": "b"})
+
+TYPOSQUAT_FUZZY_BRANDS: frozenset[str] = frozenset({
+    "onlinesbi", "hdfcbank", "icicibank", "axisbank", "kotakbank", "canarabank",
+    "indusind", "yesbank", "paytm", "phonepe", "uidai", "incometax", "parivahan",
+    "echallan", "irctc", "indiapost", "digilocker", "flipkart", "paypal",
+    "microsoft", "google", "amazon", "netflix", "whatsapp", "github",
+    "coinbase", "facebook", "instagram", "linkedin", "dropbox", "fedex",
+    "icici", "fastag",
+})
+TYPOSQUAT_LEET_ONLY_BRANDS: frozenset[str] = TYPOSQUAT_FUZZY_BRANDS | {"apple", "icloud", "aadhaar", "kotak"}
+_TYPOSQUAT_COLLISION_ALLOWLIST: frozenset[str] = frozenset({
+    "kodak", "goggle", "boogle", "papal", "fasta", "cloud", "apply", "ample", "maple",
+    "icic", "gitlab", "dropbot", "linkedit", "amason", "netflux", "codebase",
+    "basecoin", "facework", "phoneme",
+})
+_COMPOUND_LURE_AFFIXES: tuple[str, ...] = (
+    "login", "signin", "verify", "kyc", "ekyc", "secure", "auth", "account",
+    "update", "support", "wallet", "bank", "docs", "pay", "mail", "web",
+    "app", "portal", "alert", "claim", "refund", "unlock", "unblock",
+    "retail", "online", "id",
+)
+_BRAND_LURE_TOKENS = frozenset({"kyc", "ekyc", "netbanking", "webscr"})
+_GENERIC_AUTH_TOKENS = frozenset({"login", "signin", "verify", "update", "secure", "account", "unlock", "unblock"})
+_INT_OR_HEX_IP_RE = re.compile(r"^(?:0x[0-9a-f]+|0[0-7]+|\d+)$", re.I)
+
+
+def _normalize_leet_variants(token: str) -> tuple[str, str]:
+    v_l = token.translate(_LEET_L_MAP).replace("rn", "m").replace("vv", "w")
+    v_i = token.translate(_LEET_I_MAP).replace("rn", "m").replace("vv", "w")
+    return v_l, v_i
+
+
+def _damerau_levenshtein_le1(a: str, b: str) -> bool:
+    """Return True if optimal string alignment (Damerau-Levenshtein) distance between a and b is <= 1."""
+    if a == b:
+        return True
+    la, lb = len(a), len(b)
+    if abs(la - lb) > 1:
+        return False
+    if la == lb:
+        diffs = [i for i in range(la) if a[i] != b[i]]
+        if len(diffs) == 1:
+            return True
+        if len(diffs) == 2 and diffs[1] == diffs[0] + 1:
+            i, j = diffs
+            return a[i] == b[j] and a[j] == b[i]
+        return False
+    short, long = (a, b) if la < lb else (b, a)
+    i = j = 0
+    skipped = False
+    while i < len(short) and j < len(long):
+        if short[i] == long[j]:
+            i += 1
+            j += 1
+        elif skipped:
+            return False
+        else:
+            skipped = True
+            j += 1
+    return True
+
+
+def detect_brand_typosquat(host: str, reg_domain: str, is_trusted_gov_bank: bool = False) -> bool:
+    """Detect leetspeak, compound brand+lure, or edit-1 typosquatting in non-TLD host tokens."""
+    if is_trusted_gov_bank or not host:
+        return False
+    labels = [lbl for lbl in host.lower().split(".") if lbl]
+    non_tld_surface = ".".join(labels[:-1]) if len(labels) >= 2 else host.lower()
+    host_tokens = re.findall(r"[a-z0-9]+", non_tld_surface)
+    for tok in host_tokens:
+        if len(tok) < 5 or tok in _TYPOSQUAT_COLLISION_ALLOWLIST:
+            continue
+        v_l, v_i = _normalize_leet_variants(tok)
+        for v in (v_l, v_i):
+            if v != tok:
+                for brand in TYPOSQUAT_LEET_ONLY_BRANDS:
+                    if reg_domain in BRAND_OFFICIAL_DOMAINS.get(brand, ()):
+                        continue
+                    if v == brand or (len(brand) >= 6 and brand in v):
+                        return True
+        for brand in TYPOSQUAT_FUZZY_BRANDS:
+            if reg_domain in BRAND_OFFICIAL_DOMAINS.get(brand, ()):
+                continue
+            if len(brand) >= 6 and tok != brand and brand in tok:
+                remainder = tok.replace(brand, "", 1)
+                if any(remainder == afx or remainder.startswith(afx) or remainder.endswith(afx) for afx in _COMPOUND_LURE_AFFIXES):
+                    return True
+            if tok != brand and v_l != brand and v_i != brand:
+                if abs(len(v_l) - len(brand)) <= 1 and (_damerau_levenshtein_le1(v_l, brand) or _damerau_levenshtein_le1(v_i, brand)):
+                    return True
+    return False
+
+
+def _is_ip_host(host: str) -> bool:
+    if not host:
+        return False
+    stripped = host.strip("[]")
+    try:
+        ipaddress.ip_address(stripped)
+        return True
+    except ValueError:
+        pass
+    if _INT_OR_HEX_IP_RE.match(stripped):
+        return True
+    parts = stripped.split(".")
+    if len(parts) == 4 and all(_INT_OR_HEX_IP_RE.match(p) for p in parts):
+        return True
+    return False
+
+
+def parse_url_parts(raw_url: str) -> dict[str, object]:
+    """Parse a normalized URL purely locally (no DNS/network) into structured components."""
+    text = raw_url.strip()
+    has_explicit_scheme = "://" in text
+    parsed = urlsplit(text if has_explicit_scheme else "http://" + text)
+    scheme = parsed.scheme.lower() if has_explicit_scheme else ""
+    netloc = parsed.netloc
+    host = (parsed.hostname or "").lower().rstrip(".")
+    try:
+        port = parsed.port
+    except ValueError:
+        port = None
+    has_at = "@" in netloc or parsed.username is not None or parsed.password is not None
+    labels = [lbl for lbl in host.split(".") if lbl] if host else []
+    is_ip = _is_ip_host(host)
+    if is_ip or len(labels) < 2:
+        reg_domain = host
+        sub_labels: list[str] = []
+        tld = ""
+    elif len(labels) >= 3 and (
+        ".".join(labels[-2:]) in TRUSTED_MULTI_SLD
+        or (len(labels[-1]) == 2 and labels[-2] in _CC_SECOND_LEVEL_CATEGORIES)
+    ):
+        reg_domain = ".".join(labels[-3:])
+        sub_labels = labels[:-3]
+        tld = labels[-1]
+    else:
+        reg_domain = ".".join(labels[-2:])
+        sub_labels = labels[:-2]
+        tld = labels[-1]
+    non_www_subs = [lbl for lbl in sub_labels if lbl != "www"]
+    return {
+        "scheme": scheme,
+        "netloc": netloc,
+        "host": host,
+        "port": port,
+        "has_at": has_at,
+        "is_ip": is_ip,
+        "labels": labels,
+        "reg_domain": reg_domain,
+        "sub_labels": sub_labels,
+        "non_www_subs": non_www_subs,
+        "tld": tld,
+        "path": parsed.path or "",
+        "query": parsed.query or "",
+    }
+
+
+def has_homoglyph_punycode(labels: list[str]) -> bool:
+    """Return True if any punycode label decodes to mixed ASCII + non-ASCII characters (or fails IDNA)."""
+    for lbl in labels:
+        if not lbl.startswith("xn--"):
+            continue
+        try:
+            decoded = lbl.encode("ascii").decode("idna")
+        except UnicodeError:
+            return True
+        has_ascii_alpha = any("a" <= c.lower() <= "z" for c in decoded)
+        has_non_ascii = any(ord(c) > 127 for c in decoded)
+        if has_ascii_alpha and has_non_ascii:
+            return True
+    return False
+
+
+def detect_url_indicators(url: str) -> tuple[str, ...]:
+    """Extract observable structural/lexical cues from a URL without network calls."""
+    parts = parse_url_parts(url)
+    host = str(parts["host"])
+    reg_domain = str(parts["reg_domain"])
+    tld = str(parts["tld"])
+    path_lower = str(parts["path"]).lower()
+    query_lower = str(parts["query"]).lower()
+    sub_labels = list(parts["sub_labels"])  # type: ignore[arg-type]
+    non_www_subs = list(parts["non_www_subs"])  # type: ignore[arg-type]
+    labels = list(parts["labels"])  # type: ignore[arg-type]
+    scheme = str(parts["scheme"])
+    port = parts["port"]
+
+    found: set[str] = set()
+    if parts["is_ip"]:
+        found.add("IP_HOST_URL")
+    if parts["has_at"] or has_homoglyph_punycode(labels):
+        found.add("PUNYCODE_OR_AT_URL")
+    if host in URL_SHORTENERS:
+        found.add("SHORTENER_LINK")
+    if tld in SUSPICIOUS_TLDS:
+        found.add("SUSPICIOUS_TLD_URL")
+    if len(non_www_subs) >= 3:
+        found.add("DEEP_SUBDOMAIN_URL")
+
+    # Check risky executable/archive extension in path or query values.
+    if any(path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
+           for ext in RISKY_EXTENSIONS):
+        found.add("RISKY_EXTENSION_URL")
+
+    host_tokens = set(re.findall(r"[a-z0-9]+", host))
+    path_query_tokens = set(re.findall(r"[a-z0-9]+", f"{path_lower} {query_lower}"))
+    all_tokens = host_tokens | path_query_tokens
+    is_trusted_gov_bank = host.endswith(TRUSTED_INDIAN_GOV_BANK_SUFFIXES)
+
+    brand_spoof = False
+    has_nonstd_port = port not in (None, 80, 443)
+    has_abused_hosting = host.endswith(ABUSED_HOSTING_SUFFIXES)
+    has_risky_host = (
+        scheme == "http"
+        or tld in SUSPICIOUS_TLDS
+        or bool(parts["is_ip"])
+        or bool(parts["has_at"])
+        or host in URL_SHORTENERS
+        or host.count("-") >= 2
+        or len(non_www_subs) >= 2
+        or has_nonstd_port
+        or has_abused_hosting
+    )
+    if detect_brand_typosquat(host, reg_domain, is_trusted_gov_bank):
+        brand_spoof = True
+    if not brand_spoof:
+        for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items():
+            if brand in all_tokens and reg_domain not in official_domains and not is_trusted_gov_bank:
+                if brand in host_tokens or (all_tokens & (_BRAND_LURE_TOKENS | _GENERIC_AUTH_TOKENS)):
+                    brand_spoof = True
+                    break
+    if not brand_spoof and (host_tokens & _BRAND_LURE_TOKENS) and not is_trusted_gov_bank and has_risky_host:
+        if not any(reg_domain in doms for doms in BRAND_OFFICIAL_DOMAINS.values()):
+            brand_spoof = True
+    if not brand_spoof and (all_tokens & _GENERIC_AUTH_TOKENS) and not is_trusted_gov_bank:
+        if scheme == "http" or "-" in reg_domain or len(non_www_subs) >= 2 or tld in SUSPICIOUS_TLDS or has_nonstd_port or has_abused_hosting:
+            if any(tok in host_tokens for tok in _GENERIC_AUTH_TOKENS) or scheme == "http" or tld in SUSPICIOUS_TLDS or has_abused_hosting:
+                brand_spoof = True
+
+    if brand_spoof:
+        found.add("BRAND_SPOOF_URL")
+
+    return tuple(name for name in DESCRIPTIONS if name in found)
+
+
+def is_verified_official_domain(url: str) -> bool:
+    """Strictly verify an explicit HTTPS URL matches a known official registrable domain without anomalies."""
+    parts = parse_url_parts(url)
+    host = str(parts["host"])
+    reg_domain = str(parts["reg_domain"])
+    labels = list(parts["labels"])  # type: ignore[arg-type]
+    path_lower = str(parts["path"]).lower()
+    query_lower = str(parts["query"]).lower()
+
+    if parts["scheme"] != "https":
+        return False
+    if parts["is_ip"] or parts["has_at"] or has_homoglyph_punycode(labels):
+        return False
+    if parts["port"] not in (None, 443):
+        return False
+    if host.endswith(ABUSED_HOSTING_SUFFIXES) or host in URL_SHORTENERS:
+        return False
+    if any(
+        path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
+        for ext in RISKY_EXTENSIONS
+    ):
+        return False
+    pq = f"{path_lower}?{query_lower}" if query_lower else path_lower
+    if any(scheme in pq for scheme in ("http://", "https://", "http%3a", "https%3a")):
+        return False
+    if reg_domain not in VERIFIED_OFFICIAL_DOMAINS:
+        return False
+    return detect_url_indicators(url) == ()
