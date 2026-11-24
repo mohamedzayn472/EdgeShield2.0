@@ -2,9 +2,9 @@
 from dataclasses import dataclass
 from time import perf_counter
 from .privacy import normalize_sms
-from .indicators import detect_indicators
+from .indicators import detect_indicators, detect_url_indicators
 from .evidence import Evidence
-from .recommendations import recommendation
+from .recommendations import recommendation, url_recommendation
 from .validator import build_prompt, validate_explanation, fallback
 
 ADVISORY_POLICIES = ("always", "elevated", "uncertain", "off")
@@ -51,6 +51,20 @@ def assess(text, detector) -> Assessment:
     evidence = Evidence(prediction["band"], prediction["score"], detect_indicators(clean))
     return Assessment(evidence, prediction["score_label"], prediction["model_version"], detector_ms,
                       (perf_counter() - start) * 1000, recommendation(evidence.band))
+
+
+def assess_url(url_text, url_detector) -> Assessment:
+    """Assess a single URL locally through the closed Evidence boundary."""
+    from .url_detector import normalize_url
+
+    start = perf_counter()
+    clean = normalize_url(url_text)
+    prediction = url_detector.predict(clean)
+    detector_ms = (perf_counter() - start) * 1000
+    start = perf_counter()
+    evidence = Evidence(prediction["band"], prediction["score"], detect_url_indicators(clean))
+    return Assessment(evidence, prediction["score_label"], prediction["model_version"], detector_ms,
+                      (perf_counter() - start) * 1000, url_recommendation(evidence.band))
 
 
 def explain(evidence: Evidence, advisor=None, *, policy: str = "always") -> Explanation:

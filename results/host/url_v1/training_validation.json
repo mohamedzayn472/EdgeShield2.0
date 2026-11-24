@@ -1,0 +1,28 @@
+{
+  "model_version": "edgeshield-url-char-lexical-lr-v1",
+  "sha256": "6e68120417050c7f4647be6373fe086dec7a7a685c0c3f3188e13eb0daf23217",
+  "bytes": 1125655,
+  "C": 2.0,
+  "calibration": [
+    1.806247,
+    0.357556
+  ],
+  "thresholds": [
+    0.3,
+    0.7
+  ],
+  "word_vocab_size": 1942,
+  "char_vocab_size": 19827,
+  "validation_metrics": {
+    "fpr": 0.0144,
+    "recall": 0.8551,
+    "precision": 0.9807,
+    "f1": 0.9136,
+    "accuracy": 0.9121,
+    "abstention_rate": 0.0592,
+    "fp": 13,
+    "fn": 35,
+    "roc_auc": 0.99128,
+    "brier": 0.03862
+  }
+}

@@ -1,0 +1,256 @@
+{
+  "model_version": "edgeshield-url-char-lexical-lr-v1",
+  "detector_sha256": "6e68120417050c7f4647be6373fe086dec7a7a685c0c3f3188e13eb0daf23217",
+  "thresholds": [
+    0.3,
+    0.7
+  ],
+  "datasets": {
+    "test_temporal": {
+      "n": 1827,
+      "negative_n": 1350,
+      "positive_n": 477,
+      "confusion_matrix_2x3": [
+        [
+          1294,
+          35,
+          21
+        ],
+        [
+          41,
+          59,
+          377
+        ]
+      ],
+      "accuracy": 0.9146,
+      "precision": 0.9472,
+      "recall": 0.7904,
+      "false_positive_rate": 0.0156,
+      "f1": 0.8617,
+      "abstention_rate": 0.0515,
+      "roc_auc": 0.98624,
+      "brier": 0.04054,
+      "latency_ms": {
+        "median": 0.464,
+        "p95": 0.5149,
+        "max": 1.1698
+      },
+      "false_alarms_sample": [
+        {
+          "url": "http://web.ewuye.vip/",
+          "score": 0.7453,
+          "source": "tranco_top100k",
+          "cues": [
+            "SUSPICIOUS_TLD_URL"
+          ]
+        },
+        {
+          "url": "https://www.vidkleess-ink.sbs/releases/education.aspx",
+          "score": 0.7314,
+          "source": "tranco_top100k",
+          "cues": [
+            "SUSPICIOUS_TLD_URL"
+          ]
+        },
+        {
+          "url": "https://hls-dhs-dss.ch/",
+          "score": 0.9677,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://073m.com/",
+          "score": 0.895,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://bromium-online.com/",
+          "score": 0.7131,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://are.na/",
+          "score": 0.793,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://forum.b5c1d2e8c9982e3b965a27ac72ru7284cc.com/guide-started/tags-help/academics.html",
+          "score": 0.8455,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://gegevensbeschermingsautoriteit.be/",
+          "score": 0.8829,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://braunschweiger-zeitung.de/",
+          "score": 0.959,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "http://www.ctseelink.cn/",
+          "score": 0.7323,
+          "source": "tranco_top100k",
+          "cues": []
+        }
+      ],
+      "misses_sample": [
+        {
+          "url": "http://pageforge.fr/p/mail",
+          "score": 0.1291,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://www.awscfdns.com/customer-preferences/edit",
+          "score": 0.0068,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://www.westindiaequip.com/",
+          "score": 0.1528,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "http://api-google-docs.com/",
+          "score": 0.0305,
+          "source": "openphish_public_feed",
+          "cues": [
+            "BRAND_SPOOF_URL"
+          ]
+        },
+        {
+          "url": "https://auth0-google.com/",
+          "score": 0.2965,
+          "source": "openphish_public_feed",
+          "cues": [
+            "BRAND_SPOOF_URL"
+          ]
+        },
+        {
+          "url": "https://bolson.site/",
+          "score": 0.1689,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://www.hotel.sc/",
+          "score": 0.0019,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://www.travel.sc/",
+          "score": 0.0013,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "http://jumbu.de/gustafsonltd",
+          "score": 0.1638,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "http://web-coinbese.com/",
+          "score": 0.1433,
+          "source": "openphish_public_feed",
+          "cues": []
+        }
+      ]
+    },
+    "url_holdout_200": {
+      "n": 200,
+      "negative_n": 100,
+      "positive_n": 100,
+      "confusion_matrix_2x3": [
+        [
+          98,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          100
+        ]
+      ],
+      "accuracy": 0.99,
+      "precision": 0.9804,
+      "recall": 1.0,
+      "false_positive_rate": 0.02,
+      "f1": 0.9901,
+      "abstention_rate": 0.0,
+      "roc_auc": 0.9999,
+      "brier": 0.01034,
+      "latency_ms": {
+        "median": 0.4642,
+        "p95": 0.5002,
+        "max": 0.5808
+      },
+      "false_alarms_sample": [
+        {
+          "url": "https://www.indusind.com/in/en/personal/online-services/netbanking.html",
+          "score": 0.9326,
+          "source": "indian_benign_holdout",
+          "cues": []
+        },
+        {
+          "url": "https://github.com/login",
+          "score": 0.9999,
+          "source": "global_benign_holdout",
+          "cues": []
+        }
+      ],
+      "misses_sample": []
+    },
+    "url_holdout_indian_subset": {
+      "n": 75,
+      "negative_n": 25,
+      "positive_n": 50,
+      "confusion_matrix_2x3": [
+        [
+          24,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          50
+        ]
+      ],
+      "accuracy": 0.9867,
+      "precision": 0.9804,
+      "recall": 1.0,
+      "false_positive_rate": 0.04,
+      "f1": 0.9901,
+      "abstention_rate": 0.0,
+      "roc_auc": 1.0,
+      "brier": 0.01187,
+      "latency_ms": {
+        "median": 0.4739,
+        "p95": 0.5026,
+        "max": 0.5493
+      },
+      "false_alarms_sample": [
+        {
+          "url": "https://www.indusind.com/in/en/personal/online-services/netbanking.html",
+          "score": 0.9326,
+          "source": "indian_benign_holdout",
+          "cues": []
+        }
+      ],
+      "misses_sample": []
+    }
+  }
+}

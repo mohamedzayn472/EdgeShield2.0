@@ -1,4 +1,5 @@
 """Observable lexical cues, never proof of fraud or sender identity."""
+import ipaddress
 import re
 from urllib.parse import urlsplit
 from .privacy import normalize_sms
@@ -16,6 +17,12 @@ DESCRIPTIONS = {
     "PRIZE_LURE": "Prize-related wording appears",
     "JOB_LURE": "Job-related wording appears",
     "HINGLISH_CUE": "Romanized Hindi wording appears",
+    "IP_HOST_URL": "A numeric network address host appears",
+    "PUNYCODE_OR_AT_URL": "Obfuscated host or credential syntax appears",
+    "SUSPICIOUS_TLD_URL": "An elevated-risk top-level domain appears",
+    "DEEP_SUBDOMAIN_URL": "Deeply nested subdomain structure appears",
+    "BRAND_SPOOF_URL": "Brand-like login or verification path wording appears",
+    "RISKY_EXTENSION_URL": "Executable or archive download path wording appears",
 }
 
 HIGH_RISK_INDICATORS = frozenset({
@@ -571,5 +578,172 @@ def detect_indicators(text: str) -> tuple[str, ...]:
 
     if has_bank_context and has_active_bank_cue:
         found.add("BANK_IMPERSONATION")
+
+    return tuple(name for name in DESCRIPTIONS if name in found)
+
+
+URL_SHORTENERS = SHORTENERS | {"ow.ly", "rebrand.ly", "tiny.cc"}
+SUSPICIOUS_TLDS = frozenset({
+    "xyz", "top", "click", "icu", "buzz", "cfd", "sbs", "rest",
+    "tk", "ml", "ga", "cf", "gq", "vip", "win", "loan", "work", "zip", "mov",
+})
+RISKY_EXTENSIONS = frozenset({".apk", ".exe", ".scr", ".msi", ".bat", ".cmd", ".vbs", ".jar"})
+TRUSTED_MULTI_SLD = frozenset({
+    "co.in", "org.in", "gov.in", "nic.in", "ac.in", "net.in", "edu.in", "res.in",
+    "co.uk", "org.uk", "ac.uk", "com.au", "co.jp", "com.sg",
+})
+_CC_SECOND_LEVEL_CATEGORIES = frozenset({"com", "co", "org", "net", "gov", "edu", "ac", "nic", "res", "mil", "sch"})
+TRUSTED_INDIAN_GOV_BANK_SUFFIXES = (".gov.in", ".nic.in", ".ac.in", ".res.in", ".edu.in", ".sbi", ".rbi.org.in", ".npci.org.in")
+BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
+    "sbi": ("sbi.co.in", "onlinesbi.sbi", "bank.sbi", "sbi.co"),
+    "onlinesbi": ("onlinesbi.sbi", "sbi.co.in"),
+    "hdfc": ("hdfcbank.com", "hdfc.com"),
+    "hdfcbank": ("hdfcbank.com",),
+    "icici": ("icicibank.com", "icici.com"),
+    "icicibank": ("icicibank.com",),
+    "axisbank": ("axisbank.com",),
+    "kotak": ("kotak.com", "kotakbank.com"),
+    "paytm": ("paytm.com", "paytm.in"),
+    "phonepe": ("phonepe.com",),
+    "gpay": ("pay.google.com", "google.com"),
+    "npci": ("npci.org.in",),
+    "uidai": ("uidai.gov.in",),
+    "aadhaar": ("uidai.gov.in",),
+    "incometax": ("incometax.gov.in", "incometaxindiaefiling.gov.in"),
+    "parivahan": ("parivahan.gov.in",),
+    "echallan": ("parivahan.gov.in", "echallan.parivahan.gov.in"),
+    "irctc": ("irctc.co.in",),
+    "indiapost": ("indiapost.gov.in",),
+    "paypal": ("paypal.com",),
+    "microsoft": ("microsoft.com", "live.com", "office.com", "microsoftonline.com"),
+    "apple": ("apple.com", "icloud.com"),
+    "google": ("google.com",),
+    "netflix": ("netflix.com",),
+    "amazon": ("amazon.com", "amazon.in"),
+    "whatsapp": ("whatsapp.com",),
+}
+_BRAND_LURE_TOKENS = frozenset({"kyc", "ekyc", "netbanking", "webscr"})
+_GENERIC_AUTH_TOKENS = frozenset({"login", "signin", "verify", "update", "secure", "account", "unlock", "unblock"})
+_INT_OR_HEX_IP_RE = re.compile(r"^(?:0x[0-9a-f]+|0[0-7]+|\d+)$", re.I)
+
+
+def _is_ip_host(host: str) -> bool:
+    if not host:
+        return False
+    stripped = host.strip("[]")
+    try:
+        ipaddress.ip_address(stripped)
+        return True
+    except ValueError:
+        pass
+    if _INT_OR_HEX_IP_RE.match(stripped):
+        return True
+    parts = stripped.split(".")
+    if len(parts) == 4 and all(_INT_OR_HEX_IP_RE.match(p) for p in parts):
+        return True
+    return False
+
+
+def parse_url_parts(raw_url: str) -> dict[str, object]:
+    """Parse a normalized URL purely locally (no DNS/network) into structured components."""
+    text = raw_url.strip()
+    has_explicit_scheme = "://" in text
+    parsed = urlsplit(text if has_explicit_scheme else "http://" + text)
+    scheme = parsed.scheme.lower() if has_explicit_scheme else ""
+    netloc = parsed.netloc
+    host = (parsed.hostname or "").lower().rstrip(".")
+    try:
+        port = parsed.port
+    except ValueError:
+        port = None
+    has_at = "@" in netloc or parsed.username is not None or parsed.password is not None
+    labels = [lbl for lbl in host.split(".") if lbl] if host else []
+    is_ip = _is_ip_host(host)
+    if is_ip or len(labels) < 2:
+        reg_domain = host
+        sub_labels: list[str] = []
+        tld = ""
+    elif len(labels) >= 3 and (
+        ".".join(labels[-2:]) in TRUSTED_MULTI_SLD
+        or (len(labels[-1]) == 2 and labels[-2] in _CC_SECOND_LEVEL_CATEGORIES)
+    ):
+        reg_domain = ".".join(labels[-3:])
+        sub_labels = labels[:-3]
+        tld = labels[-1]
+    else:
+        reg_domain = ".".join(labels[-2:])
+        sub_labels = labels[:-2]
+        tld = labels[-1]
+    non_www_subs = [lbl for lbl in sub_labels if lbl != "www"]
+    return {
+        "scheme": scheme,
+        "netloc": netloc,
+        "host": host,
+        "port": port,
+        "has_at": has_at,
+        "is_ip": is_ip,
+        "labels": labels,
+        "reg_domain": reg_domain,
+        "sub_labels": sub_labels,
+        "non_www_subs": non_www_subs,
+        "tld": tld,
+        "path": parsed.path or "",
+        "query": parsed.query or "",
+    }
+
+
+def detect_url_indicators(url: str) -> tuple[str, ...]:
+    """Extract observable structural/lexical cues from a URL without network calls."""
+    parts = parse_url_parts(url)
+    host = str(parts["host"])
+    reg_domain = str(parts["reg_domain"])
+    tld = str(parts["tld"])
+    path_lower = str(parts["path"]).lower()
+    query_lower = str(parts["query"]).lower()
+    sub_labels = list(parts["sub_labels"])  # type: ignore[arg-type]
+    non_www_subs = list(parts["non_www_subs"])  # type: ignore[arg-type]
+    labels = list(parts["labels"])  # type: ignore[arg-type]
+    scheme = str(parts["scheme"])
+    port = parts["port"]
+
+    found: set[str] = set()
+    if parts["is_ip"]:
+        found.add("IP_HOST_URL")
+    if parts["has_at"] or any(lbl.startswith("xn--") for lbl in labels):
+        found.add("PUNYCODE_OR_AT_URL")
+    if host in URL_SHORTENERS:
+        found.add("SHORTENER_LINK")
+    if tld in SUSPICIOUS_TLDS:
+        found.add("SUSPICIOUS_TLD_URL")
+    if len(non_www_subs) >= 3:
+        found.add("DEEP_SUBDOMAIN_URL")
+
+    # Check risky executable/archive extension in path or query values.
+    if any(path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
+           for ext in RISKY_EXTENSIONS):
+        found.add("RISKY_EXTENSION_URL")
+
+    host_tokens = set(re.findall(r"[a-z0-9]+", host))
+    path_query_tokens = set(re.findall(r"[a-z0-9]+", f"{path_lower} {query_lower}"))
+    all_tokens = host_tokens | path_query_tokens
+    is_trusted_gov_bank = host.endswith(TRUSTED_INDIAN_GOV_BANK_SUFFIXES)
+
+    brand_spoof = False
+    for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items():
+        if brand in all_tokens and reg_domain not in official_domains and not is_trusted_gov_bank:
+            if brand in host_tokens or (all_tokens & (_BRAND_LURE_TOKENS | _GENERIC_AUTH_TOKENS)):
+                brand_spoof = True
+                break
+    if not brand_spoof and (host_tokens & _BRAND_LURE_TOKENS) and not is_trusted_gov_bank:
+        if not any(reg_domain in doms for doms in BRAND_OFFICIAL_DOMAINS.values()):
+            brand_spoof = True
+    if not brand_spoof and (all_tokens & _GENERIC_AUTH_TOKENS) and not is_trusted_gov_bank:
+        has_nonstd_port = port not in (None, 80, 443)
+        if scheme == "http" or "-" in reg_domain or len(non_www_subs) >= 2 or tld in SUSPICIOUS_TLDS or has_nonstd_port:
+            if any(tok in host_tokens for tok in _GENERIC_AUTH_TOKENS) or scheme == "http" or tld in SUSPICIOUS_TLDS:
+                brand_spoof = True
+
+    if brand_spoof:
+        found.add("BRAND_SPOOF_URL")
 
     return tuple(name for name in DESCRIPTIONS if name in found)

@@ -1,0 +1,49 @@
+{
+  "created_at_utc": "2026-11-24T07:45:00Z",
+  "sources": {
+    "openphish": "https://github.com/openphish/public_feed (30 timestamped snapshots)",
+    "tranco": "https://tranco-list.eu/top-1m.csv.zip (sampled top 50k domains with realistic deep paths)",
+    "indian_synthetic": "Curated Indian banking/gov benign + Indian KYC/UPI/APK synthetic phishing patterns"
+  },
+  "time_cutoff_utc": "2026-11-17T00:00:08Z",
+  "counts": {
+    "train": {
+      "total": 9502,
+      "phish": 5345,
+      "benign": 4157
+    },
+    "calibration": {
+      "total": 1598,
+      "phish": 473,
+      "benign": 1125
+    },
+    "validation": {
+      "total": 1673,
+      "phish": 773,
+      "benign": 900
+    },
+    "test_temporal": {
+      "total": 1827,
+      "phish": 477,
+      "benign": 1350
+    },
+    "url_holdout": {
+      "total": 200,
+      "phish": 100,
+      "benign": 100
+    }
+  },
+  "disjoint_domain_checks": {
+    "dev_vs_test_temporal_overlap": 0,
+    "dev_vs_url_holdout_overlap": 0,
+    "test_temporal_vs_url_holdout_overlap": 0
+  },
+  "sha256": {
+    "data/synthetic/url_indian_dev.jsonl": "38a153ff92d88bd4cc2c735c6e961f1b6d89c345083986b87a6fcf34d742eae3",
+    "data/synthetic/url_holdout.jsonl": "b4123395383083c347f67111687a55ddf8715bda9d6930ef3161b2c8b8898504",
+    "data/processed/url_train.jsonl": "6844f597eb866d7f69f74ff76e38a6040784204c895bd688733f8f915968129f",
+    "data/processed/url_calibration.jsonl": "032e7d43b0ff81b4e22e3824806fbc496ce2ec3781c0cf2453ae5cf89d0ce5f7",
+    "data/processed/url_validation.jsonl": "55a608500f2f57d3649eeb0e632510e24c544cf80a5081ae993008ae348e6a63",
+    "data/processed/url_test_temporal.jsonl": "4fc9a631d313cb6514d560129df52bd27e5efc5112b89fdc94bf9d302f7ecba2"
+  }
+}

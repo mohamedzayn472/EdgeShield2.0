@@ -1,0 +1,58 @@
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (6e6812041705)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: URL is not saved or fetched. Zero DNS/HTTP requests. Lower risk does not prove safety.
+Experimental time-split URL detector. Human review and real-world validation are still pending.
+
+=== Demo 1/4: Legitimate Indian banking deep URL ===
+Synthetic URL: https://www.onlinesbi.sbi/sbijava/retail/html/faq.html
+
+Threat band: LEGITIMATE
+Experimental time-split URL risk score (not real-world calibrated): 0.000
+Indicators: none
+DO: The URL detector estimates lower risk. Confirm the domain spelling before entering sensitive details.
+Detector: 1.36 ms | Evidence: 0.04 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3153.45 ms | Validation: 0.62 ms | Total: 3155.47 ms
+
+=== Demo 2/4: Phishing Indian bank KYC subdomain spoof ===
+Synthetic URL: http://sbi.kyc-verify-account.xyz/netbanking/login.php?session=9281
+
+Threat band: SCAM
+Experimental time-split URL risk score (not real-world calibrated): 1.000
+Indicators: SUSPICIOUS_TLD_URL, BRAND_SPOOF_URL
+Indicator details: An elevated-risk top-level domain appears; Brand-like login or verification path wording appears
+DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.
+Detector: 1.14 ms | Evidence: 0.03 ms
+WHY: The detector estimates elevated risk. Brand-like login or verification path wording appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3300.54 ms | Validation: 0.07 ms | Total: 3301.79 ms
+
+=== Demo 3/4: Legitimate NPCI UPI information URL ===
+Synthetic URL: https://www.npci.org.in/what-we-do/upi/product-overview
+
+Threat band: LEGITIMATE
+Experimental time-split URL risk score (not real-world calibrated): 0.000
+Indicators: none
+DO: The URL detector estimates lower risk. Confirm the domain spelling before entering sensitive details.
+Detector: 1.46 ms | Evidence: 0.04 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3143.36 ms | Validation: 0.06 ms | Total: 3144.92 ms
+
+=== Demo 4/4: Phishing numeric IP executable download URL ===
+Synthetic URL: http://198.51.100.42:8080/parivahan/echallan-update.apk
+
+Threat band: SCAM
+Experimental time-split URL risk score (not real-world calibrated): 1.000
+Indicators: IP_HOST_URL, BRAND_SPOOF_URL, RISKY_EXTENSION_URL
+Indicator details: A numeric network address host appears; Brand-like login or verification path wording appears; Executable or archive download path wording appears
+DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.
+Detector: 1.05 ms | Evidence: 0.03 ms
+WHY: The detector estimates elevated risk. A numeric network address host appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3405.20 ms | Validation: 0.07 ms | Total: 3406.35 ms
+{"event": "detection", "quality_status": "EXPERIMENTAL_TIME_SPLIT_URL_MODEL", "detector_sha256": "6e68120417050c7f4647be6373fe086dec7a7a685c0c3f3188e13eb0daf23217", "evidence": {"band": "SCAM", "score": 0.9999997809424082, "indicators": ["SUSPICIOUS_TLD_URL", "BRAND_SPOOF_URL"], "schema_version": 1}, "score_label": "Experimental time-split URL risk score (not real-world calibrated)", "model_version": "edgeshield-url-char-lexical-lr-v1", "detector_ms": 2.16081700000359, "evidence_ms": 0.05216899990045931, "advice": "DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.", "mode": "url"}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. Brand-like login or verification path wording appears.", "source": "Llama (validated)", "reason": "ACCEPTED", "llama_ms": 3406.187601000056, "validation_ms": 0.5595279999397462}
