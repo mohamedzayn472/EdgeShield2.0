@@ -255,7 +255,8 @@ Per challenge guidance, network traffic anomaly and intrusion detection is **not
 ### 8.1 Verify Public Source & Run Tests (Any Linux Host, Python 3.10–3.13)
 
 ```bash
-python3 scripts/verify_bundle.py
+sha256sum models/detector_v8.json models/url_detector_v1.json
+sha256sum -c results/pi5/v8-device-20261124/SHA256SUMS
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements/host.txt
 .venv/bin/python -m pip install --no-deps .

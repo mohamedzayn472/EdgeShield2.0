@@ -11,7 +11,7 @@ REQUIRED_DEFAULT_FILES = (
     DEFAULT_DETECTOR_REL,
     f"{DEFAULT_DETECTOR_REL}.sha256",
 )
-TOP_FILES = {"README.md", "PROJECT_STATUS.md", "pyproject.toml", ".gitignore", ".gitattributes", "EDGESHIELD_ARCHITECT_PROMPT.md"}
+TOP_FILES = {"README.md", "PROJECT_STATUS.md", "pyproject.toml", ".gitignore", ".gitattributes", "LICENSE"}
 TOP_DIRS = {"src", "scripts", "tests", "requirements", "configs", "docs", "deploy", "executorch", "submission", "results", "wheelhouse"}
 EXCLUDED_PARTS = {"__pycache__", ".pytest_cache", "raw", "processed", "llama", "licensed", "upstream"}
 
