@@ -1,0 +1,81 @@
+=== 1_POLICY_ELEVATED_ON_CLEAN_LEGIT (expect SKIPPED_BY_POLICY) ===
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910", "evidence": {"band": "LEGITIMATE", "score": 0.02482788263863505, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v3", "detector_ms": 1.3087160004943144, "evidence_ms": 0.3288490006525535, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "SKIPPED_BY_POLICY", "llama_ms": null, "validation_ms": 0.003296000613772776}
+EXIT=0
+=== 2_POLICY_UNCERTAIN_ON_CLEAN_LEGIT (expect SKIPPED_BY_POLICY) ===
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910", "evidence": {"band": "LEGITIMATE", "score": 0.02482788263863505, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v3", "detector_ms": 1.3569989996540244, "evidence_ms": 0.34977999985130737, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "SKIPPED_BY_POLICY", "llama_ms": null, "validation_ms": 0.0033360001907567494}
+EXIT=0
+=== 3_POLICY_OFF_ON_SCAM (expect SKIPPED_BY_POLICY) ===
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910", "evidence": {"band": "SCAM", "score": 0.9998283513596183, "indicators": ["URGENCY", "THREAT_OF_BLOCK", "LINK_PRESENT", "SHORTENER_LINK", "BANK_IMPERSONATION", "KYC_IMPERSONATION"], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v3", "detector_ms": 1.4076960005695582, "evidence_ms": 0.3460630005065468, "advice": "DO: Do not open suspicious links. Verify the message using the organization's independently known official channel."}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. A known link shortener appears.", "source": "Template fallback", "reason": "SKIPPED_BY_POLICY", "llama_ms": null, "validation_ms": 0.007595000170113053}
+EXIT=0
+=== 4_LLAMA_LEGIT_BANK_CREDIT (policy=always) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.025
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.35 ms | Evidence: 0.33 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3221.60 ms | Validation: 0.29 ms | Total: 3223.57 ms
+EXIT=0
+=== 5_LLAMA_SCAM_BANK_KYC (policy=always) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 1.000
+Indicators: URGENCY, THREAT_OF_BLOCK, LINK_PRESENT, SHORTENER_LINK, BANK_IMPERSONATION, KYC_IMPERSONATION
+Indicator details: Urgent wording appears; Account restriction wording appears; Link-like text appears; A known link shortener appears; Suspicious bank-related request or warning appears; Identity verification wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.33 ms | Evidence: 0.33 ms
+WHY: The detector estimates elevated risk. A known link shortener appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3576.87 ms | Validation: 0.51 ms | Total: 3579.04 ms
+EXIT=0
+=== 6_LLAMA_FALSE_POSITIVE_ANTIFRAUD_ADVISORY (V3=SCAM, Validator=ACCEPTED) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.928
+Indicators: none
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.39 ms | Evidence: 0.34 ms
+WHY: The detector estimates elevated risk.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3068.06 ms | Validation: 0.47 ms | Total: 3070.26 ms
+EXIT=0
+=== 7_LLAMA_FALSE_NEGATIVE_FAMILY_IMPERSONATION (V3=LEGITIMATE, Validator=ACCEPTED) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.344
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.26 ms | Evidence: 0.32 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3316.67 ms | Validation: 0.62 ms | Total: 3318.88 ms
+EXIT=0

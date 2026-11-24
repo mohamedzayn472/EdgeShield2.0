@@ -1,0 +1,2619 @@
+{
+ "source": "v7_holdout.jsonl",
+ "detector": "detector_v7.json",
+ "note": "Evidence only; message text intentionally omitted",
+ "cases": [
+  {
+   "id": "v7h001",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.040532288577109006,
+   "indicators": []
+  },
+  {
+   "id": "v7h002",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.19405427693450175,
+   "indicators": []
+  },
+  {
+   "id": "v7h003",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.009189264719461531,
+   "indicators": []
+  },
+  {
+   "id": "v7h004",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.06590517362035568,
+   "indicators": []
+  },
+  {
+   "id": "v7h005",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.003687998532595684,
+   "indicators": []
+  },
+  {
+   "id": "v7h006",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.07137554903969447,
+   "indicators": []
+  },
+  {
+   "id": "v7h007",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.09552693996185901,
+   "indicators": []
+  },
+  {
+   "id": "v7h008",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.018803795838981927,
+   "indicators": []
+  },
+  {
+   "id": "v7h009",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.051712223553089146,
+   "indicators": []
+  },
+  {
+   "id": "v7h010",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.2654073844224039,
+   "indicators": []
+  },
+  {
+   "id": "v7h011",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.3958089531352176,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h012",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.04126536129536613,
+   "indicators": []
+  },
+  {
+   "id": "v7h013",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.002166191531049124,
+   "indicators": []
+  },
+  {
+   "id": "v7h014",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0025287890942226818,
+   "indicators": []
+  },
+  {
+   "id": "v7h015",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.020371926284548206,
+   "indicators": []
+  },
+  {
+   "id": "v7h016",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.02619450954126578,
+   "indicators": []
+  },
+  {
+   "id": "v7h017",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.00582221424395902,
+   "indicators": []
+  },
+  {
+   "id": "v7h018",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0007993308737988906,
+   "indicators": []
+  },
+  {
+   "id": "v7h019",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.01736591744421703,
+   "indicators": []
+  },
+  {
+   "id": "v7h020",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.39311214369197917,
+   "indicators": []
+  },
+  {
+   "id": "v7h021",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.2179231280452513,
+   "indicators": []
+  },
+  {
+   "id": "v7h022",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.003902636996476664,
+   "indicators": []
+  },
+  {
+   "id": "v7h023",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.009725897739559345,
+   "indicators": [
+    "DELIVERY_LURE"
+   ]
+  },
+  {
+   "id": "v7h024",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.06600896134294175,
+   "indicators": []
+  },
+  {
+   "id": "v7h025",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0015531565748851985,
+   "indicators": []
+  },
+  {
+   "id": "v7h026",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.029544981658963763,
+   "indicators": []
+  },
+  {
+   "id": "v7h027",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.016588136113735146,
+   "indicators": []
+  },
+  {
+   "id": "v7h028",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.019934740406555435,
+   "indicators": []
+  },
+  {
+   "id": "v7h029",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.008987596254060135,
+   "indicators": []
+  },
+  {
+   "id": "v7h030",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.5227780581684205,
+   "indicators": []
+  },
+  {
+   "id": "v7h031",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.00120871898870102,
+   "indicators": []
+  },
+  {
+   "id": "v7h032",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.028249098955155375,
+   "indicators": [
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h033",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.06970106073006738,
+   "indicators": []
+  },
+  {
+   "id": "v7h034",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0011887239704146983,
+   "indicators": []
+  },
+  {
+   "id": "v7h035",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0007291019920063902,
+   "indicators": []
+  },
+  {
+   "id": "v7h036",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.018170629064134167,
+   "indicators": [
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h037",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0019236775986412008,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h038",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.005107996559662477,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h039",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.09578080607290555,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h040",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.015785233764725997,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h041",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.029299201755176002,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h042",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.10221724996975776,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h043",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.011638568699488525,
+   "indicators": []
+  },
+  {
+   "id": "v7h044",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.10962971580023255,
+   "indicators": []
+  },
+  {
+   "id": "v7h045",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.008148904784990274,
+   "indicators": []
+  },
+  {
+   "id": "v7h046",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.05519335603552318,
+   "indicators": []
+  },
+  {
+   "id": "v7h047",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.02322195849427978,
+   "indicators": []
+  },
+  {
+   "id": "v7h048",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0034858011025947623,
+   "indicators": []
+  },
+  {
+   "id": "v7h049",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.002328846037888664,
+   "indicators": []
+  },
+  {
+   "id": "v7h050",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.007347195521173085,
+   "indicators": []
+  },
+  {
+   "id": "v7h051",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.18773706151111225,
+   "indicators": []
+  },
+  {
+   "id": "v7h052",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.0318648477562335,
+   "indicators": []
+  },
+  {
+   "id": "v7h053",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.13302869044023446,
+   "indicators": []
+  },
+  {
+   "id": "v7h054",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.01986098545762964,
+   "indicators": []
+  },
+  {
+   "id": "v7h055",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.002555130602326953,
+   "indicators": []
+  },
+  {
+   "id": "v7h056",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.002039593578305445,
+   "indicators": []
+  },
+  {
+   "id": "v7h057",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.13734111502984567,
+   "indicators": []
+  },
+  {
+   "id": "v7h058",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.09181983592660149,
+   "indicators": []
+  },
+  {
+   "id": "v7h059",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.11560609027269012,
+   "indicators": []
+  },
+  {
+   "id": "v7h060",
+   "label": 0,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.06680623407096022,
+   "indicators": []
+  },
+  {
+   "id": "v7h061",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9991854672042727,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h062",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9208723253083256,
+   "indicators": [
+    "THREAT_OF_BLOCK",
+    "LINK_PRESENT",
+    "BANK_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h063",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9943577227208364,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h064",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9957584808655058,
+   "indicators": []
+  },
+  {
+   "id": "v7h065",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9655094274077085,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h066",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9982465359505666,
+   "indicators": [
+    "URGENCY",
+    "THREAT_OF_BLOCK"
+   ]
+  },
+  {
+   "id": "v7h067",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9994993874327227,
+   "indicators": [
+    "URGENCY",
+    "OTP_REQUEST"
+   ]
+  },
+  {
+   "id": "v7h068",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9998912226482941,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h069",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9851089742707901,
+   "indicators": []
+  },
+  {
+   "id": "v7h070",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.997111851791058,
+   "indicators": [
+    "URGENCY",
+    "OTP_REQUEST"
+   ]
+  },
+  {
+   "id": "v7h071",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9973588957663709,
+   "indicators": []
+  },
+  {
+   "id": "v7h072",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9977523964393478,
+   "indicators": [
+    "URGENCY",
+    "OTP_REQUEST"
+   ]
+  },
+  {
+   "id": "v7h073",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9779738616337178,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h074",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9965295395953351,
+   "indicators": [
+    "URGENCY",
+    "THREAT_OF_BLOCK",
+    "LINK_PRESENT",
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h075",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.997566458506806,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h076",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9997563332516332,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "BANK_IMPERSONATION",
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h077",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9976411537038749,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h078",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.8710873848344352,
+   "indicators": [
+    "BANK_IMPERSONATION",
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h079",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9004149265135035,
+   "indicators": [
+    "URGENCY",
+    "BANK_IMPERSONATION",
+    "UPI_COLLECT_LURE"
+   ]
+  },
+  {
+   "id": "v7h080",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.993238058260894,
+   "indicators": [
+    "URGENCY",
+    "BANK_IMPERSONATION",
+    "UPI_COLLECT_LURE"
+   ]
+  },
+  {
+   "id": "v7h081",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.8533933511348081,
+   "indicators": [
+    "UPI_COLLECT_LURE"
+   ]
+  },
+  {
+   "id": "v7h082",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9989287243650977,
+   "indicators": [
+    "URGENCY",
+    "UPI_COLLECT_LURE"
+   ]
+  },
+  {
+   "id": "v7h083",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9949488828263067,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h084",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.8552987581155441,
+   "indicators": [
+    "UPI_COLLECT_LURE"
+   ]
+  },
+  {
+   "id": "v7h085",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9690766247323835,
+   "indicators": []
+  },
+  {
+   "id": "v7h086",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9928493824680267,
+   "indicators": [
+    "URGENCY",
+    "OTP_REQUEST"
+   ]
+  },
+  {
+   "id": "v7h087",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9441274373523901,
+   "indicators": []
+  },
+  {
+   "id": "v7h088",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9960485440310293,
+   "indicators": [
+    "URGENCY",
+    "OTP_REQUEST"
+   ]
+  },
+  {
+   "id": "v7h089",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9491847593989092,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h090",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.999519163148777,
+   "indicators": [
+    "URGENCY",
+    "OTP_REQUEST"
+   ]
+  },
+  {
+   "id": "v7h091",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9185954775801547,
+   "indicators": []
+  },
+  {
+   "id": "v7h092",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.8949425682471635,
+   "indicators": []
+  },
+  {
+   "id": "v7h093",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.957493286489348,
+   "indicators": []
+  },
+  {
+   "id": "v7h094",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9881213420309937,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h095",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9996000675149018,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h096",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.8601439913722974,
+   "indicators": []
+  },
+  {
+   "id": "v7h097",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9790806606769777,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "DELIVERY_LURE"
+   ]
+  },
+  {
+   "id": "v7h098",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9893454325104943,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h099",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9993667426005847,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h100",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9936042976659043,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "DELIVERY_LURE"
+   ]
+  },
+  {
+   "id": "v7h101",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9985616761351116,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h102",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9523923347167085,
+   "indicators": [
+    "LINK_PRESENT",
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h103",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9999437702973529,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "PRIZE_LURE"
+   ]
+  },
+  {
+   "id": "v7h104",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9931783557926379,
+   "indicators": [
+    "LINK_PRESENT",
+    "PRIZE_LURE"
+   ]
+  },
+  {
+   "id": "v7h105",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9988777936966501,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "PRIZE_LURE"
+   ]
+  },
+  {
+   "id": "v7h106",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9985682133285297,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "PRIZE_LURE"
+   ]
+  },
+  {
+   "id": "v7h107",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9966079467888285,
+   "indicators": [
+    "LINK_PRESENT",
+    "BANK_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h108",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9998796673343276,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "PRIZE_LURE"
+   ]
+  },
+  {
+   "id": "v7h109",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9749845459670968,
+   "indicators": [
+    "JOB_LURE"
+   ]
+  },
+  {
+   "id": "v7h110",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9969568276875943,
+   "indicators": [
+    "URGENCY",
+    "JOB_LURE"
+   ]
+  },
+  {
+   "id": "v7h111",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.998195799803386,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "JOB_LURE"
+   ]
+  },
+  {
+   "id": "v7h112",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9979715329901242,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h113",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9919110131056992,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h114",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9934712182855518,
+   "indicators": [
+    "JOB_LURE"
+   ]
+  },
+  {
+   "id": "v7h115",
+   "label": 1,
+   "language": "english",
+   "band": "UNCERTAIN",
+   "score": 0.6560591988261395,
+   "indicators": [
+    "URGENCY"
+   ]
+  },
+  {
+   "id": "v7h116",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.990087788166012,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h117",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9888379843285561,
+   "indicators": [
+    "URGENCY",
+    "BANK_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h118",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9971887811741607,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h119",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9112497831563177,
+   "indicators": []
+  },
+  {
+   "id": "v7h120",
+   "label": 1,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.9998206735458075,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h121",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.20525956292314454,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h122",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.02574066713883578,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h123",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.08115658271706006,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h124",
+   "label": 0,
+   "language": "hinglish",
+   "band": "UNCERTAIN",
+   "score": 0.5565579460237087,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h125",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.10515169093021218,
+   "indicators": []
+  },
+  {
+   "id": "v7h126",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.010896607165442464,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h127",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.2575626942605915,
+   "indicators": [
+    "BANK_IMPERSONATION",
+    "UPI_COLLECT_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h128",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.015023749567742153,
+   "indicators": [
+    "URGENCY",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h129",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.15059440570183144,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h130",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.0681382878862035,
+   "indicators": [
+    "KYC_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h131",
+   "label": 0,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.8354641024572906,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h132",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.03239774122033498,
+   "indicators": []
+  },
+  {
+   "id": "v7h133",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.008458381236203865,
+   "indicators": []
+  },
+  {
+   "id": "v7h134",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.13113397300615512,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h135",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.046879774778228314,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h136",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.006953336772161623,
+   "indicators": []
+  },
+  {
+   "id": "v7h137",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.01997506037596388,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h138",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.002506445314242349,
+   "indicators": []
+  },
+  {
+   "id": "v7h139",
+   "label": 0,
+   "language": "hinglish",
+   "band": "UNCERTAIN",
+   "score": 0.6744196528336469,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h140",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.04593257325189502,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h141",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.08768347396806521,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h142",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.1082528679774892,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h143",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.010526091206127693,
+   "indicators": []
+  },
+  {
+   "id": "v7h144",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.42313181896806573,
+   "indicators": [
+    "DELIVERY_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h145",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.028185181651519637,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h146",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.0009723143501935153,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h147",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.007941142339414826,
+   "indicators": []
+  },
+  {
+   "id": "v7h148",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.17994669395655863,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h149",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.009111894305711878,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h150",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.03890970227818508,
+   "indicators": [
+    "THREAT_OF_BLOCK",
+    "BANK_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h151",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.14129791572988656,
+   "indicators": [
+    "KYC_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h152",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.002797952816589112,
+   "indicators": [
+    "BANK_IMPERSONATION",
+    "KYC_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h153",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.05201913699568626,
+   "indicators": []
+  },
+  {
+   "id": "v7h154",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.13022908642370418,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h155",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.01886019444002658,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h156",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.02372626562121445,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h157",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.001854752460510204,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h158",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.04689492397934826,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h159",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.005067003953005758,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h160",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.0064004876690413265,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h161",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.2645587761181355,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h162",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.004611335147951435,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h163",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.013129009528649283,
+   "indicators": []
+  },
+  {
+   "id": "v7h164",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.015416594489374073,
+   "indicators": []
+  },
+  {
+   "id": "v7h165",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.0903676301844396,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h166",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.045491722692482216,
+   "indicators": []
+  },
+  {
+   "id": "v7h167",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.09951703401190996,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h168",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.05347690311276106,
+   "indicators": []
+  },
+  {
+   "id": "v7h169",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.005142126057050199,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h170",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.039715581732324756,
+   "indicators": []
+  },
+  {
+   "id": "v7h171",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.004380622707704119,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h172",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.07251614745839771,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h173",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.04178805940261952,
+   "indicators": []
+  },
+  {
+   "id": "v7h174",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.04361626882638408,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h175",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.07282767879278658,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h176",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.00455312323645013,
+   "indicators": []
+  },
+  {
+   "id": "v7h177",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.013563933300106124,
+   "indicators": []
+  },
+  {
+   "id": "v7h178",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.008092744917160498,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h179",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.08637938171727809,
+   "indicators": []
+  },
+  {
+   "id": "v7h180",
+   "label": 0,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.12571655298605228,
+   "indicators": []
+  },
+  {
+   "id": "v7h181",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9997145022238342,
+   "indicators": [
+    "URGENCY",
+    "THREAT_OF_BLOCK",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h182",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9544451374936356,
+   "indicators": [
+    "THREAT_OF_BLOCK",
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h183",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9948957891281156,
+   "indicators": [
+    "URGENCY",
+    "THREAT_OF_BLOCK",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h184",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9961769771868272,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h185",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9999729943411844,
+   "indicators": [
+    "THREAT_OF_BLOCK",
+    "BANK_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h186",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9893953235655678,
+   "indicators": [
+    "URGENCY",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h187",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9974067759268566,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h188",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9963834261618972,
+   "indicators": [
+    "URGENCY",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h189",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9916046256066525,
+   "indicators": [
+    "OTP_REQUEST",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h190",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9718035909166952,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h191",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9962798760580558,
+   "indicators": [
+    "URGENCY",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h192",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9950362354757843,
+   "indicators": [
+    "URGENCY",
+    "OTP_REQUEST",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h193",
+   "label": 1,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.24358729885884858,
+   "indicators": [
+    "BANK_IMPERSONATION",
+    "KYC_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h194",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.997896568372776,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "KYC_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h195",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9987901522832636,
+   "indicators": [
+    "THREAT_OF_BLOCK",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h196",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9910646778328926,
+   "indicators": [
+    "LINK_PRESENT",
+    "KYC_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h197",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9960487311977435,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "KYC_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h198",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9999300921302795,
+   "indicators": [
+    "KYC_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h199",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9994415358922818,
+   "indicators": [
+    "UPI_COLLECT_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h200",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9462523046839107,
+   "indicators": [
+    "UPI_COLLECT_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h201",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9894993195506406,
+   "indicators": [
+    "BANK_IMPERSONATION",
+    "UPI_COLLECT_LURE"
+   ]
+  },
+  {
+   "id": "v7h202",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9987500362375691,
+   "indicators": [
+    "URGENCY",
+    "UPI_COLLECT_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h203",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9928112419954052,
+   "indicators": [
+    "UPI_COLLECT_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h204",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9915234599564904,
+   "indicators": [
+    "URGENCY",
+    "UPI_COLLECT_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h205",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.972432622236509,
+   "indicators": [
+    "OTP_REQUEST",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h206",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9880563442315606,
+   "indicators": [
+    "URGENCY",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h207",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.8556045523476061,
+   "indicators": []
+  },
+  {
+   "id": "v7h208",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9669417434970399,
+   "indicators": [
+    "OTP_REQUEST",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h209",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9995901582840047,
+   "indicators": [
+    "OTP_REQUEST",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h210",
+   "label": 1,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.46836702229198973,
+   "indicators": []
+  },
+  {
+   "id": "v7h211",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9886630062969998,
+   "indicators": []
+  },
+  {
+   "id": "v7h212",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9976218080495016,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h213",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9983702589842185,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h214",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9879618884971354,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h215",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9707378052659104,
+   "indicators": [
+    "URGENCY",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h216",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9937168073275187,
+   "indicators": []
+  },
+  {
+   "id": "v7h217",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9929437459735052,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h218",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9085246304270339,
+   "indicators": [
+    "LINK_PRESENT",
+    "DELIVERY_LURE"
+   ]
+  },
+  {
+   "id": "v7h219",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9986757402422176,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "DELIVERY_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h220",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.996992692901715,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h221",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.981839833429992,
+   "indicators": [
+    "LINK_PRESENT",
+    "DELIVERY_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h222",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9944440987438055,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "DELIVERY_LURE"
+   ]
+  },
+  {
+   "id": "v7h223",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9985656122993167,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "PRIZE_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h224",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.94063227099216,
+   "indicators": [
+    "LINK_PRESENT",
+    "DELIVERY_LURE"
+   ]
+  },
+  {
+   "id": "v7h225",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9998684797923606,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "PRIZE_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h226",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9993328218589025,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h227",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9991165663845195,
+   "indicators": [
+    "LINK_PRESENT",
+    "BANK_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h228",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9998337978250971,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h229",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9638441144569505,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h230",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9822122554845384,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h231",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9363009486797743,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION"
+   ]
+  },
+  {
+   "id": "v7h232",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9779946675770963,
+   "indicators": [
+    "JOB_LURE"
+   ]
+  },
+  {
+   "id": "v7h233",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9961868741109066,
+   "indicators": [
+    "URGENCY",
+    "JOB_LURE",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h234",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.999275691084341,
+   "indicators": [
+    "URGENCY",
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h235",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.8667468380891422,
+   "indicators": [
+    "URGENCY",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h236",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9954081973028874,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h237",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9956553197705948,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK",
+    "BANK_IMPERSONATION",
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h238",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9891369753991797,
+   "indicators": []
+  },
+  {
+   "id": "v7h239",
+   "label": 1,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.4494830774423036,
+   "indicators": []
+  },
+  {
+   "id": "v7h240",
+   "label": 1,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9979954164255623,
+   "indicators": [
+    "LINK_PRESENT",
+    "SHORTENER_LINK"
+   ]
+  },
+  {
+   "id": "v7h241",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.10475744659591703,
+   "indicators": []
+  },
+  {
+   "id": "v7h242",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.12094888485017918,
+   "indicators": []
+  },
+  {
+   "id": "v7h243",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.11291942501027798,
+   "indicators": []
+  },
+  {
+   "id": "v7h244",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.00568296921088003,
+   "indicators": []
+  },
+  {
+   "id": "v7h245",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.022611753178743973,
+   "indicators": []
+  },
+  {
+   "id": "v7h246",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.08685817200697525,
+   "indicators": []
+  },
+  {
+   "id": "v7h247",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.10791075902935719,
+   "indicators": []
+  },
+  {
+   "id": "v7h248",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.03811592336513391,
+   "indicators": []
+  },
+  {
+   "id": "v7h249",
+   "label": null,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.7508297238733532,
+   "indicators": [
+    "THREAT_OF_BLOCK",
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h250",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.08615939467900706,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h251",
+   "label": null,
+   "language": "english",
+   "band": "SCAM",
+   "score": 0.6953649459381228,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h252",
+   "label": null,
+   "language": "english",
+   "band": "LEGITIMATE",
+   "score": 0.5324871262055044,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h253",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.2811411879721951,
+   "indicators": []
+  },
+  {
+   "id": "v7h254",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.1732888054199296,
+   "indicators": [
+    "HINGLISH_CUE"
+   ]
+  },
+  {
+   "id": "v7h255",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.21723623156848823,
+   "indicators": []
+  },
+  {
+   "id": "v7h256",
+   "label": null,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.7571646989292693,
+   "indicators": []
+  },
+  {
+   "id": "v7h257",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.07171095335590423,
+   "indicators": []
+  },
+  {
+   "id": "v7h258",
+   "label": null,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.8484210855219562,
+   "indicators": []
+  },
+  {
+   "id": "v7h259",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.07442451753149106,
+   "indicators": []
+  },
+  {
+   "id": "v7h260",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.15990324714819557,
+   "indicators": []
+  },
+  {
+   "id": "v7h261",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.07784549013491764,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h262",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.15706046792958064,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h263",
+   "label": null,
+   "language": "hinglish",
+   "band": "SCAM",
+   "score": 0.9251715115030369,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  },
+  {
+   "id": "v7h264",
+   "label": null,
+   "language": "hinglish",
+   "band": "LEGITIMATE",
+   "score": 0.08571246115500765,
+   "indicators": [
+    "LINK_PRESENT"
+   ]
+  }
+ ]
+}

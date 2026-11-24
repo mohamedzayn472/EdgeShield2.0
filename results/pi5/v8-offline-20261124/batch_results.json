@@ -1,0 +1,88 @@
+[
+  {
+    "test": "Bank OTP scam",
+    "classification": "SCAM",
+    "score": 0.9973872930881176,
+    "indicators": [
+      "URGENCY",
+      "THREAT_OF_BLOCK",
+      "OTP_REQUEST",
+      "BANK_IMPERSONATION"
+    ],
+    "latency_ms": 2.314656999260478
+  },
+  {
+    "test": "Delivery notification",
+    "classification": "LEGITIMATE",
+    "score": 0.2057783018843447,
+    "indicators": [
+      "DELIVERY_LURE"
+    ],
+    "latency_ms": 2.32536000021355
+  },
+  {
+    "test": "Meeting reminder",
+    "classification": "LEGITIMATE",
+    "score": 0.000785487679620788,
+    "indicators": [],
+    "latency_ms": 2.3694339997746283
+  },
+  {
+    "test": "Suspicious link",
+    "classification": "SCAM",
+    "score": 0.9996927036659763,
+    "indicators": [
+      "URGENCY",
+      "THREAT_OF_BLOCK",
+      "LINK_PRESENT",
+      "BANK_IMPERSONATION"
+    ],
+    "latency_ms": 2.5034339996636845
+  },
+  {
+    "test": "OTP sharing",
+    "classification": "SCAM",
+    "score": 0.9640824401964683,
+    "indicators": [],
+    "latency_ms": 2.3111190002964577
+  },
+  {
+    "test": "Bank transaction",
+    "classification": "LEGITIMATE",
+    "score": 0.04476623080355911,
+    "indicators": [],
+    "latency_ms": 2.3170269996626303
+  },
+  {
+    "test": "Lottery scam",
+    "classification": "SCAM",
+    "score": 0.9290647199367393,
+    "indicators": [
+      "PRIZE_LURE"
+    ],
+    "latency_ms": 2.407693000350264
+  },
+  {
+    "test": "Password reset",
+    "classification": "UNCERTAIN",
+    "score": 0.6410857746897947,
+    "indicators": [],
+    "latency_ms": 2.374063999923237
+  },
+  {
+    "test": "Urgent payment scam",
+    "classification": "SCAM",
+    "score": 0.9116465747867301,
+    "indicators": [
+      "URGENCY"
+    ],
+    "latency_ms": 2.4725269995542476
+  },
+  {
+    "test": "Family message",
+    "classification": "LEGITIMATE",
+    "score": 0.013151854967626601,
+    "indicators": [],
+    "latency_ms": 2.2310459999062004
+  }
+]

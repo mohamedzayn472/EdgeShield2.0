@@ -1,0 +1,76 @@
+=== DEFAULT V3 + HOST EXECUTORCH LLAMA --demo ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+=== Demo 1/4: English legitimate OTP notice ===
+Synthetic SMS: Cedar Bank: Your OTP is 000000. Do not share it with anyone.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.130
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.16 ms | Evidence: 0.06 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3273.75 ms | Validation: 0.30 ms | Total: 3275.27 ms
+
+=== Demo 2/4: English KYC/account-block scam ===
+Synthetic SMS: Urgent: Cedar Bank account will be blocked today. Share your OTP at https://bit.ly/synthetic to verify KYC.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.999
+Indicators: URGENCY, THREAT_OF_BLOCK, OTP_REQUEST, LINK_PRESENT, SHORTENER_LINK, BANK_IMPERSONATION, KYC_IMPERSONATION
+Indicator details: Urgent wording appears; Account restriction wording appears; A code sharing request appears; Link-like text appears; A known link shortener appears; Suspicious bank-related request or warning appears; Identity verification wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.20 ms | Evidence: 0.09 ms
+WHY: The detector estimates elevated risk. A code sharing request appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3684.47 ms | Validation: 0.04 ms | Total: 3685.80 ms
+
+=== Demo 3/4: Hinglish legitimate delivery update ===
+Synthetic SMS: Aapka parcel aaj shaam ko aayega. Live tracking aapke official app par available hai.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.064
+Indicators: DELIVERY_LURE, HINGLISH_CUE
+Indicator details: Delivery-related wording appears; Romanized Hindi wording appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.07 ms | Evidence: 0.06 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3471.41 ms | Validation: 0.04 ms | Total: 3472.58 ms
+
+=== Demo 4/4: Hinglish UPI collect/prize scam ===
+Synthetic SMS: Aapka reward ready hai! Jaldi 500 rs UPI collect request approve karo aur prize paise turant pao.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.994
+Indicators: URGENCY, UPI_COLLECT_LURE, PRIZE_LURE, HINGLISH_CUE
+Indicator details: Urgent wording appears; Payment collection wording appears; Prize-related wording appears; Romanized Hindi wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.02 ms | Evidence: 0.07 ms
+WHY: The detector estimates elevated risk. Payment collection wording appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3472.70 ms | Validation: 0.06 ms | Total: 3473.85 ms
+
+=== BANK_IMPERSONATION-PRIMARY LLAMA VERIFICATION ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.997
+Indicators: BANK_IMPERSONATION
+Indicator details: Suspicious bank-related request or warning appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.29 ms | Evidence: 0.08 ms
+WHY: The detector estimates elevated risk. Suspicious bank-related request or warning appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3373.51 ms | Validation: 0.70 ms | Total: 3375.59 ms

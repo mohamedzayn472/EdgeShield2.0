@@ -1,0 +1,11 @@
+{
+  "total_detections": 50,
+  "classification_counts": {
+    "SCAM": 25,
+    "LEGITIMATE": 20,
+    "UNCERTAIN": 5
+  },
+  "average_latency_ms": 2.4320693000481697,
+  "minimum_latency_ms": 2.217156999904546,
+  "maximum_latency_ms": 5.098050999549741
+}

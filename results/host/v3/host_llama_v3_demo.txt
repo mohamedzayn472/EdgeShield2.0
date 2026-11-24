@@ -1,0 +1,57 @@
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+=== Demo 1/4: English legitimate OTP notice ===
+Synthetic SMS: Cedar Bank: Your OTP is 000000. Do not share it with anyone.
+
+Threat band: UNCERTAIN
+Experimental synthetic-trained risk score (not real-world calibrated): 0.523
+Indicators: none
+DO: Confirm the request through the official application or a trusted contact method before taking action.
+Detector: 1.17 ms | Evidence: 0.06 ms
+WHY: The detector is uncertain.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3072.29 ms | Validation: 0.54 ms | Total: 3074.07 ms
+
+=== Demo 2/4: English KYC/account-block scam ===
+Synthetic SMS: Urgent: Cedar Bank account will be blocked today. Share your OTP at https://bit.ly/synthetic to verify KYC.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.999
+Indicators: URGENCY, THREAT_OF_BLOCK, OTP_REQUEST, LINK_PRESENT, SHORTENER_LINK, BANK_IMPERSONATION, KYC_IMPERSONATION
+Indicator details: Urgent wording appears; Account restriction wording appears; A code sharing request appears; Link-like text appears; A known link shortener appears; Suspicious bank-related request or warning appears; Identity verification wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.60 ms | Evidence: 0.08 ms
+WHY: The detector estimates elevated risk. A code sharing request appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3717.15 ms | Validation: 0.07 ms | Total: 3718.90 ms
+
+=== Demo 3/4: Hinglish legitimate delivery update ===
+Synthetic SMS: Aapka parcel aaj shaam ko aayega. Live tracking aapke official app par available hai.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.081
+Indicators: DELIVERY_LURE, HINGLISH_CUE
+Indicator details: Delivery-related wording appears; Romanized Hindi wording appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.34 ms | Evidence: 0.06 ms
+WHY: The detector estimates lower risk, without authenticating the sender. Delivery-related wording appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3615.99 ms | Validation: 0.08 ms | Total: 3617.47 ms
+
+=== Demo 4/4: Hinglish UPI collect/prize scam ===
+Synthetic SMS: Aapka reward ready hai! Jaldi 500 rs UPI collect request approve karo aur prize paise turant pao.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.993
+Indicators: URGENCY, UPI_COLLECT_LURE, PRIZE_LURE, HINGLISH_CUE
+Indicator details: Urgent wording appears; Payment collection wording appears; Prize-related wording appears; Romanized Hindi wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.19 ms | Evidence: 0.06 ms
+WHY: The detector estimates elevated risk. Payment collection wording appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3464.90 ms | Validation: 0.05 ms | Total: 3466.21 ms

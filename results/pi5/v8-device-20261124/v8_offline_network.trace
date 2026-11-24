@@ -1,0 +1,55 @@
+6618  +++ exited with 0 +++
+6611  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6618, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+6623  +++ exited with 0 +++
+6622  +++ exited with 0 +++
+6624  +++ exited with 0 +++
+6625  +++ exited with 0 +++
+6619  +++ exited with 0 +++
+6620  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6619, si_uid=1000, si_status=0, si_utime=821 /* 8.21 s */, si_stime=34 /* 0.34 s */} ---
+6621  +++ exited with 0 +++
+6620  +++ exited with 0 +++
+6637  +++ exited with 0 +++
+6638  +++ exited with 0 +++
+6636  +++ exited with 0 +++
+6639  +++ exited with 0 +++
+6633  +++ exited with 0 +++
+6635  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6633, si_uid=1000, si_status=0, si_utime=938 /* 9.38 s */, si_stime=30 /* 0.30 s */} ---
+6634  +++ exited with 0 +++
+6635  +++ exited with 0 +++
+6660  +++ exited with 0 +++
+6659  +++ exited with 0 +++
+6661  +++ exited with 0 +++
+6662  +++ exited with 0 +++
+6656  +++ exited with 0 +++
+6657  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6656, si_uid=1000, si_status=0, si_utime=972 /* 9.72 s */, si_stime=29 /* 0.29 s */} ---
+6658  +++ exited with 0 +++
+6657  +++ exited with 0 +++
+6670  +++ exited with 0 +++
+6668  +++ exited with 0 +++
+6669  +++ exited with 0 +++
+6671  +++ exited with 0 +++
+6665  +++ exited with 0 +++
+6611  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6665, si_uid=1000, si_status=0, si_utime=806 /* 8.06 s */, si_stime=34 /* 0.34 s */} ---
+6666  +++ exited with 0 +++
+6667  +++ exited with 0 +++
+6677  +++ exited with 0 +++
+6676  +++ exited with 0 +++
+6675  +++ exited with 0 +++
+6678  +++ exited with 0 +++
+6672  +++ exited with 0 +++
+6611  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6672, si_uid=1000, si_status=0, si_utime=924 /* 9.24 s */, si_stime=28 /* 0.28 s */} ---
+6674  +++ exited with 0 +++
+6673  +++ exited with 0 +++
+6679  +++ exited with 0 +++
+6611  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6679, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+6680  +++ exited with 0 +++
+6611  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6680, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+6681  +++ exited with 128 +++
+6611  --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=6681, si_uid=1000, si_status=128, si_utime=0, si_stime=0} ---
+6614  +++ exited with 0 +++
+6613  +++ exited with 0 +++
+6612  +++ exited with 0 +++
+6615  +++ exited with 0 +++
+6617  +++ exited with 0 +++
+6616  +++ exited with 0 +++
+6611  +++ exited with 0 +++

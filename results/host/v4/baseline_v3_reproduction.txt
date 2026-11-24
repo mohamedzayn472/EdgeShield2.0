@@ -1,0 +1,133 @@
+1_antifraud_notice_en: band=SCAM score=0.922524 inds=[]
+  norm=Bank Security Advisory: Fraudsters send fake account block and KYC update links. Bank staff will never ask for your OTP, password, or UPI PIN.
+  canon=Bank Security Advisory: Fraudsters send fake account block and KYC update links. Bank staff will never ask for your OTP, password, or UPI PIN.
+1b_antifraud_bank_only: band=SCAM score=0.930886 inds=['BANK_IMPERSONATION', 'KYC_IMPERSONATION']
+  norm=HDFC Bank Alert: Never share your OTP, ATM PIN, CVV, or password with anyone. Bank employees never call to ask for KYC or card details.
+  canon=HDFC Bank Alert: Never share your OTP, ATM PIN, CVV, or password with anyone. Bank employees never call to ask for KYC or card details.
+2_user_card_block_en: band=LEGITIMATE score=0.108244 inds=['THREAT_OF_BLOCK', 'BANK_IMPERSONATION']
+  norm=Cedar Bank: Confirmation that you blocked your debit card XX1234 in the official Cedar Bank app. Call 1800-000-0000 if you did not initiate this.
+  canon=Cedar Bank: Confirmation that you blocked your debit card acctmask in the official Cedar Bank app. Call tollfreenum if you did not initiate this.
+2b_card_block_hi: band=LEGITIMATE score=0.040837 inds=['THREAT_OF_BLOCK', 'BANK_IMPERSONATION', 'HINGLISH_CUE']
+  norm=Aapne official app mein apna debit card XX4512 block kar diya hai. Agar aapne yeh nahi kiya to 1800-000-0000 par call karein.
+  canon=Aapne official app mein apna debit card acctmask block kar diya hai. Agar aapne yeh nahi kiya to tollfreenum par call karein.
+3_kyc_branch_appt_en: band=LEGITIMATE score=0.024529 inds=['BANK_IMPERSONATION', 'KYC_IMPERSONATION']
+  norm=Cedar Bank: Reminder that your routine KYC update appointment at the Main Street branch is scheduled for 25-Nov-26 at 11:00 AM.
+  canon=Cedar Bank: Reminder that your routine KYC update appointment at the Main Street branch is scheduled for datetoken at timetoken .
+3b_kyc_completed_en: band=LEGITIMATE score=0.216426 inds=[]
+  norm=Cedar Bank: Your KYC verification at the branch has been completed successfully.
+  canon=Cedar Bank: Your KYC verification at the branch has been completed successfully.
+4_statement_link_en: band=LEGITIMATE score=0.377936 inds=['LINK_PRESENT']
+  norm=Cedar Bank: Your October 2026 e-statement for A/c XX1234 is ready. View it at https://mybank.example/statement.
+  canon=Cedar Bank: Your October shortnum e-statement for bankacctmask is ready. View it at urltoken mybank.example
+5_family_imp_en: band=LEGITIMATE score=0.416803 inds=['URGENCY']
+  norm=Hi Mom, my phone broke and I am texting from a new number. Please transfer Rs. 4500 urgently via UPI right now, dont call this number as mic is damaged.
+  canon=Hi Mom, my phone broke and I am texting from a new number. Please transfer inramount urgently via UPI right now, dont call this number as mic is damaged.
+5b_family_hi: band=LEGITIMATE score=0.498330 inds=['URGENCY', 'HINGLISH_CUE']
+  norm=Papa mera phone toot gaya hai, yeh mera naya number hai. Please turant 5000 rs is UPI par bhej do, abhi call mat karna mic kharab hai.
+  canon=Papa mera phone toot gaya hai, yeh mera naya number hai. Please turant inramount is UPI par bhej do, abhi call mat karna mic kharab hai.
+6_hinglish_read_aloud: band=SCAM score=0.985138 inds=['OTP_REQUEST', 'HINGLISH_CUE']
+  norm=Sir aapke card par 4999 ka galat charge laga hai, charge reverse karne ke liye phone par aaya one-time code abhi bol kar batao.
+  canon=Sir aapke card par shortnum ka galat charge laga hai, charge reverse karne ke liye phone par aaya one-time code abhi bol kar batao.
+6c_hinglish_read_aloud_uncertain: band=UNCERTAIN score=0.746494 inds=['OTP_REQUEST', 'HINGLISH_CUE']
+  norm=Charge reverse karne ke liye aapke number par jo one-time code aaya hai woh padh kar bata do.
+  canon=Charge reverse karne ke liye aapke number par jo one-time code aaya hai woh padh kar bata do.
+7a_ctrl_genuine_otp: band=LEGITIMATE score=0.122406 inds=[]
+  norm=123456 is your OTP for transaction of INR 499.00 on Cedar Bank Card XX1234. Never share your OTP with anyone. Valid for 10 mins.
+  canon=shortnum is your OTP for transaction of inramount on Cedar Bank Card acctmask . Never share your OTP with anyone. Valid for 10 mins.
+7b_ctrl_active_otp_req: band=SCAM score=0.987019 inds=['URGENCY', 'OTP_REQUEST', 'BANK_IMPERSONATION']
+  norm=Cedar Bank Alert: Share your 6-digit OTP immediately to cancel an unauthorized debit of INR 4,999.00.
+  canon=Cedar Bank Alert: Share your 6-digit OTP immediately to cancel an unauthorized debit of inramount .
+7c_ctrl_warn_then_req: band=SCAM score=0.802045 inds=['OTP_REQUEST']
+  norm=Never share your OTP with strangers. However, send your OTP now to confirm your refund.
+  canon=Never share your OTP with strangers. However, send your OTP now to confirm your refund.
+7d_paired_refund_legit: band=LEGITIMATE score=0.302155 inds=[]
+  norm=Your failed UPI payment of Rs 850.00 has been reversed and credited back to your A/c XX1234.
+  canon=Your failed UPI payment of inramount has been reversed and credited back to your bankacctmask .
+7e_paired_refund_scam: band=SCAM score=0.985843 inds=['URGENCY']
+  norm=Approve this collect request of Rs 850 to receive your failed payment refund immediately.
+  canon=Approve this collect request of inramount to receive your failed payment refund immediately.
+=== CLI WITH HOST LLAMA ON BASELINE FAILURES ===
+--- 1_antifraud_notice_en ---
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.923
+Indicators: none
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.34 ms | Evidence: 0.33 ms
+WHY: The detector estimates elevated risk.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3064.25 ms | Validation: 0.54 ms | Total: 3066.45 ms
+--- 2_user_card_block_en ---
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.108
+Indicators: THREAT_OF_BLOCK, BANK_IMPERSONATION
+Indicator details: Account restriction wording appears; Suspicious bank-related request or warning appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.30 ms | Evidence: 0.32 ms
+WHY: The detector estimates lower risk, without authenticating the sender. Account restriction wording appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3517.68 ms | Validation: 0.49 ms | Total: 3519.79 ms
+--- 3_kyc_branch_appt_en ---
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.025
+Indicators: BANK_IMPERSONATION, KYC_IMPERSONATION
+Indicator details: Suspicious bank-related request or warning appears; Identity verification wording appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.31 ms | Evidence: 0.36 ms
+WHY: The detector estimates lower risk, without authenticating the sender. Identity verification wording appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3571.30 ms | Validation: 0.40 ms | Total: 3573.38 ms
+--- 5_family_imp_en ---
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.314
+Indicators: URGENCY
+Indicator details: Urgent wording appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.38 ms | Evidence: 0.36 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3364.55 ms | Validation: 0.55 ms | Total: 3366.84 ms
+--- 6c_hinglish_read_aloud_uncertain ---
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b2b2126b872c)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: UNCERTAIN
+Experimental synthetic-trained risk score (not real-world calibrated): 0.746
+Indicators: OTP_REQUEST, HINGLISH_CUE
+Indicator details: A code sharing request appears; Romanized Hindi wording appears
+DO: Confirm the request through the official application or a trusted contact method before taking action.
+Detector: 1.24 ms | Evidence: 0.32 ms
+WHY: The detector is uncertain. A code sharing request appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3318.58 ms | Validation: 0.52 ms | Total: 3320.66 ms

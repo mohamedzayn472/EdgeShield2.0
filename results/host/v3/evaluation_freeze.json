@@ -1,0 +1,13 @@
+{
+  "created_at_utc": "2026-11-20T04:42:08.753508+00:00",
+  "file_sha256": {
+    "src/edgeshield/detector_v3.py": "86bc3c6649d291f16918355737048e1fb297149240796bbe5d497ebddb4af871",
+    "src/edgeshield/indicators.py": "239b39e613409c649758b5f56d69f4eaca2df8886cbbd5e21b0d6a4b1fb1dcda",
+    "scripts/create_v3_datasets.py": "b83aa9078d9844a8d90dc72fd8c8035dcd2c4fbe1f5e3a4d9111b4829418d31e",
+    "scripts/train_detector_v3.py": "3e9a265b546f15828589ad03ac09e51a42c8112aac01e1a211690d2e8a6cfb8d",
+    "data/synthetic/v3_development.jsonl": "8f970952224fe7b1c923ca4d038798dc5c429c2f4f688913020b55e6664efd1e",
+    "data/synthetic/v3_holdout.jsonl": "a127660629cfc78e763b5017b4363f7b0eaae66119a10035fb052135a1de9f85",
+    "models/detector_v3.json": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910",
+    "models/detector_v3.json.sha256": "0c3f9c28f7e1fb3f0ef5e9ffa78cefe207e3adc91b714a6c54ba4f66bfd4e47f"
+  }
+}

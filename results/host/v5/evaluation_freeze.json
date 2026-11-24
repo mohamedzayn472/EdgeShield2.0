@@ -1,0 +1,18 @@
+{
+  "created_at_utc": "2026-11-20T07:03:54.065932+00:00",
+  "file_sha256": {
+    "src/edgeshield/detector_v5.py": "b43c1d5774b1c0c42f5941294b2c31fd4bd02088ed834ae6a1679d11397e99e7",
+    "src/edgeshield/indicators.py": "cd85251eb96ecfacae92ecc1c6dec01c6e9fa542a1616a9e77d3a2538ffaf629",
+    "src/edgeshield/model_loader.py": "9e6172a39a4317aa538fb008387f2ef1a983fcbf3379a9600004471d885cd220",
+    "scripts/create_v5_datasets.py": "1db17770c9c48dca3a208f538d041b63f5f3ba995674dbac02e7c1c18c5abcd9",
+    "scripts/train_detector_v5.py": "db6d096dfd271de0d8f8b31f1259843b378cabba3c1687674de30964c80c9aa4",
+    "data/synthetic/v5_development.jsonl": "e32f3ace4ef918ed2903d0ff566e2a8b9da458d9571315dda25214fecdae834b",
+    "data/synthetic/v5_holdout.jsonl": "873bc9dc74ec049970f95bad7061bba5cd5f0bbd9fbafa85efdfdd57915ae1fd",
+    "data/synthetic/v4_holdout.jsonl": "9f5e1a9f247ebe44011393898653f8afaec02aa644aea0015d3cbcbe2b5551b9",
+    "models/detector_v5.json": "bc98c0d961aec7c1a03e1f0e517b970765ee818f42c938152719c7b84951908b",
+    "models/detector_v5.json.sha256": "e3a859fac0124460c9e6b608c2695988a715a77bdc32d414191ab40271d300d5",
+    "models/detector_v4.json": "b6f54fab1cc4b70b4d3e1f98cd5e71e865f10ce25e6680d7a7567e40198d2f6a",
+    "models/detector_v3.json": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910",
+    "docs/V5_EVALUATION_PROTOCOL.md": "9c158f7ae4d9a4f37670eca0cd06d98ae3c0f6eae0d905dc681f52008d23a519"
+  }
+}

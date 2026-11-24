@@ -1,0 +1,3273 @@
+{
+  "generated_at_utc": "2026-11-20T04:40:26.497969+00:00",
+  "scope": "Point 3 & Point 4 identical-row V2 vs V3 audit; synthetic metrics do NOT measure real-world prevalence.",
+  "data_and_calibration_audit": {
+    "model_artifacts": {
+      "v1": {
+        "path": "models/detector.json",
+        "sha256": "9163c20783d76eb1c3cea637dea844e4d1c7d61bec976cd64cb0b69a20cd4c72",
+        "sidecar": "9163c20783d76eb1c3cea637dea844e4d1c7d61bec976cd64cb0b69a20cd4c72"
+      },
+      "v2": {
+        "path": "models/detector_v2.json",
+        "sha256": "f37c3dd9060b89ead7ea6bbf1c393b22fff7cfc18ed5d85126e977e03daea6a6",
+        "sidecar": "f37c3dd9060b89ead7ea6bbf1c393b22fff7cfc18ed5d85126e977e03daea6a6",
+        "calibration": [
+          2.60327953983995,
+          -2.08053659424738
+        ],
+        "thresholds": [
+          0.25,
+          0.275
+        ],
+        "intercept": -2.754753387204363,
+        "vocab_word": 9065,
+        "vocab_char": 28223
+      },
+      "v3": {
+        "path": "models/detector_v3.json",
+        "sha256": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910",
+        "sidecar": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910",
+        "calibration": [
+          1.3705123053608386,
+          0.3831004729692403
+        ],
+        "thresholds": [
+          0.65,
+          0.75
+        ],
+        "intercept": -3.3102789876504506,
+        "vocab_word": 9291,
+        "vocab_char": 27286,
+        "selection_hyperparams": {
+          "C": 4,
+          "synthetic_weight": 2
+        },
+        "calibration_method": "Balanced logistic sigmoid (Platt scaling) on calibration split margins",
+        "validation_metrics_at_selection": {
+          "uci": {
+            "n": 1113,
+            "positive_count": 160,
+            "negative_count": 953,
+            "accuracy": 0.9883198562443846,
+            "precision": 0.9743589743589743,
+            "recall": 0.95,
+            "f1": 0.9620253164556962,
+            "false_positive_rate": 0.004197271773347324,
+            "false_negative_rate": 0.05,
+            "positive_as_legitimate_rate": 0.05,
+            "coverage": 0.9991015274034142,
+            "abstention_rate": 0.0008984725965858042,
+            "confusion_matrix_2_by_3": [
+              [
+                948,
+                1,
+                4
+              ],
+              [
+                8,
+                0,
+                152
+              ]
+            ]
+          },
+          "synthetic": {
+            "n": 138,
+            "positive_count": 66,
+            "negative_count": 72,
+            "accuracy": 0.9927536231884058,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "positive_as_legitimate_rate": 0.0,
+            "coverage": 0.9927536231884058,
+            "abstention_rate": 0.007246376811594203,
+            "confusion_matrix_2_by_3": [
+              [
+                71,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                66
+              ]
+            ]
+          }
+        },
+        "validation_calibration_comparison": {
+          "raw": {
+            "uci": {
+              "brier": 0.011466876052525582,
+              "log_loss": 0.05858521180287068
+            },
+            "synthetic": {
+              "brier": 0.018643599380764143,
+              "log_loss": 0.10744910033810312
+            },
+            "macro_brier": 0.015055237716644862,
+            "macro_log_loss": 0.0830171560704869
+          },
+          "sigmoid": {
+            "uci": {
+              "brier": 0.010787139130513646,
+              "log_loss": 0.045255087540760956
+            },
+            "synthetic": {
+              "brier": 0.017314402841310975,
+              "log_loss": 0.08430608166250432
+            },
+            "macro_brier": 0.01405077098591231,
+            "macro_log_loss": 0.06478058460163263
+          }
+        }
+      }
+    },
+    "v3_development_splits": {
+      "train": {
+        "total": 432,
+        "label_0": 216,
+        "label_1": 216,
+        "english": 252,
+        "hinglish": 180,
+        "families": [
+          "v2_en_advance_job_fee",
+          "v2_en_balance_receipt",
+          "v2_en_block_credentials",
+          "v2_en_card_record",
+          "v2_en_collect_controls",
+          "v2_en_delivery_card_capture",
+          "v2_en_everyday_plans",
+          "v2_en_fake_court_fine",
+          "v2_en_interview_schedule",
+          "v2_en_kyc_branch",
+          "v2_en_loan_fee_release",
+          "v2_en_login_code",
+          "v2_en_otp_support_theft",
+          "v2_en_parcel_status",
+          "v2_en_prize_fee",
+          "v2_en_receive_collect",
+          "v2_en_receive_qr_pin",
+          "v2_en_refund_pin_theft",
+          "v2_en_refund_settled",
+          "v2_en_remote_control",
+          "v2_en_safe_account_transfer",
+          "v2_en_security_warning",
+          "v2_en_subscription_options",
+          "v2_en_upi_receipt",
+          "v2_hi_atm_notice",
+          "v2_hi_bank_credit_notice",
+          "v2_hi_bill_notice",
+          "v2_hi_campus_hiring",
+          "v2_hi_card_controls",
+          "v2_hi_collect_receive_trick",
+          "v2_hi_daily_plans",
+          "v2_hi_delivery_status",
+          "v2_hi_job_advance",
+          "v2_hi_kyc_offline_reminder",
+          "v2_hi_kyc_password_link",
+          "v2_hi_loan_private_fee",
+          "v2_hi_lottery_release",
+          "v2_hi_otp_notification",
+          "v2_hi_parcel_cvv",
+          "v2_hi_pin_awareness",
+          "v2_hi_police_wallet_fine",
+          "v2_hi_purchase_reversal",
+          "v2_hi_qr_sale_payment",
+          "v2_hi_refund_secret_pin",
+          "v2_hi_safe_wallet_transfer",
+          "v2_hi_screen_share_bank",
+          "v2_hi_support_otp_capture",
+          "v2_hi_upi_complete",
+          "v3_benign_info_links_tr",
+          "v3_en_balance_tr",
+          "v3_en_credit_neft_tr",
+          "v3_en_debit_pos_tr",
+          "v3_en_institution_tr",
+          "v3_en_otp_short_tr",
+          "v3_en_otp_txn_tr",
+          "v3_en_scam_bank_link_tr",
+          "v3_en_scam_block_tr",
+          "v3_en_scam_cred_tr",
+          "v3_en_scam_impersonation_no_url_tr",
+          "v3_en_scam_kyc_tr",
+          "v3_en_scam_otp_pin_tr",
+          "v3_en_scam_short_otp_tr",
+          "v3_en_scam_sim_support_tr",
+          "v3_en_scam_voucher_deposit_tr",
+          "v3_en_statement_tr",
+          "v3_en_upi_confirm_tr",
+          "v3_hi_credit_debit_tr",
+          "v3_hi_otp_extended_tr",
+          "v3_hi_otp_upi_tr",
+          "v3_hi_scam_bank_tr",
+          "v3_hi_scam_no_url_tr",
+          "v3_hi_scam_sim_remote_tr"
+        ]
+      },
+      "calibration": {
+        "total": 72,
+        "label_0": 36,
+        "label_1": 36,
+        "english": 36,
+        "hinglish": 36,
+        "families": [
+          "v2_en_failed_transfer_reversal",
+          "v2_en_marketplace_release_deposit",
+          "v2_en_passkey_registered",
+          "v2_en_voicemail_login_capture",
+          "v2_hi_bank_complaint_receipt",
+          "v2_hi_pension_reactivate_secrets",
+          "v2_hi_power_cut_remote_fee",
+          "v2_hi_train_ticket_update",
+          "v3_en_legit_bank_cal",
+          "v3_en_scam_bank_cal",
+          "v3_hi_legit_bank_cal",
+          "v3_hi_scam_bank_cal"
+        ]
+      },
+      "validation": {
+        "total": 138,
+        "label_0": 72,
+        "label_1": 66,
+        "english": 78,
+        "hinglish": 60,
+        "families": [
+          "v2_en_credit_limit_cvv",
+          "v2_en_delivery_code_boundary",
+          "v2_en_employment_warning",
+          "v2_en_installment_receipt",
+          "v2_en_kyc_completed_app",
+          "v2_en_prize_autopay_mandate",
+          "v2_en_school_grant_release",
+          "v2_en_tax_remote_access",
+          "v2_hi_bill_autopay_settings",
+          "v2_hi_charity_pin_request",
+          "v2_hi_clinic_schedule",
+          "v2_hi_collect_request_declined",
+          "v2_hi_guaranteed_investment_deposit",
+          "v2_hi_login_review_warning",
+          "v2_hi_parcel_digital_arrest",
+          "v2_hi_scholarship_otp_capture",
+          "v3_en_legit_credit_val",
+          "v3_en_legit_debit_stmt_val",
+          "v3_en_legit_otp_upi_val",
+          "v3_en_scam_block_kyc_val",
+          "v3_en_scam_otp_cred_val",
+          "v3_hi_legit_bank_val",
+          "v3_hi_scam_bank_val"
+        ]
+      }
+    },
+    "v3_holdout_summary": {
+      "total": 160,
+      "label_0": 80,
+      "label_1": 80,
+      "english": 80,
+      "hinglish": 80,
+      "families": [
+        "v3_holdout_english_balance_notification_033",
+        "v3_holdout_english_balance_notification_034",
+        "v3_holdout_english_balance_notification_035",
+        "v3_holdout_english_balance_notification_036",
+        "v3_holdout_english_bank_credit_001",
+        "v3_holdout_english_bank_credit_002",
+        "v3_holdout_english_bank_credit_003",
+        "v3_holdout_english_bank_credit_004",
+        "v3_holdout_english_bank_credit_005",
+        "v3_holdout_english_bank_credit_006",
+        "v3_holdout_english_bank_credit_007",
+        "v3_holdout_english_bank_debit_008",
+        "v3_holdout_english_bank_debit_009",
+        "v3_holdout_english_bank_debit_010",
+        "v3_holdout_english_bank_debit_011",
+        "v3_holdout_english_bank_debit_012",
+        "v3_holdout_english_bank_debit_013",
+        "v3_holdout_english_bank_debit_014",
+        "v3_holdout_english_bank_statement_015",
+        "v3_holdout_english_bank_statement_016",
+        "v3_holdout_english_bank_statement_017",
+        "v3_holdout_english_bank_statement_018",
+        "v3_holdout_english_bank_statement_019",
+        "v3_holdout_english_bank_statement_020",
+        "v3_holdout_english_banking_otp_021",
+        "v3_holdout_english_banking_otp_022",
+        "v3_holdout_english_banking_otp_023",
+        "v3_holdout_english_banking_otp_024",
+        "v3_holdout_english_banking_otp_025",
+        "v3_holdout_english_banking_otp_026",
+        "v3_holdout_english_banking_otp_027",
+        "v3_holdout_english_institutional_notice_037",
+        "v3_holdout_english_institutional_notice_038",
+        "v3_holdout_english_institutional_notice_039",
+        "v3_holdout_english_institutional_notice_040",
+        "v3_holdout_english_scam_account_block_081",
+        "v3_holdout_english_scam_account_block_082",
+        "v3_holdout_english_scam_account_block_083",
+        "v3_holdout_english_scam_account_block_084",
+        "v3_holdout_english_scam_account_block_085",
+        "v3_holdout_english_scam_account_block_086",
+        "v3_holdout_english_scam_account_block_087",
+        "v3_holdout_english_scam_account_block_088",
+        "v3_holdout_english_scam_bank_link_105",
+        "v3_holdout_english_scam_bank_link_106",
+        "v3_holdout_english_scam_bank_link_107",
+        "v3_holdout_english_scam_bank_link_108",
+        "v3_holdout_english_scam_bank_link_109",
+        "v3_holdout_english_scam_bank_link_110",
+        "v3_holdout_english_scam_bank_link_111",
+        "v3_holdout_english_scam_bank_link_112",
+        "v3_holdout_english_scam_credentials_113",
+        "v3_holdout_english_scam_credentials_114",
+        "v3_holdout_english_scam_credentials_115",
+        "v3_holdout_english_scam_credentials_116",
+        "v3_holdout_english_scam_credentials_117",
+        "v3_holdout_english_scam_credentials_118",
+        "v3_holdout_english_scam_credentials_119",
+        "v3_holdout_english_scam_credentials_120",
+        "v3_holdout_english_scam_fake_kyc_097",
+        "v3_holdout_english_scam_fake_kyc_098",
+        "v3_holdout_english_scam_fake_kyc_099",
+        "v3_holdout_english_scam_fake_kyc_100",
+        "v3_holdout_english_scam_fake_kyc_101",
+        "v3_holdout_english_scam_fake_kyc_102",
+        "v3_holdout_english_scam_fake_kyc_103",
+        "v3_holdout_english_scam_fake_kyc_104",
+        "v3_holdout_english_scam_otp_pin_089",
+        "v3_holdout_english_scam_otp_pin_090",
+        "v3_holdout_english_scam_otp_pin_091",
+        "v3_holdout_english_scam_otp_pin_092",
+        "v3_holdout_english_scam_otp_pin_093",
+        "v3_holdout_english_scam_otp_pin_094",
+        "v3_holdout_english_scam_otp_pin_095",
+        "v3_holdout_english_scam_otp_pin_096",
+        "v3_holdout_english_upi_confirmation_028",
+        "v3_holdout_english_upi_confirmation_029",
+        "v3_holdout_english_upi_confirmation_030",
+        "v3_holdout_english_upi_confirmation_031",
+        "v3_holdout_english_upi_confirmation_032",
+        "v3_holdout_hinglish_balance_notification_073",
+        "v3_holdout_hinglish_balance_notification_074",
+        "v3_holdout_hinglish_balance_notification_075",
+        "v3_holdout_hinglish_balance_notification_076",
+        "v3_holdout_hinglish_bank_credit_041",
+        "v3_holdout_hinglish_bank_credit_042",
+        "v3_holdout_hinglish_bank_credit_043",
+        "v3_holdout_hinglish_bank_credit_044",
+        "v3_holdout_hinglish_bank_credit_045",
+        "v3_holdout_hinglish_bank_credit_046",
+        "v3_holdout_hinglish_bank_credit_047",
+        "v3_holdout_hinglish_bank_debit_048",
+        "v3_holdout_hinglish_bank_debit_049",
+        "v3_holdout_hinglish_bank_debit_050",
+        "v3_holdout_hinglish_bank_debit_051",
+        "v3_holdout_hinglish_bank_debit_052",
+        "v3_holdout_hinglish_bank_debit_053",
+        "v3_holdout_hinglish_bank_debit_054",
+        "v3_holdout_hinglish_bank_statement_055",
+        "v3_holdout_hinglish_bank_statement_056",
+        "v3_holdout_hinglish_bank_statement_057",
+        "v3_holdout_hinglish_bank_statement_058",
+        "v3_holdout_hinglish_bank_statement_059",
+        "v3_holdout_hinglish_bank_statement_060",
+        "v3_holdout_hinglish_banking_otp_061",
+        "v3_holdout_hinglish_banking_otp_062",
+        "v3_holdout_hinglish_banking_otp_063",
+        "v3_holdout_hinglish_banking_otp_064",
+        "v3_holdout_hinglish_banking_otp_065",
+        "v3_holdout_hinglish_banking_otp_066",
+        "v3_holdout_hinglish_banking_otp_067",
+        "v3_holdout_hinglish_institutional_notice_077",
+        "v3_holdout_hinglish_institutional_notice_078",
+        "v3_holdout_hinglish_institutional_notice_079",
+        "v3_holdout_hinglish_institutional_notice_080",
+        "v3_holdout_hinglish_scam_account_block_121",
+        "v3_holdout_hinglish_scam_account_block_122",
+        "v3_holdout_hinglish_scam_account_block_123",
+        "v3_holdout_hinglish_scam_account_block_124",
+        "v3_holdout_hinglish_scam_account_block_125",
+        "v3_holdout_hinglish_scam_account_block_126",
+        "v3_holdout_hinglish_scam_account_block_127",
+        "v3_holdout_hinglish_scam_account_block_128",
+        "v3_holdout_hinglish_scam_bank_link_145",
+        "v3_holdout_hinglish_scam_bank_link_146",
+        "v3_holdout_hinglish_scam_bank_link_147",
+        "v3_holdout_hinglish_scam_bank_link_148",
+        "v3_holdout_hinglish_scam_bank_link_149",
+        "v3_holdout_hinglish_scam_bank_link_150",
+        "v3_holdout_hinglish_scam_bank_link_151",
+        "v3_holdout_hinglish_scam_bank_link_152",
+        "v3_holdout_hinglish_scam_credentials_153",
+        "v3_holdout_hinglish_scam_credentials_154",
+        "v3_holdout_hinglish_scam_credentials_155",
+        "v3_holdout_hinglish_scam_credentials_156",
+        "v3_holdout_hinglish_scam_credentials_157",
+        "v3_holdout_hinglish_scam_credentials_158",
+        "v3_holdout_hinglish_scam_credentials_159",
+        "v3_holdout_hinglish_scam_credentials_160",
+        "v3_holdout_hinglish_scam_fake_kyc_137",
+        "v3_holdout_hinglish_scam_fake_kyc_138",
+        "v3_holdout_hinglish_scam_fake_kyc_139",
+        "v3_holdout_hinglish_scam_fake_kyc_140",
+        "v3_holdout_hinglish_scam_fake_kyc_141",
+        "v3_holdout_hinglish_scam_fake_kyc_142",
+        "v3_holdout_hinglish_scam_fake_kyc_143",
+        "v3_holdout_hinglish_scam_fake_kyc_144",
+        "v3_holdout_hinglish_scam_otp_pin_129",
+        "v3_holdout_hinglish_scam_otp_pin_130",
+        "v3_holdout_hinglish_scam_otp_pin_131",
+        "v3_holdout_hinglish_scam_otp_pin_132",
+        "v3_holdout_hinglish_scam_otp_pin_133",
+        "v3_holdout_hinglish_scam_otp_pin_134",
+        "v3_holdout_hinglish_scam_otp_pin_135",
+        "v3_holdout_hinglish_scam_otp_pin_136",
+        "v3_holdout_hinglish_upi_confirmation_068",
+        "v3_holdout_hinglish_upi_confirmation_069",
+        "v3_holdout_hinglish_upi_confirmation_070",
+        "v3_holdout_hinglish_upi_confirmation_071",
+        "v3_holdout_hinglish_upi_confirmation_072"
+      ],
+      "categories": {
+        "bank_credit": 14,
+        "bank_debit": 14,
+        "bank_statement": 12,
+        "banking_otp": 14,
+        "upi_confirmation": 10,
+        "balance_notification": 8,
+        "institutional_notice": 8,
+        "scam_account_block": 16,
+        "scam_otp_pin": 16,
+        "scam_fake_kyc": 16,
+        "scam_bank_link": 16,
+        "scam_credentials": 16
+      }
+    },
+    "separation_checks": {
+      "dev_vs_holdout_family_overlap": [],
+      "dev_vs_dev_cross_split_family_overlap": {
+        "train_vs_calibration": [],
+        "train_vs_validation": [],
+        "calibration_vs_validation": []
+      },
+      "dev_vs_holdout_exact_text_overlap": 0,
+      "dev_vs_v2_holdout_exact_text_overlap": 0,
+      "dev_vs_indian_sms_exact_text_overlap": 0,
+      "near_duplicate_cross_split_or_holdout": [],
+      "has_family_impersonation_in_v3_dev": false,
+      "has_antifraud_advisory_in_v3_dev": false
+    },
+    "failure_mode_feature_attribution": {
+      "legit_antifraud_en": {
+        "canonical": "Bank Security Advisory: Fraudsters send fake account block and KYC update links. Never share your OTP, PIN, or CVV with anyone.",
+        "raw_margin": 1.59034,
+        "calibrated_score": 0.92842,
+        "top_scam_features": [
+          {
+            "feature": "w:pin",
+            "contrib": 0.2981,
+            "coef": 1.7542
+          },
+          {
+            "feature": "w:bank",
+            "contrib": 0.26248,
+            "coef": 1.8572
+          },
+          {
+            "feature": "w:your",
+            "contrib": 0.22268,
+            "coef": 2.1976
+          },
+          {
+            "feature": "w:account",
+            "contrib": 0.21346,
+            "coef": 1.3468
+          },
+          {
+            "feature": "w:kyc",
+            "contrib": 0.20411,
+            "coef": 1.0485
+          },
+          {
+            "feature": "w:cvv",
+            "contrib": 0.16929,
+            "coef": 0.7451
+          },
+          {
+            "feature": "w:with",
+            "contrib": 0.15593,
+            "coef": 1.2081
+          },
+          {
+            "feature": "w:send",
+            "contrib": 0.15446,
+            "coef": 1.0425
+          }
+        ],
+        "top_legit_features": [
+          {
+            "feature": "w:with anyone",
+            "contrib": -0.16482,
+            "coef": -0.6484
+          },
+          {
+            "feature": "w:never",
+            "contrib": -0.11023,
+            "coef": -0.5567
+          },
+          {
+            "feature": "w:never share",
+            "contrib": -0.06974,
+            "coef": -0.2599
+          },
+          {
+            "feature": "w:update",
+            "contrib": -0.05262,
+            "coef": -0.2898
+          },
+          {
+            "feature": "w:bank security",
+            "contrib": -0.04638,
+            "coef": -0.1932
+          },
+          {
+            "feature": "w:anyone",
+            "contrib": -0.0441,
+            "coef": -0.2096
+          },
+          {
+            "feature": "c:yone.",
+            "contrib": -0.03233,
+            "coef": -0.4028
+          },
+          {
+            "feature": "c:one. ",
+            "contrib": -0.02877,
+            "coef": -0.4158
+          }
+        ]
+      },
+      "legit_antifraud_hi": {
+        "canonical": "Cyber thag nakli KYC block link bhejte hain. Apna OTP ya MPIN kisi ke saath share mat karo.",
+        "raw_margin": 0.37791,
+        "calibrated_score": 0.711161,
+        "top_scam_features": [
+          {
+            "feature": "w:karo",
+            "contrib": 0.40107,
+            "coef": 1.7729
+          },
+          {
+            "feature": "w:kyc",
+            "contrib": 0.23041,
+            "coef": 1.0485
+          },
+          {
+            "feature": "w:apna",
+            "contrib": 0.20798,
+            "coef": 0.8755
+          },
+          {
+            "feature": "w:ke",
+            "contrib": 0.20182,
+            "coef": 1.1254
+          },
+          {
+            "feature": "w:link",
+            "contrib": 0.18341,
+            "coef": 0.6236
+          },
+          {
+            "feature": "w:mpin",
+            "contrib": 0.13246,
+            "coef": 0.4373
+          },
+          {
+            "feature": "w:cyber",
+            "contrib": 0.12557,
+            "coef": 0.4556
+          },
+          {
+            "feature": "w:block",
+            "contrib": 0.12243,
+            "coef": 0.4359
+          }
+        ],
+        "top_legit_features": [
+          {
+            "feature": "w:hain",
+            "contrib": -0.12251,
+            "coef": -0.5028
+          },
+          {
+            "feature": "w:ya",
+            "contrib": -0.10518,
+            "coef": -0.4733
+          },
+          {
+            "feature": "w:kisi",
+            "contrib": -0.08552,
+            "coef": -0.3541
+          },
+          {
+            "feature": "c:in. ",
+            "contrib": -0.04753,
+            "coef": -0.6755
+          },
+          {
+            "feature": "c:in.",
+            "contrib": -0.04026,
+            "coef": -0.5993
+          },
+          {
+            "feature": "w:saath",
+            "contrib": -0.04011,
+            "coef": -0.1276
+          },
+          {
+            "feature": "c:ain",
+            "contrib": -0.03343,
+            "coef": -0.5303
+          },
+          {
+            "feature": "c:tha",
+            "contrib": -0.02858,
+            "coef": -0.6188
+          }
+        ]
+      },
+      "scam_family_impersonation_en": {
+        "canonical": "Hi Mom, my phone broke and I am texting from a new number. Please send inramount urgently via UPI, I will pay you back tonight.",
+        "raw_margin": -0.749,
+        "calibrated_score": 0.344476,
+        "top_scam_features": [
+          {
+            "feature": "w:new",
+            "contrib": 0.28864,
+            "coef": 1.6617
+          },
+          {
+            "feature": "w:from",
+            "contrib": 0.16555,
+            "coef": 1.1932
+          },
+          {
+            "feature": "w:send",
+            "contrib": 0.16026,
+            "coef": 1.0425
+          },
+          {
+            "feature": "w:upi",
+            "contrib": 0.09686,
+            "coef": 0.528
+          },
+          {
+            "feature": "w:pay",
+            "contrib": 0.08825,
+            "coef": 0.4646
+          },
+          {
+            "feature": "w:and",
+            "contrib": 0.08753,
+            "coef": 0.8076
+          },
+          {
+            "feature": "c:num",
+            "contrib": 0.08414,
+            "coef": 1.9345
+          },
+          {
+            "feature": "c:rge",
+            "contrib": 0.07166,
+            "coef": 1.1353
+          }
+        ],
+        "top_legit_features": [
+          {
+            "feature": "w:my",
+            "contrib": -0.22208,
+            "coef": -1.868
+          },
+          {
+            "feature": "w:am",
+            "contrib": -0.12197,
+            "coef": -0.7813
+          },
+          {
+            "feature": "c: i ",
+            "contrib": -0.11513,
+            "coef": -1.989
+          },
+          {
+            "feature": "w:inramount",
+            "contrib": -0.11239,
+            "coef": -0.6104
+          },
+          {
+            "feature": "w:via",
+            "contrib": -0.06787,
+            "coef": -0.2844
+          },
+          {
+            "feature": "w:my phone",
+            "contrib": -0.05171,
+            "coef": -0.2194
+          },
+          {
+            "feature": "w:please",
+            "contrib": -0.04496,
+            "coef": -0.2661
+          },
+          {
+            "feature": "w:hi",
+            "contrib": -0.04393,
+            "coef": -0.2514
+          }
+        ]
+      },
+      "scam_family_impersonation_hi": {
+        "canonical": "Papa mera phone gir gaya hai, yeh mera naya number hai. Please turant inramount is UPI ID par bhej do, bahut urgent hai.",
+        "raw_margin": -0.58545,
+        "calibrated_score": 0.396694,
+        "top_scam_features": [
+          {
+            "feature": "w:turant",
+            "contrib": 0.21034,
+            "coef": 1.0269
+          },
+          {
+            "feature": "w:urgent",
+            "contrib": 0.20379,
+            "coef": 1.2187
+          },
+          {
+            "feature": "w:mera",
+            "contrib": 0.14272,
+            "coef": 0.357
+          },
+          {
+            "feature": "w:bhej",
+            "contrib": 0.12466,
+            "coef": 0.5041
+          },
+          {
+            "feature": "w:par",
+            "contrib": 0.10119,
+            "coef": 0.6029
+          },
+          {
+            "feature": "w:inramount is",
+            "contrib": 0.09843,
+            "coef": 0.3865
+          },
+          {
+            "feature": "w:upi",
+            "contrib": 0.08861,
+            "coef": 0.528
+          },
+          {
+            "feature": "w:hai",
+            "contrib": 0.07605,
+            "coef": 0.2486
+          }
+        ],
+        "top_legit_features": [
+          {
+            "feature": "w:yeh",
+            "contrib": -0.16741,
+            "coef": -0.8314
+          },
+          {
+            "feature": "w:inramount",
+            "contrib": -0.10281,
+            "coef": -0.6104
+          },
+          {
+            "feature": "w:hai yeh",
+            "contrib": -0.0744,
+            "coef": -0.345
+          },
+          {
+            "feature": "w:do",
+            "contrib": -0.06945,
+            "coef": -0.5747
+          },
+          {
+            "feature": "w:is",
+            "contrib": -0.04349,
+            "coef": -0.4456
+          },
+          {
+            "feature": "w:please",
+            "contrib": -0.04113,
+            "coef": -0.2661
+          },
+          {
+            "feature": "w:gaya",
+            "contrib": -0.02876,
+            "coef": -0.1364
+          },
+          {
+            "feature": "c:i. ",
+            "contrib": -0.02849,
+            "coef": -0.28
+          }
+        ]
+      }
+    }
+  },
+  "identical_row_comparisons": {
+    "v2_holdout_labeled_120": {
+      "v2": {
+        "n": 120,
+        "negative_n": 60,
+        "positive_n": 60,
+        "confusion_matrix_2x3": [
+          [
+            59,
+            0,
+            1
+          ],
+          [
+            10,
+            0,
+            50
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.9083,
+        "precision": 0.9804,
+        "recall": 0.8333,
+        "f1": 0.9009,
+        "false_positive_rate": 0.0167,
+        "false_negative_rate": 0.1667,
+        "positive_as_legitimate_rate": 0.1667,
+        "abstention_rate": 0.0,
+        "brier_score": 0.11059,
+        "log_loss": 0.37336,
+        "ece_10bin": 0.15432
+      },
+      "v3": {
+        "n": 120,
+        "negative_n": 60,
+        "positive_n": 60,
+        "confusion_matrix_2x3": [
+          [
+            55,
+            3,
+            2
+          ],
+          [
+            3,
+            2,
+            55
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.9167,
+        "precision": 0.9649,
+        "recall": 0.9167,
+        "f1": 0.9402,
+        "false_positive_rate": 0.0333,
+        "false_negative_rate": 0.0833,
+        "positive_as_legitimate_rate": 0.05,
+        "abstention_rate": 0.0417,
+        "brier_score": 0.06546,
+        "log_loss": 0.22779,
+        "ece_10bin": 0.1252
+      },
+      "by_language": {
+        "english": {
+          "v2": {
+            "n": 60,
+            "negative_n": 30,
+            "positive_n": 30,
+            "confusion_matrix_2x3": [
+              [
+                30,
+                0,
+                0
+              ],
+              [
+                4,
+                0,
+                26
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.9333,
+            "precision": 1.0,
+            "recall": 0.8667,
+            "f1": 0.9286,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.1333,
+            "positive_as_legitimate_rate": 0.1333,
+            "abstention_rate": 0.0,
+            "brier_score": 0.10351,
+            "log_loss": 0.35835,
+            "ece_10bin": 0.15134
+          },
+          "v3": {
+            "n": 60,
+            "negative_n": 30,
+            "positive_n": 30,
+            "confusion_matrix_2x3": [
+              [
+                27,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                27
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.9,
+            "precision": 0.9643,
+            "recall": 0.9,
+            "f1": 0.931,
+            "false_positive_rate": 0.0333,
+            "false_negative_rate": 0.1,
+            "positive_as_legitimate_rate": 0.0667,
+            "abstention_rate": 0.05,
+            "brier_score": 0.08075,
+            "log_loss": 0.2684,
+            "ece_10bin": 0.1375
+          }
+        },
+        "hinglish": {
+          "v2": {
+            "n": 60,
+            "negative_n": 30,
+            "positive_n": 30,
+            "confusion_matrix_2x3": [
+              [
+                29,
+                0,
+                1
+              ],
+              [
+                6,
+                0,
+                24
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.8833,
+            "precision": 0.96,
+            "recall": 0.8,
+            "f1": 0.8727,
+            "false_positive_rate": 0.0333,
+            "false_negative_rate": 0.2,
+            "positive_as_legitimate_rate": 0.2,
+            "abstention_rate": 0.0,
+            "brier_score": 0.11767,
+            "log_loss": 0.38836,
+            "ece_10bin": 0.15729
+          },
+          "v3": {
+            "n": 60,
+            "negative_n": 30,
+            "positive_n": 30,
+            "confusion_matrix_2x3": [
+              [
+                28,
+                1,
+                1
+              ],
+              [
+                1,
+                1,
+                28
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.9333,
+            "precision": 0.9655,
+            "recall": 0.9333,
+            "f1": 0.9492,
+            "false_positive_rate": 0.0333,
+            "false_negative_rate": 0.0667,
+            "positive_as_legitimate_rate": 0.0333,
+            "abstention_rate": 0.0333,
+            "brier_score": 0.05017,
+            "log_loss": 0.18718,
+            "ece_10bin": 0.12286
+          }
+        }
+      },
+      "paired_diff_counts": {
+        "newly_introduced_errors": 4,
+        "resolved_errors": 5,
+        "both_wrong_or_abstained": 6
+      },
+      "newly_introduced_errors": [
+        {
+          "id": "v2h001",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "en_card_receipt",
+          "v2_score": 0.223326,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.717817,
+          "v3_band": "UNCERTAIN",
+          "indicators": []
+        },
+        {
+          "id": "v2h017",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "en_account_security_notification",
+          "v2_score": 0.029191,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.721553,
+          "v3_band": "UNCERTAIN",
+          "indicators": []
+        },
+        {
+          "id": "v2h018",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "en_account_security_notification",
+          "v2_score": 0.140742,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.840859,
+          "v3_band": "SCAM",
+          "indicators": [
+            "BANK_IMPERSONATION"
+          ]
+        },
+        {
+          "id": "v2h079",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "hinglish",
+          "family": "hi_lost_card_followup",
+          "v2_score": 0.119903,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.783723,
+          "v3_band": "SCAM",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        }
+      ],
+      "resolved_errors": [
+        {
+          "id": "v2h057",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "english",
+          "family": "en_profile_recovery_secrets",
+          "v2_score": 0.178905,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.910061,
+          "v3_band": "SCAM",
+          "indicators": []
+        },
+        {
+          "id": "v2h091",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "hi_bank_hold_otp_reply",
+          "v2_score": 0.03375,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.908006,
+          "v3_band": "SCAM",
+          "indicators": []
+        },
+        {
+          "id": "v2h100",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "hi_refund_collect_pin",
+          "v2_score": 0.169178,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.927217,
+          "v3_band": "SCAM",
+          "indicators": [
+            "UPI_COLLECT_LURE"
+          ]
+        },
+        {
+          "id": "v2h106",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "hi_kyc_full_credentials",
+          "v2_score": 0.063239,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.95154,
+          "v3_band": "SCAM",
+          "indicators": [
+            "BANK_IMPERSONATION",
+            "KYC_IMPERSONATION",
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h118",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "hi_social_recovery_credentials",
+          "v2_score": 0.175722,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.939408,
+          "v3_band": "SCAM",
+          "indicators": [
+            "BANK_IMPERSONATION",
+            "HINGLISH_CUE"
+          ]
+        }
+      ],
+      "both_wrong_or_abstained": [
+        {
+          "id": "v2h049",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "english",
+          "family": "en_manager_secret_vouchers",
+          "v2_score": 0.018347,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.440742,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v2h050",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "english",
+          "family": "en_manager_secret_vouchers",
+          "v2_score": 0.037501,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.692739,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "URGENCY"
+          ]
+        },
+        {
+          "id": "v2h056",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "english",
+          "family": "en_marketplace_receive_payment",
+          "v2_score": 0.043277,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.612406,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "UPI_COLLECT_LURE"
+          ]
+        },
+        {
+          "id": "v2h066",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "hinglish",
+          "family": "hi_merchant_bill_paid",
+          "v2_score": 0.290047,
+          "v2_band": "SCAM",
+          "v3_score": 0.698333,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h102",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "hi_support_remote_control",
+          "v2_score": 0.058874,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.694109,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h108",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "hi_utility_voucher_settlement",
+          "v2_score": 0.02477,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.64109,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        }
+      ]
+    },
+    "v2_holdout_ambiguous_12": {
+      "n": 12,
+      "note": "Reported strictly outside binary accuracy.",
+      "v2_band_counts": {
+        "LEGITIMATE": 11,
+        "SCAM": 1
+      },
+      "v3_band_counts": {
+        "LEGITIMATE": 10,
+        "UNCERTAIN": 1,
+        "SCAM": 1
+      },
+      "rows": [
+        {
+          "id": "v2h121",
+          "language": "english",
+          "family": "en_ambiguous_document_review",
+          "v2_score": 0.00197,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.11864,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v2h122",
+          "language": "english",
+          "family": "en_ambiguous_payment_request",
+          "v2_score": 0.002241,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.087507,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "UPI_COLLECT_LURE"
+          ]
+        },
+        {
+          "id": "v2h123",
+          "language": "english",
+          "family": "en_ambiguous_recruiter_reply",
+          "v2_score": 0.187069,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.662352,
+          "v3_band": "UNCERTAIN",
+          "indicators": []
+        },
+        {
+          "id": "v2h124",
+          "language": "english",
+          "family": "en_ambiguous_delivery_charge",
+          "v2_score": 0.042727,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.280119,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "DELIVERY_LURE"
+          ]
+        },
+        {
+          "id": "v2h125",
+          "language": "english",
+          "family": "en_ambiguous_membership_benefit",
+          "v2_score": 0.00625,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.061797,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v2h126",
+          "language": "english",
+          "family": "en_ambiguous_changed_number",
+          "v2_score": 0.001257,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.133822,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v2h127",
+          "language": "hinglish",
+          "family": "hi_ambiguous_form_followup",
+          "v2_score": 0.001271,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.100486,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h128",
+          "language": "hinglish",
+          "family": "hi_ambiguous_bill_request",
+          "v2_score": 0.000236,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.069027,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h129",
+          "language": "hinglish",
+          "family": "hi_ambiguous_interview_contact",
+          "v2_score": 0.001665,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.053363,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "JOB_LURE",
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h130",
+          "language": "hinglish",
+          "family": "hi_ambiguous_rebooking_cost",
+          "v2_score": 0.003126,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.144357,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "DELIVERY_LURE",
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h131",
+          "language": "hinglish",
+          "family": "hi_ambiguous_reward_terms",
+          "v2_score": 0.997292,
+          "v2_band": "SCAM",
+          "v3_score": 0.994138,
+          "v3_band": "SCAM",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v2h132",
+          "language": "hinglish",
+          "family": "hi_ambiguous_new_number",
+          "v2_score": 0.046088,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.296173,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        }
+      ]
+    },
+    "v3_holdout_160": {
+      "v2": {
+        "n": 160,
+        "negative_n": 80,
+        "positive_n": 80,
+        "confusion_matrix_2x3": [
+          [
+            61,
+            0,
+            19
+          ],
+          [
+            5,
+            0,
+            75
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.85,
+        "precision": 0.7979,
+        "recall": 0.9375,
+        "f1": 0.8621,
+        "false_positive_rate": 0.2375,
+        "false_negative_rate": 0.0625,
+        "positive_as_legitimate_rate": 0.0625,
+        "abstention_rate": 0.0,
+        "brier_score": 0.09845,
+        "log_loss": 0.31304,
+        "ece_10bin": 0.04782
+      },
+      "v3": {
+        "n": 160,
+        "negative_n": 80,
+        "positive_n": 80,
+        "confusion_matrix_2x3": [
+          [
+            79,
+            1,
+            0
+          ],
+          [
+            1,
+            0,
+            79
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.9875,
+        "precision": 1.0,
+        "recall": 0.9875,
+        "f1": 0.9937,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0125,
+        "positive_as_legitimate_rate": 0.0125,
+        "abstention_rate": 0.0063,
+        "brier_score": 0.01758,
+        "log_loss": 0.07302,
+        "ece_10bin": 0.05322
+      },
+      "by_language": {
+        "english": {
+          "v2": {
+            "n": 80,
+            "negative_n": 40,
+            "positive_n": 40,
+            "confusion_matrix_2x3": [
+              [
+                24,
+                0,
+                16
+              ],
+              [
+                1,
+                0,
+                39
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.7875,
+            "precision": 0.7091,
+            "recall": 0.975,
+            "f1": 0.8211,
+            "false_positive_rate": 0.4,
+            "false_negative_rate": 0.025,
+            "positive_as_legitimate_rate": 0.025,
+            "abstention_rate": 0.0,
+            "brier_score": 0.11995,
+            "log_loss": 0.36868,
+            "ece_10bin": 0.08695
+          },
+          "v3": {
+            "n": 80,
+            "negative_n": 40,
+            "positive_n": 40,
+            "confusion_matrix_2x3": [
+              [
+                40,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                40
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "positive_as_legitimate_rate": 0.0,
+            "abstention_rate": 0.0,
+            "brier_score": 0.01624,
+            "log_loss": 0.07307,
+            "ece_10bin": 0.06158
+          }
+        },
+        "hinglish": {
+          "v2": {
+            "n": 80,
+            "negative_n": 40,
+            "positive_n": 40,
+            "confusion_matrix_2x3": [
+              [
+                37,
+                0,
+                3
+              ],
+              [
+                4,
+                0,
+                36
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.9125,
+            "precision": 0.9231,
+            "recall": 0.9,
+            "f1": 0.9114,
+            "false_positive_rate": 0.075,
+            "false_negative_rate": 0.1,
+            "positive_as_legitimate_rate": 0.1,
+            "abstention_rate": 0.0,
+            "brier_score": 0.07695,
+            "log_loss": 0.2574,
+            "ece_10bin": 0.09428
+          },
+          "v3": {
+            "n": 80,
+            "negative_n": 40,
+            "positive_n": 40,
+            "confusion_matrix_2x3": [
+              [
+                39,
+                1,
+                0
+              ],
+              [
+                1,
+                0,
+                39
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.975,
+            "precision": 1.0,
+            "recall": 0.975,
+            "f1": 0.9873,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.025,
+            "positive_as_legitimate_rate": 0.025,
+            "abstention_rate": 0.0125,
+            "brier_score": 0.01893,
+            "log_loss": 0.07297,
+            "ece_10bin": 0.04486
+          }
+        }
+      },
+      "paired_diff_counts": {
+        "newly_introduced_errors": 0,
+        "resolved_errors": 22,
+        "both_wrong_or_abstained": 2
+      },
+      "newly_introduced_errors": [],
+      "resolved_errors": [
+        {
+          "id": "v3h001",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_credit_001",
+          "v2_score": 0.744212,
+          "v2_band": "SCAM",
+          "v3_score": 0.027986,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h004",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_credit_004",
+          "v2_score": 0.412368,
+          "v2_band": "SCAM",
+          "v3_score": 0.039956,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h006",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_credit_006",
+          "v2_score": 0.389005,
+          "v2_band": "SCAM",
+          "v3_score": 0.29155,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h009",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_debit_009",
+          "v2_score": 0.664152,
+          "v2_band": "SCAM",
+          "v3_score": 0.10248,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h012",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_debit_012",
+          "v2_score": 0.297352,
+          "v2_band": "SCAM",
+          "v3_score": 0.060615,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h015",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_statement_015",
+          "v2_score": 0.904626,
+          "v2_band": "SCAM",
+          "v3_score": 0.216488,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h018",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_statement_018",
+          "v2_score": 0.972736,
+          "v2_band": "SCAM",
+          "v3_score": 0.615826,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h020",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_bank_statement_020",
+          "v2_score": 0.671224,
+          "v2_band": "SCAM",
+          "v3_score": 0.130854,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h021",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_banking_otp_021",
+          "v2_score": 0.302262,
+          "v2_band": "SCAM",
+          "v3_score": 0.103111,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h023",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_banking_otp_023",
+          "v2_score": 0.304094,
+          "v2_band": "SCAM",
+          "v3_score": 0.032658,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h025",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_banking_otp_025",
+          "v2_score": 0.746973,
+          "v2_band": "SCAM",
+          "v3_score": 0.337142,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "OTP_REQUEST"
+          ]
+        },
+        {
+          "id": "v3h027",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_banking_otp_027",
+          "v2_score": 0.561228,
+          "v2_band": "SCAM",
+          "v3_score": 0.377969,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h029",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_upi_confirmation_029",
+          "v2_score": 0.518266,
+          "v2_band": "SCAM",
+          "v3_score": 0.035981,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h033",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_balance_notification_033",
+          "v2_score": 0.354588,
+          "v2_band": "SCAM",
+          "v3_score": 0.021223,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h034",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_balance_notification_034",
+          "v2_score": 0.386316,
+          "v2_band": "SCAM",
+          "v3_score": 0.006872,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h035",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "v3_holdout_english_balance_notification_035",
+          "v2_score": 0.652891,
+          "v2_band": "SCAM",
+          "v3_score": 0.087586,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "v3h049",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "hinglish",
+          "family": "v3_holdout_hinglish_bank_debit_049",
+          "v2_score": 0.275677,
+          "v2_band": "SCAM",
+          "v3_score": 0.179406,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v3h065",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "hinglish",
+          "family": "v3_holdout_hinglish_banking_otp_065",
+          "v2_score": 0.807821,
+          "v2_band": "SCAM",
+          "v3_score": 0.512552,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v3h117",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "english",
+          "family": "v3_holdout_english_scam_credentials_117",
+          "v2_score": 0.055203,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.970691,
+          "v3_band": "SCAM",
+          "indicators": [
+            "BANK_IMPERSONATION"
+          ]
+        },
+        {
+          "id": "v3h122",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "v3_holdout_hinglish_scam_account_block_122",
+          "v2_score": 0.057047,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.964676,
+          "v3_band": "SCAM",
+          "indicators": [
+            "THREAT_OF_BLOCK",
+            "LINK_PRESENT",
+            "SHORTENER_LINK",
+            "BANK_IMPERSONATION",
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v3h127",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "v3_holdout_hinglish_scam_account_block_127",
+          "v2_score": 0.053157,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.808283,
+          "v3_band": "SCAM",
+          "indicators": [
+            "URGENCY",
+            "LINK_PRESENT",
+            "BANK_IMPERSONATION",
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v3h141",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "v3_holdout_hinglish_scam_fake_kyc_141",
+          "v2_score": 0.183586,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.924749,
+          "v3_band": "SCAM",
+          "indicators": [
+            "URGENCY",
+            "LINK_PRESENT",
+            "BANK_IMPERSONATION",
+            "KYC_IMPERSONATION",
+            "HINGLISH_CUE"
+          ]
+        }
+      ],
+      "both_wrong_or_abstained": [
+        {
+          "id": "v3h064",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "hinglish",
+          "family": "v3_holdout_hinglish_banking_otp_064",
+          "v2_score": 0.296093,
+          "v2_band": "SCAM",
+          "v3_score": 0.724757,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "OTP_REQUEST",
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "v3h132",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "v3_holdout_hinglish_scam_otp_pin_132",
+          "v2_score": 0.032455,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.509452,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "URGENCY",
+            "OTP_REQUEST",
+            "HINGLISH_CUE"
+          ]
+        }
+      ]
+    },
+    "uci_test_1148": {
+      "v2": {
+        "n": 1148,
+        "negative_n": 984,
+        "positive_n": 164,
+        "confusion_matrix_2x3": [
+          [
+            983,
+            0,
+            1
+          ],
+          [
+            16,
+            0,
+            148
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.9852,
+        "precision": 0.9933,
+        "recall": 0.9024,
+        "f1": 0.9457,
+        "false_positive_rate": 0.001,
+        "false_negative_rate": 0.0976,
+        "positive_as_legitimate_rate": 0.0976,
+        "abstention_rate": 0.0,
+        "brier_score": 0.01534,
+        "log_loss": 0.06822,
+        "ece_10bin": 0.01951
+      },
+      "v3": {
+        "n": 1148,
+        "negative_n": 984,
+        "positive_n": 164,
+        "confusion_matrix_2x3": [
+          [
+            984,
+            0,
+            0
+          ],
+          [
+            15,
+            5,
+            144
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.9826,
+        "precision": 1.0,
+        "recall": 0.878,
+        "f1": 0.9351,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.122,
+        "positive_as_legitimate_rate": 0.0915,
+        "abstention_rate": 0.0044,
+        "brier_score": 0.00898,
+        "log_loss": 0.04015,
+        "ece_10bin": 0.01423
+      },
+      "by_language": {},
+      "paired_diff_counts": {
+        "newly_introduced_errors": 8,
+        "resolved_errors": 5,
+        "both_wrong_or_abstained": 12
+      },
+      "newly_introduced_errors": [
+        {
+          "id": "uci-00165",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "165",
+          "v2_score": 0.905533,
+          "v2_band": "SCAM",
+          "v3_score": 0.655726,
+          "v3_band": "UNCERTAIN",
+          "indicators": []
+        },
+        {
+          "id": "uci-01318",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "3860",
+          "v2_score": 0.495215,
+          "v2_band": "SCAM",
+          "v3_score": 0.676754,
+          "v3_band": "UNCERTAIN",
+          "indicators": []
+        },
+        {
+          "id": "uci-01778",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "4735",
+          "v2_score": 0.630739,
+          "v2_band": "SCAM",
+          "v3_score": 0.741775,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "LINK_PRESENT"
+          ]
+        },
+        {
+          "id": "uci-02115",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "2146",
+          "v2_score": 0.927007,
+          "v2_band": "SCAM",
+          "v3_score": 0.648746,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-02146",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "2146",
+          "v2_score": 0.927007,
+          "v2_band": "SCAM",
+          "v3_score": 0.648746,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-03860",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "3860",
+          "v2_score": 0.482339,
+          "v2_band": "SCAM",
+          "v3_score": 0.671609,
+          "v3_band": "UNCERTAIN",
+          "indicators": []
+        },
+        {
+          "id": "uci-04725",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "4725",
+          "v2_score": 0.420939,
+          "v2_band": "SCAM",
+          "v3_score": 0.559532,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-04735",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "4735",
+          "v2_score": 0.630739,
+          "v2_band": "SCAM",
+          "v3_score": 0.741775,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "LINK_PRESENT"
+          ]
+        }
+      ],
+      "resolved_errors": [
+        {
+          "id": "uci-02364",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "3848",
+          "v2_score": 0.145513,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.976707,
+          "v3_band": "SCAM",
+          "indicators": []
+        },
+        {
+          "id": "uci-03848",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "3848",
+          "v2_score": 0.145513,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.976707,
+          "v3_band": "SCAM",
+          "indicators": []
+        },
+        {
+          "id": "uci-04298",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "4298",
+          "v2_score": 0.119517,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.824851,
+          "v3_band": "SCAM",
+          "indicators": [
+            "LINK_PRESENT"
+          ]
+        },
+        {
+          "id": "uci-04702",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "unknown",
+          "family": "4702",
+          "v2_score": 0.69435,
+          "v2_band": "SCAM",
+          "v3_score": 0.605432,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-05539",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "5539",
+          "v2_score": 0.090756,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.974117,
+          "v3_band": "SCAM",
+          "indicators": []
+        }
+      ],
+      "both_wrong_or_abstained": [
+        {
+          "id": "uci-00305",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "305",
+          "v2_score": 0.088203,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.455193,
+          "v3_band": "LEGITIMATE",
+          "indicators": [
+            "LINK_PRESENT"
+          ]
+        },
+        {
+          "id": "uci-00672",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "672",
+          "v2_score": 0.031588,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.589102,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-00815",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "815",
+          "v2_score": 0.053409,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.308189,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-00869",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "869",
+          "v2_score": 3.3e-05,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.016606,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-01460",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "1460",
+          "v2_score": 0.103994,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.305414,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-01500",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "1500",
+          "v2_score": 0.006354,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.078298,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-02774",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "2774",
+          "v2_score": 2.1e-05,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.009665,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-03132",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "3132",
+          "v2_score": 0.043393,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.617061,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-03742",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "3742",
+          "v2_score": 0.008726,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.103521,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-04394",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "4394",
+          "v2_score": 0.054307,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.168655,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-04949",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "4949",
+          "v2_score": 0.007182,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.199902,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "uci-05372",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "unknown",
+          "family": "5372",
+          "v2_score": 0.005473,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.116017,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        }
+      ]
+    },
+    "indian_sms_test_labeled_24": {
+      "v2": {
+        "n": 24,
+        "negative_n": 12,
+        "positive_n": 12,
+        "confusion_matrix_2x3": [
+          [
+            11,
+            0,
+            1
+          ],
+          [
+            3,
+            0,
+            9
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.8333,
+        "precision": 0.9,
+        "recall": 0.75,
+        "f1": 0.8182,
+        "false_positive_rate": 0.0833,
+        "false_negative_rate": 0.25,
+        "positive_as_legitimate_rate": 0.25,
+        "abstention_rate": 0.0,
+        "brier_score": 0.14236,
+        "log_loss": 0.38304,
+        "ece_10bin": 0.21348
+      },
+      "v3": {
+        "n": 24,
+        "negative_n": 12,
+        "positive_n": 12,
+        "confusion_matrix_2x3": [
+          [
+            10,
+            1,
+            1
+          ],
+          [
+            1,
+            2,
+            9
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 0.7917,
+        "precision": 0.9,
+        "recall": 0.75,
+        "f1": 0.8182,
+        "false_positive_rate": 0.0833,
+        "false_negative_rate": 0.25,
+        "positive_as_legitimate_rate": 0.0833,
+        "abstention_rate": 0.125,
+        "brier_score": 0.06781,
+        "log_loss": 0.22895,
+        "ece_10bin": 0.1185
+      },
+      "by_language": {
+        "english": {
+          "v2": {
+            "n": 14,
+            "negative_n": 8,
+            "positive_n": 6,
+            "confusion_matrix_2x3": [
+              [
+                7,
+                0,
+                1
+              ],
+              [
+                1,
+                0,
+                5
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.8571,
+            "precision": 0.8333,
+            "recall": 0.8333,
+            "f1": 0.8333,
+            "false_positive_rate": 0.125,
+            "false_negative_rate": 0.1667,
+            "positive_as_legitimate_rate": 0.1667,
+            "abstention_rate": 0.0,
+            "brier_score": 0.14357,
+            "log_loss": 0.38556,
+            "ece_10bin": 0.21865
+          },
+          "v3": {
+            "n": 14,
+            "negative_n": 8,
+            "positive_n": 6,
+            "confusion_matrix_2x3": [
+              [
+                7,
+                0,
+                1
+              ],
+              [
+                1,
+                1,
+                4
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.7857,
+            "precision": 0.8,
+            "recall": 0.6667,
+            "f1": 0.7273,
+            "false_positive_rate": 0.125,
+            "false_negative_rate": 0.3333,
+            "positive_as_legitimate_rate": 0.1667,
+            "abstention_rate": 0.0714,
+            "brier_score": 0.06736,
+            "log_loss": 0.23409,
+            "ece_10bin": 0.13325
+          }
+        },
+        "hinglish": {
+          "v2": {
+            "n": 10,
+            "negative_n": 4,
+            "positive_n": 6,
+            "confusion_matrix_2x3": [
+              [
+                4,
+                0,
+                0
+              ],
+              [
+                2,
+                0,
+                4
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.8,
+            "precision": 1.0,
+            "recall": 0.6667,
+            "f1": 0.8,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.3333,
+            "positive_as_legitimate_rate": 0.3333,
+            "abstention_rate": 0.0,
+            "brier_score": 0.14065,
+            "log_loss": 0.37951,
+            "ece_10bin": 0.20624
+          },
+          "v3": {
+            "n": 10,
+            "negative_n": 4,
+            "positive_n": 6,
+            "confusion_matrix_2x3": [
+              [
+                3,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                5
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 0.8,
+            "precision": 1.0,
+            "recall": 0.8333,
+            "f1": 0.9091,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.1667,
+            "positive_as_legitimate_rate": 0.0,
+            "abstention_rate": 0.2,
+            "brier_score": 0.06843,
+            "log_loss": 0.22176,
+            "ece_10bin": 0.09785
+          }
+        }
+      },
+      "paired_diff_counts": {
+        "newly_introduced_errors": 2,
+        "resolved_errors": 1,
+        "both_wrong_or_abstained": 3
+      },
+      "newly_introduced_errors": [
+        {
+          "id": "synthetic-otp_protection-1",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "hinglish",
+          "family": "otp_protection",
+          "v2_score": 0.028601,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.719387,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "HINGLISH_CUE"
+          ]
+        },
+        {
+          "id": "synthetic-police_threat-0",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "english",
+          "family": "police_threat",
+          "v2_score": 0.32983,
+          "v2_band": "SCAM",
+          "v3_score": 0.648914,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        }
+      ],
+      "resolved_errors": [
+        {
+          "id": "synthetic-kyc_code-0",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "kyc_code",
+          "v2_score": 0.206467,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.943948,
+          "v3_band": "SCAM",
+          "indicators": [
+            "OTP_REQUEST",
+            "BANK_IMPERSONATION",
+            "KYC_IMPERSONATION",
+            "HINGLISH_CUE"
+          ]
+        }
+      ],
+      "both_wrong_or_abstained": [
+        {
+          "id": "synthetic-delivery_status-1",
+          "label": 0,
+          "expected_band": "LEGITIMATE",
+          "language": "english",
+          "family": "delivery_status",
+          "v2_score": 0.853889,
+          "v2_band": "SCAM",
+          "v3_score": 0.755976,
+          "v3_band": "SCAM",
+          "indicators": [
+            "DELIVERY_LURE"
+          ]
+        },
+        {
+          "id": "synthetic-police_threat-1",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "english",
+          "family": "police_threat",
+          "v2_score": 0.246148,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.73557,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "URGENCY"
+          ]
+        },
+        {
+          "id": "synthetic-relative_payment-1",
+          "label": 1,
+          "expected_band": "SCAM",
+          "language": "hinglish",
+          "family": "relative_payment",
+          "v2_score": 0.183548,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.705897,
+          "v3_band": "UNCERTAIN",
+          "indicators": [
+            "URGENCY",
+            "HINGLISH_CUE"
+          ]
+        }
+      ]
+    },
+    "indian_sms_dev_labeled_8": {
+      "v2": {
+        "n": 8,
+        "negative_n": 4,
+        "positive_n": 4,
+        "confusion_matrix_2x3": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            4
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "positive_as_legitimate_rate": 0.0,
+        "abstention_rate": 0.0,
+        "brier_score": 0.00655,
+        "log_loss": 0.04506,
+        "ece_10bin": 0.04137
+      },
+      "v3": {
+        "n": 8,
+        "negative_n": 4,
+        "positive_n": 4,
+        "confusion_matrix_2x3": [
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            4
+          ]
+        ],
+        "rows": [
+          "LEGITIMATE(0)",
+          "SCAM(1)"
+        ],
+        "cols": [
+          "LEGITIMATE",
+          "UNCERTAIN",
+          "SCAM"
+        ],
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "positive_as_legitimate_rate": 0.0,
+        "abstention_rate": 0.0,
+        "brier_score": 0.00341,
+        "log_loss": 0.0431,
+        "ece_10bin": 0.04127
+      },
+      "by_language": {
+        "english": {
+          "v2": {
+            "n": 8,
+            "negative_n": 4,
+            "positive_n": 4,
+            "confusion_matrix_2x3": [
+              [
+                4,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "positive_as_legitimate_rate": 0.0,
+            "abstention_rate": 0.0,
+            "brier_score": 0.00655,
+            "log_loss": 0.04506,
+            "ece_10bin": 0.04137
+          },
+          "v3": {
+            "n": 8,
+            "negative_n": 4,
+            "positive_n": 4,
+            "confusion_matrix_2x3": [
+              [
+                4,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                4
+              ]
+            ],
+            "rows": [
+              "LEGITIMATE(0)",
+              "SCAM(1)"
+            ],
+            "cols": [
+              "LEGITIMATE",
+              "UNCERTAIN",
+              "SCAM"
+            ],
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "false_positive_rate": 0.0,
+            "false_negative_rate": 0.0,
+            "positive_as_legitimate_rate": 0.0,
+            "abstention_rate": 0.0,
+            "brier_score": 0.00341,
+            "log_loss": 0.0431,
+            "ece_10bin": 0.04127
+          }
+        }
+      },
+      "paired_diff_counts": {
+        "newly_introduced_errors": 0,
+        "resolved_errors": 0,
+        "both_wrong_or_abstained": 0
+      },
+      "newly_introduced_errors": [],
+      "resolved_errors": [],
+      "both_wrong_or_abstained": []
+    },
+    "indian_sms_ambiguous_4": {
+      "n": 4,
+      "note": "Reported strictly outside binary accuracy.",
+      "v2_band_counts": {
+        "LEGITIMATE": 3,
+        "SCAM": 1
+      },
+      "v3_band_counts": {
+        "LEGITIMATE": 4
+      },
+      "rows": [
+        {
+          "id": "synthetic-ambiguous_request-0",
+          "language": "english",
+          "family": "ambiguous_request",
+          "v2_score": 0.000614,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.401436,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "synthetic-ambiguous_request-1",
+          "language": "english",
+          "family": "ambiguous_request",
+          "v2_score": 0.540891,
+          "v2_band": "SCAM",
+          "v3_score": 0.632027,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "synthetic-injection-0",
+          "language": "english",
+          "family": "injection",
+          "v2_score": 0.144613,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.616247,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        },
+        {
+          "id": "synthetic-injection-1",
+          "language": "english",
+          "family": "injection",
+          "v2_score": 0.014629,
+          "v2_band": "LEGITIMATE",
+          "v3_score": 0.226357,
+          "v3_band": "LEGITIMATE",
+          "indicators": []
+        }
+      ]
+    },
+    "stress_test_54_status": "NOT_FOUND_IN_REPO_OR_GIT_HISTORY (verified only 36-row indian_sms.jsonl exists)"
+  },
+  "separate_fresh_diagnostic_cases": {
+    "note": "Reported strictly outside holdout accuracy.",
+    "n": 22,
+    "rows": [
+      {
+        "id": "diag_card_block_en",
+        "label": 0,
+        "language": "english",
+        "category": "completed_card_block",
+        "v2_score": 0.576738,
+        "v2_band": "SCAM",
+        "v3_score": 0.266637,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "diag_card_block_hi",
+        "label": 0,
+        "language": "hinglish",
+        "category": "completed_card_block",
+        "v2_score": 0.007379,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.178123,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_kyc_completed_en",
+        "label": 0,
+        "language": "english",
+        "category": "completed_kyc",
+        "v2_score": 0.004824,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.206659,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "diag_kyc_completed_hi",
+        "label": 0,
+        "language": "hinglish",
+        "category": "completed_kyc",
+        "v2_score": 0.000343,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.131813,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_kyc_scheduled_en",
+        "label": 0,
+        "language": "english",
+        "category": "scheduled_kyc_branch",
+        "v2_score": 0.000224,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.017502,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "diag_kyc_scheduled_hi",
+        "label": 0,
+        "language": "hinglish",
+        "category": "scheduled_kyc_branch",
+        "v2_score": 0.000452,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.068343,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_statement_link_en",
+        "label": 0,
+        "language": "english",
+        "category": "generic_statement_link",
+        "v2_score": 0.671065,
+        "v2_band": "SCAM",
+        "v3_score": 0.577322,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "LINK_PRESENT"
+        ]
+      },
+      {
+        "id": "diag_antifraud_en",
+        "label": 0,
+        "language": "english",
+        "category": "educational_antifraud",
+        "v2_score": 0.170089,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.92842,
+        "v3_band": "SCAM",
+        "repaired_indicators": []
+      },
+      {
+        "id": "diag_antifraud_hi",
+        "label": 0,
+        "language": "hinglish",
+        "category": "educational_antifraud",
+        "v2_score": 0.052902,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.711161,
+        "v3_band": "UNCERTAIN",
+        "repaired_indicators": [
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_hinglish_neg_otp",
+        "label": 0,
+        "language": "hinglish",
+        "category": "hinglish_negation",
+        "v2_score": 0.04944,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.407455,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_hinglish_neg_mpin",
+        "label": 0,
+        "language": "hinglish",
+        "category": "hinglish_negation",
+        "v2_score": 0.001757,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.17236,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_family_imp_en",
+        "label": 1,
+        "language": "english",
+        "category": "family_impersonation",
+        "v2_score": 0.012783,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.344476,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "diag_family_imp_hi",
+        "label": 1,
+        "language": "hinglish",
+        "category": "family_impersonation",
+        "v2_score": 0.091124,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.396694,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "URGENCY",
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_read_aloud_en",
+        "label": 1,
+        "language": "english",
+        "category": "read_code_aloud",
+        "v2_score": 0.65171,
+        "v2_band": "SCAM",
+        "v3_score": 0.940936,
+        "v3_band": "SCAM",
+        "repaired_indicators": [
+          "OTP_REQUEST",
+          "BANK_IMPERSONATION"
+        ]
+      },
+      {
+        "id": "diag_read_aloud_hi",
+        "label": 1,
+        "language": "hinglish",
+        "category": "read_code_aloud",
+        "v2_score": 0.01963,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.284363,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "OTP_REQUEST",
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_neg_then_aloud_en",
+        "label": 1,
+        "language": "english",
+        "category": "benign_then_malicious",
+        "v2_score": 0.139732,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.552748,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "OTP_REQUEST",
+          "BANK_IMPERSONATION"
+        ]
+      },
+      {
+        "id": "diag_kyc_done_then_otp_en",
+        "label": 1,
+        "language": "english",
+        "category": "benign_then_malicious",
+        "v2_score": 0.344283,
+        "v2_band": "SCAM",
+        "v3_score": 0.741328,
+        "v3_band": "UNCERTAIN",
+        "repaired_indicators": [
+          "OTP_REQUEST",
+          "BANK_IMPERSONATION"
+        ]
+      },
+      {
+        "id": "diag_advisory_then_shortener_en",
+        "label": 1,
+        "language": "english",
+        "category": "benign_then_malicious",
+        "v2_score": 0.087085,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.975898,
+        "v3_band": "SCAM",
+        "repaired_indicators": [
+          "LINK_PRESENT",
+          "SHORTENER_LINK",
+          "BANK_IMPERSONATION",
+          "KYC_IMPERSONATION"
+        ]
+      },
+      {
+        "id": "diag_ov_hinglish_otp",
+        "label": 1,
+        "language": "hinglish",
+        "category": "hinglish_ov",
+        "v2_score": 0.020814,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.562581,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "URGENCY",
+          "OTP_REQUEST",
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_ov_hinglish_cred",
+        "label": 1,
+        "language": "hinglish",
+        "category": "hinglish_ov",
+        "v2_score": 0.056379,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.954932,
+        "v3_band": "SCAM",
+        "repaired_indicators": [
+          "BANK_IMPERSONATION",
+          "HINGLISH_CUE"
+        ]
+      },
+      {
+        "id": "diag_abbrev_cred",
+        "label": 1,
+        "language": "english",
+        "category": "abbreviations",
+        "v2_score": 0.107881,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.373259,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": [
+          "URGENCY",
+          "BANK_IMPERSONATION"
+        ]
+      },
+      {
+        "id": "diag_unicode_otp",
+        "label": 1,
+        "language": "english",
+        "category": "unicode_obfuscation",
+        "v2_score": 0.16139,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.981711,
+        "v3_band": "SCAM",
+        "repaired_indicators": [
+          "OTP_REQUEST",
+          "LINK_PRESENT",
+          "SHORTENER_LINK"
+        ]
+      }
+    ]
+  },
+  "pi_six_proxy_diagnostic_cases": {
+    "note": "Representative reconstructs matching original 6 Pi 5 categories; never used in training.",
+    "n": 6,
+    "rows": [
+      {
+        "id": "pi_diag_1_credit",
+        "label": 0,
+        "v2_score": 0.553017,
+        "v2_band": "SCAM",
+        "v3_score": 0.024828,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "pi_diag_2_debit",
+        "label": 0,
+        "v2_score": 0.311806,
+        "v2_band": "SCAM",
+        "v3_score": 0.057015,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "pi_diag_3_otp",
+        "label": 0,
+        "v2_score": 0.292158,
+        "v2_band": "SCAM",
+        "v3_score": 0.091299,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "pi_diag_4_upi",
+        "label": 0,
+        "v2_score": 0.015511,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.015178,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "pi_diag_5_college",
+        "label": 0,
+        "v2_score": 0.002166,
+        "v2_band": "LEGITIMATE",
+        "v3_score": 0.035807,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      },
+      {
+        "id": "pi_diag_6_statement",
+        "label": 0,
+        "v2_score": 0.818816,
+        "v2_band": "SCAM",
+        "v3_score": 0.192855,
+        "v3_band": "LEGITIMATE",
+        "repaired_indicators": []
+      }
+    ]
+  }
+}

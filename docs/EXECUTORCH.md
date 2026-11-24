@@ -1,24 +1,23 @@
-> Ubuntu continuation (17 November 2026): model identity, `.pte` export (`llama3_2.pte`), native x86_64 `llama_main` execution (`10/10` benchmark, `20/20` comparison, `432/432` dev & `132/132` holdout prompt acceptance), and Bookworm-compatible `aarch64` cross-compilation (`arm-gnu-toolchain-12.2.rel1`, `GLIBC <= 2.34`) are now verified on the Ubuntu host. See [ARGON_COMPLETION_REPORT.md](ARGON_COMPLETION_REPORT.md), [OPUS_TO_ARGON_HANDOFF.md](OPUS_TO_ARGON_HANDOFF.md), and [UBUNTU_VERIFICATION.md](UBUNTU_VERIFICATION.md). Physical Pi 4 execution remains `PENDING_HARDWARE`. Earlier Windows blockers below are historical.
+# ExecuTorch Integration, Lawful Model Access, and Pi 5 Runtime Verification
 
-# ExecuTorch integration and outstanding gate
+**Status (20 November 2026):** Model export (`llama3_2.pte`), dedicated Raspberry Pi 5 Cortex-A76 `aarch64` cross-compilation (`pi5-cortex-a76-native`, `GLIBC <= 2.34`), **genuine on-device physical Raspberry Pi 5 execution** (archived B0 measured under Detector V2 `f37c3dd9...`: `4/4` smoke test, `5/5` short run, `91/91` sustained 605.4 s B0 benchmark in `results/pi5/archive/20261118-B0-full/`), and **disconnected Pi 5 `strace` offline verification** (`results/pi5/offline-20261119/`, V2 `f37c3dd9...`: `5/5` validated, zero `AF_INET`/`AF_INET6`, `eth0`/`wlan0` `DOWN`, manifest `a4f1f80b...` matching B0) are **VERIFIED**. Detector V3 (`b2b2126b...`) on-device Pi 5 verification is `PENDING_HARDWARE`. Host adapter, packaging, and safety tests pass (`261 passed` on Ubuntu x86_64).
 
-Status: adapter HOST TESTS passed (`176 passed, 1 skipped`); model export and genuine Ubuntu x86_64 host inference `VERIFIED`; Bookworm-compatible Pi 4 `aarch64` binaries cross-compiled and audited (`VERIFIED` on host); physical Pi 4 inference `PENDING_HARDWARE`. No checkpoint, tokenizer, `.pte`, runner binary, or Llama output has been fabricated.
+## Verified Upstream Configuration and Provenance
 
-Update, 16 November: the user now reports downloading Llama in this laptop's dual-boot Linux installation. The exact checkpoint name/path and approval state have not been inspected from Windows. Treat the earlier missing-download statement as historical; file compatibility, export and inference remain unverified. The Pi4 is available but setup must wait for the lab visit.
+- **ExecuTorch revision:** `985c1ceccc8bb8b6a32294f71aeb5d2f299562f7` (`release/1.5`). Audited reference snapshots and upstream `LICENSE` live under `executorch/references/`. See [SOURCES_RUNTIME.md](SOURCES_RUNTIME.md).
+- **Target checkpoint:** Official [Meta Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8), Hugging Face revision `b8c08c95d0476ccb6fc86e9410818d602ecca19d` (`consolidated.00.pth` SHA-256 `c14adb6bf48fd9e81fdc14ebad5ef0ea9f98d50ca3419b28f0b788149c4ef2a5`, `tokenizer.model` SHA-256 `82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55`).
+- **Export YAML:** `llama_xnnpack_spinquant.yaml` (prequantized SpinQuant, group size 32, 8-bit dynamic activations, 4-bit weights, XNNPACK extended operators, KV cache, 2048 context).
+- **Exported `.pte`:** `llama3_2.pte`, `1,075,142,912` bytes (~1.00 GiB), SHA-256 `c31e4d376f349de85b4422a8c0405d88f21145709f0e17168b06d809ffe5e8a2`.
+- **Dedicated Pi 5 runner (`pi5-cortex-a76-native`):** Cross-compiled with Arm GNU Toolchain `12.2.rel1` (`GLIBC <= 2.34`, Bookworm & Trixie compatible):
+  - `models/llama/pi5-aarch64/llama_main` (`6,245,384` bytes, SHA-256 `e628abef24091067f4954b4ea15ce84317570d6d99e2ddc34a3786af7ad8d70c`)
+  - `models/llama/pi5-aarch64/libllama_runner.so` (SHA-256 `d45f39fd3b7f53bb511190fedab971933d176a3431c73f53f9fd87ad39496731`)
 
-## Verified upstream configuration
+## Lawful Model Acquisition and Reproduction on a Linux Export Host
 
-Selected release/1.5 commit: `985c1ceccc8bb8b6a32294f71aeb5d2f299562f7`. The official GitHub API response and audited source copies are under `executorch/references/`; source copies retain upstream copyright and the upstream LICENSE is included there. Read [source findings](SOURCES_RUNTIME.md).
+Meta Llama 3.2 weights and tokenizer are gated under the **Meta Llama 3.2 Community License** and are **never** distributed in the public GitHub repository or public source archive. Reviewers reproducing genuine on-device Llama execution must:
 
-The selected upstream setup script accepts `pi4` and selects `-march=armv8-a -mtune=cortex-a72`. The Pi5 build uses newer CPU instructions and must not be substituted. This source verification does not establish that the resulting binary or its XNNPACK kernels actually run on a Pi4.
-
-The selected export YAML uses prequantized SpinQuant, group size 32, 8-bit dynamic activations and 4-bit weights with separately configured embedding/output quantization. It enables XNNPACK extended operators, KV cache and a 2048-token context. The source is audited, but the actual supported operators, memory requirement and checkpoint compatibility remain untested until export and inference execute.
-
-Target checkpoint is the official [Meta Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8). Its model card requires gated access and license acceptance. Obtain the matching original-format `consolidated.00.pth`, `params.json`, and `tokenizer.model` after approval, record their source revision and SHA-256, and inspect the actual parameter shapes. A base/non-Instruct model or ordinary unquantized checkpoint is not interchangeable with this prequantized export. Do not rename `tokenizer.json` to `.model`; format compatibility is not established by the filename.
-
-## Reproduction on a separate Linux export host
-
-Prerequisites: Linux x86_64, CMake 3.26+, git, a supported Python environment, compiler/build tools and sufficient disk/RAM for the upstream export. Upstream tools perform downloads during provisioning. No model acquisition occurs in the EdgeShield app.
+1. Request and obtain approved access to `meta-llama/Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8` (revision `b8c08c95d0476ccb6fc86e9410818d602ecca19d`) on Hugging Face, review the Meta Llama 3.2 License and Acceptable Use Policy, and download the original-format `consolidated.00.pth`, `params.json`, `tokenizer.model`, and Meta `LICENSE` / `NOTICE` files. Do not substitute a base/non-Instruct model or rename `tokenizer.json` to `.model`.
+2. Export `llama3_2.pte` and cross-build the Pi 5 runner on a Linux x86_64 host (CMake 3.26+, git, supported Python 3.10–3.13):
 
 ```bash
 git clone https://github.com/pytorch/executorch.git build/executorch
@@ -28,34 +27,41 @@ git submodule update --init --recursive
 python3 -m venv .venv
 source .venv/bin/activate
 ./install_executorch.sh
-# Capture pip freeze and build logs into a private build record.
+
 export LLAMA_LICENSE_ACCEPTED=yes  # only after actual approval and license review
 export LLAMA_QUANTIZED_CHECKPOINT=/absolute/approved/consolidated.00.pth
 export LLAMA_PARAMS=/absolute/approved/params.json
 bash /absolute/edgeshield/scripts/export_llama.sh
-# Cross-build in a separate build tree from any native host runtime.
-bash examples/raspberry_pi/setup.sh pi4
+
+# Dedicated Pi 5 Cortex-A76 cross-build (use separate build tree from any host runtime):
+bash examples/raspberry_pi/setup.sh pi5 --skip-env-setup
 ```
 
-The export wrapper refuses a different commit, missing inputs or existing output. It checks the generated `.pte` exists and hashes it; this is not an inference test. Save checkpoint revision, export environment lock, command log and params alongside the deployment provenance record. This workflow has not been executed here because approved weights and the Linux toolchain are unavailable. Upstream downloads/toolchain checks may fail; never bypass a checksum failure. Verify the toolchain against Arm's official distribution metadata.
+3. Stage `llama3_2.pte`, `tokenizer.model`, `pi5-aarch64/llama_main`, `pi5-aarch64/libllama_runner.so`, and Meta `LICENSE_AND_NOTICE.md` under `models/llama/` on the Raspberry Pi 5, then generate `configs/inference.json`:
 
-Copy the resulting `llama3_2.pte`, matching `tokenizer.model`, `cmake-out/examples/models/llama/llama_main` and `cmake-out/examples/models/llama/runner/libllama_runner.so` into the EdgeShield `models/llama/` directory. Include any additional required shared libraries only after inspecting the target loader dependencies and distribution terms. `libextension_module.a` is linked during build; it is not a runtime shared library. Retain all model notices and the applicable license when distributing Llama materials; the current bundle excludes them.
+```bash
+chmod u+x models/llama/pi5-aarch64/llama_main
+.venv/bin/python deploy/pi5/create_manifest.py --profile pi5
+bash deploy/pi5/smoke_test.sh
+```
 
-## Runner contract and safety
+Retain all Meta license and attribution notices (`models/llama/LICENSE_AND_NOTICE.md`) on any authorized private device deployment. Never publish gated weights or tokenizer files.
 
-`ExecuTorchAdvisor(config_path).generate(prompt)` receives the already-framed evidence-only Llama3 prompt. It does not inspect raw SMS or add a second chat template. The audited main accepts `--model_path`, `--tokenizer_path`, `--max_new_tokens`, `--cpu_threads`, `--temperature` and `--prompt`. Default settings request 48 new tokens, two CPU threads and greedy sampling. The exported model context is 2048; `seq_len` is retained for compatibility but upstream prioritizes `max_new_tokens`. Measure actual tokenizer length before deploying any enlarged prompt.
+## Runner Contract and Safety
 
-The pinned runner echoes the prompt, writes generation, then emits a terminal `PyTorchObserver` numeric JSON report. The adapter requires an exact prompt prefix and valid final report. It never extracts a plausible WHY line from arbitrary output. All generated text reaches the validator. A missing/changed protocol, invalid UTF-8, timeout, child failure, exhausted generation budget or excessive combined stdout/stderr causes sanitized failure and the application falls back. Numeric report data are exposed as `last_stats`; they are not proof of correctness. No runtime stdout/stderr is written to disk by the adapter.
+`ExecuTorchAdvisor(config_path).generate(prompt)` (`src/edgeshield/advisory.py`) receives only the already-framed evidence-only Llama 3 prompt built by `src/edgeshield/validator.py`. It never inspects raw SMS text or adds a second chat template. The pinned runner accepts `--model_path`, `--tokenizer_path`, `--max_new_tokens`, `--cpu_threads`, `--temperature`, and `--prompt`. Production Pi 5 settings use `max_new_tokens=48`, `cpu_threads=2`, and greedy decoding.
 
-Manifest hashes are checked before every launch. The manifest itself must be trusted and protected alongside the executable. It is not a signed provenance attestation, and cannot protect against an attacker who changes both the manifest and artifacts. Shared-library loading is restricted to declared local directories and inherited preload variables are removed; system libraries still belong to the OS trust boundary. A hostile binary can do anything the local user can; hashes do not sandbox native code. The adapter assumes the verified upstream runner does not spawn descendants: timeout kills the direct process, not arbitrary descendant trees.
+The pinned runner echoes the prompt, writes generated tokens, and emits a terminal `PyTorchObserver` JSON stats trailer. The adapter requires an exact prompt prefix and valid trailer, passing all generated text to the strict validator. Missing/changed protocol, invalid UTF-8, timeout, child failure, or excessive stdout/stderr triggers sanitized failure and an explicitly labeled `Template fallback`. No runtime stdout/stderr is written to disk by the adapter.
 
-One runner process is started per message. It reloads model weights each time. The measured Llama wall time therefore includes startup, integrity checks, loading, prefill and decode. Persistent inference is deferred until a measured bottleneck justifies a supported integration. Detector verdict/advice are printed before this blocking advisory call; the terminal cannot accept another message during generation. No claimed responsiveness beyond that sequence.
+Manifest SHA-256 hashes are verified before every call. Shared-library loading is restricted to declared local directories and inherited preload variables (`LD_PRELOAD`, etc.) are stripped. One runner process is spawned per message, so measured Llama wall time includes per-call integrity verification, `.pte` model load (`~1.22 s` median on Pi 5), tokenization + prefill (`3.20 s` median TTFT), and decode (`13.49 tok/s` median). The detector verdict and deterministic `DO:` advice print in `<2 ms` before the advisory call finishes.
 
-## Actual verification (updated 17 November 2026)
+## Verified Execution Evidence (19 November 2026)
 
-- `bash scripts/host_python.sh -m pytest tests/test_runtime.py -q` exercises real child-process timeout, output bounding, error sanitization, and adapter protocol tests (`VERIFIED`).
-- Genuine Ubuntu x86_64 `.pte` export (`build/executorch/llama3_2.pte`, `1,075,142,912` bytes, SHA-256 `c31e4d376f349de85b4422a8c0405d88f21145709f0e17168b06d809ffe5e8a2`) and pybind/native `llama_main` inference verified (`results/host/ubuntu/llama_host_smoke_v2.json`, `llama_prompt_v2_development.json` `432/432`, `llama_prompt_v2_holdout.json` `132/132`, `twenty_case_llama_vs_template.json` `20/20`, `benchmark_llama_threads2.json` `10/10`, `benchmark_argon_llama.json` `5/5`, `cli_llama_smoke.jsonl`, `demo_ubuntu_llama.txt`) (`VERIFIED` on Ubuntu x86_64).
-- Bookworm-compatible Pi 4 `aarch64` cross-compilation verified with Arm GNU Toolchain `12.2.rel1` (`-march=armv8-a -mtune=cortex-a72`, KleidiAI & Armv8.2+/Armv9 extensions disabled; `pi4_bookworm_cross_build.log` & `pi4_bookworm_binary_audit.json`, max `GLIBC_2.34` and `GLIBCXX_3.4.30`, zero `GLIBC > 2.36` symbols). Note that upstream `setup.sh` with `14.3.rel1` produced `GLIBC_2.38` binaries (`models/llama/pi4-aarch64-glibc238/`, `pi4_binary_audit.json`) which would fail on Bookworm.
-- Physical Pi 4 execution, `vcgencmd` thermal/throttled behavior, and disconnected Pi 4 `strace` verification remain `PENDING_HARDWARE`.
+- **Physical Raspberry Pi 5 (`VERIFIED`, `results/pi5/archive/20261118-B0-full/`):**
+  - Model B Rev 1.1, 16 GB, CPU-only `aarch64`, Debian 13 Trixie, Python 3.13.5, `glibc 2.41`, `pi5-cortex-a76-native` (`cpu_threads=2`).
+  - `smoke_test.txt`: `4/4` `Llama (validated)`; `fallback_smoke.jsonl`: `2/2` labeled `Template fallback`.
+  - `benchmark.json` (B0 sustained, 605.4 s, `n=91`): `91/91` validator-accepted advisories (`0` fallbacks), `6.81 s` p95 full response, `1.44 GB` (`1.34 GiB`) peak runner RSS, `0 B` swap, `83.7 °C` peak passive-heatsink temp with throttling (`0xe0008`).
+- **Ubuntu x86_64 host (`VERIFIED`):** `261 passed` pytest (`tests/test_runtime.py` exercises child timeout, output bounding, error sanitization, and protocol parsing); `432/432` dev, `132/132` holdout, and `20/20` comparison validator acceptance on host x86_64 plus V3 `Llama (validated)` host E2E runs (`results/host/v3/e2e_host_llama_validation.txt`).
+- **Historical Pi 4 reference:** Earlier Pi 4 Cortex-A72 cross-compilation scripts and Bookworm binary audits remain under `deploy/pi4/` for reference only; verified competition hardware is Raspberry Pi 5.
 
-Arm-Examples LLM-Runner was reviewed as a reference, but is not used. Its current README pins a different ExecuTorch release and defaults to another backend; adopting it without an explicit ExecuTorch configuration would not satisfy this project's chosen integration.
+Arm-Examples LLM-Runner was reviewed as a reference only and is not used (its README pins ExecuTorch v1.4.1 and defaults to another backend).

@@ -1,33 +1,30 @@
-# Limitations and release blockers
+# Limitations and Open Release Blockers (20 November 2026)
 
-## Mandatory external dependencies
+## Open Phase 1 release gates
 
-- **`PENDING_HARDWARE` (Raspberry Pi 4):** Physical Pi 4 hardware is not yet connected. Arm on-device execution, Cortex-A72 runtime latency, peak device memory, sustained thermals, and disconnected `strace` offline proof cannot be certified on the x86_64 Ubuntu host. *(Bookworm-compatible `GLIBC <= 2.34` `aarch64` runner binaries, `.pte`, and `tokenizer.model` are now built and staged under `models/llama/` on Ubuntu.)*
-- **`PENDING_PARTICIPANTS` / `BLOCKED` (Human reviews & studies):** Independent human label review of the synthetic V2 corpus and the 5-person clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`) remain unexecuted.
-- **`UNVERIFIED` (Scope & eligibility):** Organiser confirmation of Raspberry Pi 4 eligibility under "Arm-based Linux devices" and SMS-only Phase 1 scope against the full PS3 capability description remains unresolved.
+- **`PENDING_HARDWARE` (V3 Pi 5 device verification):** Archived Pi 5 B0 and offline runs measured frozen **V2** (`f37c3dd9060b89ead7ea6bbf1c393b22fff7cfc18ed5d85126e977e03daea6a6`). An authorized offline Pi 5 smoke/demo capture running **V3** (`b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910`) into a new results directory is still required before recommending submission.
+- **`MISSING` (On-device demo video):** No actual disconnected Raspberry Pi 5 video recording is present in the workspace. A laptop or template-fallback capture cannot substitute for showing at least one genuine `Llama (validated)` response on the disconnected Pi 5 running the V3 release candidate.
+- **`BLOCKED` (Team/portal items):** Root `LICENSE` approval, team/mentor details, account-gated submission form field/limit verification, authorized GitHub publication, and final form submission by **23 November 2026**.
 
-## Detection limits
+## Hardware and thermal limits (Verified Pi 5 B0)
 
-- **Preserved V1 failure (`FAILED`, archived):** V1 detected only `1/12` synthetic scams and `0/6` Hinglish scams (`docs/DETECTOR_FINDINGS.md`).
-- **V2 synthetic holdout limits (`VERIFIED`):** On the 120-case fresh synthetic test (`results/host/v2/heldout_evaluation.json`, reproduced bit-for-bit on Ubuntu in `results/host/ubuntu/v2_reproduction.json`), V2 caught `50/60` scams (`26/30` English, `24/30` Hinglish) with `1/60` false alarm (`v2h066`), but assigned **`LEGITIMATE` to 10/60 scams** with `0` abstentions (`thresholds: [0.25, 0.275]`).
-- **Domain shift & proxy labels:** UCI spam/ham and AI-assisted synthetic Indian/Hinglish messages do not establish real-world Indian SMS fraud accuracy. Scores are not calibrated real-world probabilities.
-- **Keyword cues:** Indicators are lexical cues (`BANK_IMPERSONATION`, `KYC_IMPERSONATION`, `LINK_PRESENT`, etc.), never proof of sender identity, fraud, or malicious URL destinations.
+- **Passive-heatsink thermal throttling (`VERIFIED`):** During the 605.4 s continuous back-to-back B0 benchmark on an open **Raspberry Pi 5 Model B (16 GB, passive heatsink)**, SoC temperature peaked at **83.7 °C** and triggered throttling (`throttled_after=0xe0008`). By contrast, a 5-request burst (`benchmark-short.json`) peaked at `69.95 °C` (`throttled=0x0`). Active cooling is recommended for sustained continuous loads.
+- **Cold-load subprocess latency:** Each `ExecuTorchAdvisor` invocation launches `llama_main`, verifies SHA-256 hashes, loads the ~1.00 GiB `.pte` (`~1.22 s` median), runs prefill (`3.20 s` median TTFT), and decodes (`13.49 tok/s` median), producing **6.81 s p95** full-response latency (`1.44 GB` / `1.34 GiB` peak runner RSS, `0 B` swap). Detector verdict and `DO:` advice appear immediately in `<2 ms`. Reaching an internal 2-second latency goal and persistent-runner designs remain ongoing engineering work.
 
-## Explanation & runtime limits
+## Detection and evaluation limits
 
-- **Narrow controlled grammar:** The validator accepts only exact band prefixes plus at most one supported indicator sentence (`validator.py`). The 1-shot prompt achieves `100%` acceptance on synthetic evidence (`432/432` dev, `132/132` holdout, `20/20` comparison) by steering the 1B SpinQuant model to emit an approved `WHY:` line rather than open-ended prose. Passing validation proves wording compliance, not truth of the detector's verdict.
-- **Subprocess memory & cold load latency:** Each `ExecuTorchAdvisor` call spawns `llama_main`, hashing artifacts and loading the `1.07 GB` `.pte` (`~1.6 s` load, `~3.43 s` median total wall time, `~1.59 GiB` child peak RSS on Ubuntu x86_64). Pi 4 latency could be substantially higher; `--advisory-policy elevated` can skip Llama on clean low-risk messages while `always` preserves full Llama coverage.
+- **Preserved V1 failure (`FAILED`, archived):** V1 (`models/detector.json`, `9163c207...`) detected only `1/12` synthetic scams and `0/6` Hinglish scams (`docs/DETECTOR_FINDINGS.md`).
+- **Archived V2 limits (`VERIFIED`, `f37c3dd9...`):** On `120` labeled fresh synthetic messages (`12` ambiguous excluded; `results/host/v2/heldout_evaluation.json`), V2 detected `50/60` scams (`83.33%` recall; `26/30` English, `24/30` Hinglish) with `1/60` false positive (`1.67%` FPR; `1/30` Hinglish `v2h066`), assigned **`LEGITIMATE` to 10/60 scams** (`4` English, `6` Hinglish) with **0 abstentions** (`thresholds: [0.25, 0.275]`), and produced `19/80` false positives (`23.75%` FPR) on `v3_holdout`.
+- **Current V3 statistical & coverage limits (`b2b2126b...`, `thresholds: [0.65, 0.75]`):** Across identical-row audits (`results/host/v3/full_v2_v3_regression_audit.json`), V3 introduces `4` regressions vs. V2 on `v2_holdout` (`v2h001`/`v2h017` `UNCERTAIN`; `v2h018`/`v2h079` `SCAM`), `8` on `uci_test` (`3` missed, `5` abstained), and `2` on `indian_sms` test (`24` labeled). In fresh diagnostics, V3 shows false alarms on educational anti-fraud advisories (`0.928` `SCAM` EN, `0.711` `UNCERTAIN` HI) and false reassurance on family-impersonation scams (`0.344`–`0.397` `LEGITIMATE`) and some read-aloud/Hinglish-OV requests (`0.284`–`0.563`) because zero anti-fraud or family-impersonation families exist in `v3_development.jsonl`. Addressing those statistically requires a separate, independently authored **V4** development/calibration/validation/fresh-holdout round.
+- **Domain shift & proxy labels:** UCI spam/ham and AI-assisted synthetic Indian/Hinglish messages do not establish real-world Indian SMS fraud accuracy. Scores are not calibrated real-world fraud probabilities.
+- **Pending human studies:** Independent human label review of synthetic examples, representative consented real-message evaluation, and the 5-person clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`, `PENDING_PARTICIPANTS`) remain unfinished.
+- **Keyword cues:** Clause-level indicators (`BANK_IMPERSONATION`, `KYC_IMPERSONATION`, `OTP_REQUEST`, `LINK_PRESENT`, etc.) are lexical cues only, never proof of sender identity, fraud, or malicious URL destinations, and never override statistical verdicts.
 
-## Deployment and privacy limits
+## Explanation and privacy limits
 
-- SHA-256 manifests verify file integrity against a trusted manifest, not source authenticity against a compromised host.
-- The no-history policy applies to EdgeShield application storage; OS swap, shell history, terminal scrollback, and crash dumps remain outside application guarantees.
-- Normal inference makes no network calls by design, but formal `strace -f -e trace=network` offline certification must execute on the disconnected Pi 4.
+- **Controlled grammar:** The validator (`src/edgeshield/validator.py`) enforces exact approved band prefixes plus at most one supported cue sentence. Validator acceptance (`91/91` on Pi 5 B0) proves wording compliance against structured `Evidence`, not truth of the detector's underlying risk verdict.
+- **OS trust boundary:** SHA-256 manifests verify integrity against a trusted manifest, not source authenticity on a compromised host. EdgeShield's no-history policy applies to application storage; OS swap, shell history, terminal scrollback, and crash dumps remain outside application guarantees.
 
-## Deferred capabilities
+## Deferred PS3 capabilities (Future scope)
 
-- Independent phishing URL classification, network intrusion detection, malware behavior analysis, call filtering, automatic inbox integration, and a GUI dashboard remain `NOT_IMPLEMENTED`.
-
-## Readiness gate
-
-- Do not claim competition readiness while physical Pi 4 execution, offline device trace, demo video, clarity study, and human label review remain open. Use `submission/CHECKLIST.md` and `docs/ARGON_COMPLETION_REPORT.md` as the factual status gate.
+- Aligned with PS3 mentoring slides 03 and 11 (one complete scam SMS workflow for Phase 1), independent phishing URL classification, network intrusion detection, malware behavior analysis, call filtering, automatic inbox integration, and a GUI dashboard remain future scope (`NOT_IMPLEMENTED`).

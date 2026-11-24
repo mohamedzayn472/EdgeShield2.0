@@ -4,7 +4,16 @@ import pytest
 from edgeshield.model_loader import load_detector
 
 
-@pytest.mark.parametrize("path,version", [("models/detector.json", "edgeshield-tfidf-lr-v1"), ("models/detector_v2.json", "edgeshield-word-char-lr-v2")])
+@pytest.mark.parametrize("path,version", [
+    ("models/detector.json", "edgeshield-tfidf-lr-v1"),
+    ("models/detector_v2.json", "edgeshield-word-char-lr-v2"),
+    ("models/detector_v3.json", "edgeshield-word-char-lr-v3"),
+    ("models/detector_v4.json", "edgeshield-word-char-lr-v4"),
+    ("models/detector_v5.json", "edgeshield-word-char-lr-v5"),
+    ("models/detector_v6.json", "edgeshield-word-char-lr-v6"),
+    ("models/detector_v7.json", "edgeshield-word-char-lr-v7"),
+    ("models/detector_v8.json", "edgeshield-word-char-lr-v8"),
+])
 def test_supported_models(path, version):
     assert load_detector(path).predict("A blue notebook rests on the wooden desk.")["model_version"] == version
 

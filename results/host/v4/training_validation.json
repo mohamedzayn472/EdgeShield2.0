@@ -1,0 +1,2781 @@
+{
+  "scope": "DEVELOPMENT VALIDATION ONLY; candidate V4 model compared against V3 on identical validation splits",
+  "data_sha256": {
+    "v4_development": "74fd6928ed1158e9eb490310e56397881815c3611df6f759147274b139c9151c",
+    "uci_train": "0d3e43bfe478a9ca86e6db8976404e010e09d635198c6089f87978cd6e2ab6bd",
+    "uci_calibration": "c7a3faeecf73f55f857bfd0eec97f7a1cc7d35d7fafa350c901f623f92e87abb",
+    "uci_validation": "28e9f9fe96de86b78774ea4b5d164778be3449534faeaaa6bc0014b2df4e3308"
+  },
+  "model_sha256": "b6f54fab1cc4b70b4d3e1f98cd5e71e865f10ce25e6680d7a7567e40198d2f6a",
+  "split_counts": {
+    "train": {
+      "uci": 2770,
+      "synthetic": 491
+    },
+    "calibration": {
+      "uci": 543,
+      "synthetic": 89
+    },
+    "validation": {
+      "uci": 1113,
+      "synthetic": 158
+    }
+  },
+  "synthetic_development_leakage_check": "PASSED",
+  "serialization_parity": "PASSED",
+  "v3_baseline_on_identical_v4_validation": {
+    "uci": {
+      "n": 1113,
+      "positive_count": 160,
+      "negative_count": 953,
+      "accuracy": 0.9883198562443846,
+      "precision": 0.9743589743589743,
+      "recall": 0.95,
+      "f1": 0.9620253164556962,
+      "false_positive_rate": 0.004197271773347324,
+      "false_negative_rate": 0.05,
+      "positive_as_legitimate_rate": 0.05,
+      "benign_uncertain_rate": 0.001049317943336831,
+      "coverage": 0.9991015274034142,
+      "abstention_rate": 0.0008984725965858042,
+      "roc_auc": 0.9979603882476389,
+      "pr_auc": 0.9901192272183147,
+      "brier": 0.010787139130513646,
+      "log_loss": 0.045255087540760956,
+      "ece_10bin": 0.01479633504045371,
+      "confusion_matrix_2_by_3": [
+        [
+          948,
+          1,
+          4
+        ],
+        [
+          8,
+          0,
+          152
+        ]
+      ]
+    },
+    "synthetic": {
+      "n": 158,
+      "positive_count": 75,
+      "negative_count": 83,
+      "accuracy": 0.9746835443037974,
+      "precision": 0.9866666666666667,
+      "recall": 0.9866666666666667,
+      "f1": 0.9866666666666668,
+      "false_positive_rate": 0.012048192771084338,
+      "false_negative_rate": 0.013333333333333334,
+      "positive_as_legitimate_rate": 0.013333333333333334,
+      "benign_uncertain_rate": 0.024096385542168676,
+      "coverage": 0.9873417721518988,
+      "abstention_rate": 0.012658227848101266,
+      "roc_auc": 0.992289156626506,
+      "pr_auc": 0.9942276579656533,
+      "brier": 0.03454348111221477,
+      "log_loss": 0.13529392100642387,
+      "ece_10bin": 0.07137565995887495,
+      "confusion_matrix_2_by_3": [
+        [
+          80,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          74
+        ]
+      ]
+    }
+  },
+  "candidates": [
+    {
+      "C": 1,
+      "synthetic_weight": 2,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        2.5115998184464625,
+        -1.7946169963401695
+      ],
+      "val_macro_log_loss": 0.04512,
+      "val_macro_brier": 0.01067,
+      "val_macro_roc_auc": 0.99892,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.016666919929292617,
+            "log_loss": 0.09731576302797657,
+            "ece": 0.0670949526257401,
+            "roc_auc": 0.9979931794333683
+          },
+          "synthetic": {
+            "brier": 0.035129885238010077,
+            "log_loss": 0.17404821720990993,
+            "ece": 0.14504279166972922,
+            "roc_auc": 0.9998393574297189
+          },
+          "macro_brier": 0.025898402583651347,
+          "macro_log_loss": 0.13568199011894325,
+          "macro_auc": 0.9989162684315436
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.013548310922586248,
+            "log_loss": 0.05079243411582962,
+            "ece": 0.014082694481533917,
+            "roc_auc": 0.9979931794333683
+          },
+          "synthetic": {
+            "brier": 0.007796424871171612,
+            "log_loss": 0.0394415158262121,
+            "ece": 0.02537363217225773,
+            "roc_auc": 0.9998393574297189
+          },
+          "macro_brier": 0.01067236789687893,
+          "macro_log_loss": 0.045116974971020865,
+          "macro_auc": 0.9989162684315436
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.011391881685731893,
+            "log_loss": 0.045645496906334446,
+            "ece": 0.01608543199299841,
+            "roc_auc": 0.9979931794333683
+          },
+          "synthetic": {
+            "brier": 0.020551383905467232,
+            "log_loss": 0.08864417176292548,
+            "ece": 0.06862213189869273,
+            "roc_auc": 0.9998393574297189
+          },
+          "macro_brier": 0.01597163279559956,
+          "macro_log_loss": 0.06714483433462996,
+          "macro_auc": 0.9989162684315436
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9761,
+        0.9905,
+        -0.0133,
+        -0.0,
+        -0.0052,
+        1.0,
+        -0.3
+      ],
+      "thresholds": [
+        0.2,
+        0.275
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9874213836477987,
+          "precision": 0.9681528662420382,
+          "recall": 0.95,
+          "f1": 0.9589905362776026,
+          "false_positive_rate": 0.005246589716684155,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.05,
+          "benign_uncertain_rate": 0.001049317943336831,
+          "coverage": 0.9991015274034142,
+          "abstention_rate": 0.0008984725965858042,
+          "roc_auc": 0.9979931794333683,
+          "pr_auc": 0.9898163257379705,
+          "brier": 0.013548310922586248,
+          "log_loss": 0.05079243411582962,
+          "ece_10bin": 0.014082694481533917,
+          "confusion_matrix_2_by_3": [
+            [
+              947,
+              1,
+              5
+            ],
+            [
+              8,
+              0,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 0.9866666666666667,
+          "f1": 0.9932885906040269,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.013333333333333334,
+          "positive_as_legitimate_rate": 0.013333333333333334,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 0.9998393574297189,
+          "pr_auc": 0.9998245614035086,
+          "brier": 0.007796424871171612,
+          "log_loss": 0.0394415158262121,
+          "ece_10bin": 0.02537363217225773,
+          "confusion_matrix_2_by_3": [
+            [
+              83,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              74
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99892,
+        0.9761,
+        0.9905,
+        -0.04512,
+        -0.0133,
+        -0.0
+      ]
+    },
+    {
+      "C": 1,
+      "synthetic_weight": 3,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        2.3048233798094993,
+        -1.6799475971839704
+      ],
+      "val_macro_log_loss": 0.04891,
+      "val_macro_brier": 0.01164,
+      "val_macro_roc_auc": 0.99876,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.016734222317171893,
+            "log_loss": 0.09674368823130003,
+            "ece": 0.06525345717528572,
+            "roc_auc": 0.9978357817418678
+          },
+          "synthetic": {
+            "brier": 0.03196952943701597,
+            "log_loss": 0.1623912250760638,
+            "ece": 0.13540486085576287,
+            "roc_auc": 0.9996787148594378
+          },
+          "macro_brier": 0.02435187587709393,
+          "macro_log_loss": 0.1295674566536819,
+          "macro_auc": 0.9987572483006528
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.0155723666522124,
+            "log_loss": 0.056705647494511444,
+            "ece": 0.019130293246863227,
+            "roc_auc": 0.9978357817418678
+          },
+          "synthetic": {
+            "brier": 0.007711758782744325,
+            "log_loss": 0.041112803108177734,
+            "ece": 0.024442545938066253,
+            "roc_auc": 0.9996787148594378
+          },
+          "macro_brier": 0.011642062717478363,
+          "macro_log_loss": 0.04890922530134459,
+          "macro_auc": 0.9987572483006528
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.011190041228663664,
+            "log_loss": 0.04368546146113027,
+            "ece": 0.013291772873809154,
+            "roc_auc": 0.9978357817418678
+          },
+          "synthetic": {
+            "brier": 0.01434905308590171,
+            "log_loss": 0.06976554637033011,
+            "ece": 0.05367254732682913,
+            "roc_auc": 0.9996787148594378
+          },
+          "macro_brier": 0.012769547157282686,
+          "macro_log_loss": 0.05672550391573019,
+          "macro_auc": 0.9987572483006528
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9746,
+        0.9838,
+        -0.0,
+        -0.0,
+        -0.0063,
+        0.981,
+        -0.375
+      ],
+      "thresholds": [
+        0.15,
+        0.2
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9865229110512129,
+          "precision": 0.9620253164556962,
+          "recall": 0.95,
+          "f1": 0.9559748427672956,
+          "false_positive_rate": 0.0062959076600209865,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.05,
+          "benign_uncertain_rate": 0.001049317943336831,
+          "coverage": 0.9991015274034142,
+          "abstention_rate": 0.0008984725965858042,
+          "roc_auc": 0.9978357817418678,
+          "pr_auc": 0.9893369499727597,
+          "brier": 0.0155723666522124,
+          "log_loss": 0.056705647494511444,
+          "ece_10bin": 0.019130293246863227,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              1,
+              6
+            ],
+            [
+              8,
+              0,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9810126582278481,
+          "precision": 1.0,
+          "recall": 0.9866666666666667,
+          "f1": 0.9932885906040269,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.013333333333333334,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.024096385542168676,
+          "coverage": 0.9810126582278481,
+          "abstention_rate": 0.0189873417721519,
+          "roc_auc": 0.9996787148594378,
+          "pr_auc": 0.9996536796536795,
+          "brier": 0.007711758782744325,
+          "log_loss": 0.041112803108177734,
+          "ece_10bin": 0.024442545938066253,
+          "confusion_matrix_2_by_3": [
+            [
+              81,
+              2,
+              0
+            ],
+            [
+              0,
+              1,
+              74
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99876,
+        0.9746,
+        0.9838,
+        -0.04891,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 1,
+      "synthetic_weight": 4,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        2.203940911468926,
+        -1.5282859650561273
+      ],
+      "val_macro_log_loss": 0.04759,
+      "val_macro_brier": 0.01146,
+      "val_macro_roc_auc": 0.99886,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.016681917019862384,
+            "log_loss": 0.09520223366085337,
+            "ece": 0.06350828958647842,
+            "roc_auc": 0.9977111752360965
+          },
+          "synthetic": {
+            "brier": 0.026624931424971136,
+            "log_loss": 0.1430191184266265,
+            "ece": 0.11967208312595344,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.02165342422241676,
+          "macro_log_loss": 0.11911067604373994,
+          "macro_auc": 0.9988555876180483
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.016036301810666044,
+            "log_loss": 0.05779940594322516,
+            "ece": 0.020040271355832542,
+            "roc_auc": 0.9977111752360965
+          },
+          "synthetic": {
+            "brier": 0.006876369715719391,
+            "log_loss": 0.03738256134119543,
+            "ece": 0.02193803409072265,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.011456335763192717,
+          "macro_log_loss": 0.047590983642210295,
+          "macro_auc": 0.9988555876180483
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.011546328281897535,
+            "log_loss": 0.043955539877675684,
+            "ece": 0.01148154768540151,
+            "roc_auc": 0.9977111752360965
+          },
+          "synthetic": {
+            "brier": 0.009720314342629576,
+            "log_loss": 0.05255714045190182,
+            "ece": 0.039350377221317685,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010633321312263556,
+          "macro_log_loss": 0.04825634016478875,
+          "macro_auc": 0.9988555876180483
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.973,
+        0.9896,
+        -0.0,
+        -0.0,
+        -0.0063,
+        0.9937,
+        -0.325
+      ],
+      "thresholds": [
+        0.175,
+        0.25
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9856244384546271,
+          "precision": 0.9617834394904459,
+          "recall": 0.94375,
+          "f1": 0.9526813880126183,
+          "false_positive_rate": 0.0062959076600209865,
+          "false_negative_rate": 0.05625,
+          "positive_as_legitimate_rate": 0.05,
+          "benign_uncertain_rate": 0.001049317943336831,
+          "coverage": 0.9982030548068284,
+          "abstention_rate": 0.0017969451931716084,
+          "roc_auc": 0.9977111752360965,
+          "pr_auc": 0.9888747436353582,
+          "brier": 0.016036301810666044,
+          "log_loss": 0.05779940594322516,
+          "ece_10bin": 0.020040271355832542,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              1,
+              6
+            ],
+            [
+              8,
+              1,
+              151
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 0.9866666666666667,
+          "f1": 0.9932885906040269,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.013333333333333334,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.006876369715719391,
+          "log_loss": 0.03738256134119543,
+          "ece_10bin": 0.02193803409072265,
+          "confusion_matrix_2_by_3": [
+            [
+              83,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              74
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99886,
+        0.973,
+        0.9896,
+        -0.04759,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 1,
+      "synthetic_weight": 6,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_balanced",
+      "calibration_params": [
+        1.8951828421267538,
+        -0.4561271514906526
+      ],
+      "val_macro_log_loss": 0.04384,
+      "val_macro_brier": 0.00982,
+      "val_macro_roc_auc": 0.9987,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.017165983963878195,
+            "log_loss": 0.09432978781260959,
+            "ece": 0.06105531289087941,
+            "roc_auc": 0.9974029380902414
+          },
+          "synthetic": {
+            "brier": 0.02227947045353173,
+            "log_loss": 0.1254091693558429,
+            "ece": 0.11132042031787803,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.019722727208704962,
+          "macro_log_loss": 0.10986947858422624,
+          "macro_auc": 0.9987014690451207
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.01787066071716684,
+            "log_loss": 0.06288855747351403,
+            "ece": 0.02267090892379221,
+            "roc_auc": 0.9974029380902414
+          },
+          "synthetic": {
+            "brier": 0.006522381193433263,
+            "log_loss": 0.03657096191824829,
+            "ece": 0.03068346755506826,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.012196520955300051,
+          "macro_log_loss": 0.04972975969588116,
+          "macro_auc": 0.9987014690451207
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.013514139331255065,
+            "log_loss": 0.048932471740180956,
+            "ece": 0.010943502703426687,
+            "roc_auc": 0.9974029380902414
+          },
+          "synthetic": {
+            "brier": 0.006131913729845143,
+            "log_loss": 0.03875175905001195,
+            "ece": 0.03463793907473657,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.009823026530550104,
+          "macro_log_loss": 0.043842115395096456,
+          "macro_auc": 0.9987014690451207
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9765,
+        0.9901,
+        -0.0,
+        -0.0,
+        -0.0073,
+        0.9937,
+        -0.225
+      ],
+      "thresholds": [
+        0.3,
+        0.35
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9865229110512129,
+          "precision": 0.9559748427672956,
+          "recall": 0.95,
+          "f1": 0.9529780564263324,
+          "false_positive_rate": 0.007345225603357817,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 0.9991015274034142,
+          "abstention_rate": 0.0008984725965858042,
+          "roc_auc": 0.9974029380902414,
+          "pr_auc": 0.9874366809679391,
+          "brier": 0.013514139331255065,
+          "log_loss": 0.048932471740180956,
+          "ece_10bin": 0.010943502703426687,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              0,
+              7
+            ],
+            [
+              7,
+              1,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.006131913729845143,
+          "log_loss": 0.03875175905001195,
+          "ece_10bin": 0.03463793907473657,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.9987,
+        0.9765,
+        0.9901,
+        -0.04384,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 2,
+      "synthetic_weight": 2,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        2.0842856993571353,
+        -1.731130357510081
+      ],
+      "val_macro_log_loss": 0.04313,
+      "val_macro_brier": 0.01028,
+      "val_macro_roc_auc": 0.99902,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.013341941933559706,
+            "log_loss": 0.07410021276832657,
+            "ece": 0.046508854296295636,
+            "roc_auc": 0.9980456453305352
+          },
+          "synthetic": {
+            "brier": 0.024860116644370822,
+            "log_loss": 0.13192353289665323,
+            "ece": 0.10985475867723295,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.019101029288965263,
+          "macro_log_loss": 0.1030118728324899,
+          "macro_auc": 0.9990228226652675
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.013088782843600849,
+            "log_loss": 0.04895368299335187,
+            "ece": 0.014700700302430548,
+            "roc_auc": 0.9980456453305352
+          },
+          "synthetic": {
+            "brier": 0.0074664986997941855,
+            "log_loss": 0.03731264187115591,
+            "ece": 0.02318331408903579,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010277640771697518,
+          "macro_log_loss": 0.04313316243225389,
+          "macro_auc": 0.9990228226652675
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.011050576876713515,
+            "log_loss": 0.0449348707328369,
+            "ece": 0.014604001019391105,
+            "roc_auc": 0.9980456453305352
+          },
+          "synthetic": {
+            "brier": 0.01878476594449374,
+            "log_loss": 0.08162936587683717,
+            "ece": 0.06343212229951545,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.014917671410603628,
+          "macro_log_loss": 0.06328211830483703,
+          "macro_auc": 0.9990228226652675
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9777,
+        0.9905,
+        -0.0,
+        -0.0,
+        -0.0042,
+        0.9937,
+        -0.275
+      ],
+      "thresholds": [
+        0.175,
+        0.3
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9874213836477987,
+          "precision": 0.9743589743589743,
+          "recall": 0.95,
+          "f1": 0.9620253164556962,
+          "false_positive_rate": 0.004197271773347324,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.002098635886673662,
+          "coverage": 0.9973045822102425,
+          "abstention_rate": 0.0026954177897574125,
+          "roc_auc": 0.9980456453305352,
+          "pr_auc": 0.9900291220738388,
+          "brier": 0.013088782843600849,
+          "log_loss": 0.04895368299335187,
+          "ece_10bin": 0.014700700302430548,
+          "confusion_matrix_2_by_3": [
+            [
+              947,
+              2,
+              4
+            ],
+            [
+              7,
+              1,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 0.9866666666666667,
+          "f1": 0.9932885906040269,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.013333333333333334,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.0074664986997941855,
+          "log_loss": 0.03731264187115591,
+          "ece_10bin": 0.02318331408903579,
+          "confusion_matrix_2_by_3": [
+            [
+              83,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              74
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99902,
+        0.9777,
+        0.9905,
+        -0.04313,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 2,
+      "synthetic_weight": 3,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.9407453801643286,
+        -1.6321922546867247
+      ],
+      "val_macro_log_loss": 0.04549,
+      "val_macro_brier": 0.0108,
+      "val_macro_roc_auc": 0.99901,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.013406957877918289,
+            "log_loss": 0.0732612771326179,
+            "ece": 0.0434187882430656,
+            "roc_auc": 0.9980128541448058
+          },
+          "synthetic": {
+            "brier": 0.022781780297366435,
+            "log_loss": 0.12304629617133558,
+            "ece": 0.10219920777401248,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.01809436908764236,
+          "macro_log_loss": 0.09815378665197674,
+          "macro_auc": 0.9990064270724028
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.014314927035076601,
+            "log_loss": 0.05233501204801656,
+            "ece": 0.016855564602941672,
+            "roc_auc": 0.9980128541448058
+          },
+          "synthetic": {
+            "brier": 0.007275504894909302,
+            "log_loss": 0.0386530992535302,
+            "ece": 0.02415819436138349,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010795215964992952,
+          "macro_log_loss": 0.045494055650773385,
+          "macro_auc": 0.9990064270724028
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.010765373216895587,
+            "log_loss": 0.04231486448612308,
+            "ece": 0.010234935254039231,
+            "roc_auc": 0.9980128541448058
+          },
+          "synthetic": {
+            "brier": 0.012888215219768422,
+            "log_loss": 0.06364252210214151,
+            "ece": 0.04910333221491425,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.011826794218332003,
+          "macro_log_loss": 0.052978693294132295,
+          "macro_auc": 0.9990064270724028
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9746,
+        0.9905,
+        -0.0133,
+        -0.0,
+        -0.0063,
+        1.0,
+        -0.325
+      ],
+      "thresholds": [
+        0.2,
+        0.25
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9874213836477987,
+          "precision": 0.9620253164556962,
+          "recall": 0.95,
+          "f1": 0.9559748427672956,
+          "false_positive_rate": 0.0062959076600209865,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.05,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 0.9980128541448058,
+          "pr_auc": 0.9902709024613248,
+          "brier": 0.014314927035076601,
+          "log_loss": 0.05233501204801656,
+          "ece_10bin": 0.016855564602941672,
+          "confusion_matrix_2_by_3": [
+            [
+              947,
+              0,
+              6
+            ],
+            [
+              8,
+              0,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 0.9866666666666667,
+          "f1": 0.9932885906040269,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.013333333333333334,
+          "positive_as_legitimate_rate": 0.013333333333333334,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.007275504894909302,
+          "log_loss": 0.0386530992535302,
+          "ece_10bin": 0.02415819436138349,
+          "confusion_matrix_2_by_3": [
+            [
+              83,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              74
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99901,
+        0.9746,
+        0.9905,
+        -0.04549,
+        -0.0133,
+        -0.0
+      ]
+    },
+    {
+      "C": 2,
+      "synthetic_weight": 4,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.874737982196347,
+        -1.4983794628823994
+      ],
+      "val_macro_log_loss": 0.04408,
+      "val_macro_brier": 0.01051,
+      "val_macro_roc_auc": 0.99892,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.013354705606878486,
+            "log_loss": 0.07244443219275032,
+            "ece": 0.042044102266659826,
+            "roc_auc": 0.9978423399790135
+          },
+          "synthetic": {
+            "brier": 0.01871896414467855,
+            "log_loss": 0.10737331556741307,
+            "ece": 0.09538248764098174,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.01603683487577852,
+          "macro_log_loss": 0.0899088738800817,
+          "macro_auc": 0.9989211699895068
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.01450562550021416,
+            "log_loss": 0.05277708908681892,
+            "ece": 0.017267522269532574,
+            "roc_auc": 0.9978423399790135
+          },
+          "synthetic": {
+            "brier": 0.006505286735852298,
+            "log_loss": 0.03538747128059436,
+            "ece": 0.029157032471632427,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010505456118033229,
+          "macro_log_loss": 0.044082280183706635,
+          "macro_auc": 0.9989211699895068
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.010880611650968817,
+            "log_loss": 0.041802323517729466,
+            "ece": 0.009725592185493214,
+            "roc_auc": 0.9978423399790135
+          },
+          "synthetic": {
+            "brier": 0.008507865068087594,
+            "log_loss": 0.0475342625792993,
+            "ece": 0.04190559127503447,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.009694238359528207,
+          "macro_log_loss": 0.044668293048514385,
+          "macro_auc": 0.9989211699895068
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9765,
+        0.9901,
+        -0.0,
+        -0.0,
+        -0.0073,
+        0.9937,
+        -0.375
+      ],
+      "thresholds": [
+        0.15,
+        0.2
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9865229110512129,
+          "precision": 0.9559748427672956,
+          "recall": 0.95,
+          "f1": 0.9529780564263324,
+          "false_positive_rate": 0.007345225603357817,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 0.9991015274034142,
+          "abstention_rate": 0.0008984725965858042,
+          "roc_auc": 0.9978423399790135,
+          "pr_auc": 0.9897473764753122,
+          "brier": 0.01450562550021416,
+          "log_loss": 0.05277708908681892,
+          "ece_10bin": 0.017267522269532574,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              0,
+              7
+            ],
+            [
+              7,
+              1,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.006505286735852298,
+          "log_loss": 0.03538747128059436,
+          "ece_10bin": 0.029157032471632427,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99892,
+        0.9765,
+        0.9901,
+        -0.04408,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 2,
+      "synthetic_weight": 6,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_balanced",
+      "calibration_params": [
+        1.6349891144142927,
+        -0.4528229450456908
+      ],
+      "val_macro_log_loss": 0.04002,
+      "val_macro_brier": 0.00888,
+      "val_macro_roc_auc": 0.99885,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.013748661476612481,
+            "log_loss": 0.07221017352098737,
+            "ece": 0.04117776769086534,
+            "roc_auc": 0.9976915005246589
+          },
+          "synthetic": {
+            "brier": 0.01578590902641262,
+            "log_loss": 0.09329728927416449,
+            "ece": 0.08322700149859061,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.01476728525151255,
+          "macro_log_loss": 0.08275373139757593,
+          "macro_auc": 0.9988457502623295
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.015571099095709943,
+            "log_loss": 0.05566034758582452,
+            "ece": 0.018995866362988743,
+            "roc_auc": 0.9976915005246589
+          },
+          "synthetic": {
+            "brier": 0.006043669217896368,
+            "log_loss": 0.034017353690743164,
+            "ece": 0.02875899023559622,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010807384156803155,
+          "macro_log_loss": 0.04483885063828384,
+          "macro_auc": 0.9988457502623295
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.012116802470604647,
+            "log_loss": 0.04454671318960055,
+            "ece": 0.00863151518679066,
+            "roc_auc": 0.9976915005246589
+          },
+          "synthetic": {
+            "brier": 0.005641375292891529,
+            "log_loss": 0.03549850448114884,
+            "ece": 0.03176048546521651,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.008879088881748088,
+          "macro_log_loss": 0.0400226088353747,
+          "macro_auc": 0.9988457502623295
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9781,
+        0.9905,
+        -0.0,
+        -0.0,
+        -0.0073,
+        0.9937,
+        -0.2
+      ],
+      "thresholds": [
+        0.3,
+        0.375
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9874213836477987,
+          "precision": 0.95625,
+          "recall": 0.95625,
+          "f1": 0.95625,
+          "false_positive_rate": 0.007345225603357817,
+          "false_negative_rate": 0.04375,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 0.9976915005246589,
+          "pr_auc": 0.9891204352635528,
+          "brier": 0.012116802470604647,
+          "log_loss": 0.04454671318960055,
+          "ece_10bin": 0.00863151518679066,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              0,
+              7
+            ],
+            [
+              7,
+              0,
+              153
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.005641375292891529,
+          "log_loss": 0.03549850448114884,
+          "ece_10bin": 0.03176048546521651,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99885,
+        0.9781,
+        0.9905,
+        -0.04002,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 4,
+      "synthetic_weight": 2,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.7714856631500562,
+        -1.6447814465017827
+      ],
+      "val_macro_log_loss": 0.04264,
+      "val_macro_brier": 0.00991,
+      "val_macro_roc_auc": 0.99909,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.011194885962947093,
+            "log_loss": 0.05739169829655043,
+            "ece": 0.029902476486948205,
+            "roc_auc": 0.998189926547744
+          },
+          "synthetic": {
+            "brier": 0.019332690729612974,
+            "log_loss": 0.10673450680382357,
+            "ece": 0.08803215021353177,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.015263788346280033,
+          "macro_log_loss": 0.082063102550187,
+          "macro_auc": 0.9990949632738719
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.01229074407251264,
+            "log_loss": 0.046225126917449094,
+            "ece": 0.013312259555931967,
+            "roc_auc": 0.998189926547744
+          },
+          "synthetic": {
+            "brier": 0.0075308777826063635,
+            "log_loss": 0.03904508260312723,
+            "ece": 0.024427576219933307,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.0099108109275595,
+          "macro_log_loss": 0.04263510476028816,
+          "macro_auc": 0.9990949632738719
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.010506519440629584,
+            "log_loss": 0.0431601319596545,
+            "ece": 0.013934492862112164,
+            "roc_auc": 0.998189926547744
+          },
+          "synthetic": {
+            "brier": 0.018325212146937327,
+            "log_loss": 0.08084316160997997,
+            "ece": 0.06281738461951955,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.014415865793783456,
+          "macro_log_loss": 0.06200164678481723,
+          "macro_auc": 0.9990949632738719
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9777,
+        0.9914,
+        -0.0133,
+        -0.0,
+        -0.0042,
+        1.0,
+        -0.275
+      ],
+      "thresholds": [
+        0.25,
+        0.3
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9892183288409704,
+          "precision": 0.9743589743589743,
+          "recall": 0.95,
+          "f1": 0.9620253164556962,
+          "false_positive_rate": 0.004197271773347324,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.05,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 0.998189926547744,
+          "pr_auc": 0.9912911770850046,
+          "brier": 0.01229074407251264,
+          "log_loss": 0.046225126917449094,
+          "ece_10bin": 0.013312259555931967,
+          "confusion_matrix_2_by_3": [
+            [
+              949,
+              0,
+              4
+            ],
+            [
+              8,
+              0,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 0.9866666666666667,
+          "f1": 0.9932885906040269,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.013333333333333334,
+          "positive_as_legitimate_rate": 0.013333333333333334,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.0075308777826063635,
+          "log_loss": 0.03904508260312723,
+          "ece_10bin": 0.024427576219933307,
+          "confusion_matrix_2_by_3": [
+            [
+              83,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              74
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99909,
+        0.9777,
+        0.9914,
+        -0.04264,
+        -0.0133,
+        -0.0
+      ]
+    },
+    {
+      "C": 4,
+      "synthetic_weight": 3,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.6692378765507454,
+        -1.5658585307267205
+      ],
+      "val_macro_log_loss": 0.04281,
+      "val_macro_brier": 0.01009,
+      "val_macro_roc_auc": 0.99902,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.011433143648854263,
+            "log_loss": 0.0569476231939283,
+            "ece": 0.028495470528557724,
+            "roc_auc": 0.9980456453305352
+          },
+          "synthetic": {
+            "brier": 0.016667624616800165,
+            "log_loss": 0.09336778732850386,
+            "ece": 0.07658911297059129,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.014050384132827214,
+          "macro_log_loss": 0.07515770526121608,
+          "macro_auc": 0.9990228226652675
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.01321801802126933,
+            "log_loss": 0.04870961595650315,
+            "ece": 0.014829037823476627,
+            "roc_auc": 0.9980456453305352
+          },
+          "synthetic": {
+            "brier": 0.006963278421081243,
+            "log_loss": 0.03691626862127436,
+            "ece": 0.030290245218388773,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010090648221175287,
+          "macro_log_loss": 0.04281294228888875,
+          "macro_auc": 0.9990228226652675
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.010357785331334475,
+            "log_loss": 0.040997452080109464,
+            "ece": 0.01029410020297944,
+            "roc_auc": 0.9980456453305352
+          },
+          "synthetic": {
+            "brier": 0.012014974005298358,
+            "log_loss": 0.05967058823206312,
+            "ece": 0.046062230614474634,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.011186379668316416,
+          "macro_log_loss": 0.05033402015608629,
+          "macro_auc": 0.9990228226652675
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.978,
+        0.9901,
+        -0.0,
+        -0.0,
+        -0.0063,
+        0.9937,
+        -0.375
+      ],
+      "thresholds": [
+        0.15,
+        0.2
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9865229110512129,
+          "precision": 0.9620253164556962,
+          "recall": 0.95,
+          "f1": 0.9559748427672956,
+          "false_positive_rate": 0.0062959076600209865,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.001049317943336831,
+          "coverage": 0.9982030548068284,
+          "abstention_rate": 0.0017969451931716084,
+          "roc_auc": 0.9980456453305352,
+          "pr_auc": 0.990740685557925,
+          "brier": 0.01321801802126933,
+          "log_loss": 0.04870961595650315,
+          "ece_10bin": 0.014829037823476627,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              1,
+              6
+            ],
+            [
+              7,
+              1,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.006963278421081243,
+          "log_loss": 0.03691626862127436,
+          "ece_10bin": 0.030290245218388773,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99902,
+        0.978,
+        0.9901,
+        -0.04281,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 4,
+      "synthetic_weight": 4,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.620080065270234,
+        -1.4826950869083282
+      ],
+      "val_macro_log_loss": 0.04225,
+      "val_macro_brier": 0.01002,
+      "val_macro_roc_auc": 0.99898,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.01157927452995103,
+            "log_loss": 0.05716991124097583,
+            "ece": 0.027155469603989842,
+            "roc_auc": 0.9979538300104932
+          },
+          "synthetic": {
+            "brier": 0.014583351195793508,
+            "log_loss": 0.0837730312718477,
+            "ece": 0.06854203255603228,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.013081312862872268,
+          "macro_log_loss": 0.07047147125641176,
+          "macro_auc": 0.9989769150052465
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.01354672281524626,
+            "log_loss": 0.049552736572576986,
+            "ece": 0.015501326665920384,
+            "roc_auc": 0.9979538300104932
+          },
+          "synthetic": {
+            "brier": 0.006494839223833696,
+            "log_loss": 0.03494123493637332,
+            "ece": 0.0290270024273608,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010020781019539978,
+          "macro_log_loss": 0.04224698575447515,
+          "macro_auc": 0.9989769150052465
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.010492666116204195,
+            "log_loss": 0.04038997928693883,
+            "ece": 0.009349220983648517,
+            "roc_auc": 0.9979538300104932
+          },
+          "synthetic": {
+            "brier": 0.008479818839356138,
+            "log_loss": 0.04650054104555184,
+            "ece": 0.04084763978153643,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.009486242477780167,
+          "macro_log_loss": 0.043445260166245336,
+          "macro_auc": 0.9989769150052465
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.978,
+        0.9901,
+        -0.0,
+        -0.0,
+        -0.0063,
+        0.9937,
+        -0.35
+      ],
+      "thresholds": [
+        0.15,
+        0.225
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9865229110512129,
+          "precision": 0.9620253164556962,
+          "recall": 0.95,
+          "f1": 0.9559748427672956,
+          "false_positive_rate": 0.0062959076600209865,
+          "false_negative_rate": 0.05,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.001049317943336831,
+          "coverage": 0.9982030548068284,
+          "abstention_rate": 0.0017969451931716084,
+          "roc_auc": 0.9979538300104932,
+          "pr_auc": 0.9906513146161352,
+          "brier": 0.01354672281524626,
+          "log_loss": 0.049552736572576986,
+          "ece_10bin": 0.015501326665920384,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              1,
+              6
+            ],
+            [
+              7,
+              1,
+              152
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.006494839223833696,
+          "log_loss": 0.03494123493637332,
+          "ece_10bin": 0.0290270024273608,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99898,
+        0.978,
+        0.9901,
+        -0.04225,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 4,
+      "synthetic_weight": 6,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_balanced",
+      "calibration_params": [
+        1.4179023701445101,
+        -0.44463893539787014
+      ],
+      "val_macro_log_loss": 0.03817,
+      "val_macro_brier": 0.00835,
+      "val_macro_roc_auc": 0.99886,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.011831320653768119,
+            "log_loss": 0.056978727556893385,
+            "ece": 0.026993333340942758,
+            "roc_auc": 0.9977177334732424
+          },
+          "synthetic": {
+            "brier": 0.01169934691971962,
+            "log_loss": 0.0711364435554095,
+            "ece": 0.06363578361043483,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.011765333786743869,
+          "macro_log_loss": 0.06405758555615144,
+          "macro_auc": 0.9988588667366212
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.014509188637180474,
+            "log_loss": 0.052501949432797755,
+            "ece": 0.01731735526129764,
+            "roc_auc": 0.9977177334732424
+          },
+          "synthetic": {
+            "brier": 0.005913282252961629,
+            "log_loss": 0.03319103876265567,
+            "ece": 0.028160056759157216,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010211235445071052,
+          "macro_log_loss": 0.042846494097726714,
+          "macro_auc": 0.9988588667366212
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.011426121364783378,
+            "log_loss": 0.04243440286372021,
+            "ece": 0.006486391607755491,
+            "roc_auc": 0.9977177334732424
+          },
+          "synthetic": {
+            "brier": 0.005276438012876307,
+            "log_loss": 0.03389742713300957,
+            "ece": 0.030437378052037046,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.008351279688829844,
+          "macro_log_loss": 0.038165914998364886,
+          "macro_auc": 0.9988588667366212
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9781,
+        0.9905,
+        -0.0,
+        -0.0,
+        -0.0073,
+        0.9937,
+        -0.2
+      ],
+      "thresholds": [
+        0.3,
+        0.375
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9874213836477987,
+          "precision": 0.95625,
+          "recall": 0.95625,
+          "f1": 0.95625,
+          "false_positive_rate": 0.007345225603357817,
+          "false_negative_rate": 0.04375,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 0.9977177334732424,
+          "pr_auc": 0.9897107367853902,
+          "brier": 0.011426121364783378,
+          "log_loss": 0.04243440286372021,
+          "ece_10bin": 0.006486391607755491,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              0,
+              7
+            ],
+            [
+              7,
+              0,
+              153
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.005276438012876307,
+          "log_loss": 0.03389742713300957,
+          "ece_10bin": 0.030437378052037046,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99886,
+        0.9781,
+        0.9905,
+        -0.03817,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 8,
+      "synthetic_weight": 2,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.5454752914525065,
+        -1.5635337166847454
+      ],
+      "val_macro_log_loss": 0.04062,
+      "val_macro_brier": 0.00945,
+      "val_macro_roc_auc": 0.99911,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.01030087850204838,
+            "log_loss": 0.04721981432946441,
+            "ece": 0.01998224061499704,
+            "roc_auc": 0.9982227177334733
+          },
+          "synthetic": {
+            "brier": 0.014302283807430411,
+            "log_loss": 0.08143165912419338,
+            "ece": 0.06634109665020531,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.012301581154739396,
+          "macro_log_loss": 0.0643257367268289,
+          "macro_auc": 0.9991113588667366
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.011846062979557105,
+            "log_loss": 0.044503343827799455,
+            "ece": 0.011711475409961874,
+            "roc_auc": 0.9982227177334733
+          },
+          "synthetic": {
+            "brier": 0.007048185685220167,
+            "log_loss": 0.03673458816040831,
+            "ece": 0.03018231977354723,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.009447124332388635,
+          "macro_log_loss": 0.04061896599410388,
+          "macro_auc": 0.9991113588667366
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.010449995291151083,
+            "log_loss": 0.043018888404812765,
+            "ece": 0.014231899751338668,
+            "roc_auc": 0.9982227177334733
+          },
+          "synthetic": {
+            "brier": 0.01683458573350287,
+            "log_loss": 0.0754637922601054,
+            "ece": 0.059037334007264394,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.013642290512326976,
+          "macro_log_loss": 0.05924134033245908,
+          "macro_auc": 0.9991113588667366
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9811,
+        0.991,
+        -0.0,
+        -0.0,
+        -0.0052,
+        0.9937,
+        -0.375
+      ],
+      "thresholds": [
+        0.15,
+        0.2
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9883198562443846,
+          "precision": 0.9683544303797469,
+          "recall": 0.95625,
+          "f1": 0.9622641509433963,
+          "false_positive_rate": 0.005246589716684155,
+          "false_negative_rate": 0.04375,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.001049317943336831,
+          "coverage": 0.9991015274034142,
+          "abstention_rate": 0.0008984725965858042,
+          "roc_auc": 0.9982227177334733,
+          "pr_auc": 0.9914354666553564,
+          "brier": 0.011846062979557105,
+          "log_loss": 0.044503343827799455,
+          "ece_10bin": 0.011711475409961874,
+          "confusion_matrix_2_by_3": [
+            [
+              947,
+              1,
+              5
+            ],
+            [
+              7,
+              0,
+              153
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.007048185685220167,
+          "log_loss": 0.03673458816040831,
+          "ece_10bin": 0.03018231977354723,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99911,
+        0.9811,
+        0.991,
+        -0.04062,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 8,
+      "synthetic_weight": 3,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.4420489195162791,
+        -1.4529484766677865
+      ],
+      "val_macro_log_loss": 0.0395,
+      "val_macro_brier": 0.00924,
+      "val_macro_roc_auc": 0.99908,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.010431487723821131,
+            "log_loss": 0.046573306881883145,
+            "ece": 0.019580699423027235,
+            "roc_auc": 0.9981571353620147
+          },
+          "synthetic": {
+            "brier": 0.01212904329922255,
+            "log_loss": 0.07047295166057677,
+            "ece": 0.06264027597029867,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.01128026551152184,
+          "macro_log_loss": 0.058523129271229955,
+          "macro_auc": 0.9990785676810073
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.012272512374078533,
+            "log_loss": 0.045412682731877374,
+            "ece": 0.012719305741307097,
+            "roc_auc": 0.9981571353620147
+          },
+          "synthetic": {
+            "brier": 0.006215123989496083,
+            "log_loss": 0.03359071514170194,
+            "ece": 0.028329043152362354,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.009243818181787308,
+          "macro_log_loss": 0.03950169893678966,
+          "macro_auc": 0.9990785676810073
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.010139611949686805,
+            "log_loss": 0.040381467518380884,
+            "ece": 0.009731803123425368,
+            "roc_auc": 0.9981571353620147
+          },
+          "synthetic": {
+            "brier": 0.010846200172603394,
+            "log_loss": 0.055784447902013444,
+            "ece": 0.048528643459849787,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.0104929060611451,
+          "macro_log_loss": 0.04808295771019716,
+          "macro_auc": 0.9990785676810073
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9811,
+        0.9946,
+        -0.0,
+        -0.0,
+        -0.0052,
+        1.0,
+        -0.35
+      ],
+      "thresholds": [
+        0.175,
+        0.225
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9892183288409704,
+          "precision": 0.9683544303797469,
+          "recall": 0.95625,
+          "f1": 0.9622641509433963,
+          "false_positive_rate": 0.005246589716684155,
+          "false_negative_rate": 0.04375,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 0.9981571353620147,
+          "pr_auc": 0.9907939322258247,
+          "brier": 0.012272512374078533,
+          "log_loss": 0.045412682731877374,
+          "ece_10bin": 0.012719305741307097,
+          "confusion_matrix_2_by_3": [
+            [
+              948,
+              0,
+              5
+            ],
+            [
+              7,
+              0,
+              153
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.006215123989496083,
+          "log_loss": 0.03359071514170194,
+          "ece_10bin": 0.028329043152362354,
+          "confusion_matrix_2_by_3": [
+            [
+              83,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99908,
+        0.9811,
+        0.9946,
+        -0.0395,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 8,
+      "synthetic_weight": 4,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_equalized",
+      "calibration_params": [
+        1.414156016246057,
+        -1.480349224357984
+      ],
+      "val_macro_log_loss": 0.04116,
+      "val_macro_brier": 0.0097,
+      "val_macro_roc_auc": 0.99899,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.010665376954072794,
+            "log_loss": 0.04738683625363439,
+            "ece": 0.018278376019401486,
+            "roc_auc": 0.9979866211962225
+          },
+          "synthetic": {
+            "brier": 0.011201964252409257,
+            "log_loss": 0.06518481016984154,
+            "ece": 0.05257601598408049,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010933670603241026,
+          "macro_log_loss": 0.056285823211737966,
+          "macro_auc": 0.9989933105981113
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.013133924730286467,
+            "log_loss": 0.04825774147672367,
+            "ece": 0.015034124785410654,
+            "roc_auc": 0.9979866211962225
+          },
+          "synthetic": {
+            "brier": 0.006257447073517557,
+            "log_loss": 0.034067755657431587,
+            "ece": 0.028684039480194823,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.009695685901902012,
+          "macro_log_loss": 0.04116274856707763,
+          "macro_auc": 0.9989933105981113
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.01029994574534424,
+            "log_loss": 0.03970962255812753,
+            "ece": 0.007327265743422646,
+            "roc_auc": 0.9979866211962225
+          },
+          "synthetic": {
+            "brier": 0.007723377761194749,
+            "log_loss": 0.044300533884030886,
+            "ece": 0.039235474727294765,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.009011661753269494,
+          "macro_log_loss": 0.04200507822107921,
+          "macro_auc": 0.9989933105981113
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9796,
+        0.9905,
+        -0.0,
+        -0.0,
+        -0.0063,
+        0.9937,
+        -0.375
+      ],
+      "thresholds": [
+        0.15,
+        0.2
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9874213836477987,
+          "precision": 0.9622641509433962,
+          "recall": 0.95625,
+          "f1": 0.9592476489028213,
+          "false_positive_rate": 0.0062959076600209865,
+          "false_negative_rate": 0.04375,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.001049317943336831,
+          "coverage": 0.9991015274034142,
+          "abstention_rate": 0.0008984725965858042,
+          "roc_auc": 0.9979866211962225,
+          "pr_auc": 0.9909181847953146,
+          "brier": 0.013133924730286467,
+          "log_loss": 0.04825774147672367,
+          "ece_10bin": 0.015034124785410654,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              1,
+              6
+            ],
+            [
+              7,
+              0,
+              153
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.006257447073517557,
+          "log_loss": 0.034067755657431587,
+          "ece_10bin": 0.028684039480194823,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99899,
+        0.9796,
+        0.9905,
+        -0.04116,
+        -0.0,
+        -0.0
+      ]
+    },
+    {
+      "C": 8,
+      "synthetic_weight": 6,
+      "status": "TRAINED",
+      "calibration_method_selected": "sigmoid_balanced",
+      "calibration_params": [
+        1.2426714032047081,
+        -0.4649411805023341
+      ],
+      "val_macro_log_loss": 0.03769,
+      "val_macro_brier": 0.00823,
+      "val_macro_roc_auc": 0.99892,
+      "calibration_comparison": {
+        "raw": {
+          "uci": {
+            "brier": 0.010973269455609369,
+            "log_loss": 0.047624790112056135,
+            "ece": 0.0169577129675456,
+            "roc_auc": 0.9978423399790136
+          },
+          "synthetic": {
+            "brier": 0.009723697874939248,
+            "log_loss": 0.057317554852160654,
+            "ece": 0.05101265945115077,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.010348483665274308,
+          "macro_log_loss": 0.05247117248210839,
+          "macro_auc": 0.9989211699895069
+        },
+        "sigmoid_equalized": {
+          "uci": {
+            "brier": 0.014094754610481807,
+            "log_loss": 0.051153209415547046,
+            "ece": 0.016480791722162415,
+            "roc_auc": 0.9978423399790136
+          },
+          "synthetic": {
+            "brier": 0.005849419218691434,
+            "log_loss": 0.03267350491004021,
+            "ece": 0.027876085598275816,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.00997208691458662,
+          "macro_log_loss": 0.041913357162793624,
+          "macro_auc": 0.9989211699895069
+        },
+        "sigmoid_balanced": {
+          "uci": {
+            "brier": 0.011197608323821922,
+            "log_loss": 0.04153947201509183,
+            "ece": 0.006439641311188244,
+            "roc_auc": 0.9978423399790136
+          },
+          "synthetic": {
+            "brier": 0.0052584825795010766,
+            "log_loss": 0.033846620552119455,
+            "ece": 0.03044742687305469,
+            "roc_auc": 1.0
+          },
+          "macro_brier": 0.0082280454516615,
+          "macro_log_loss": 0.03769304628360565,
+          "macro_auc": 0.9989211699895069
+        }
+      },
+      "rank": [
+        true,
+        true,
+        0.9781,
+        0.9905,
+        -0.0,
+        -0.0,
+        -0.0073,
+        0.9937,
+        -0.2
+      ],
+      "thresholds": [
+        0.3,
+        0.375
+      ],
+      "metrics": {
+        "uci": {
+          "n": 1113,
+          "positive_count": 160,
+          "negative_count": 953,
+          "accuracy": 0.9874213836477987,
+          "precision": 0.95625,
+          "recall": 0.95625,
+          "f1": 0.95625,
+          "false_positive_rate": 0.007345225603357817,
+          "false_negative_rate": 0.04375,
+          "positive_as_legitimate_rate": 0.04375,
+          "benign_uncertain_rate": 0.0,
+          "coverage": 1.0,
+          "abstention_rate": 0.0,
+          "roc_auc": 0.9978423399790136,
+          "pr_auc": 0.990291756156193,
+          "brier": 0.011197608323821922,
+          "log_loss": 0.04153947201509183,
+          "ece_10bin": 0.006439641311188244,
+          "confusion_matrix_2_by_3": [
+            [
+              946,
+              0,
+              7
+            ],
+            [
+              7,
+              0,
+              153
+            ]
+          ]
+        },
+        "synthetic": {
+          "n": 158,
+          "positive_count": 75,
+          "negative_count": 83,
+          "accuracy": 0.9936708860759493,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "false_positive_rate": 0.0,
+          "false_negative_rate": 0.0,
+          "positive_as_legitimate_rate": 0.0,
+          "benign_uncertain_rate": 0.012048192771084338,
+          "coverage": 0.9936708860759493,
+          "abstention_rate": 0.006329113924050633,
+          "roc_auc": 1.0,
+          "pr_auc": 0.9999999999999998,
+          "brier": 0.0052584825795010766,
+          "log_loss": 0.033846620552119455,
+          "ece_10bin": 0.03044742687305469,
+          "confusion_matrix_2_by_3": [
+            [
+              82,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              75
+            ]
+          ]
+        }
+      },
+      "validation_quality_gate": "PASSED",
+      "candidate_rank": [
+        true,
+        true,
+        0.99892,
+        0.9781,
+        0.9905,
+        -0.03769,
+        -0.0,
+        -0.0
+      ]
+    }
+  ],
+  "selected": {
+    "C": 8,
+    "synthetic_weight": 2,
+    "status": "TRAINED",
+    "calibration_method_selected": "sigmoid_equalized",
+    "calibration_params": [
+      1.5454752914525065,
+      -1.5635337166847454
+    ],
+    "val_macro_log_loss": 0.04062,
+    "val_macro_brier": 0.00945,
+    "val_macro_roc_auc": 0.99911,
+    "calibration_comparison": {
+      "raw": {
+        "uci": {
+          "brier": 0.01030087850204838,
+          "log_loss": 0.04721981432946441,
+          "ece": 0.01998224061499704,
+          "roc_auc": 0.9982227177334733
+        },
+        "synthetic": {
+          "brier": 0.014302283807430411,
+          "log_loss": 0.08143165912419338,
+          "ece": 0.06634109665020531,
+          "roc_auc": 1.0
+        },
+        "macro_brier": 0.012301581154739396,
+        "macro_log_loss": 0.0643257367268289,
+        "macro_auc": 0.9991113588667366
+      },
+      "sigmoid_equalized": {
+        "uci": {
+          "brier": 0.011846062979557105,
+          "log_loss": 0.044503343827799455,
+          "ece": 0.011711475409961874,
+          "roc_auc": 0.9982227177334733
+        },
+        "synthetic": {
+          "brier": 0.007048185685220167,
+          "log_loss": 0.03673458816040831,
+          "ece": 0.03018231977354723,
+          "roc_auc": 1.0
+        },
+        "macro_brier": 0.009447124332388635,
+        "macro_log_loss": 0.04061896599410388,
+        "macro_auc": 0.9991113588667366
+      },
+      "sigmoid_balanced": {
+        "uci": {
+          "brier": 0.010449995291151083,
+          "log_loss": 0.043018888404812765,
+          "ece": 0.014231899751338668,
+          "roc_auc": 0.9982227177334733
+        },
+        "synthetic": {
+          "brier": 0.01683458573350287,
+          "log_loss": 0.0754637922601054,
+          "ece": 0.059037334007264394,
+          "roc_auc": 1.0
+        },
+        "macro_brier": 0.013642290512326976,
+        "macro_log_loss": 0.05924134033245908,
+        "macro_auc": 0.9991113588667366
+      }
+    },
+    "rank": [
+      true,
+      true,
+      0.9811,
+      0.991,
+      -0.0,
+      -0.0,
+      -0.0052,
+      0.9937,
+      -0.375
+    ],
+    "thresholds": [
+      0.15,
+      0.2
+    ],
+    "metrics": {
+      "uci": {
+        "n": 1113,
+        "positive_count": 160,
+        "negative_count": 953,
+        "accuracy": 0.9883198562443846,
+        "precision": 0.9683544303797469,
+        "recall": 0.95625,
+        "f1": 0.9622641509433963,
+        "false_positive_rate": 0.005246589716684155,
+        "false_negative_rate": 0.04375,
+        "positive_as_legitimate_rate": 0.04375,
+        "benign_uncertain_rate": 0.001049317943336831,
+        "coverage": 0.9991015274034142,
+        "abstention_rate": 0.0008984725965858042,
+        "roc_auc": 0.9982227177334733,
+        "pr_auc": 0.9914354666553564,
+        "brier": 0.011846062979557105,
+        "log_loss": 0.044503343827799455,
+        "ece_10bin": 0.011711475409961874,
+        "confusion_matrix_2_by_3": [
+          [
+            947,
+            1,
+            5
+          ],
+          [
+            7,
+            0,
+            153
+          ]
+        ]
+      },
+      "synthetic": {
+        "n": 158,
+        "positive_count": 75,
+        "negative_count": 83,
+        "accuracy": 0.9936708860759493,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "false_positive_rate": 0.0,
+        "false_negative_rate": 0.0,
+        "positive_as_legitimate_rate": 0.0,
+        "benign_uncertain_rate": 0.012048192771084338,
+        "coverage": 0.9936708860759493,
+        "abstention_rate": 0.006329113924050633,
+        "roc_auc": 1.0,
+        "pr_auc": 0.9999999999999998,
+        "brier": 0.007048185685220167,
+        "log_loss": 0.03673458816040831,
+        "ece_10bin": 0.03018231977354723,
+        "confusion_matrix_2_by_3": [
+          [
+            82,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            75
+          ]
+        ]
+      }
+    },
+    "validation_quality_gate": "PASSED",
+    "candidate_rank": [
+      true,
+      true,
+      0.99911,
+      0.9811,
+      0.991,
+      -0.04062,
+      -0.0,
+      -0.0
+    ]
+  },
+  "holdout_read": false
+}

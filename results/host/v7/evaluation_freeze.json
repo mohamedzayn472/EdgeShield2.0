@@ -1,0 +1,30 @@
+{
+  "created_at_utc": "2026-11-23T18:43:25.621245+00:00",
+  "file_sha256": {
+    "src/edgeshield/detector_v7.py": "b5a6225c61c6fc6d687bc091fb928004abbb509421d600dac3c40a4538180c64",
+    "src/edgeshield/indicators.py": "fc023cc0e774fbdadd7f7ff5ec2a6324eefeb860ed92678ff9b2f82c2d4d3089",
+    "src/edgeshield/model_loader.py": "92757fc441c5edc05c48004f498f38d09c5f2717f7afd9d1c2570331e64ea431",
+    "scripts/create_v7_datasets.py": "7fb6549c073deceb8e7ad5c4addf0796ba4a9d1332bd01f79d9fde11723245bb",
+    "scripts/train_detector_v7.py": "495c062b50301701ad85cfd09155d62bd50c2c6bcc6909dc2df5eca58e82597a",
+    "scripts/evaluate_detector_v7.py": "72bd5ff1b98728fc52b5a334b1394e2000c0f24c14fe82fe831cf12677217f66",
+    "docs/V7_EVALUATION_PROTOCOL.md": "e79bfbf31482fae191243096dd5353ffefad98683f1bcf7d0dcd95a0f4af02e9",
+    "models/detector_v7.json": "3958bebfc4c791fea10f2d861acfe8998355ea7e481212aef109657ffb79daa4",
+    "models/detector_v7.json.sha256": "9801c2abab290ff462bdcd7937002924b1fb505a267201d45ef38143eda6e1fe",
+    "models/detector_v6.json": "a7e6fe59ed622f89171ee97d8dc47d5454915af0e5db68e399e2540b982210d3",
+    "models/detector_v5.json": "bc98c0d961aec7c1a03e1f0e517b970765ee818f42c938152719c7b84951908b",
+    "models/detector_v4.json": "b6f54fab1cc4b70b4d3e1f98cd5e71e865f10ce25e6680d7a7567e40198d2f6a",
+    "models/detector_v3.json": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910",
+    "data/synthetic/v7_development.jsonl": "c72f2e472c7105f61fe08afb39dc5a9bdd9214a964ebbe4c49a50b2621bb4525",
+    "data/synthetic/v7_holdout.jsonl": "5c8e7d1825861cfbcb505ff54781a00ddfb563755323045491c7f7d90593f6c7",
+    "data/synthetic/v6_holdout.jsonl": "27257205980a0fca20c0bb44852559c3f5205db2f5320295427d8ac89a3e9f24",
+    "data/synthetic/v5_holdout.jsonl": "873bc9dc74ec049970f95bad7061bba5cd5f0bbd9fbafa85efdfdd57915ae1fd",
+    "data/synthetic/v4_holdout.jsonl": "9f5e1a9f247ebe44011393898653f8afaec02aa644aea0015d3cbcbe2b5551b9",
+    "data/synthetic/v3_holdout.jsonl": "a127660629cfc78e763b5017b4363f7b0eaae66119a10035fb052135a1de9f85",
+    "data/synthetic/v2_holdout.jsonl": "a2eb49623715b7cf3b84c6d2afda29c6f50fe07b65a4820ad52753ea1681ff1e",
+    "data/synthetic/indian_sms.jsonl": "555e4891a9203eb90ff5287200944f324dfad348025462a450b81bf10e303f2c",
+    "data/processed/train.jsonl": "0d3e43bfe478a9ca86e6db8976404e010e09d635198c6089f87978cd6e2ab6bd",
+    "data/processed/calibration.jsonl": "c7a3faeecf73f55f857bfd0eec97f7a1cc7d35d7fafa350c901f623f92e87abb",
+    "data/processed/validation.jsonl": "28e9f9fe96de86b78774ea4b5d164778be3449534faeaaa6bc0014b2df4e3308",
+    "data/processed/test.jsonl": "90249b9b6a885e771b316297329c9f7ae37a7d02944fcc3b0ce501ad0c61d059"
+  }
+}

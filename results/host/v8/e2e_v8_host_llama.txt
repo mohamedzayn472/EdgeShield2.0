@@ -1,0 +1,271 @@
+=== 0_default_resolves_v8_json ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --advisory-policy off --stdin --json
+EXIT: 0
+STDOUT:
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "4d3481555460d2bf5dfaf5e28fc107786f38ea34400358e4637b5bd9b0afd365", "evidence": {"band": "LEGITIMATE", "score": 0.005139492951965812, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v8", "detector_ms": 1.314748999902804, "evidence_ms": 0.2855660000022908, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.0033060000532714184}
+
+=== 1_en_legit_otp ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.003
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.44 ms | Evidence: 0.35 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3259.89 ms | Validation: 0.36 ms | Total: 3262.04 ms
+
+=== 2_en_scam_otp ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.999
+Indicators: URGENCY, OTP_REQUEST, BANK_IMPERSONATION
+Indicator details: Urgent wording appears; A code sharing request appears; Suspicious bank-related request or warning appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.52 ms | Evidence: 0.31 ms
+WHY: The detector estimates elevated risk. A code sharing request appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3375.82 ms | Validation: 0.47 ms | Total: 3378.12 ms
+
+=== 3a_hi_legit_advisory ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.018
+Indicators: HINGLISH_CUE
+Indicator details: Romanized Hindi wording appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.57 ms | Evidence: 0.39 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3314.94 ms | Validation: 0.39 ms | Total: 3317.29 ms
+
+=== 3b_hi_legit_card_block ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.001
+Indicators: HINGLISH_CUE
+Indicator details: Romanized Hindi wording appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.48 ms | Evidence: 0.36 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3311.46 ms | Validation: 0.61 ms | Total: 3313.91 ms
+
+=== 4_hi_scam_read_aloud ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.995
+Indicators: OTP_REQUEST, HINGLISH_CUE
+Indicator details: A code sharing request appears; Romanized Hindi wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.60 ms | Evidence: 0.35 ms
+WHY: The detector estimates elevated risk. A code sharing request appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3313.17 ms | Validation: 0.56 ms | Total: 3315.68 ms
+
+=== 5_7c_ctrl_warn_then_req ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.958
+Indicators: OTP_REQUEST
+Indicator details: A code sharing request appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.33 ms | Evidence: 0.31 ms
+WHY: The detector estimates elevated risk. A code sharing request appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3269.65 ms | Validation: 0.58 ms | Total: 3271.88 ms
+
+=== 6_v8h210_uncertain_pos ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: UNCERTAIN
+Experimental synthetic-trained risk score (not real-world calibrated): 0.615
+Indicators: none
+DO: Confirm the request through the official application or a trusted contact method before taking action.
+Detector: 1.47 ms | Evidence: 0.28 ms
+WHY: The detector is uncertain.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3017.74 ms | Validation: 0.51 ms | Total: 3019.99 ms
+
+=== 7a_uci_00869_fn_audit ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.028
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.51 ms | Evidence: 0.39 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3163.62 ms | Validation: 0.28 ms | Total: 3165.81 ms
+
+=== 7b_uci_02774_fn_audit ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.007
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.55 ms | Evidence: 0.35 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3217.15 ms | Validation: 0.53 ms | Total: 3219.59 ms
+
+=== 8_advisory_policy_off_with_runtime_json ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/edgeshield-host-inference.json --advisory-policy off --stdin --json
+EXIT: 0
+STDOUT:
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "4d3481555460d2bf5dfaf5e28fc107786f38ea34400358e4637b5bd9b0afd365", "evidence": {"band": "SCAM", "score": 0.9990978581265331, "indicators": ["URGENCY", "OTP_REQUEST", "BANK_IMPERSONATION"], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v8", "detector_ms": 1.6107239998746081, "evidence_ms": 0.3412710002521635, "advice": "DO: Do not open suspicious links. Verify the message using the organization's independently known official channel."}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. A code sharing request appears.", "source": "Template fallback", "reason": "SKIPPED_BY_POLICY", "llama_ms": null, "validation_ms": 0.006432000191125553}
+
+=== 9_invalid_runtime_config_json ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/bad-inference.json --stdin --json
+EXIT: 0
+STDOUT:
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "4d3481555460d2bf5dfaf5e28fc107786f38ea34400358e4637b5bd9b0afd365", "evidence": {"band": "SCAM", "score": 0.9990978581265331, "indicators": ["URGENCY", "OTP_REQUEST", "BANK_IMPERSONATION"], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v8", "detector_ms": 1.2805340002159937, "evidence_ms": 0.24408899980699061, "advice": "DO: Do not open suspicious links. Verify the message using the organization's independently known official channel."}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. A code sharing request appears.", "source": "Template fallback", "reason": "RUNTIME_CONFIGURATION_REJECTED", "llama_ms": null, "validation_ms": 0.006321999990177574}
+
+=== 9b_invalid_runtime_config_human ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --runtime-config /tmp/bad-inference.json --stdin
+EXIT: 0
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: configuration rejected; template fallback
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.999
+Indicators: URGENCY, OTP_REQUEST, BANK_IMPERSONATION
+Indicator details: Urgent wording appears; A code sharing request appears; Suspicious bank-related request or warning appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.25 ms | Evidence: 0.24 ms
+WHY: The detector estimates elevated risk. A code sharing request appears.
+Source: Template fallback | Status: RUNTIME_CONFIGURATION_REJECTED
+Llama execution: not run | Validation: 0.01 ms | Total: 1.50 ms
+
+=== 10a_invalid_empty ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --advisory-policy off --stdin
+EXIT: 2
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: not configured; template fallback
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+STDERR:
+Invalid SMS input; use nonempty text up to 4096 characters.
+
+=== 10b_invalid_oversize_4097 ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --advisory-policy off --stdin
+EXIT: 2
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: not configured; template fallback
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+STDERR:
+Invalid SMS input; use nonempty text up to 4096 characters.
+
+=== 10c_invalid_private_use_ue000 ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --advisory-policy off --stdin
+EXIT: 2
+STDOUT:
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (4d3481555460)
+ExecuTorch: not configured; template fallback
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+STDERR:
+Invalid SMS input; use nonempty text up to 4096 characters.
+
+=== 11_tampered_sha256 ===
+CMD: bash scripts/host_python.sh -m edgeshield.cli --detector /tmp/tampered_v8/detector_v8.json --advisory-policy off --stdin
+EXIT: 2
+STDERR:
+Detector unavailable or invalid. Verify the selected model and checksum.

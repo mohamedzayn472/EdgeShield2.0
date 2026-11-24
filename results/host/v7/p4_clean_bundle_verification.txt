@@ -1,0 +1,97 @@
+=== 1_package_bundle_source_only ===
+CWD: /home/zayn/Projects/edgeshield
+CMD: bash scripts/host_python.sh scripts/package_bundle.py --output-dir /tmp/edgeshield-v7-pkg --source-only
+EXIT: 0
+STDOUT:
+{
+  "files": 344,
+  "pi5_archive": {
+    "file": "edgeshield-pi5-preparation.zip",
+    "bytes": 127840769,
+    "sha256": "2f9921a772fe566cb839afa7bcd3c4b28f471d34b6c6139fecbabd2208bdb410"
+  },
+  "pi4_archive": {
+    "file": "edgeshield-pi4-preparation.zip",
+    "bytes": 127840769,
+    "sha256": "a0b1913efbeb8abf98eac2203558111722312f613498f348e982f9dcc8e185f2"
+  },
+  "runtime_archive": null,
+  "runners_archive": null,
+  "private_runtime_complete": false
+}
+
+=== 2_zip_contents_check ===
+zip_file: /tmp/edgeshield-v7-pkg/edgeshield-pi5-preparation.zip (127840769 bytes)
+zip_entry_count: 345
+models/llama entries in zip: 0 []
+
+=== 3_extract_llama_check ===
+models/llama* paths on disk: []
+
+=== 4_verify_bundle ===
+CWD: /tmp/edgeshield-v7-clean/edgeshield
+CMD: python3 scripts/verify_bundle.py
+EXIT: 0
+STDOUT:
+PASSED: 344 bundle files match manifest. This proves integrity, not authenticity or hardware compatibility.
+
+=== 5_create_fresh_venv ===
+CWD: /tmp/edgeshield-v7-clean/edgeshield
+CMD: python3 -m venv .venv
+EXIT: 0
+
+=== 6_pip_install_requirements ===
+CWD: /tmp/edgeshield-v7-clean/edgeshield
+CMD: /tmp/edgeshield-v7-clean/edgeshield/.venv/bin/pip install --quiet -r requirements/host.txt
+EXIT: 0
+
+=== 7_pip_install_package ===
+CWD: /tmp/edgeshield-v7-clean/edgeshield
+CMD: /tmp/edgeshield-v7-clean/edgeshield/.venv/bin/pip install --quiet --no-deps --no-build-isolation .
+EXIT: 0
+
+=== 8_pytest_clean_bundle ===
+CWD: /tmp/edgeshield-v7-clean/edgeshield
+CMD: /tmp/edgeshield-v7-clean/edgeshield/.venv/bin/python -m pytest -q
+EXIT: 0
+STDOUT:
+........................s............................................... [ 20%]
+........................................................................ [ 41%]
+........................................................................ [ 62%]
+........................................................................ [ 83%]
+........................................................                 [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_detector.py:71: Corpus excluded from transfer bundle; reproduce local dataset preparation to run split audit
+343 passed, 1 skipped in 6.34s
+
+=== 9a_cli_default_v5_from_tmp ===
+CWD: /tmp
+CMD: /tmp/edgeshield-v7-clean/edgeshield/.venv/bin/edgeshield --stdin --json
+EXIT: 0
+STDOUT:
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "bc98c0d961aec7c1a03e1f0e517b970765ee818f42c938152719c7b84951908b", "evidence": {"band": "LEGITIMATE", "score": 0.006299958087166925, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v5", "detector_ms": 1.27328700000362, "evidence_ms": 0.3053480013477383, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.003496999852359295}
+
+=== 9b_cli_default_v5_from_bundle_root ===
+CWD: /tmp/edgeshield-v7-clean/edgeshield
+CMD: /tmp/edgeshield-v7-clean/edgeshield/.venv/bin/edgeshield --stdin --json
+EXIT: 0
+STDOUT:
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "bc98c0d961aec7c1a03e1f0e517b970765ee818f42c938152719c7b84951908b", "evidence": {"band": "LEGITIMATE", "score": 0.006299958087166925, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v5", "detector_ms": 1.346822999039432, "evidence_ms": 0.2959489993372699, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.003707998985191807}
+
+=== 10a_cli_v7_from_tmp ===
+CWD: /tmp
+CMD: /tmp/edgeshield-v7-clean/edgeshield/.venv/bin/edgeshield --detector /tmp/edgeshield-v7-clean/edgeshield/models/detector_v7.json --stdin --json
+EXIT: 0
+STDOUT:
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "3958bebfc4c791fea10f2d861acfe8998355ea7e481212aef109657ffb79daa4", "evidence": {"band": "LEGITIMATE", "score": 0.0033253276696032542, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v7", "detector_ms": 1.3865129985788371, "evidence_ms": 0.2981239995278884, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.0035270004445919767}
+
+=== 10b_cli_v7_from_bundle_root ===
+CWD: /tmp/edgeshield-v7-clean/edgeshield
+CMD: /tmp/edgeshield-v7-clean/edgeshield/.venv/bin/edgeshield --detector /tmp/edgeshield-v7-clean/edgeshield/models/detector_v7.json --stdin --json
+EXIT: 0
+STDOUT:
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "3958bebfc4c791fea10f2d861acfe8998355ea7e481212aef109657ffb79daa4", "evidence": {"band": "LEGITIMATE", "score": 0.0033253276696032542, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v7", "detector_ms": 1.8108280000888044, "evidence_ms": 0.31711199881101493, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.003688001015689224}

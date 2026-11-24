@@ -1,10 +1,16 @@
 """Build dual-target source bundles and the private licensed aarch64 Llama runtime archive."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_DETECTOR_REL = "models/detector_v8.json"
+REQUIRED_DEFAULT_FILES = (
+    DEFAULT_DETECTOR_REL,
+    f"{DEFAULT_DETECTOR_REL}.sha256",
+)
 TOP_FILES = {"README.md", "PROJECT_STATUS.md", "pyproject.toml", ".gitignore", ".gitattributes", "EDGESHIELD_ARCHITECT_PROMPT.md"}
 TOP_DIRS = {"src", "scripts", "tests", "requirements", "configs", "docs", "deploy", "executorch", "submission", "results", "wheelhouse"}
 EXCLUDED_PARTS = {"__pycache__", ".pytest_cache", "raw", "processed", "llama", "licensed", "upstream"}
@@ -39,7 +45,46 @@ def included(path):
         return False
     return (rel.parts[0] in TOP_DIRS or str(rel) in TOP_FILES or
             rel.parts[0] == "data" and (len(rel.parts) == 2 or rel.parts[1] == "synthetic") or
-            rel.parts[0] == "models" and path.name in {"README.md", "detector_README.md", "detector.json", "detector.json.sha256", "detector_v2.json", "detector_v2.json.sha256"})
+            rel.parts[0] == "models" and path.name in {
+                "README.md",
+                "detector_README.md",
+                "detector.json",
+                "detector.json.sha256",
+                "detector_v2.json",
+                "detector_v2.json.sha256",
+                "detector_v3.json",
+                "detector_v3.json.sha256",
+                "detector_v4.json",
+                "detector_v4.json.sha256",
+                "detector_v5.json",
+                "detector_v5.json.sha256",
+                "detector_v6.json",
+                "detector_v6.json.sha256",
+                "detector_v7.json",
+                "detector_v7.json.sha256",
+                "detector_v8.json",
+                "detector_v8.json.sha256",
+            })
+
+
+def validate_required_artifacts(paths: list[Path], root: Path = ROOT) -> None:
+    """Fail packaging if any default detector artifact or its .sha256 sidecar is missing or mismatched."""
+    rel_set = {p.relative_to(root).as_posix() for p in paths}
+    for req in REQUIRED_DEFAULT_FILES:
+        if req not in rel_set:
+            raise RuntimeError(f"Required default artifact missing from bundle: {req}")
+        target = root / req
+        if not target.is_file():
+            raise RuntimeError(f"Required default artifact missing on disk: {req}")
+    model_path = root / DEFAULT_DETECTOR_REL
+    checksum_path = root / f"{DEFAULT_DETECTOR_REL}.sha256"
+    raw_sum = checksum_path.read_text(encoding="ascii").strip()
+    expected_sha = raw_sum.split()[0] if raw_sum else ""
+    actual_sha = sha256_file(model_path)
+    if len(expected_sha) != 64 or expected_sha != actual_sha:
+        raise RuntimeError(
+            f"Default detector checksum mismatch for {DEFAULT_DETECTOR_REL}: expected {expected_sha!r}, got {actual_sha!r}"
+        )
 
 
 def _build_source_zip(archive: Path, paths: list[Path], manifest_text: str) -> dict:
@@ -145,19 +190,26 @@ def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None]:
     return runtime_manifest, archive_info, runners_archive_info
 
 
-def main():
+def main(argv=None):
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--output-dir", type=Path, default=ROOT / "dist", help="Destination directory for built archives")
+    ap.add_argument("--source-only", action="store_true", help="Build only the public source/detector bundles without private Llama archives")
+    args = ap.parse_args(argv)
+
     candidates = [ROOT / name for name in TOP_FILES]
     for name in TOP_DIRS | {"data", "models"}:
         base = ROOT / name
         if base.exists():
             candidates.extend(base.rglob("*"))
     paths = sorted(p for p in candidates if p.is_file() and included(p))
+    validate_required_artifacts(paths, ROOT)
     entries = [{"path": p.relative_to(ROOT).as_posix(), "bytes": p.stat().st_size,
                 "sha256": sha256_file(p)} for p in paths]
     manifest = {
         "kind": "SOURCE_AND_DETECTOR_BUNDLE",
-        "primary_target": "Raspberry Pi 5 Model B 4 GB (aarch64)",
+        "primary_target": "Raspberry Pi 5 Model B 16 GB (aarch64)",
         "backup_target": "Raspberry Pi 4 Model B 8 GB (aarch64)",
+        "default_detector": DEFAULT_DETECTOR_REL,
         "complete_llama_deployment": False,
         "missing": [
             "licensed Llama checkpoint (host-only, not transferred)",
@@ -172,21 +224,31 @@ def main():
         "entries": entries,
     }
     manifest_text = json.dumps(manifest, indent=2)
-    (ROOT / "BUNDLE_MANIFEST.json").write_text(manifest_text, encoding="utf-8")
 
-    dest = ROOT / "dist"
-    dest.mkdir(exist_ok=True)
+    dest = args.output_dir.resolve()
+    dest.mkdir(parents=True, exist_ok=True)
+    if dest == (ROOT / "dist").resolve():
+        (ROOT / "BUNDLE_MANIFEST.json").write_text(manifest_text, encoding="utf-8")
+    else:
+        (dest / "BUNDLE_MANIFEST.json").write_text(manifest_text, encoding="utf-8")
+
     pi5_archive = _build_source_zip(dest / "edgeshield-pi5-preparation.zip", paths, manifest_text)
     pi4_archive = _build_source_zip(dest / "edgeshield-pi4-preparation.zip", paths, manifest_text)
-    runtime_manifest, runtime_archive, runners_archive = _build_private_runtime_bundle(dest)
+    if args.source_only:
+        runtime_manifest = {"complete": False, "missing": ["skipped via --source-only"], "binaries": {}, "entries": []}
+        runtime_archive = None
+        runners_archive = None
+    else:
+        runtime_manifest, runtime_archive, runners_archive = _build_private_runtime_bundle(dest)
 
-    private_inventory = {
-        **runtime_manifest,
-        "archive": runtime_archive,
-        "runners_only_archive": runners_archive,
-        "excludes": ["models/llama/host-x86_64/*", ".venv-host/*", "build/*", "data/raw/*", "data/processed/*"],
-    }
-    (dest / "PRIVATE_RUNTIME_INVENTORY.json").write_text(json.dumps(private_inventory, indent=2), encoding="utf-8")
+    if not args.source_only:
+        private_inventory = {
+            **runtime_manifest,
+            "archive": runtime_archive,
+            "runners_only_archive": runners_archive,
+            "excludes": ["models/llama/host-x86_64/*", ".venv-host/*", "build/*", "data/raw/*", "data/processed/*"],
+        }
+        (dest / "PRIVATE_RUNTIME_INVENTORY.json").write_text(json.dumps(private_inventory, indent=2), encoding="utf-8")
 
     inventory = {
         **manifest,

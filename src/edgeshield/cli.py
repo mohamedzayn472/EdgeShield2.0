@@ -1,10 +1,8 @@
 """Terminal interface. SMS input never appears in argv, logs, or output."""
 import argparse
-import getpass
 import json
 import platform
 import sys
-import warnings
 from dataclasses import asdict, replace
 from pathlib import Path
 from .indicators import DESCRIPTIONS
@@ -26,7 +24,7 @@ DEMO_CASES = (
 
 def parser():
     p = argparse.ArgumentParser(description="EdgeShield — Private intelligence. Safer decisions.")
-    p.add_argument("--detector", type=Path, default=Path("models/detector_v2.json"))
+    p.add_argument("--detector", type=Path, default=Path("models/detector_v8.json"))
     p.add_argument("--runtime-config", type=Path, help="Verified local ExecuTorch manifest/config")
     p.add_argument("--advisory-policy", choices=ADVISORY_POLICIES, default="always",
                    help="When to invoke the verified ExecuTorch advisor")
@@ -60,7 +58,9 @@ def main(argv=None):
             runtime_status = "configuration rejected; template fallback"
     if not args.json:
         print("EdgeShield | Private intelligence. Safer decisions.")
-        print(f"Device: {platform.system()} {platform.machine()} | Detector: loaded")
+        det_sha = getattr(detector, "artifact_sha256", None)
+        det_status = f"loaded ({det_sha[:12]})" if det_sha else "loaded"
+        print(f"Device: {platform.system()} {platform.machine()} | Detector: {det_status}")
         print(f"ExecuTorch: {runtime_status}")
         print("Network: application uses local processing; connectivity and traffic NOT VERIFIED.")
         print("Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.")
@@ -84,17 +84,10 @@ def main(argv=None):
             elif args.stdin:
                 text = sys.stdin.read(MAX_SMS_CHARS + 1)
             else:
-                # Avoid Python readline/history and terminal echo of private SMS.
                 if not sys.stdin.isatty():
                     print("Use --stdin for piped input.", file=sys.stderr)
                     return 2
-                try:
-                    with warnings.catch_warnings():
-                        warnings.simplefilter("error", getpass.GetPassWarning)
-                        text = getpass.getpass("Paste SMS (hidden; empty to exit): ")
-                except getpass.GetPassWarning:
-                    print("Hidden terminal input unavailable. Use --stdin through a trusted local pipe.", file=sys.stderr)
-                    return 2
+                text = input("Paste SMS (empty to exit): ")
                 if not text.strip():
                     return 0
             try:
@@ -108,7 +101,12 @@ def main(argv=None):
                 text = None  # Best effort only; Python cannot promise memory zeroization.
             if args.json:
                 quality = "EXPERIMENTAL_SYNTHETIC_TRAINED" if hasattr(detector, "char") else "FAILED_INDIAN_HINGLISH_CHALLENGE"
-                payload = {"event": "detection", "quality_status": quality, **asdict(result)}
+                payload = {
+                    "event": "detection",
+                    "quality_status": quality,
+                    "detector_sha256": getattr(detector, "artifact_sha256", None),
+                    **asdict(result),
+                }
                 if demo_key is not None:
                     payload["demo_case"] = demo_key
                 print(json.dumps(payload), flush=True)

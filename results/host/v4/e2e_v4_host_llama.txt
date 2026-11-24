@@ -1,0 +1,181 @@
+=== 1. DEFAULT CLI (--json, V3) vs EXPLICIT CANDIDATE (--detector models/detector_v4.json) ===
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910", "evidence": {"band": "LEGITIMATE", "score": 0.13033966338132172, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v3", "detector_ms": 1.109237000491703, "evidence_ms": 0.27744700128096156, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.003405999450478703}
+EXIT_DEFAULT=0
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "b6f54fab1cc4b70b4d3e1f98cd5e71e865f10ce25e6680d7a7567e40198d2f6a", "evidence": {"band": "LEGITIMATE", "score": 0.005915080994059881, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v4", "detector_ms": 1.26262800040422, "evidence_ms": 0.21174200082896277, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.0034269996831426397}
+EXIT_V4=0
+=== 2_V4_LLAMA_ANTIFRAUD_EN (Fixed FP) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.127
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.40 ms | Evidence: 0.27 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3173.80 ms | Validation: 0.54 ms | Total: 3176.01 ms
+EXIT=0
+=== 3_V4_LLAMA_USER_CARD_BLOCK_EN (Fixed Cues) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.001
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.48 ms | Evidence: 0.27 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3232.83 ms | Validation: 0.30 ms | Total: 3234.88 ms
+EXIT=0
+=== 4_V4_LLAMA_KYC_BRANCH_APPT_EN (Fixed Cues) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.000
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.33 ms | Evidence: 0.25 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3213.48 ms | Validation: 0.53 ms | Total: 3215.59 ms
+EXIT=0
+=== 5_V4_LLAMA_STATEMENT_LINK_EN (LINK_PRESENT only) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.022
+Indicators: LINK_PRESENT
+Indicator details: Link-like text appears
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.35 ms | Evidence: 0.24 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3309.46 ms | Validation: 0.30 ms | Total: 3311.34 ms
+EXIT=0
+=== 6_V4_LLAMA_FAMILY_IMP_EN (Fixed FN) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.561
+Indicators: URGENCY
+Indicator details: Urgent wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.50 ms | Evidence: 0.32 ms
+WHY: The detector estimates elevated risk. Urgent wording appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3220.33 ms | Validation: 0.57 ms | Total: 3222.72 ms
+EXIT=0
+=== 7_V4_LLAMA_HINGLISH_READ_ALOUD (Fixed UNCERTAIN->SCAM) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 0.759
+Indicators: OTP_REQUEST, HINGLISH_CUE
+Indicator details: A code sharing request appears; Romanized Hindi wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.35 ms | Evidence: 0.23 ms
+WHY: The detector estimates elevated risk. A code sharing request appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3321.08 ms | Validation: 0.56 ms | Total: 3323.21 ms
+EXIT=0
+=== 8_V4_LLAMA_GENUINE_BANK_SCAM ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: SCAM
+Experimental synthetic-trained risk score (not real-world calibrated): 1.000
+Indicators: URGENCY, THREAT_OF_BLOCK, LINK_PRESENT, SHORTENER_LINK, BANK_IMPERSONATION, KYC_IMPERSONATION
+Indicator details: Urgent wording appears; Account restriction wording appears; Link-like text appears; A known link shortener appears; Suspicious bank-related request or warning appears; Identity verification wording appears
+DO: Do not open suspicious links. Verify the message using the organization's independently known official channel.
+Detector: 1.64 ms | Evidence: 0.33 ms
+WHY: The detector estimates elevated risk. A known link shortener appears.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3630.61 ms | Validation: 0.46 ms | Total: 3633.05 ms
+EXIT=0
+=== 9_V4_LLAMA_REMAINING_MISSED_SCAM_v4h099 (False Reassurance Audit) ===
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: configured; inference not yet verified in this session
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+
+Threat band: LEGITIMATE
+Experimental synthetic-trained risk score (not real-world calibrated): 0.027
+Indicators: none
+DO: The detector estimates lower risk. Verify unusual requests independently.
+Detector: 1.46 ms | Evidence: 0.28 ms
+WHY: The detector estimates lower risk, without authenticating the sender.
+Source: Llama (validated) | Status: ACCEPTED
+Llama execution: 3287.27 ms | Validation: 0.55 ms | Total: 3289.55 ms
+EXIT=0
+=== 10_V4_POLICY_OFF_AND_MISSING_RUNTIME ===
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "b6f54fab1cc4b70b4d3e1f98cd5e71e865f10ce25e6680d7a7567e40198d2f6a", "evidence": {"band": "SCAM", "score": 0.9998954802611627, "indicators": ["URGENCY", "THREAT_OF_BLOCK", "LINK_PRESENT", "SHORTENER_LINK", "BANK_IMPERSONATION", "KYC_IMPERSONATION"], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v4", "detector_ms": 1.3762129983660998, "evidence_ms": 0.23787200007063802, "advice": "DO: Do not open suspicious links. Verify the message using the organization's independently known official channel."}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. A known link shortener appears.", "source": "Template fallback", "reason": "SKIPPED_BY_POLICY", "llama_ms": null, "validation_ms": 0.011441999959060922}
+EXIT_POLICY_OFF=0
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "b6f54fab1cc4b70b4d3e1f98cd5e71e865f10ce25e6680d7a7567e40198d2f6a", "evidence": {"band": "UNCERTAIN", "score": 0.17008825486020612, "indicators": ["URGENCY", "OTP_REQUEST"], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v4", "detector_ms": 1.3517770003090845, "evidence_ms": 0.20911700084980112, "advice": "DO: Confirm the request through the official application or a trusted contact method before taking action."}
+{"event": "explanation", "why": "WHY: The detector is uncertain. A code sharing request appears.", "source": "Template fallback", "reason": "RUNTIME_CONFIGURATION_REJECTED", "llama_ms": null, "validation_ms": 0.006321999535430223}
+EXIT_MISSING_RT=0
+=== 11_INVALID_INPUTS_AND_CORRUPT_V4_CHECKSUM ===
+Invalid SMS input; use nonempty text up to 4096 characters.
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: not configured; template fallback
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+EXIT_EMPTY=2
+Invalid SMS input; use nonempty text up to 4096 characters.
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: not configured; template fallback
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+EXIT_OVERSIZE=2
+Invalid SMS input; use nonempty text up to 4096 characters.
+EdgeShield | Private intelligence. Safer decisions.
+Device: Linux x86_64 | Detector: loaded (b6f54fab1cc4)
+ExecuTorch: not configured; template fallback
+Network: application uses local processing; connectivity and traffic NOT VERIFIED.
+Privacy: SMS is not saved. No automatic message actions. Lower risk does not prove safety.
+Experimental synthetic-trained detector. Human review and real-world validation are still pending.
+EXIT_PUA=2
+Detector unavailable or invalid. Verify the selected model and checksum.
+EXIT_BAD_SUM=2

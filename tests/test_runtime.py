@@ -234,3 +234,87 @@ def test_verify_environment_runner_device_compatibility(tmp_path, monkeypatch):
     ve.main(["--device", "pi4", "--runtime", str(pi5_cfg), "--output", str(out_pi5_on_pi4)])
     r54 = json.loads(out_pi5_on_pi4.read_text(encoding="utf-8"))
     assert r54["checks"]["runner_compatible_with_device"] is False
+
+
+def test_bounded_run_kills_and_reaps_child_on_base_exception(tmp_path):
+    import os
+    import signal
+    import threading
+    import time
+
+    pid_file = tmp_path / "child.pid"
+
+    class InterruptRun(BaseException):
+        pass
+
+    prev_handler = signal.getsignal(signal.SIGALRM)
+
+    def _on_alarm(signum, frame):
+        raise InterruptRun("interrupted")
+
+    signal.signal(signal.SIGALRM, _on_alarm)
+    stop_thread = threading.Event()
+
+    def _trigger_when_ready():
+        deadline = time.monotonic() + 5.0
+        while not stop_thread.is_set() and time.monotonic() < deadline:
+            if pid_file.is_file() and pid_file.read_text(encoding="utf-8").strip().isdigit():
+                os.kill(os.getpid(), signal.SIGALRM)
+                return
+            time.sleep(0.02)
+
+    t = threading.Thread(target=_trigger_when_ready, daemon=True)
+    t.start()
+    try:
+        script = (
+            f"import os, time; "
+            f"open({str(pid_file)!r}, 'w').write(str(os.getpid())); "
+            f"time.sleep(30)"
+        )
+        with pytest.raises(InterruptRun):
+            bounded_run([sys.executable, "-c", script], timeout=30, max_bytes=4096)
+    finally:
+        stop_thread.set()
+        t.join(timeout=1)
+        signal.signal(signal.SIGALRM, prev_handler)
+
+    child_pid = int(pid_file.read_text(encoding="utf-8").strip())
+    with pytest.raises(ProcessLookupError):
+        os.kill(child_pid, 0)
+
+
+def test_advisor_last_timing_recorded_and_preserved_on_protocol_errors(runtime_config, monkeypatch):
+    advisor = ExecuTorchAdvisor(runtime_config)
+    assert advisor.last_timing is None
+
+    monkeypatch.setattr(
+        "edgeshield.advisory.bounded_run",
+        lambda *a, **k: "promptWHY: The detector is uncertain." + TRAILER,
+    )
+    assert advisor.generate("prompt") == "WHY: The detector is uncertain."
+    assert advisor.last_timing is not None
+    assert set(advisor.last_timing) == {"integrity_ms", "runner_wall_ms"}
+    assert advisor.last_timing["integrity_ms"] >= 0
+    assert advisor.last_timing["runner_wall_ms"] >= 0
+
+    monkeypatch.setattr("edgeshield.advisory.bounded_run", lambda *a, **k: "promptWHY: Uncertain.")
+    with pytest.raises(AdvisoryError, match="RUNNER_STATS_PROTOCOL"):
+        advisor.generate("prompt")
+    assert advisor.last_stats is None
+    assert advisor.last_timing is not None
+    assert advisor.last_timing["integrity_ms"] >= 0
+    assert advisor.last_timing["runner_wall_ms"] >= 0
+
+    monkeypatch.setattr(
+        "edgeshield.advisory.bounded_run",
+        lambda *a, **k: "promptWHY: Truncated." + TRAILER.replace('"generated_tokens":8', '"generated_tokens":47'),
+    )
+    with pytest.raises(AdvisoryError, match="RUNNER_TOKEN_LIMIT"):
+        advisor.generate("prompt")
+    assert advisor.last_timing is not None
+    assert advisor.last_timing["runner_wall_ms"] >= 0
+
+    with pytest.raises(AdvisoryError, match="RUNTIME_PROMPT_INVALID"):
+        advisor.generate("")
+    assert advisor.last_timing is None
+    assert advisor.last_stats is None

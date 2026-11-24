@@ -1,0 +1,26 @@
+=== P4 CLEAN EXTRACT VERIFICATION (dist/edgeshield-v8-pi5-handoff/edgeshield-pi5-preparation.zip) ===
+--- 1. SHA256SUMS check ---
+ARTIFACT_INVENTORY.json: OK
+BUNDLE_MANIFEST.json: OK
+edgeshield-pi4-preparation.zip: OK
+edgeshield-pi5-preparation.zip: OK
+--- 2. Private Llama files check (must be 0) ---
+models/llama/* count: 0
+--- 3. verify_bundle.py ---
+PASSED: 362 bundle files match manifest. This proves integrity, not authenticity or hardware compatibility.
+--- 4. Fresh isolated .venv provisioning & pytest ---
+........................s............................................... [ 19%]
+........................................................................ [ 39%]
+........................................................................ [ 59%]
+........................................................................ [ 79%]
+........................................................................ [ 99%]
+..                                                                       [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_detector.py:71: Corpus excluded from transfer bundle; reproduce local dataset preparation to run split audit
+361 passed, 1 skipped in 6.57s
+--- 5. Default CLI resolution from /tmp (no --detector flag) ---
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "4d3481555460d2bf5dfaf5e28fc107786f38ea34400358e4637b5bd9b0afd365", "evidence": {"band": "LEGITIMATE", "score": 0.005139492951965812, "indicators": [], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v8", "detector_ms": 1.653933999932633, "evidence_ms": 0.3761459997804195, "advice": "DO: The detector estimates lower risk. Verify unusual requests independently."}
+{"event": "explanation", "why": "WHY: The detector estimates lower risk, without authenticating the sender.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.005319999672792619}
+--- 6. Default CLI resolution from bundle root (no --detector flag) ---
+{"event": "detection", "quality_status": "EXPERIMENTAL_SYNTHETIC_TRAINED", "detector_sha256": "4d3481555460d2bf5dfaf5e28fc107786f38ea34400358e4637b5bd9b0afd365", "evidence": {"band": "SCAM", "score": 0.9990978581265331, "indicators": ["URGENCY", "OTP_REQUEST", "BANK_IMPERSONATION"], "schema_version": 1}, "score_label": "Experimental synthetic-trained risk score (not real-world calibrated)", "model_version": "edgeshield-word-char-lr-v8", "detector_ms": 1.3289149997035565, "evidence_ms": 0.24019100010264083, "advice": "DO: Do not open suspicious links. Verify the message using the organization's independently known official channel."}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. A code sharing request appears.", "source": "Template fallback", "reason": "RUNTIME_NOT_CONFIGURED", "llama_ms": null, "validation_ms": 0.006601999757549493}

@@ -1,0 +1,58 @@
+16639 +++ exited with 0 +++
+16632 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16639, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+16632 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_KERNEL} ---
+16645 +++ exited with 0 +++
+16643 +++ exited with 0 +++
+16644 +++ exited with 0 +++
+16646 +++ exited with 0 +++
+16640 +++ exited with 0 +++
+16641 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16640, si_uid=1000, si_status=0, si_utime=962 /* 9.62 s */, si_stime=33 /* 0.33 s */} ---
+16642 +++ exited with 0 +++
+16641 +++ exited with 0 +++
+16652 +++ exited with 0 +++
+16651 +++ exited with 0 +++
+16650 +++ exited with 0 +++
+16647 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_KERNEL} ---
+16632 --- SIGWINCH {si_signo=SIGWINCH, si_code=SI_KERNEL} ---
+16653 +++ exited with 0 +++
+16647 +++ exited with 0 +++
+16649 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16647, si_uid=1000, si_status=0, si_utime=926 /* 9.26 s */, si_stime=35 /* 0.35 s */} ---
+16648 +++ exited with 0 +++
+16649 +++ exited with 0 +++
+16659 +++ exited with 0 +++
+16657 +++ exited with 0 +++
+16658 +++ exited with 0 +++
+16660 +++ exited with 0 +++
+16654 +++ exited with 0 +++
+16632 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16654, si_uid=1000, si_status=0, si_utime=981 /* 9.81 s */, si_stime=31 /* 0.31 s */} ---
+16655 +++ exited with 0 +++
+16656 +++ exited with 0 +++
+16677 +++ exited with 0 +++
+16675 +++ exited with 0 +++
+16676 +++ exited with 0 +++
+16678 +++ exited with 0 +++
+16672 +++ exited with 0 +++
+16632 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16672, si_uid=1000, si_status=0, si_utime=968 /* 9.68 s */, si_stime=30 /* 0.30 s */} ---
+16673 +++ exited with 0 +++
+16674 +++ exited with 0 +++
+16683 +++ exited with 0 +++
+16684 +++ exited with 0 +++
+16682 +++ exited with 0 +++
+16685 +++ exited with 0 +++
+16679 +++ exited with 0 +++
+16632 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16679, si_uid=1000, si_status=0, si_utime=922 /* 9.22 s */, si_stime=28 /* 0.28 s */} ---
+16680 +++ exited with 0 +++
+16681 +++ exited with 0 +++
+16712 +++ exited with 0 +++
+16632 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16712, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+16713 +++ exited with 0 +++
+16632 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16713, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+16714 +++ exited with 128 +++
+16632 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=16714, si_uid=1000, si_status=128, si_utime=0, si_stime=0} ---
+16635 +++ exited with 0 +++
+16634 +++ exited with 0 +++
+16633 +++ exited with 0 +++
+16636 +++ exited with 0 +++
+16637 +++ exited with 0 +++
+16638 +++ exited with 0 +++
+16632 +++ exited with 0 +++

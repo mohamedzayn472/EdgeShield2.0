@@ -1,0 +1,14 @@
+2026-11-18T13:11:23Z
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       579Mi        10Gi        41Mi       5.2Gi        15Gi
+Swap:          2.0Gi          0B       2.0Gi
+MemTotal:       16603456 kB
+MemFree:        10699504 kB
+MemAvailable:   16009808 kB
+SwapTotal:       2097136 kB
+SwapFree:        2097136 kB
+NAME       TYPE      SIZE USED PRIO
+/dev/zram0 partition   2G   0B  100
+thermal_zone0_millic=58950
+temp=59.3'C
+throttled=0x0

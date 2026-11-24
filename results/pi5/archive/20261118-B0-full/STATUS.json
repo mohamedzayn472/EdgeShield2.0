@@ -1,0 +1,19 @@
+{
+  "status": "PENDING_HARDWARE",
+  "device": "Raspberry Pi 5 Model B 4 GB",
+  "role": "PRIMARY_TARGET",
+  "inference_verified": false,
+  "offline_verified": false,
+  "measurements": null,
+  "staged_host_assets": {
+    "pte_model": "models/llama/llama3_2.pte",
+    "pte_sha256": "c31e4d376f349de85b4422a8c0405d88f21145709f0e17168b06d809ffe5e8a2",
+    "tokenizer": "models/llama/tokenizer.model",
+    "tokenizer_sha256": "82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55",
+    "pi5_native_bookworm_trixie": "models/llama/pi5-aarch64/ (Arm GNU 12.2.rel1, Cortex-A76, GLIBC <= 2.34)",
+    "pi4_baseline_candidate": "models/llama/pi4-aarch64/ (Arm GNU 12.2.rel1, Cortex-A72, GLIBC <= 2.34)",
+    "wheelhouse_cp313": "wheelhouse/pi5-cp313-aarch64/",
+    "wheelhouse_cp311_seed": "wheelhouse/pi4-cp311/"
+  },
+  "reason": "Laptop preparation, cross-builds, wheelhouse, and verification bundles are ready; physical Raspberry Pi 5 execution, 4 GB memory measurement, thermals, and offline trace remain PENDING_HARDWARE."
+}

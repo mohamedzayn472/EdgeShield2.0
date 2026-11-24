@@ -1,0 +1,15 @@
+
+========== EDGESHIELD V8 BATCH RESULTS ==========
+
+{"test_number": 1, "test": "Bank OTP scam", "classification": "SCAM", "score": 0.9973872930881176, "indicators": ["URGENCY", "THREAT_OF_BLOCK", "OTP_REQUEST", "BANK_IMPERSONATION"], "latency_ms": 2.284563999637612}
+{"test_number": 2, "test": "Delivery notification", "classification": "LEGITIMATE", "score": 0.2057783018843447, "indicators": ["DELIVERY_LURE"], "latency_ms": 2.304675000232237}
+{"test_number": 3, "test": "Meeting reminder", "classification": "LEGITIMATE", "score": 0.000785487679620788, "indicators": [], "latency_ms": 2.4168039999494795}
+{"test_number": 4, "test": "Suspicious link", "classification": "SCAM", "score": 0.9996927036659763, "indicators": ["URGENCY", "THREAT_OF_BLOCK", "LINK_PRESENT", "BANK_IMPERSONATION"], "latency_ms": 2.8010249998260406}
+{"test_number": 5, "test": "OTP sharing", "classification": "SCAM", "score": 0.9640824401964683, "indicators": [], "latency_ms": 2.8898760001538903}
+{"test_number": 6, "test": "Bank transaction", "classification": "LEGITIMATE", "score": 0.04476623080355911, "indicators": [], "latency_ms": 2.610839999761083}
+{"test_number": 7, "test": "Lottery scam", "classification": "SCAM", "score": 0.9290647199367393, "indicators": ["PRIZE_LURE"], "latency_ms": 2.332527000362461}
+{"test_number": 8, "test": "Password reset", "classification": "UNCERTAIN", "score": 0.6410857746897947, "indicators": [], "latency_ms": 2.3688410001341254}
+{"test_number": 9, "test": "Urgent payment scam", "classification": "SCAM", "score": 0.9116465747867301, "indicators": ["URGENCY"], "latency_ms": 2.3187300002973643}
+{"test_number": 10, "test": "Family message", "classification": "LEGITIMATE", "score": 0.013151854967626601, "indicators": [], "latency_ms": 2.2305090005829697}
+
+Results saved to batch_results.json

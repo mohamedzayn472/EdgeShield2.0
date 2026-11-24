@@ -14,7 +14,16 @@ def test_private_and_incompatible_assets_excluded(name):
     assert not bundle.included(bundle.ROOT / name)
 
 
-@pytest.mark.parametrize("name", ["README.md", ".gitignore", "src/edgeshield/cli.py", "models/detector.json",
+@pytest.mark.parametrize("name", ["README.md", ".gitignore", "src/edgeshield/cli.py",
+                                  "src/edgeshield/detector_v3.py", "src/edgeshield/detector_v4.py", "src/edgeshield/detector_v5.py", "src/edgeshield/detector_v6.py", "src/edgeshield/detector_v7.py", "src/edgeshield/detector_v8.py",
+                                  "models/detector.json", "models/detector.json.sha256",
+                                  "models/detector_v2.json", "models/detector_v2.json.sha256",
+                                  "models/detector_v3.json", "models/detector_v3.json.sha256",
+                                  "models/detector_v4.json", "models/detector_v4.json.sha256",
+                                  "models/detector_v5.json", "models/detector_v5.json.sha256",
+                                  "models/detector_v6.json", "models/detector_v6.json.sha256",
+                                  "models/detector_v7.json", "models/detector_v7.json.sha256",
+                                  "models/detector_v8.json", "models/detector_v8.json.sha256",
                                   "data/synthetic/examples.jsonl", "deploy/pi4/README.md", "deploy/pi5/setup.sh",
                                   "requirements/pi5.txt", "results/pi4/STATUS.json", "results/pi5/STATUS.json",
                                   "wheelhouse/pi5-cp313-aarch64/SHA256SUMS"])
@@ -162,3 +171,65 @@ def test_verify_and_repair_pte_split_check_patch_and_repair(tmp_path, monkeypatc
     repaired = tmp_path / "repaired.pte"
     assert mod.main(["--repair", str(repaired), "--source", str(zip_a), "--source", str(zip_b)]) == 0
     assert repaired.read_bytes() == payload
+
+
+def test_default_detector_and_checksum_are_packaged_and_aligned():
+    import edgeshield.benchmarking as benchmarking
+    from edgeshield import cli
+    from edgeshield.model_loader import DEFAULT_DETECTOR_PATH, load_detector
+
+    assert DEFAULT_DETECTOR_PATH == Path("models/detector_v8.json")
+    assert cli.parser().parse_args([]).detector == DEFAULT_DETECTOR_PATH
+
+    # Confirm benchmarking.main also defaults --detector to DEFAULT_DETECTOR_PATH
+    bench_src = Path("src/edgeshield/benchmarking.py").read_text(encoding="utf-8")
+    assert 'default=Path("models/detector_v8.json")' in bench_src
+    assert benchmarking.resolve_default_detector(DEFAULT_DETECTOR_PATH).resolve() == (bundle.ROOT / DEFAULT_DETECTOR_PATH).resolve()
+
+    model_path = bundle.ROOT / DEFAULT_DETECTOR_PATH
+    sum_path = bundle.ROOT / f"{DEFAULT_DETECTOR_PATH.as_posix()}.sha256"
+    assert bundle.included(model_path)
+    assert bundle.included(sum_path)
+    assert model_path.is_file()
+    assert sum_path.is_file()
+    assert bundle.sha256_file(model_path) == sum_path.read_text(encoding="ascii").strip()
+
+    detector = load_detector(model_path)
+    assert getattr(detector, "artifact_sha256", None) == bundle.sha256_file(model_path)
+    assert bundle.DEFAULT_DETECTOR_REL == DEFAULT_DETECTOR_PATH.as_posix()
+
+
+def test_packaging_fails_when_default_detector_or_checksum_missing(tmp_path):
+    import shutil
+    from edgeshield.model_loader import load_detector
+
+    fake_root = tmp_path / "bundle"
+    models_dir = fake_root / "models"
+    models_dir.mkdir(parents=True)
+    src_model = bundle.ROOT / "models" / "detector_v8.json"
+    src_sum = bundle.ROOT / "models" / "detector_v8.json.sha256"
+    dst_model = models_dir / "detector_v8.json"
+    dst_sum = models_dir / "detector_v8.json.sha256"
+    shutil.copy2(src_model, dst_model)
+    shutil.copy2(src_sum, dst_sum)
+
+    # Valid baseline succeeds
+    bundle.validate_required_artifacts([dst_model, dst_sum], fake_root)
+
+    # Missing model artifact in packaged paths fails
+    with pytest.raises(RuntimeError, match="detector_v8.json"):
+        bundle.validate_required_artifacts([dst_sum], fake_root)
+
+    # Missing .sha256 sidecar in packaged paths fails
+    with pytest.raises(RuntimeError, match="sha256"):
+        bundle.validate_required_artifacts([dst_model], fake_root)
+
+    # Corrupted .sha256 sidecar fails
+    dst_sum.write_text("0" * 64 + "\n", encoding="ascii")
+    with pytest.raises(RuntimeError, match="checksum mismatch"):
+        bundle.validate_required_artifacts([dst_model, dst_sum], fake_root)
+
+    # Removing .sha256 also fails runtime load_detector
+    dst_sum.unlink()
+    with pytest.raises(OSError):
+        load_detector(dst_model)

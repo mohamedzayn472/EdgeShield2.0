@@ -14,6 +14,7 @@ import platform
 import re
 import subprocess
 import threading
+import time
 
 
 class AdvisoryError(RuntimeError):
@@ -63,11 +64,24 @@ def bounded_run(argv, *, timeout, max_bytes, env=None):
         reader.start()
     timed_out = False
     try:
-        proc.wait(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        timed_out = True
-        proc.kill()
-        proc.wait()
+        try:
+            proc.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            proc.kill()
+            proc.wait()
+    except BaseException:
+        try:
+            proc.kill()
+        except OSError:
+            pass
+        try:
+            proc.wait()
+        except BaseException:
+            pass
+        for reader in readers:
+            reader.join(timeout=2)
+        raise
     for reader in readers:
         reader.join(timeout=2)
     if timed_out:
@@ -134,6 +148,7 @@ Model/runner/tokenizer hashes are checked on construction and before each call.
                 raise ValueError()
             self.config = c
             self.last_stats = None
+            self.last_timing = None
             self.verify_integrity()
         except AdvisoryError:
             raise
@@ -160,9 +175,15 @@ Model/runner/tokenizer hashes are checked on construction and before each call.
 
     def generate(self, prompt: str) -> str:
         self.last_stats = None
+        self.last_timing = None
         if not isinstance(prompt, str) or not prompt or len(prompt.encode("utf-8")) > 8192 or "\x00" in prompt:
             raise AdvisoryError("RUNTIME_PROMPT_INVALID")
-        self.verify_integrity()
+        integrity_start = time.perf_counter()
+        try:
+            self.verify_integrity()
+        finally:
+            integrity_ms = (time.perf_counter() - integrity_start) * 1000
+            self.last_timing = {"integrity_ms": integrity_ms, "runner_wall_ms": None}
         c = self.config
         argv = [str(self.files["runner"][0]), "--model_path", str(self.files["model"][0]),
                 "--tokenizer_path", str(self.files["tokenizer"][0]), "--seq_len", str(c["seq_len"]),
@@ -174,7 +195,12 @@ Model/runner/tokenizer hashes are checked on construction and before each call.
             env.pop(key, None)
         if self.libraries:
             env["LD_LIBRARY_PATH"] = os.pathsep.join(sorted({str(path.parent) for path, _ in self.libraries}))
-        output = bounded_run(argv, timeout=c["timeout_seconds"], max_bytes=c["max_output_bytes"], env=env)
+        runner_start = time.perf_counter()
+        try:
+            output = bounded_run(argv, timeout=c["timeout_seconds"], max_bytes=c["max_output_bytes"], env=env)
+        finally:
+            runner_wall_ms = (time.perf_counter() - runner_start) * 1000
+            self.last_timing = {"integrity_ms": integrity_ms, "runner_wall_ms": runner_wall_ms}
         if c["stdout_mode"] == "prompt_echo":
             if not output.startswith(prompt):
                 raise AdvisoryError("RUNNER_OUTPUT_PROTOCOL")

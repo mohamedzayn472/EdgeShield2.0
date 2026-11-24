@@ -1,49 +1,86 @@
-# Presentation content
+# EdgeShield Phase 1 submission draft
 
-This is slide-by-slide source content, not a generated PowerPoint. Replace `[PENDING_HARDWARE]` / `[PENDING_PARTICIPANTS]` placeholders only after executing on the physical Pi 4 and with real human participants. Do not present Ubuntu x86_64 host numbers as Pi 4 results.
+**Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying**
+
+The submission includes the source code, runnable application, demonstration video, and technical report. Host the project on GitHub and submit through the official challenge form by **23 November 2026**. The PS3 mentoring slides 03 and 11 recommend one complete, testable on-device security workflow. EdgeShield focuses on scam SMS. [Official challenge brief and PS3 mentoring session](https://arm-education.github.io/Arm-Developer-Labs/Bharat_AI_SoC_2026_27.html)
 
 ## 1. EdgeShield
 
-Private intelligence. Safer decisions.
+A local SMS scam assistant for a CPU-only Raspberry Pi 5. It flags risk, explains the evidence in plain language, and recommends a safe next action.
 
-An SMS-first local safety assistant with independent detection, bounded explanation, and deterministic advice. Team: add the three students' names and roles after review.
+Add the team name, member names and roles, institution, and faculty mentor before export.
 
 ## 2. The user problem
 
-People must decide whether an unexpected message deserves action. Ordinary OTP, payment, and delivery notices can resemble scams. False alarms and false reassurance both matter. No unsupported prevalence statistic is needed.
+Legitimate OTPs, bank alerts, payment notices, and delivery messages can share cues with scams. The assistant needs to catch dangerous requests while limiting false alarms on everyday messages. When evidence is ambiguous, it can show an `UNCERTAIN` verdict and suggest independent verification.
 
-## 3. What Phase 1 delivers
+## 3. Phase 1 scope
 
-User-pasted SMS, a statistical score and abstaining decision, observable cue IDs, evidence-only Llama 3.2 1B SpinQuant advisory integration via ExecuTorch, strict explanation validation, conditional hybrid policy (`--advisory-policy`), and fixed `DO:` advice. URL reputation, network intrusion, and malware analysis remain gaps.
+The user pastes an SMS and receives a risk verdict, observable cues, a Llama explanation when available, and a recommended action. The workflow runs locally on the Pi. Standalone phishing URL classification, network intrusion monitoring, and malware analysis are future work.
 
-## 4. Architecture
+## 4. On-device architecture
 
-Use the Mermaid diagram in `docs/ARCHITECTURE.md`. Highlight the raw-text/evidence boundary and separate Python V2 TF-IDF/LR detector (`< 1 ms` host median) from ExecuTorch Llama (`~3.4 s` host median cold subprocess). Advice is application-owned. No cloud inference or automatic action.
+1. The local detector scores the SMS using word and character TF-IDF and logistic regression. Validation-selected thresholds produce `LEGITIMATE`, `UNCERTAIN`, or `SCAM`.
+2. The detector provides the risk band, score, and enumerated cue IDs. The application selects the next action.
+3. Llama runs through ExecuTorch on the Pi CPU and generates an explanation using the structured evidence. The validator checks the explanation against the detected risk and cues. The CLI labels a template fallback when it uses one.
 
-## 5. Detector and data
+Use the [architecture diagram](../docs/ARCHITECTURE.md) to show the evidence boundary and the two paths.
 
-Word + character TF-IDF plus class-weighted binary logistic regression; validation-selected bands (`[0.25, 0.275]`). Explain spam as a proxy, duplicate/template-family controls, and held-out test discipline. Show UCI (`148/164` recall, `1/984` FPR in Windows regression) and synthetic Indian/Hinglish results (`50/60` scams, `24/30` Hinglish, `1/60` false alarm) separately, with sample counts.
+## 5. Detector evaluation
 
-## 6. Privacy and explanation safety
+Use these identical-row synthetic holdout figures (`results/host/v8/v3_v5_v6_v7_v8_evaluation.json`), noting clearly that **archived Pi 5 B0 & offline Llama tests measured V2 (`f37c3dd9...`)**, **V8 (`4d348155...`)** is verified offline on Pi 5 in detector-only mode (`results/pi5/v8-offline-20261124/`), and **V8 + Llama on Pi 5** is `PENDING_HARDWARE`:
 
-Only fixed `Evidence` values reach Llama (`band`, `score`, indicator IDs, `schema_version=1`). Replacing raw internal enum names and zero-shot prompting with 1-shot defensive framing + salience-ordered fallback raised 1B SpinQuant validator acceptance from `11.1%` (`48/432`) to **`100%`** (`432/432` dev, `132/132` holdout, `20/20` comparison). Show an actual valid output and a clearly labelled adversarial validator fixture. State that validation cannot guarantee detector correctness.
+| Synthetic holdout (`V8 [0.55, 0.675]`) | Version | Scams detected | Legitimate messages flagged | Abstentions |
+|---|---|---:|---:|---:|
+| **`v8_holdout` (`240` labeled; `24` ambiguous excl.)** | **V8 (`4d348155...`)** | **119/120 (99.17% recall)** | **1/120 (0.83% FPR)** | **1** |
+| **`v3_holdout` (`160`: 80 legit, 80 scam)** | **V8 (`4d348155...`)** | **79/80 (98.75% recall)** | **0/80 (0.00% FPR)** | **0** |
+| **`v2_holdout` (`120` labeled; `12` ambiguous excl.)** | **V8 (`4d348155...`)** | **57/60 (95.00% recall)** | **1/60 (1.67% FPR)** | **2** |
+| **`uci_test` (`1,148`: 984 legit, 164 scam)** | **V8 (`4d348155...`)** | **145/164 (88.41% recall)** | **0/984 (0.00% FPR)** | **2** |
 
-## 7. Arm deployment
+On `v8_holdout`, V8 achieved **99.17% accuracy**, **99.17% precision**, **0.9917 F1**, **0.99993 ROC-AUC**, and **0.00857 Brier score** (`[[119, 0, 1], [0, 1, 119]]`), using OTP/short-number separation (`src/edgeshield/detector_v8.py`) alongside repaired clause-level cue rules (`src/edgeshield/indicators.py`). State clearly that synthetic data does not measure real-world accuracy. [V8 Evaluation Protocol](../docs/V8_EVALUATION_PROTOCOL.md) · [V3 Evaluation Report](../docs/V3_EVALUATION_REPORT.md) · [V2 Results](../docs/V2_RESULTS.md)
 
-- Model: `Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8` (`llama3_2.pte`, `1.00 GiB`, SHA-256 `c31e4d37...`, ExecuTorch `985c1ceccc8bb8b6a32294f71aeb5d2f299562f7`, `TiktokenTokenizer`).
-- Cross-build prepared for Pi 4 Model B 8 GB (`aarch64`, `-march=armv8-a -mtune=cortex-a72`, Arm GNU `12.2.rel1`, `GLIBC <= 2.34` Bookworm-compatible; SHA-256 `2dff99fe...` & `b4c1c42f...`).
-- Physical Pi 4 execution: `[PENDING_HARDWARE]` (insert device diagnostics, OS/GLIBC, and real device photo/logs only after lab run).
+## 6. Privacy and user safeguards
 
-## 8. Measured results
+- The detector processes the SMS locally. The Llama prompt receives structured detector evidence and omits the raw SMS, sender, and URL.
+- The application selects the recommended action. Show a recommendation to verify through a trusted channel and explain that the user decides what to do next.
+- Use fictional examples in the video. Use consented, anonymized examples for any future real-message evaluation. Describe controlled offline model updates as future work.
 
-- **V2 synthetic holdout (n=120, reproduced on Ubuntu):** `50/60` scams (`83.33%` recall), English `26/30` (`0` false alarms), Hinglish `24/30` (`1` false alarm, `1.67%` FPR), `10` scams assigned `LEGITIMATE`, `0` abstentions. Preserve V1 failure (`1/12` scams, `0/6` Hinglish) as history.
-- **Ubuntu x86_64 HOST TESTS (labeled explicitly as host, NOT Pi 4):** `176` software tests pass (`1` skipped); detector median `0.554 ms` (`0.625 ms` mean, `0.989 ms` p95); cold `ExecuTorchAdvisor` (`cpu_threads=2`, 10 reps) `10/10` validated, `llama_ms` median `3434.78 ms` (`1568.5 ms` load, `772.0 ms` prefill, `45.23 tok/s` decode, `1628.5 MiB` child peak RSS); 20-case host comparison `20/20` accepted (`0/20` fallback).
-- **Pi 4 device timings & memory:** `[PENDING_HARDWARE]`.
+## 7. Verified Arm deployment
+
+- **Target:** Physical Raspberry Pi 5 Model B Rev 1.1, 16 GB, CPU-only, `aarch64`, Debian 13 (Trixie), Python 3.13.5, glibc 2.41.
+- **Model and runtime:** Llama 3.2 1B Instruct, SpinQuant INT4 EO8, approximately 1.00 GiB `.pte`. ExecuTorch revision `985c1ceccc8bb8b6a32294f71aeb5d2f299562f7`, XNNPACK CPU backend, `pi5-cortex-a76-native` runner, two CPU threads.
+- **Device evidence:** The Pi 5 smoke run produced validated Llama explanations. The runtime manifest and export notes record model identity, quantization, backend, and artifact hashes. [Pi 5 environment](../results/pi5/archive/20261118-B0-full/environment.json) · [Pi 5 smoke test](../results/pi5/archive/20261118-B0-full/smoke_test.txt) · [Runtime sources](../docs/SOURCES_RUNTIME.md)
+
+## 8. Measured Pi 5 results
+
+| Metric | Result |
+|---|---:|
+| Detector inference p95 | **0.92 ms** over 100 detector-only samples |
+| Full response p95 | **6.81 s** over 91 sustained requests |
+| Runtime time to first token, median | **3.20 s** |
+| Decode rate, median | **13.49 tokens/s** |
+| Sustained runtime output | **91/91** passed the explanation validator, with zero fallbacks in 605 s |
+| Peak runner RSS and maximum swap used | **1.44 GB** (**1.34 GiB**) RSS and **0 bytes** swap used |
+| Passive heatsink, open board | **83.7 °C** peak sampled temperature, with throttling (`0xe0008`) under continuous load |
+
+The detector figure measures model inference in a detector-only run (`benchmark-detector.json`). The full-response figure measures the benchmark pipeline, including the advisory (`benchmark.json`). The 91/91 result measures explanation validation. Use slide 5 for detection accuracy. Document the fixture set, timing boundaries, and cooling setup in the report. [Detector-only run](../results/pi5/archive/20261118-B0-full/benchmark-detector.json) · [Sustained run](../results/pi5/archive/20261118-B0-full/benchmark.json)
 
 ## 9. Offline demo and limitations
 
-Show Pi 4 disconnected interface state and `strace` offline proof (`[PENDING_HARDWARE]`). Disclose scope gaps (no URL/network/malware), synthetic-data limits (`10/60` missed scams, human review open), narrow explanation grammar, and 5-person clarity study status (`[PENDING_PARTICIPANTS]`, instrument in `docs/CLARITY_STUDY_INSTRUMENT.md`).
+**Offline verification on physical Pi 5 (`VERIFIED`):**
+- **V8 + ExecuTorch Llama (`results/pi5/v8-device-20261124/`, `8/8 OK`):** `eth0`/`wlan0` `DOWN`, empty `offline_routes.json`, **zero `AF_INET`/`AF_INET6` matches** in `v8_offline_network.trace`, **5/5 `Llama (validated)`** (`6.51 s` med / `6.85 s` p95 full response, `1.44 GB` / `1.34 GiB` RSS, `0 B` swap, `72.7 °C` max, `throttled=0x0`).
+- **V8 detector-only batch & suite (`results/pi5/v8-offline-20261124/`):** `361 passed / 1 skipped` (`52.35 s`), `50` repeated batch detections (`5` runs × `10` messages: `2.4321 ms` avg), `63.7 °C`, `throttled=0x0`.
+- **Archived V2 sustained B0 (`results/pi5/archive/20261118-B0-full/`):** `91/91` `Llama (validated)` over `605.4 s` (`6.81 s` p95, `83.7 °C` peak, `throttled=0xe0008`).
 
-## 10. Next steps and handoff
+**Demo video (`MISSING`):** Record the disconnected physical Pi 5 running V8 (`4d348155...`) analyzing a fictional scam SMS and a legitimate transactional SMS, visibly showing `eth0`/`wlan0` `DOWN`, risk verdict, at least one `Llama (validated)` explanation, and suggested `DO:` action.
 
-Execute lab-visit Pi 4 validation (`deploy/pi4/setup.sh`, `smoke_test.sh`, `offline_verify.sh`, `benchmark.sh`), complete 5-person clarity study & human label review, record on-device demo video, resolve organiser scope questions, and expand representative evaluation and URL/network inputs in Phase 2.
+State the limits that affect interpretation: archived Pi 5 B0 & offline Llama metrics measured V2 (`f37c3dd9...`), whereas V8 (`4d348155...`) awaits on-device Pi 5 Llama capture (`PENDING_HARDWARE`); continuous 605.4 s passive B0 inference reached thermal throttling (`83.7 °C`, `0xe0008`); synthetic/UCI spam data does not prove real-world Indian fraud accuracy; and Phase 1 analyzes user-supplied SMS (URL, IDS, and malware are future work).
+
+## 10. Final submission checklist
+
+- [x] Archive disconnected Pi 5 V8 detector-only offline tests (`results/pi5/v8-offline-20261124/`: `361/362` pytest, `50` repeated batch runs `2.4321 ms` avg) and V2 Llama offline proof (`results/pi5/offline-20261119/`: `6/6 OK`, `5/5` validated, zero `AF_INET`/`AF_INET6`).
+- [ ] Run V8 (`4d348155...`) + ExecuTorch Llama on the physical Pi 5 (`PENDING_HARDWARE`) and record/review the disconnected Pi 5 demo video showing at least one visible `Llama (validated)` response.
+- [ ] Export the reconciled technical report as PDF/DOCX (`<= 10 MB`), add root `LICENSE`, push clean public GitHub repo (including final report), submit portal form, and save `submission/RECEIPT.md`.
+- [ ] Approve project root `LICENSE`, confirm team/mentor details on Slide 1, and review the curated release deliverables before upload.
+- [ ] Publish the reviewed project on GitHub with team authorization and verify public reviewer access.
+- [ ] Confirm the submission form's fields, format, and upload limits, submit by **23 November 2026**, and save the receipt.

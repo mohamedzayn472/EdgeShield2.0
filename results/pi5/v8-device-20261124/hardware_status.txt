@@ -1,0 +1,16 @@
+===== V8 PI5 HARDWARE STATUS =====
+2026-11-24T10:51:27+05:30
+
+===== TEMPERATURE =====
+temp=63.1'C
+
+===== THROTTLING =====
+throttled=0x0
+
+===== MEMORY =====
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       2.1Gi       9.5Gi       145Mi       4.5Gi        13Gi
+Swap:          2.0Gi          0B       2.0Gi
+
+===== MODEL CHECKSUM =====
+4d3481555460d2bf5dfaf5e28fc107786f38ea34400358e4637b5bd9b0afd365  models/detector_v8.json

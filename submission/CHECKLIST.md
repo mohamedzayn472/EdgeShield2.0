@@ -1,39 +1,28 @@
-# Phase 1 submission gates
+# Phase 1 Submission Gates (Updated 24 November 2026)
 
-Internal target: **22 November 2026**. Official deadline verified on 15 November: **23 November 2026**. Unchecked items are not complete. Refer to `PROJECT_STATUS.md` and `docs/ARGON_COMPLETION_REPORT.md` for verified evidence.
+Refer to `PROJECT_STATUS.md`, `docs/REPORT.md`, and `results/pi5/STATUS.json` for evidence paths. Unchecked items are still pending completion/verification.
 
 ## Mandatory engineering evidence
 
-- [x] Resolve the observed Indian/Hinglish quality failure with a new version and fresh evaluation data; preserve the v1 result (`1/12` scams detected, Hinglish `0/6`; v2 detected `50/60` scams, Hinglish `24/30`, `1/60` false alarm, reproduced on Ubuntu in `results/host/ubuntu/v2_reproduction.json`). *(Synthetic gate passed; human label review still open below.)*
-- [x] Review passing unit, privacy, adversarial, and integration results from the updated source (`176 passed, 1 skipped` on Ubuntu x86_64; `results/host/ubuntu/pytest_argon.xml`).
-- [x] Review detector provenance, leakage checks, threshold selection, and held-out metrics separately by data source (`results/host/v2/`).
-- [x] Verify legally obtained model/tokenizer, required notices, and artifact SHA-256 inventory (`results/host/ubuntu/model_audit.json`, `models/llama/LICENSE_AND_NOTICE.md`, `models/llama/pi4-runtime-manifest.json`).
-- [x] Export the real model (`build/executorch/llama3_2.pte`, SHA-256 `c31e4d37...`) and verify genuine ExecuTorch runtime execution on the Ubuntu x86_64 host (`432/432` dev, `132/132` holdout, `20/20` comparison, `10/10` benchmark, `cli_llama_smoke.jsonl`).
-- [ ] Demonstrate genuine Llama inference on physical compatible Arm hardware (`PENDING_HARDWARE`; Bookworm-compatible `GLIBC <= 2.34` `aarch64` binaries are cross-compiled and staged under `models/llama/`).
-- [x] Show independent detector output and evidence-only Llama prompt without raw SMS (`tests/test_safety.py`, `results/host/ubuntu/demo_ubuntu_llama.txt`).
-- [x] Show explanation validation, truthful fallback provenance, and deterministic advice (`src/edgeshield/validator.py`, `src/edgeshield/pipeline.py`).
-- [ ] Record Pi hardware, OS, GLIBC, runtime version, quantization, and CPU path (`PENDING_HARDWARE`; `deploy/pi4/diagnostic.sh`).
-- [ ] Execute device benchmarks and the full 600 s sustained run; disclose missing measurements (`PENDING_HARDWARE`; `deploy/pi4/benchmark.sh`).
-- [ ] Disable connectivity and inspect attempted network calls during real inference on Pi 4 (`PENDING_HARDWARE`; `deploy/pi4/offline_verify.sh`).
-- [ ] Verify target installation with only local dependencies before the offline demo (`PENDING_HARDWARE`; `deploy/pi4/setup.sh`).
+- [x] **Detector V8 release candidate & multi-version regression (`VERIFIED` on host):** Default CLI/benchmark/bundle artifact `models/detector_v8.json` (`4d3481555460d2bf5dfaf5e28fc107786f38ea34400358e4637b5bd9b0afd365`, thresholds `[0.55, 0.675]`): `v8_holdout` (`240`) `99.17%` acc (`99.17%` P, `99.17%` R, `0.83%` FPR, `0.99993` ROC-AUC, `[[119, 0, 1], [0, 1, 119]]`); `v7_holdout` (`240`) `97.08%`; `v6_holdout` (`240`) `100.00%`; `v5_holdout` (`240`) `100.00%`; `v4_holdout` (`240`) `97.08%`; `v3_holdout` (`160`) `99.38%`; `v2_holdout` (`120`) `96.67%`; `uci_test` (`1,148`) `98.17%` (`0.00%` FPR, `88.41%` R); `indian_sms` test (`24`) `95.83%` (`results/host/v8/v3_v5_v6_v7_v8_evaluation.json`). *(Synthetic holdout only; human label review & real-world calibration remain pending.)*
+- [x] **Host automated test suite, Llama E2E & shell checks (`VERIFIED`):** Host `pytest -q` passes (`0` failures), `3/3` host Llama smoke & `264/264` weighted (`221/221` distinct) evidence validation (`results/host/v8/`), clean bundle verification (`results/host/v8/p4_clean_bundle_verification.txt`), and `14/14` deployment shell scripts (`deploy/pi5/*.sh`, `deploy/pi4/*.sh`) pass `bash -n`.
+- [x] **Detector provenance, leakage checks, and frozen hashes (`VERIFIED`):** `results/host/v8/{training_validation,evaluation_freeze}.json` (`4d348155...`), plus preserved `v2`–`v7` freeze records.
+- [x] **Lawful Llama checkpoint & ExecuTorch export (`VERIFIED`):** Meta `Llama-3.2-1B-Instruct-SpinQuant_INT4_EO8` (rev `b8c08c95d0476ccb6fc86e9410818d602ecca19d`) exported via ExecuTorch `985c1ceccc8bb8b6a32294f71aeb5d2f299562f7` to `llama3_2.pte` (SHA-256 `c31e4d37...`), notices retained in `models/llama/LICENSE_AND_NOTICE.md`, excluded from public source archives.
+- [x] **Physical Pi 5 V8 detector-only offline verification (`VERIFIED`):** `results/pi5/v8-offline-20261124/` (`OFFLINE_COMPETITION_REPORT/full_report.txt`, `test_logs/final_summary.json`): Pi 5 Rev 1.1 (`16 GB`, Debian 13 Trixie, Python 3.13.5, `eth0`/`wlan0` `DOWN`, `63.7 °C`, `throttled=0x0`), V8 checksum verified, `pip check` clean, `361 passed, 1 skipped` (`52.35 s`), `50` repeated batch detections (`2.4321 ms` avg). *(Llama runtime not configured in this run; `Template fallback`.)*
+- [x] **Archived Pi 5 Llama smoke, B0 benchmark & offline proof — Detector V2 (`f37c3dd9...` ONLY, `VERIFIED`):** Physical Pi 5 Rev 1.1 (`pi5-cortex-a76-native`, 2 threads): `4/4` `Llama (validated)`, `2/2` fallback, `0.92 ms` detector p95, sustained `91/91` (`605.4 s`, `6.81 s` p95, `1.44 GB`/`1.34 GiB` RSS, `0 B` swap, `83.7 °C` `0xe0008`), offline `5/5` (`eth0`/`wlan0` `DOWN`, `0` `AF_INET`/`AF_INET6` syscalls, `results/pi5/offline-20261119/` `6/6 OK`).
+- [x] **Detector V8 (`4d348155...`) + ExecuTorch Llama on-device & offline Pi 5 verification (`VERIFIED`):** Audited in `results/pi5/v8-device-20261124/` (`SHA256SUMS` `8/8 OK`): `eth0`/`wlan0` `DOWN`, empty `offline_routes.json`, `0 AF_INET/AF_INET6` matches in `v8_offline_network.trace`, single CLI `Llama (validated)`, and `5/5` `Llama (validated)` offline benchmark (`6.51 s` med / `6.85 s` p95, `1.44 GB` / `1.34 GiB` RSS, `0 B` swap, `72.7 °C` max, `throttled=0x0`). *(Note: `offline_competition_test.sh` and clean-folder `setup.sh --offline` log remain optional/pending.)*
+- [x] **Evidence firewall, validator, clause-level indicators, and deterministic advice (`VERIFIED`):** `src/edgeshield/evidence.py`, `indicators.py`, `validator.py`, `pipeline.py`, `recommendations.py`, `tests/test_safety.py`.
 
 ## Scope and interpretation
 
-- [ ] Resolve or explicitly disclose Pi 4 eligibility interpretation (`UNVERIFIED` organiser clarification).
-- [ ] Resolve or explicitly disclose SMS-only scope against the broader PS3 capability list.
-- [ ] State URL, network, and malware gaps in report, slides, and video.
-- [ ] State that spam labels are a scam proxy and synthetic results are not real-world accuracy (plus complete human label review of synthetic V2 examples).
-- [ ] Complete 20-case explanation comparison (`[x]` host run complete in `results/host/ubuntu/twenty_case_llama_vs_template.json`, `20/20` accepted) and 5-person clarity exercise (`[ ]` `PENDING_PARTICIPANTS`, instrument ready in `docs/CLARITY_STUDY_INSTRUMENT.md`).
+- [x] **Target hardware eligibility (`VERIFIED`):** Raspberry Pi 5 (CPU-only Arm Linux) is explicitly listed on the official Bharat AI-SoC Challenge page (`docs/SOURCES.md`).
+- [x] **Phase 1 SMS scope & future-work disclosure (`VERIFIED`):** Reconciled across `README.md`, `docs/REPORT.md`, `submission/*`, explicitly listing standalone URL classification, network intrusion detection, and malware analysis as future work.
+- [x] **Evaluation limits, misses, and throttling disclosed (`VERIFIED`):** Synthetic/spam-proxy limits, non-calibrated scores, and B0 passive thermal throttling (`83.7 °C`, `0xe0008`) documented.
+- [ ] **Optional/residual research items (disclosed as limitations):** Independent human label review of synthetic corpus and 5-person clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`, `PENDING_PARTICIPANTS`).
 
 ## Deliverables and submission
 
-- [ ] Review source for private data, secrets, licensed weights, and generated local environments before public upload.
-- [ ] Publish reviewed source to the team's GitHub repository when authorized.
-- [x] Include reproducible setup, deployment, and evaluation instructions (`README.md`, `docs/PI4_DEPLOYMENT.md`, `docs/LAB_CHECKLIST.md`, `docs/ARGON_COMPLETION_REPORT.md`).
-- [ ] Record the actual on-device demonstration; no simulated screens or inference.
-- [ ] Finalize technical report and slide content using generated device evidence.
-- [ ] Confirm the real submission form's fields, file limits, and upload requirements.
-- [ ] Confirm team details, college nomination, and faculty mentor details.
-- [ ] Submit through the official form and save the receipt.
-
-Do not mark hardware items complete until physical Raspberry Pi 4 execution succeeds.
+- [x] **Project root `LICENSE` & "Built with Llama" attribution added (`PENDING_CONTRIBUTOR_SIGNOFF`):** Root `LICENSE` sets MIT for EdgeShield original source code & original V8 detector (subject to contributor/ownership confirmation), preserves Meta Llama 3.2 Community License (`models/llama/LICENSE_AND_NOTICE.md`) and ExecuTorch BSD license, and adds "Built with Llama" attribution in `README.md` and `docs/REPORT.md`.
+- [ ] **Disconnected Pi 5 demo video (`MISSING`):** Record and review actual physical Pi 5 playback showing disconnected state and at least one visible `Llama (validated)` response.
+- [ ] **Final Report PDF/DOCX (≤ 10 MB) & team details (`PENDING — TEAMMATE 2`):** Populate team/mentor details, incorporate V8 + Pi 5 results, export PDF/DOCX (≤ 10 MB) for upload, and commit final report into public GitHub repo.
+- [ ] **Public GitHub publication & official form submission (`PENDING — TEAMMATE 2`):** Push curated repository (verify public access, zero gated weights/build artifacts), submit through official challenge form, and save receipt to `submission/RECEIPT.md`.

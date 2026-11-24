@@ -1,0 +1,39 @@
+=== Timestamp (UTC) ===
+2026-11-18T12:47:00Z
+=== Device Model ===
+Raspberry Pi 5 Model B Rev 1.1
+=== OS Release ===
+PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+NAME="Debian GNU/Linux"
+VERSION_ID="13"
+VERSION="13 (trixie)"
+VERSION_CODENAME=trixie
+DEBIAN_VERSION_FULL=13.7
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+=== Kernel & Arch ===
+Linux Hunter 6.18.50+rpt-rpi-2712 #1 SMP PREEMPT Debian 1:6.18.50-1+rpt1 (2026-09-11) aarch64 GNU/Linux
+=== Python ===
+Python 3.13.5
+=== GLIBC ===
+glibc 2.41
+=== Memory & Swap ===
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       2.1Gi       8.7Gi       214Mi       5.4Gi        13Gi
+Swap:          2.0Gi          0B       2.0Gi
+MemTotal:       16603456 kB
+MemFree:         9115168 kB
+MemAvailable:   14397216 kB
+SwapTotal:       2097136 kB
+SwapFree:        2097136 kB
+NAME       TYPE      SIZE USED PRIO
+/dev/zram0 partition   2G   0B  100
+=== Disk ===
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/mmcblk0p2   29G   14G   14G  51% /
+=== Thermals & Throttling ===
+thermal_zone0_millic: 65000
+temp=65.3'C
+throttled=0x0
