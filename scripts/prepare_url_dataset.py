@@ -15,7 +15,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from edgeshield.indicators import URL_SHORTENERS, parse_url_parts  # noqa: E402
+from edgeshield.indicators import ABUSED_HOSTING_SUFFIXES, URL_SHORTENERS, parse_url_parts  # noqa: E402
 
 RAW_DIR = ROOT / "data" / "raw" / "url_feeds"
 PROCESSED_DIR = ROOT / "data" / "processed"
@@ -30,6 +30,11 @@ BENIGN_SUBDOMAINS = (
     "docs", "en", "support", "portal", "blog", "help", "news", "app", "api",
     "community", "developer", "mail", "shop", "m", "static", "media", "data",
     "research", "learn", "open", "web", "info", "status", "cloud", "forum",
+    "accounts", "netbanking", "console", "selfcare",
+)
+BENIGN_TWO_SUBDOMAINS = (
+    "console.cloud", "portal.services", "en.m", "my.account", "secure.portal",
+    "docs.dev", "help.support", "apis.cloud",
 )
 _PATH_WORDS = (
     "news", "tech", "science", "world", "business", "finance", "health", "education",
@@ -43,6 +48,9 @@ _PATH_WORDS = (
     "archive", "history", "system", "network", "software", "platform", "tools",
     "analysis", "design", "theory", "models", "dataset", "digital", "payments",
     "banking", "privacy", "terms", "general", "portal", "thread", "post", "item",
+    "login", "signin", "account", "accounts", "verify", "update", "secure",
+    "netbanking", "kyc", "auth", "dashboard", "tracking", "billing", "settings",
+    "oauth", "selfcare", "retail", "corp", "console", "apis", "rules",
 )
 _PATH_EXTS = ("", "", "", "/", "/", ".html", ".html", ".aspx", ".php", ".pdf")
 
@@ -50,11 +58,17 @@ _PATH_EXTS = ("", "", "", "/", "/", ".html", ".html", ".aspx", ".php", ".pdf")
 def _generate_benign_path(rng: random.Random, idx: int) -> str:
     if idx % 5 == 0:
         return "/"
+    if idx % 9 == 0:
+        # Realistic numeric ID paths (like meeting IDs, Q&A IDs, news articles).
+        prefix = rng.choice(("questions", "j", "article", "post", "records", "items"))
+        num = str(rng.randint(100000, 99999999))
+        tail = rng.choice(("", f"/{rng.choice(_PATH_WORDS)}-{rng.choice(_PATH_WORDS)}", ".html", ".ece", ".cms"))
+        return f"/{prefix}/{num}{tail}"
     n_segs = rng.choice((1, 2, 2, 3, 3, 4))
     segs: list[str] = []
     for seg_i in range(n_segs):
         if seg_i > 0 and rng.random() < 0.22:
-            segs.append(str(rng.choice((rng.randint(2019, 2026), rng.randint(100, 99999)))))
+            segs.append(str(rng.choice((rng.randint(2019, 2026), rng.randint(100, 999999)))))
         elif rng.random() < 0.35:
             segs.append(f"{rng.choice(_PATH_WORDS)}-{rng.choice(_PATH_WORDS)}")
         else:
@@ -207,7 +221,7 @@ def _download_tranco_benign(n_domains: int = 7500, excluded_domains: set[str] | 
                     continue
                 rank = int(row[0])
                 dom = row[1].strip().lower()
-                if dom.endswith(".arpa"):
+                if dom.endswith(".arpa") or f".{dom}".endswith(ABUSED_HOSTING_SUFFIXES):
                     continue
                 reg_dom = str(parse_url_parts(f"https://{dom}/")["reg_domain"])
                 if dom in excluded or reg_dom in excluded or reg_dom in seen_reg:
@@ -221,11 +235,13 @@ def _download_tranco_benign(n_domains: int = 7500, excluded_domains: set[str] | 
 
     records = []
     for idx, (rank, dom) in enumerate(domains):
-        # Mix ~35% 1-subdomain, ~35% www., and ~30% bare domain; ~20% root and ~80% diverse procedural paths.
-        mod = idx % 20
-        if mod < 7 and dom.count(".") == 1:
+        # Mix ~8% 2-subdomain, ~35% 1-subdomain, ~32% www., and ~25% bare domain.
+        mod = idx % 25
+        if mod < 2 and dom.count(".") == 1:
+            host = f"{BENIGN_TWO_SUBDOMAINS[idx % len(BENIGN_TWO_SUBDOMAINS)]}.{dom}"
+        elif mod < 11 and dom.count(".") == 1:
             host = f"{BENIGN_SUBDOMAINS[idx % len(BENIGN_SUBDOMAINS)]}.{dom}"
-        elif mod < 14:
+        elif mod < 19:
             host = f"www.{dom}"
         else:
             host = dom
@@ -277,6 +293,10 @@ def _build_indian_synthetic_datasets() -> tuple[list[dict], list[dict]]:
         "http://microsoft-365-auth.loan/signin",
         "http://paypal-account-limited.work/webscr/cmd=_login",
         "http://whatsapp-web-verify.top/code",
+        "https://cedar-netbanking-login.web.app/verify",
+        "https://maple-kyc-portal.firebaseapp.com/auth",
+        "https://xn--cedarbnk-05a.example/auth",
+        "https://cedarbank.example@evil-login.top/verify",
     ]
     for url in dev_phish:
         dev_rows.append({"url": url, "label": 1, "source": "indian_phish_dev", "reg_domain": parse_url_parts(url)["reg_domain"]})

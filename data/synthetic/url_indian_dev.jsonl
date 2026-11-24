@@ -56,3 +56,7 @@
 {"url": "http://microsoft-365-auth.loan/signin", "label": 1, "source": "indian_phish_dev", "reg_domain": "microsoft-365-auth.loan"}
 {"url": "http://paypal-account-limited.work/webscr/cmd=_login", "label": 1, "source": "indian_phish_dev", "reg_domain": "paypal-account-limited.work"}
 {"url": "http://whatsapp-web-verify.top/code", "label": 1, "source": "indian_phish_dev", "reg_domain": "whatsapp-web-verify.top"}
+{"url": "https://cedar-netbanking-login.web.app/verify", "label": 1, "source": "indian_phish_dev", "reg_domain": "web.app"}
+{"url": "https://maple-kyc-portal.firebaseapp.com/auth", "label": 1, "source": "indian_phish_dev", "reg_domain": "firebaseapp.com"}
+{"url": "https://xn--cedarbnk-05a.example/auth", "label": 1, "source": "indian_phish_dev", "reg_domain": "xn--cedarbnk-05a.example"}
+{"url": "https://cedarbank.example@evil-login.top/verify", "label": 1, "source": "indian_phish_dev", "reg_domain": "evil-login.top"}

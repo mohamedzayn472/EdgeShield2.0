@@ -594,6 +594,11 @@ TRUSTED_MULTI_SLD = frozenset({
 })
 _CC_SECOND_LEVEL_CATEGORIES = frozenset({"com", "co", "org", "net", "gov", "edu", "ac", "nic", "res", "mil", "sch"})
 TRUSTED_INDIAN_GOV_BANK_SUFFIXES = (".gov.in", ".nic.in", ".ac.in", ".res.in", ".edu.in", ".sbi", ".rbi.org.in", ".npci.org.in")
+ABUSED_HOSTING_SUFFIXES = (
+    ".web.app", ".firebaseapp.com", ".pages.dev", ".vercel.app",
+    ".ngrok-free.app", ".workers.dev", ".netlify.app", ".r2.dev",
+    ".herokuapp.com", ".blogspot.com", ".github.io",
+)
 BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
     "sbi": ("sbi.co.in", "onlinesbi.sbi", "bank.sbi", "sbi.co"),
     "onlinesbi": ("onlinesbi.sbi", "sbi.co.in"),
@@ -601,8 +606,14 @@ BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
     "hdfcbank": ("hdfcbank.com",),
     "icici": ("icicibank.com", "icici.com"),
     "icicibank": ("icicibank.com",),
-    "axisbank": ("axisbank.com",),
+    "axis": ("axisbank.com", "axisbank.co.in"),
+    "axisbank": ("axisbank.com", "axisbank.co.in"),
     "kotak": ("kotak.com", "kotakbank.com"),
+    "canarabank": ("canarabank.com", "canarabank.in"),
+    "bob": ("bankofbaroda.in", "bobibanking.com"),
+    "pnb": ("pnbindia.in", "netpnb.com"),
+    "indusind": ("indusind.com",),
+    "yesbank": ("yesbank.in",),
     "paytm": ("paytm.com", "paytm.in"),
     "phonepe": ("phonepe.com",),
     "gpay": ("pay.google.com", "google.com"),
@@ -612,6 +623,8 @@ BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
     "incometax": ("incometax.gov.in", "incometaxindiaefiling.gov.in"),
     "parivahan": ("parivahan.gov.in",),
     "echallan": ("parivahan.gov.in", "echallan.parivahan.gov.in"),
+    "epfo": ("epfindia.gov.in",),
+    "fastag": ("ihmcl.co.in", "npci.org.in"),
     "irctc": ("irctc.co.in",),
     "indiapost": ("indiapost.gov.in",),
     "paypal": ("paypal.com",),
@@ -621,6 +634,7 @@ BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
     "netflix": ("netflix.com",),
     "amazon": ("amazon.com", "amazon.in"),
     "whatsapp": ("whatsapp.com",),
+    "github": ("github.com",),
 }
 _BRAND_LURE_TOKENS = frozenset({"kyc", "ekyc", "netbanking", "webscr"})
 _GENERIC_AUTH_TOKENS = frozenset({"login", "signin", "verify", "update", "secure", "account", "unlock", "unblock"})
@@ -692,6 +706,22 @@ def parse_url_parts(raw_url: str) -> dict[str, object]:
     }
 
 
+def has_homoglyph_punycode(labels: list[str]) -> bool:
+    """Return True if any punycode label decodes to mixed ASCII + non-ASCII characters (or fails IDNA)."""
+    for lbl in labels:
+        if not lbl.startswith("xn--"):
+            continue
+        try:
+            decoded = lbl.encode("ascii").decode("idna")
+        except UnicodeError:
+            return True
+        has_ascii_alpha = any("a" <= c.lower() <= "z" for c in decoded)
+        has_non_ascii = any(ord(c) > 127 for c in decoded)
+        if has_ascii_alpha and has_non_ascii:
+            return True
+    return False
+
+
 def detect_url_indicators(url: str) -> tuple[str, ...]:
     """Extract observable structural/lexical cues from a URL without network calls."""
     parts = parse_url_parts(url)
@@ -709,7 +739,7 @@ def detect_url_indicators(url: str) -> tuple[str, ...]:
     found: set[str] = set()
     if parts["is_ip"]:
         found.add("IP_HOST_URL")
-    if parts["has_at"] or any(lbl.startswith("xn--") for lbl in labels):
+    if parts["has_at"] or has_homoglyph_punycode(labels):
         found.add("PUNYCODE_OR_AT_URL")
     if host in URL_SHORTENERS:
         found.add("SHORTENER_LINK")
@@ -729,18 +759,30 @@ def detect_url_indicators(url: str) -> tuple[str, ...]:
     is_trusted_gov_bank = host.endswith(TRUSTED_INDIAN_GOV_BANK_SUFFIXES)
 
     brand_spoof = False
+    has_nonstd_port = port not in (None, 80, 443)
+    has_abused_hosting = host.endswith(ABUSED_HOSTING_SUFFIXES)
+    has_risky_host = (
+        scheme == "http"
+        or tld in SUSPICIOUS_TLDS
+        or bool(parts["is_ip"])
+        or bool(parts["has_at"])
+        or host in URL_SHORTENERS
+        or host.count("-") >= 2
+        or len(non_www_subs) >= 2
+        or has_nonstd_port
+        or has_abused_hosting
+    )
     for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items():
         if brand in all_tokens and reg_domain not in official_domains and not is_trusted_gov_bank:
             if brand in host_tokens or (all_tokens & (_BRAND_LURE_TOKENS | _GENERIC_AUTH_TOKENS)):
                 brand_spoof = True
                 break
-    if not brand_spoof and (host_tokens & _BRAND_LURE_TOKENS) and not is_trusted_gov_bank:
+    if not brand_spoof and (host_tokens & _BRAND_LURE_TOKENS) and not is_trusted_gov_bank and has_risky_host:
         if not any(reg_domain in doms for doms in BRAND_OFFICIAL_DOMAINS.values()):
             brand_spoof = True
     if not brand_spoof and (all_tokens & _GENERIC_AUTH_TOKENS) and not is_trusted_gov_bank:
-        has_nonstd_port = port not in (None, 80, 443)
-        if scheme == "http" or "-" in reg_domain or len(non_www_subs) >= 2 or tld in SUSPICIOUS_TLDS or has_nonstd_port:
-            if any(tok in host_tokens for tok in _GENERIC_AUTH_TOKENS) or scheme == "http" or tld in SUSPICIOUS_TLDS:
+        if scheme == "http" or "-" in reg_domain or len(non_www_subs) >= 2 or tld in SUSPICIOUS_TLDS or has_nonstd_port or has_abused_hosting:
+            if any(tok in host_tokens for tok in _GENERIC_AUTH_TOKENS) or scheme == "http" or tld in SUSPICIOUS_TLDS or has_abused_hosting:
                 brand_spoof = True
 
     if brand_spoof:

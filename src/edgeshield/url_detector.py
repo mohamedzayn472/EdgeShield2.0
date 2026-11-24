@@ -15,11 +15,13 @@ from scipy import sparse
 from scipy.special import expit
 from sklearn.feature_extraction.text import TfidfVectorizer
 from .indicators import (
+    ABUSED_HOSTING_SUFFIXES,
     BRAND_OFFICIAL_DOMAINS,
     RISKY_EXTENSIONS,
     SUSPICIOUS_TLDS,
     TRUSTED_INDIAN_GOV_BANK_SUFFIXES,
     URL_SHORTENERS,
+    has_homoglyph_punycode,
     parse_url_parts,
 )
 
@@ -33,7 +35,9 @@ _AUTH_LURE_TOKENS = frozenset({
     "kyc", "ekyc", "netbanking", "webscr", "login", "signin", "verify",
     "update", "secure", "account", "unlock", "unblock", "suspend", "confirm",
 })
-_SCHEME_PREFIX_RE = re.compile(r"^[a-z][a-z0-9+.-]*://", re.I)
+_NOISE_WORD_TOKENS = frozenset({"com", "org", "net", "in", "co", "www", "http", "https", "xn"})
+_ANY_SCHEME_RE = re.compile(r"^([a-z][a-z0-9+.-]*):(.*)$", re.I)
+_PORT_TAIL_RE = re.compile(r"^\d+(?:/|\?|#|$)")
 _WHITESPACE_RE = re.compile(r"\s")
 
 _URL_CACHE: dict[tuple[str, str], "UrlDetectorV1"] = {}
@@ -53,10 +57,11 @@ def normalize_url(raw: str) -> str:
         raise ValueError("URL must not contain internal whitespace")
     if len(text) > MAX_URL_CHARS:
         raise ValueError("URL exceeds 2048-character limit")
-    scheme_match = _SCHEME_PREFIX_RE.match(text)
+    scheme_match = _ANY_SCHEME_RE.match(text)
     if scheme_match:
-        scheme = scheme_match.group(0).lower()
-        if scheme not in ("http://", "https://"):
+        scheme = scheme_match.group(1).lower()
+        rest = scheme_match.group(2)
+        if not (scheme in ("http", "https") and rest.startswith("//")) and not _PORT_TAIL_RE.match(rest):
             raise ValueError("Only http:// or https:// URLs are supported")
     parts = parse_url_parts(text)
     if not parts["host"]:
@@ -109,9 +114,22 @@ def extract_structural_features(url: str) -> list[float]:
         path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
         for ext in RISKY_EXTENSIONS
     ) else 0.0
-    has_at_or_puny = 1.0 if (parts["has_at"] or any(lbl.startswith("xn--") for lbl in labels)) else 0.0
+    has_at_or_puny = 1.0 if (parts["has_at"] or has_homoglyph_punycode(labels)) else 0.0
     has_nonstd_port = 1.0 if port not in (None, 80, 443) else 0.0
-    has_auth_kw = 1.0 if (not is_trusted_gov_bank and bool(all_tokens & _AUTH_LURE_TOKENS)) else 0.0
+    has_abused_hosting = host.endswith(ABUSED_HOSTING_SUFFIXES)
+    has_susp_host_ctx = (
+        scheme == "http"
+        or tld in SUSPICIOUS_TLDS
+        or bool(parts["is_ip"])
+        or has_at_or_puny == 1.0
+        or host in URL_SHORTENERS
+        or has_nonstd_port == 1.0
+        or brand_in_sub == 1.0
+        or brand_in_path_mismatch == 1.0
+        or host.count("-") >= 2
+        or has_abused_hosting
+    )
+    has_suspicious_auth_ctx = 1.0 if (not is_trusted_gov_bank and bool(all_tokens & _AUTH_LURE_TOKENS) and has_susp_host_ctx) else 0.0
     longest_lbl = max((len(lbl) for lbl in labels), default=0)
     num_params = float(len([p for p in query.split("&") if p])) if query else 0.0
 
@@ -119,7 +137,7 @@ def extract_structural_features(url: str) -> list[float]:
         len(host) / 100.0,
         len(path) / 150.0,
         len(query) / 150.0,
-        float(max(0, len(non_www_subs) - 1)),
+        float(max(0, len(non_www_subs) - 2)),
         float(host.count("-")),
         sum(c.isdigit() for c in host) / max(len(host), 1),
         sum(c.isdigit() for c in path_query) / max(len(path_query), 1),
@@ -135,7 +153,7 @@ def extract_structural_features(url: str) -> list[float]:
         has_risky_ext,
         brand_in_sub,
         brand_in_path_mismatch,
-        has_auth_kw,
+        has_suspicious_auth_ctx,
         longest_lbl / 50.0,
         num_params,
         is_trusted_gov_bank,
@@ -162,7 +180,7 @@ STRUCTURAL_FEATURE_NAMES = (
     "has_risky_ext",
     "has_brand_in_subdomain",
     "has_brand_in_path_mismatch",
-    "has_auth_lure_kw",
+    "has_suspicious_auth_context",
     "longest_host_label_len_scaled",
     "num_query_params",
     "is_trusted_indian_gov_ac_bank_tld",
@@ -173,27 +191,53 @@ def tokenize_url_for_tfidf(url: str) -> tuple[str, str]:
     """Return `(word_token_doc, char_surface)` for pure lexical/char TF-IDF vectorization."""
     parts = parse_url_parts(url)
     host = str(parts["host"])
+    reg_domain = str(parts["reg_domain"])
     tld = str(parts["tld"])
     scheme = str(parts["scheme"])
-    path_query = f"{parts['path']} {parts['query']}".lower()
-    host_tokens = re.findall(r"[a-z0-9]+", host)
-    pq_tokens = re.findall(r"[a-z0-9]+", path_query)
+    labels = list(parts["labels"])  # type: ignore[arg-type]
+    path_lower = str(parts["path"]).lower()
+    query_lower = str(parts["query"]).lower()
+    path_query = f"{path_lower} {query_lower}"
+    is_trusted_gov_bank = host.endswith(TRUSTED_INDIAN_GOV_BANK_SUFFIXES)
+
+    drop_tokens = set(_NOISE_WORD_TOKENS)
+    if tld and tld not in SUSPICIOUS_TLDS:
+        drop_tokens.add(tld)
+    if not parts["has_at"] and not parts["is_ip"]:
+        for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items():
+            if reg_domain in official_domains:
+                drop_tokens.add(brand)
+
+    host_tokens = [t for t in re.findall(r"[a-z0-9]+", host) if t not in drop_tokens]
+    pq_tokens = [t for t in re.findall(r"[a-z0-9]+", path_query) if t not in drop_tokens]
 
     markers: list[str] = []
-    if scheme:
-        markers.append(f"scheme_{scheme}")
-    if tld:
+    if scheme == "http":
+        markers.append("scheme_http")
+    if tld in SUSPICIOUS_TLDS:
         markers.append(f"tld_{tld}")
+        markers.append("tok_susptld")
     if parts["is_ip"]:
         markers.append("tok_ip_host")
     if parts["has_at"]:
         markers.append("tok_at_netloc")
+    if has_homoglyph_punycode(labels):
+        markers.append("tok_homoglyph_punycode")
     if host in URL_SHORTENERS:
         markers.append("tok_shortener")
-    if tld in SUSPICIOUS_TLDS:
-        markers.append("tok_susptld")
-    if host.endswith(TRUSTED_INDIAN_GOV_BANK_SUFFIXES):
+    if any(path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
+           for ext in RISKY_EXTENSIONS):
+        markers.append("tok_risky_ext")
+    if host.endswith(ABUSED_HOSTING_SUFFIXES) and (set(host_tokens) | set(pq_tokens)) & _AUTH_LURE_TOKENS:
+        markers.append("tok_abused_host_lure")
+    if is_trusted_gov_bank:
         markers.append("tok_trusted_in_govbank")
+    raw_host_tokens = set(re.findall(r"[a-z0-9]+", host))
+    if not is_trusted_gov_bank and any(
+        brand in raw_host_tokens and reg_domain not in official_domains
+        for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items()
+    ):
+        markers.append("tok_brand_mismatch")
 
     word_doc = " ".join([*host_tokens, *pq_tokens, *markers])
     char_host = host[4:] if host.startswith("www.") else host

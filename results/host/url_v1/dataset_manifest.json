@@ -8,8 +8,8 @@
   "time_cutoff_utc": "2026-11-17T00:00:08Z",
   "counts": {
     "train": {
-      "total": 9502,
-      "phish": 5345,
+      "total": 9506,
+      "phish": 5349,
       "benign": 4157
     },
     "calibration": {
@@ -39,11 +39,11 @@
     "test_temporal_vs_url_holdout_overlap": 0
   },
   "sha256": {
-    "data/synthetic/url_indian_dev.jsonl": "38a153ff92d88bd4cc2c735c6e961f1b6d89c345083986b87a6fcf34d742eae3",
+    "data/synthetic/url_indian_dev.jsonl": "c81ba82e1d8e3a623efe91170a4c7a25786b9fc83dbdea9c58ca6f1ce75cd5df",
     "data/synthetic/url_holdout.jsonl": "b4123395383083c347f67111687a55ddf8715bda9d6930ef3161b2c8b8898504",
-    "data/processed/url_train.jsonl": "6844f597eb866d7f69f74ff76e38a6040784204c895bd688733f8f915968129f",
-    "data/processed/url_calibration.jsonl": "032e7d43b0ff81b4e22e3824806fbc496ce2ec3781c0cf2453ae5cf89d0ce5f7",
-    "data/processed/url_validation.jsonl": "55a608500f2f57d3649eeb0e632510e24c544cf80a5081ae993008ae348e6a63",
-    "data/processed/url_test_temporal.jsonl": "4fc9a631d313cb6514d560129df52bd27e5efc5112b89fdc94bf9d302f7ecba2"
+    "data/processed/url_train.jsonl": "2332a8158a52f213705083a460fb96e46073f71c2cc8f24c95ce65add4b9917f",
+    "data/processed/url_calibration.jsonl": "f276893ae579e1dc7805e79c1856d619a01139149ec5138661a22dc379019126",
+    "data/processed/url_validation.jsonl": "2f5e690224665ca7c2eb146a4aab0e313095d7e101a558b9af7fd1e46bcee038",
+    "data/processed/url_test_temporal.jsonl": "d10875b05dabf24f42c82ba80cdb6910bfa2d72b501ec7e4cea254d0ef97e019"
   }
 }

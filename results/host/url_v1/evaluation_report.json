@@ -1,6 +1,6 @@
 {
   "model_version": "edgeshield-url-char-lexical-lr-v1",
-  "detector_sha256": "6e68120417050c7f4647be6373fe086dec7a7a685c0c3f3188e13eb0daf23217",
+  "detector_sha256": "e8726e42bb5023bca3952945ad5abc086a94cabac14eccfee63f4301ea711728",
   "thresholds": [
     0.3,
     0.7
@@ -12,157 +12,153 @@
       "positive_n": 477,
       "confusion_matrix_2x3": [
         [
-          1294,
-          35,
-          21
+          1272,
+          46,
+          32
         ],
         [
-          41,
-          59,
+          33,
+          67,
           377
         ]
       ],
-      "accuracy": 0.9146,
-      "precision": 0.9472,
+      "accuracy": 0.9026,
+      "precision": 0.9218,
       "recall": 0.7904,
-      "false_positive_rate": 0.0156,
-      "f1": 0.8617,
-      "abstention_rate": 0.0515,
-      "roc_auc": 0.98624,
-      "brier": 0.04054,
+      "false_positive_rate": 0.0237,
+      "f1": 0.851,
+      "abstention_rate": 0.0619,
+      "roc_auc": 0.986,
+      "brier": 0.04303,
       "latency_ms": {
-        "median": 0.464,
-        "p95": 0.5149,
-        "max": 1.1698
+        "median": 0.4954,
+        "p95": 0.6575,
+        "max": 1.5057
       },
       "false_alarms_sample": [
         {
-          "url": "http://web.ewuye.vip/",
-          "score": 0.7453,
+          "url": "http://ouest-france.fr/",
+          "score": 0.7162,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://24heures.ch/",
+          "score": 0.8148,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://www.nordlayer.com/",
+          "score": 0.7639,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "http://www.cyberark-saas.com/",
+          "score": 0.7388,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://www.cloooudlayer.com/",
+          "score": 0.7759,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://www.warszawawpigulce.pl/j/63055429.html",
+          "score": 0.8074,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://info.icloud-content.com/",
+          "score": 0.7642,
+          "source": "tranco_top100k",
+          "cues": []
+        },
+        {
+          "url": "https://www.bysex.click/accounts.html",
+          "score": 0.7823,
           "source": "tranco_top100k",
           "cues": [
             "SUSPICIOUS_TLD_URL"
           ]
         },
         {
-          "url": "https://www.vidkleess-ink.sbs/releases/education.aspx",
-          "score": 0.7314,
-          "source": "tranco_top100k",
-          "cues": [
-            "SUSPICIOUS_TLD_URL"
-          ]
-        },
-        {
-          "url": "https://hls-dhs-dss.ch/",
-          "score": 0.9677,
+          "url": "https://flixpatrol.com/",
+          "score": 0.7789,
           "source": "tranco_top100k",
           "cues": []
         },
         {
-          "url": "https://073m.com/",
-          "score": 0.895,
-          "source": "tranco_top100k",
-          "cues": []
-        },
-        {
-          "url": "https://bromium-online.com/",
-          "score": 0.7131,
-          "source": "tranco_top100k",
-          "cues": []
-        },
-        {
-          "url": "https://are.na/",
-          "score": 0.793,
-          "source": "tranco_top100k",
-          "cues": []
-        },
-        {
-          "url": "https://forum.b5c1d2e8c9982e3b965a27ac72ru7284cc.com/guide-started/tags-help/academics.html",
-          "score": 0.8455,
-          "source": "tranco_top100k",
-          "cues": []
-        },
-        {
-          "url": "https://gegevensbeschermingsautoriteit.be/",
-          "score": 0.8829,
-          "source": "tranco_top100k",
-          "cues": []
-        },
-        {
-          "url": "https://braunschweiger-zeitung.de/",
-          "score": 0.959,
-          "source": "tranco_top100k",
-          "cues": []
-        },
-        {
-          "url": "http://www.ctseelink.cn/",
-          "score": 0.7323,
+          "url": "https://networktechnologysolutions.com/",
+          "score": 0.8474,
           "source": "tranco_top100k",
           "cues": []
         }
       ],
       "misses_sample": [
         {
+          "url": "http://ananeosi-support.com/",
+          "score": 0.0554,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "http://pulsebux.com/",
+          "score": 0.2695,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "http://wechatjp.org/",
+          "score": 0.1168,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://atron-solutions.com/RKS/",
+          "score": 0.2962,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
           "url": "http://pageforge.fr/p/mail",
-          "score": 0.1291,
+          "score": 0.014,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
           "url": "https://www.awscfdns.com/customer-preferences/edit",
-          "score": 0.0068,
+          "score": 0.0176,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
-          "url": "https://www.westindiaequip.com/",
-          "score": 0.1528,
+          "url": "https://www.trap-portal.app/",
+          "score": 0.0674,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
           "url": "http://api-google-docs.com/",
-          "score": 0.0305,
+          "score": 0.1173,
           "source": "openphish_public_feed",
           "cues": [
             "BRAND_SPOOF_URL"
           ]
         },
         {
-          "url": "https://auth0-google.com/",
+          "url": "http://cdn-pdfviewer.com/",
           "score": 0.2965,
           "source": "openphish_public_feed",
-          "cues": [
-            "BRAND_SPOOF_URL"
-          ]
-        },
-        {
-          "url": "https://bolson.site/",
-          "score": 0.1689,
-          "source": "openphish_public_feed",
           "cues": []
         },
         {
-          "url": "https://www.hotel.sc/",
-          "score": 0.0019,
-          "source": "openphish_public_feed",
-          "cues": []
-        },
-        {
-          "url": "https://www.travel.sc/",
-          "score": 0.0013,
-          "source": "openphish_public_feed",
-          "cues": []
-        },
-        {
-          "url": "http://jumbu.de/gustafsonltd",
-          "score": 0.1638,
-          "source": "openphish_public_feed",
-          "cues": []
-        },
-        {
-          "url": "http://web-coinbese.com/",
-          "score": 0.1433,
+          "url": "http://snipvex.com/",
+          "score": 0.2661,
           "source": "openphish_public_feed",
           "cues": []
         }
@@ -174,8 +170,8 @@
       "positive_n": 100,
       "confusion_matrix_2x3": [
         [
-          98,
-          0,
+          89,
+          9,
           2
         ],
         [
@@ -184,29 +180,29 @@
           100
         ]
       ],
-      "accuracy": 0.99,
+      "accuracy": 0.945,
       "precision": 0.9804,
       "recall": 1.0,
       "false_positive_rate": 0.02,
       "f1": 0.9901,
-      "abstention_rate": 0.0,
-      "roc_auc": 0.9999,
-      "brier": 0.01034,
+      "abstention_rate": 0.045,
+      "roc_auc": 1.0,
+      "brier": 0.02028,
       "latency_ms": {
-        "median": 0.4642,
-        "p95": 0.5002,
-        "max": 0.5808
+        "median": 0.4884,
+        "p95": 0.6057,
+        "max": 0.6806
       },
       "false_alarms_sample": [
         {
-          "url": "https://www.indusind.com/in/en/personal/online-services/netbanking.html",
-          "score": 0.9326,
-          "source": "indian_benign_holdout",
+          "url": "https://github.com/login",
+          "score": 0.9233,
+          "source": "global_benign_holdout",
           "cues": []
         },
         {
-          "url": "https://github.com/login",
-          "score": 0.9999,
+          "url": "https://huggingface.co/meta-llama",
+          "score": 0.8485,
           "source": "global_benign_holdout",
           "cues": []
         }
@@ -220,8 +216,8 @@
       "confusion_matrix_2x3": [
         [
           24,
-          0,
-          1
+          1,
+          0
         ],
         [
           0,
@@ -230,26 +226,19 @@
         ]
       ],
       "accuracy": 0.9867,
-      "precision": 0.9804,
+      "precision": 1.0,
       "recall": 1.0,
-      "false_positive_rate": 0.04,
-      "f1": 0.9901,
-      "abstention_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "f1": 1.0,
+      "abstention_rate": 0.0133,
       "roc_auc": 1.0,
-      "brier": 0.01187,
+      "brier": 0.00749,
       "latency_ms": {
-        "median": 0.4739,
-        "p95": 0.5026,
-        "max": 0.5493
+        "median": 0.4922,
+        "p95": 0.6199,
+        "max": 0.7912
       },
-      "false_alarms_sample": [
-        {
-          "url": "https://www.indusind.com/in/en/personal/online-services/netbanking.html",
-          "score": 0.9326,
-          "source": "indian_benign_holdout",
-          "cues": []
-        }
-      ],
+      "false_alarms_sample": [],
       "misses_sample": []
     }
   }
