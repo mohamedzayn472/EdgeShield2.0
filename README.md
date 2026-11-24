@@ -24,13 +24,18 @@ Uncomment the image below once the file is committed.
   Cybersecurity &amp; Digital Safety · Open Qualifying
 </p>
 
-![Raspberry Pi 5](https://img.shields.io/badge/Hardware-Raspberry%20Pi%205-A22846?style=flat-square&logo=raspberrypi&logoColor=white)
-![ExecuTorch](https://img.shields.io/badge/Runtime-ExecuTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
-![Built with Llama](https://img.shields.io/badge/Built%20with-Llama-0467DF?style=flat-square&logo=meta&logoColor=white)
-![CPU Only](https://img.shields.io/badge/Inference-CPU%20Only-475569?style=flat-square)
-![Offline Verified](https://img.shields.io/badge/Offline-Verified-16865C?style=flat-square)
-![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=flat-square&logo=python&logoColor=white)
-![License](https://img.shields.io/badge/Licensing-MIT%20%2F%20Llama-64748B?style=flat-square)
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=Hardware&amp;message=Raspberry%20Pi%205&amp;color=A22846&amp;style=flat-square&amp;logo=raspberrypi&amp;logoColor=white" alt="Raspberry Pi 5" />
+  <img src="https://img.shields.io/static/v1?label=Runtime&amp;message=ExecuTorch&amp;color=EE4C2C&amp;style=flat-square&amp;logo=pytorch&amp;logoColor=white" alt="ExecuTorch" />
+  <img src="https://img.shields.io/static/v1?label=Built%20with&amp;message=Llama&amp;color=0467DF&amp;style=flat-square&amp;logo=meta&amp;logoColor=white" alt="Built with Llama" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=Inference&amp;message=CPU%20Only&amp;color=475569&amp;style=flat-square" alt="CPU Only" />
+  <img src="https://img.shields.io/static/v1?label=Offline&amp;message=Verified&amp;color=16865C&amp;style=flat-square" alt="Offline Verified" />
+  <img src="https://img.shields.io/static/v1?label=Python&amp;message=3.13&amp;color=3776AB&amp;style=flat-square&amp;logo=python&amp;logoColor=white" alt="Python 3.13" />
+  <img src="https://img.shields.io/static/v1?label=Licensing&amp;message=MIT%20%2F%20Llama&amp;color=64748B&amp;style=flat-square" alt="Licensing" />
+</p>
 
 **Detect locally. Explain intelligently. Keep private data on the device.**
 
@@ -1442,9 +1447,11 @@ against their local copies of the archived artifacts.
 
 <div align="center">
 
-### Built with Llama
+<h3>Built with Llama</h3>
 
-![Meta Llama](https://img.shields.io/badge/Built%20with-Llama-0467DF?style=for-the-badge&logo=meta&logoColor=white)
+<p align="center">
+  <img src="https://img.shields.io/static/v1?label=Built%20with&amp;message=Llama&amp;color=0467DF&amp;style=for-the-badge&amp;logo=meta&amp;logoColor=white" alt="Built with Llama" />
+</p>
 
 </div>
 
@@ -1530,6 +1537,8 @@ under `deploy/pi4/` for reference.
 The primary verified deployment is Raspberry Pi 5.
 
 </details>
+
+---
 
 ## Submission Artifacts
 
@@ -1642,23 +1651,25 @@ third-party attribution.
 
 <strong>Private intelligence. Safer decisions.</strong>
 
+<br><br>
+
 Local detection · Constrained AI · Evidence-driven engineering
 
-<br>
+<br><br>
 
-Built with Llama.
+<strong>Built with Llama.</strong>
 
-<br>
+<br><br>
 
 Bharat AI-SoC Challenge 2026–27 (2nd Edition)<br>
 PS3: On-device threat, phishing &amp; scam detection
 
-<br>
+<br><br>
 
 Applied AI on SoC · Cybersecurity &amp; Digital Safety
 
-<br>
+<br><br>
 
-[Back to top](#top)
+<a href="#top">Back to top ↑</a>
 
 </div>
