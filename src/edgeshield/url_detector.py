@@ -1,4 +1,4 @@
-"""Offline Phishing URL detector (format 101) with structural + lexical TF-IDF features."""
+"""Offline Phishing URL detector (format 102) with structural + lexical TF-IDF features."""
 from __future__ import annotations
 
 from collections import Counter
@@ -21,12 +21,14 @@ from .indicators import (
     SUSPICIOUS_TLDS,
     TRUSTED_INDIAN_GOV_BANK_SUFFIXES,
     URL_SHORTENERS,
+    detect_brand_typosquat,
     has_homoglyph_punycode,
+    is_verified_official_domain,
     parse_url_parts,
 )
 
 MODEL_VERSION = "edgeshield-url-char-lexical-lr-v1"
-FORMAT_VERSION = 101
+FORMAT_VERSION = 102
 DEFAULT_URL_DETECTOR_PATH = Path("models/url_detector_v1.json")
 MAX_URL_CHARS = 2048
 SCORE_LABEL = "Experimental time-split URL risk score (not real-world calibrated)"
@@ -78,7 +80,7 @@ def _shannon_entropy(text: str) -> float:
 
 
 def extract_structural_features(url: str) -> list[float]:
-    """Compute 23 deterministic, network-free structural URL features."""
+    """Compute 25 deterministic, network-free structural URL features."""
     parts = parse_url_parts(url)
     scheme = str(parts["scheme"])
     netloc = str(parts["netloc"])
@@ -110,6 +112,7 @@ def extract_structural_features(url: str) -> list[float]:
             if brand in pq_tokens:
                 brand_in_path_mismatch = 1.0
 
+    has_brand_typosquat = 1.0 if detect_brand_typosquat(host, reg_domain, bool(is_trusted_gov_bank)) else 0.0
     has_risky_ext = 1.0 if any(
         path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
         for ext in RISKY_EXTENSIONS
@@ -126,6 +129,7 @@ def extract_structural_features(url: str) -> list[float]:
         or has_nonstd_port == 1.0
         or brand_in_sub == 1.0
         or brand_in_path_mismatch == 1.0
+        or has_brand_typosquat == 1.0
         or host.count("-") >= 2
         or has_abused_hosting
     )
@@ -157,6 +161,8 @@ def extract_structural_features(url: str) -> list[float]:
         longest_lbl / 50.0,
         num_params,
         is_trusted_gov_bank,
+        has_brand_typosquat,
+        1.0 if has_abused_hosting else 0.0,
     ]
 
 
@@ -184,7 +190,20 @@ STRUCTURAL_FEATURE_NAMES = (
     "longest_host_label_len_scaled",
     "num_query_params",
     "is_trusted_indian_gov_ac_bank_tld",
+    "has_brand_typosquat",
+    "is_abused_hosting",
 )
+CONTINUOUS_STRUCTURAL_INDICES: tuple[int, ...] = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 21)
+STRUCTURAL_Z_CLIP = 3.0
+
+
+def scale_structural_matrix(raw_structs: np.ndarray, mean: np.ndarray, scale: np.ndarray) -> sparse.csr_matrix:
+    """Standardize structural features, clip continuous z-scores to [-3, +3], and match TF-IDF L2 norm."""
+    z = (np.asarray(raw_structs, dtype=np.float64) - mean) / scale
+    z[:, CONTINUOUS_STRUCTURAL_INDICES] = np.clip(
+        z[:, CONTINUOUS_STRUCTURAL_INDICES], -STRUCTURAL_Z_CLIP, STRUCTURAL_Z_CLIP
+    )
+    return sparse.csr_matrix(z / 5.0)
 
 
 def tokenize_url_for_tfidf(url: str) -> tuple[str, str]:
@@ -200,6 +219,9 @@ def tokenize_url_for_tfidf(url: str) -> tuple[str, str]:
     path_query = f"{path_lower} {query_lower}"
     is_trusted_gov_bank = host.endswith(TRUSTED_INDIAN_GOV_BANK_SUFFIXES)
 
+    matched_abused_suffix = next((suf for suf in ABUSED_HOSTING_SUFFIXES if host.endswith(suf)), "")
+    host_surface = host[:-len(matched_abused_suffix)] if matched_abused_suffix else host
+
     drop_tokens = set(_NOISE_WORD_TOKENS)
     if tld and tld not in SUSPICIOUS_TLDS:
         drop_tokens.add(tld)
@@ -208,7 +230,15 @@ def tokenize_url_for_tfidf(url: str) -> tuple[str, str]:
             if reg_domain in official_domains:
                 drop_tokens.add(brand)
 
-    host_tokens = [t for t in re.findall(r"[a-z0-9]+", host) if t not in drop_tokens]
+    raw_host_tokens = re.findall(r"[a-z0-9]+", host_surface)
+    raw_host_token_set = set(raw_host_tokens)
+    mismatched_host_brands = {
+        brand
+        for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items()
+        if not is_trusted_gov_bank and brand in raw_host_token_set and reg_domain not in official_domains
+    }
+    host_drop_tokens = drop_tokens | mismatched_host_brands
+    host_tokens = [t for t in raw_host_tokens if t not in host_drop_tokens]
     pq_tokens = [t for t in re.findall(r"[a-z0-9]+", path_query) if t not in drop_tokens]
 
     markers: list[str] = []
@@ -228,19 +258,19 @@ def tokenize_url_for_tfidf(url: str) -> tuple[str, str]:
     if any(path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
            for ext in RISKY_EXTENSIONS):
         markers.append("tok_risky_ext")
-    if host.endswith(ABUSED_HOSTING_SUFFIXES) and (set(host_tokens) | set(pq_tokens)) & _AUTH_LURE_TOKENS:
-        markers.append("tok_abused_host_lure")
+    if matched_abused_suffix:
+        markers.append("tok_abused_hosting")
+        if (raw_host_token_set | set(pq_tokens)) & _AUTH_LURE_TOKENS:
+            markers.append("tok_abused_host_lure")
     if is_trusted_gov_bank:
         markers.append("tok_trusted_in_govbank")
-    raw_host_tokens = set(re.findall(r"[a-z0-9]+", host))
-    if not is_trusted_gov_bank and any(
-        brand in raw_host_tokens and reg_domain not in official_domains
-        for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items()
-    ):
+    if mismatched_host_brands:
         markers.append("tok_brand_mismatch")
+    if detect_brand_typosquat(host, reg_domain, is_trusted_gov_bank):
+        markers.append("tok_brand_typosquat")
 
     word_doc = " ".join([*host_tokens, *pq_tokens, *markers])
-    char_host = host[4:] if host.startswith("www.") else host
+    char_host = host_surface[4:] if host_surface.startswith("www.") else host_surface
     char_surface = char_host[:256]
     return word_doc, char_surface
 
@@ -268,11 +298,13 @@ def _vectorizer(block: dict, analyzer: str, ngrams: tuple[int, int], limit: int)
 
 
 class UrlDetectorV1:
-    """Offline URL phishing classifier (format 101: structural + word + char TF-IDF LR)."""
+    """Offline URL phishing classifier (format 102: structural + word + char TF-IDF LR)."""
 
     def __init__(self, artifact: dict):
         try:
             if type(artifact) is not dict or artifact.get("format") != FORMAT_VERSION or artifact.get("model_version") != MODEL_VERSION:
+                raise ValueError()
+            if artifact.get("structural_features") != list(STRUCTURAL_FEATURE_NAMES):
                 raise ValueError()
             self.word = _vectorizer(artifact["word"], "word", (1, 2), 45000)
             self.char = _vectorizer(artifact["char"], "char", (3, 5), 65000)
@@ -303,7 +335,7 @@ class UrlDetectorV1:
 
     def _matrix(self, urls: list[str]) -> sparse.csr_matrix:
         structs = np.asarray([extract_structural_features(u) for u in urls], dtype=np.float64)
-        scaled_structs = sparse.csr_matrix(((structs - self.struct_mean) / self.struct_scale) / 5.0)
+        scaled_structs = scale_structural_matrix(structs, self.struct_mean, self.struct_scale)
         tokenized = [tokenize_url_for_tfidf(u) for u in urls]
         word_docs = [pair[0] for pair in tokenized]
         char_docs = [pair[1] for pair in tokenized]
@@ -313,14 +345,18 @@ class UrlDetectorV1:
         matrix = self._matrix(urls)
         return expit(self.a * (np.asarray(matrix @ self.coef).ravel() + self.intercept) + self.b)
 
-    def predict(self, raw_url: str) -> dict[str, object]:
+    def predict(self, raw_url: str, *, use_verified_policy: bool = True) -> dict[str, object]:
         start = perf_counter()
         url = normalize_url(raw_url)
         matrix = self._matrix([url])
-        score = float(expit(self.a * (float((matrix @ self.coef)[0]) + self.intercept) + self.b))
+        raw_score = float(expit(self.a * (float((matrix @ self.coef)[0]) + self.intercept) + self.b))
+        verified = bool(use_verified_policy and is_verified_official_domain(url))
+        score = min(raw_score, self.low * 0.5) if verified else raw_score
         band = band_for_score(score, self.low, self.high)
         return {
             "score": score,
+            "raw_score": raw_score,
+            "verified_domain_applied": verified,
             "band": band,
             "model_version": MODEL_VERSION,
             "score_label": SCORE_LABEL,

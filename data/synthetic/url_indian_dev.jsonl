@@ -60,3 +60,13 @@
 {"url": "https://maple-kyc-portal.firebaseapp.com/auth", "label": 1, "source": "indian_phish_dev", "reg_domain": "firebaseapp.com"}
 {"url": "https://xn--cedarbnk-05a.example/auth", "label": 1, "source": "indian_phish_dev", "reg_domain": "xn--cedarbnk-05a.example"}
 {"url": "https://cedarbank.example@evil-login.top/verify", "label": 1, "source": "indian_phish_dev", "reg_domain": "evil-login.top"}
+{"url": "http://on1inesbi-retail.example/login", "label": 1, "source": "indian_phish_dev", "reg_domain": "on1inesbi-retail.example"}
+{"url": "http://hdfcbnak-alert.example/kyc", "label": 1, "source": "indian_phish_dev", "reg_domain": "hdfcbnak-alert.example"}
+{"url": "http://paypa1-resolution.example/signin", "label": 1, "source": "indian_phish_dev", "reg_domain": "paypa1-resolution.example"}
+{"url": "http://rnicrosoft-verify.example/oauth", "label": 1, "source": "indian_phish_dev", "reg_domain": "rnicrosoft-verify.example"}
+{"url": "http://g00gle-security-check.example/auth", "label": 1, "source": "indian_phish_dev", "reg_domain": "g00gle-security-check.example"}
+{"url": "http://icic1bank-unblock.example/otp", "label": 1, "source": "indian_phish_dev", "reg_domain": "icic1bank-unblock.example"}
+{"url": "http://parivhan-fine.example/pay", "label": 1, "source": "indian_phish_dev", "reg_domain": "parivhan-fine.example"}
+{"url": "http://paytrn-wallet.example/claim", "label": 1, "source": "indian_phish_dev", "reg_domain": "paytrn-wallet.example"}
+{"url": "http://coinbese-wallet.example/auth", "label": 1, "source": "indian_phish_dev", "reg_domain": "coinbese-wallet.example"}
+{"url": "http://arnazon-order-hold.example/signin", "label": 1, "source": "indian_phish_dev", "reg_domain": "arnazon-order-hold.example"}

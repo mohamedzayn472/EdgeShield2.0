@@ -7,7 +7,7 @@ import pytest
 
 from edgeshield import cli
 from edgeshield.evidence import Evidence
-from edgeshield.indicators import DESCRIPTIONS, detect_url_indicators
+from edgeshield.indicators import DESCRIPTIONS, detect_brand_typosquat, detect_url_indicators, is_verified_official_domain, parse_url_parts  # noqa: E501
 from edgeshield.pipeline import assess_url, explain
 from edgeshield.url_detector import (
     DEFAULT_URL_DETECTOR_PATH,
@@ -142,11 +142,60 @@ def test_cli_url_mode_stdin_and_demo(monkeypatch, capsys):
     "https://timesofindia.indiatimes.com/business/india-business/rbi-kyc-update-rules/articleshow/109876543.cms",
     "https://console.cloud.google.com/apis/dashboard",
     "https://zoom.us/j/98765432100",
+    "https://github.com/login",
+    "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+    "https://appleid.apple.com/sign-in",
+    "https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct",
 ])
 def test_hard_benign_url_false_positive_regressions(benign_url):
     detector = load_url_detector(DEFAULT_URL_DETECTOR_PATH)
     assert detect_url_indicators(benign_url) == ()
     assert detector.predict(benign_url)["band"] != "SCAM"
+
+
+@pytest.mark.parametrize("typo_url", [
+    "http://web-coinbese.com/",
+    "http://api-google-docs.com/",
+    "https://on1inesbi-kyc.com/login",
+    "http://hdfcbnak-verify.com/netbanking",
+    "http://paypa1-secure.com/signin",
+    "http://rnicrosoft-auth.com/oauth",
+])
+def test_typosquat_and_leetspeak_detection(typo_url):
+    detector = load_url_detector(DEFAULT_URL_DETECTOR_PATH)
+    parts = parse_url_parts(typo_url)
+    assert "BRAND_SPOOF_URL" in detect_url_indicators(typo_url)
+    assert detector.predict(typo_url)["band"] == "SCAM"
+    assert isinstance(detect_brand_typosquat(str(parts["host"]), str(parts["reg_domain"])), bool)
+
+
+@pytest.mark.parametrize("lookalike_benign", [
+    "https://www.kodak.com/en/",
+    "https://cloud.google.com/",
+    "https://apply.mit.edu/",
+    "https://github.com/login",
+    "https://www.coinbase.com/",
+])
+def test_typosquat_does_not_false_trigger_on_benign_lookalikes(lookalike_benign):
+    parts = parse_url_parts(lookalike_benign)
+    assert detect_brand_typosquat(str(parts["host"]), str(parts["reg_domain"])) is False
+
+
+@pytest.mark.parametrize("url,expected", [
+    ("http://github.com/login", False),
+    ("https://github.com/attacker/payload.apk", False),
+    ("https://evil.com@github.com/login", False),
+    ("https://github.com.evil.xyz/login", False),
+    ("https://evil.github.io/login", False),
+    ("https://github.com/login?next=http://evil.xyz", False),
+    ("https://github.com:8443/login", False),
+    ("https://xn--gthub-8a.com/login", False),
+    ("https://github.com/login", True),
+    ("https://login.microsoftonline.com/common/oauth2/v2.0/authorize", True),
+    ("https://appleid.apple.com/sign-in", True),
+])
+def test_verified_official_domain_security_preconditions(url, expected):
+    assert is_verified_official_domain(url) is expected
 
 
 @pytest.mark.parametrize("phish_url", [

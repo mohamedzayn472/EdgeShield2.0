@@ -12,7 +12,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from edgeshield.indicators import detect_url_indicators  # noqa: E402
+from edgeshield.indicators import detect_url_indicators, is_verified_official_domain  # noqa: E402
 from edgeshield.pipeline import assess_url  # noqa: E402
 from edgeshield.url_detector import DEFAULT_URL_DETECTOR_PATH, load_url_detector, normalize_url  # noqa: E402
 from edgeshield.validator import build_prompt  # noqa: E402
@@ -172,7 +172,33 @@ HARD_PHISH_BUCKETS: dict[str, list[str]] = {
         "https://ｓｂｉ-ｋｙｃ-ｖｅｒｉｆｙ.xyz/login",
         "sbi-kyc-update.xyz/netbanking/otp.php",
     ],
+    "typosquat_and_leetspeak": [
+        "http://web-coinbese.com/",
+        "http://api-google-docs.com/",
+        "https://on1inesbi-kyc.com/login",
+        "http://hdfcbnak-verify.com/netbanking",
+        "http://paypa1-secure.com/signin",
+        "http://g00gle-docs-share.com/",
+        "http://rnicrosoft-auth.com/oauth",
+        "http://arnazon-india-order.com/signin",
+        "http://icic1bank-kyc.com/update",
+        "http://paytrn-wallet-refund.com/claim",
+    ],
 }
+
+VERIFIED_POLICY_BYPASS_CASES = (
+    ("http://github.com/login", False),
+    ("https://github.com/attacker/payload.apk", False),
+    ("https://evil.com@github.com/login", False),
+    ("https://github.com.evil.xyz/login", False),
+    ("https://evil.github.io/login", False),
+    ("https://github.com/login?next=http://evil.xyz", False),
+    ("https://github.com:8443/login", False),
+    ("https://xn--gthub-8a.com/login", False),
+    ("https://github.com/login", True),
+    ("https://login.microsoftonline.com/common/oauth2/v2.0/authorize", True),
+    ("https://appleid.apple.com/sign-in", True),
+)
 
 MALFORMED_INPUTS = [
     "",
@@ -266,6 +292,12 @@ def main() -> None:
             assert "example.com" not in str(exc) and "/etc/passwd" not in str(exc)
             malformed_rejected += 1
 
+    verified_policy_passed = 0
+    for policy_url, expected_verified in VERIFIED_POLICY_BYPASS_CASES:
+        actual = is_verified_official_domain(policy_url)
+        assert actual is expected_verified, (policy_url, actual, expected_verified)
+        verified_policy_passed += 1
+
     # Verify strict zero network + zero sentinel leakage
     orig_connect = socket.socket.connect
     orig_create = socket.create_connection
@@ -313,6 +345,7 @@ def main() -> None:
         },
         "security_and_fuzz": {
             "malformed_rejected": f"{malformed_rejected}/{len(MALFORMED_INPUTS)}",
+            "verified_policy_bypass_checks": f"{verified_policy_passed}/{len(VERIFIED_POLICY_BYPASS_CASES)}",
             "prompt_injection_sentinel_leaks": 0,
             "network_calls_attempted": 0,
         },

@@ -21,18 +21,21 @@ HOLDOUT_PATH = ROOT / "data" / "synthetic" / "url_holdout.jsonl"
 OUT_PATH = ROOT / "results" / "host" / "url_v1" / "evaluation_report.json"
 
 
-def _score_rows(detector, rows: list[dict]) -> dict:
+def _score_rows(detector, rows: list[dict], *, use_verified_policy: bool = True) -> dict:
     y_true = np.asarray([int(r["label"]) for r in rows], dtype=np.int64)
     scores = []
     preds = []
     latencies_ms = []
     misses = []
     false_alarms = []
+    verified_applied = 0
 
     for r in rows:
         t0 = perf_counter()
-        out = detector.predict(r["url"])
+        out = detector.predict(r["url"], use_verified_policy=use_verified_policy)
         latencies_ms.append((perf_counter() - t0) * 1000)
+        if out.get("verified_domain_applied"):
+            verified_applied += 1
         score = float(out["score"])
         band = str(out["band"])
         scores.append(score)
@@ -69,6 +72,7 @@ def _score_rows(detector, rows: list[dict]) -> dict:
         "false_positive_rate": round(fpr, 4),
         "f1": round(f1, 4),
         "abstention_rate": round((u_neg + u_pos) / len(rows), 4),
+        "verified_domain_applied_count": verified_applied,
         "roc_auc": round(float(roc_auc_score(y_true, scores_arr)), 5),
         "brier": round(float(brier_score_loss(y_true, scores_arr)), 5),
         "latency_ms": {
@@ -92,9 +96,14 @@ def main() -> None:
         "detector_sha256": detector.artifact_sha256,
         "thresholds": [detector.low, detector.high],
         "datasets": {
-            "test_temporal": _score_rows(detector, temporal_rows),
-            "url_holdout_200": _score_rows(detector, holdout_rows),
-            "url_holdout_indian_subset": _score_rows(detector, indian_rows),
+            "test_temporal": _score_rows(detector, temporal_rows, use_verified_policy=True),
+            "url_holdout_200": _score_rows(detector, holdout_rows, use_verified_policy=True),
+            "url_holdout_indian_subset": _score_rows(detector, indian_rows, use_verified_policy=True),
+        },
+        "datasets_raw_ml": {
+            "test_temporal": _score_rows(detector, temporal_rows, use_verified_policy=False),
+            "url_holdout_200": _score_rows(detector, holdout_rows, use_verified_policy=False),
+            "url_holdout_indian_subset": _score_rows(detector, indian_rows, use_verified_policy=False),
         },
     }
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)

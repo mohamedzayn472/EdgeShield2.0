@@ -1,7 +1,7 @@
 # EdgeShield Standalone Phishing URL Detection (`url_detector_v1`)
 
 **Branch:** `feat/phishing-url` (local experimental branch; `main` V8 SMS submission remains untouched)  
-**Model:** `edgeshield-url-char-lexical-lr-v1` (`models/url_detector_v1.json`, `1,083,468` bytes, SHA-256 `e8726e42bb5023bca3952945ad5abc086a94cabac14eccfee63f4301ea711728`, thresholds `[0.30, 0.70]`)
+**Model:** `edgeshield-url-char-lexical-lr-v1` (`format: 102`, `models/url_detector_v1.json`, `1,736,915` bytes, SHA-256 `779cf74fd2ac1ac8c634649a468c7dea57eeb66d15d5c20574bf5072faa1f4a0`, thresholds `[0.30, 0.65]`)
 
 ---
 
@@ -23,57 +23,64 @@ User URL (stdin / hidden prompt, <= 2,048 chars)
 [Strict Explanation Validator]   ──►  ACCEPTED  ──►  WHY: ... [Source: Llama (validated)]
 ```
 
-### Features & Closed Cue Vocabulary
-- **23 structural features** (`src/edgeshield/url_detector.py`): normalized host/path/query lengths, excess subdomain depth (`max(0, non_www_subdomains - 2)`), hyphen count, host/path digit and special-character ratios, host Shannon entropy, `http://` indicator, IP literal host, `@`/mixed-script homoglyph punycode (`has_homoglyph_punycode`), non-standard port, URL shortener match, suspicious TLD, risky executable/archive extension, brand-in-subdomain/path mismatch, suspicious-host-conditioned auth context (`has_suspicious_auth_context`), longest label length, query parameter count, and trusted Indian `.gov.in` / `.nic.in` / `.ac.in` / `.sbi` / `.rbi.org.in` / `.npci.org.in` suffix.
-- **Word + host character TF-IDF (`format: 101`):** `word` 1–2-grams (`1,239` terms, stripping non-suspicious TLD noise and official-brand tokens on verified domains) + `char` 3–5-grams (`20,000` terms) over host only (`char_host`), L2-normalized alongside `/5.0`-scaled standardized structural features and Platt-calibrated Logistic Regression (`C=4.0`, calibration `[1.808126, 0.411545]`).
-- **6 new URL cue IDs** in `src/edgeshield/indicators.py` (`detect_url_indicators`, keeping SMS `detect_indicators` unchanged): `IP_HOST_URL`, `PUNYCODE_OR_AT_URL`, `SUSPICIOUS_TLD_URL`, `DEEP_SUBDOMAIN_URL`, `BRAND_SPOOF_URL`, `RISKY_EXTENSION_URL` (plus reused `SHORTENER_LINK`).
+### Features, Typosquat Detection & Closed Cue Vocabulary
+- **25 structural features (`format: 102`, `src/edgeshield/url_detector.py`):** normalized host/path/query lengths, excess subdomain depth (`max(0, non_www_subdomains - 2)`), hyphen count, host/path digit and special-character ratios, host Shannon entropy, `http://` indicator, IP literal host, `@`/mixed-script homoglyph punycode (`has_homoglyph_punycode`), non-standard port, URL shortener match, suspicious TLD, risky executable/archive extension, brand-in-subdomain/path mismatch, suspicious-host-conditioned auth context (`has_suspicious_auth_context`), longest label length, query parameter count, trusted Indian `.gov.in`/`.nic.in`/`.ac.in`/`.sbi`/`.rbi.org.in`/`.npci.org.in` suffix, offline `has_brand_typosquat`, and `is_abused_hosting`. The 12 continuous features use z-score clipping `[-3.0, +3.0]` (`STRUCTURAL_Z_CLIP`) to prevent numeric-ID paths from spiking structural logits while leaving all 13 binary indicators unclipped (`scale_structural_matrix` scaled `/ 5.0`).
+- **Offline typosquat & leetspeak detection (`detect_brand_typosquat` in `src/edgeshield/indicators.py`):** normalizes leetspeak (`0->o`, `1->l/i`, `3->e`, `4->a`, `5->s`, `7->t`, `8->b`), visually confusable digraphs (`rn->m`, `vv->w`), compound brand+lure tokens (`coinbasewallet`, `paypalsecure`), and Damerau-Levenshtein edit distance `<= 1` against major Indian & global brand stems (guarded by `_TYPOSQUAT_COLLISION_ALLOWLIST`; triggers `BRAND_SPOOF_URL`, with `4 / 7,832 = 0.051%` false-trigger rate across real benign URLs).
+- **Word + clean host character TF-IDF:** `word` 1–2-grams (`4,847` terms, `min_df=2`, stripping non-suspicious TLD noise, official-brand tokens on verified domains, mismatched host-brand tokens, and matched abused-hosting suffixes) + `char` 3–5-grams (`28,696` terms, `min_df=2`) over non-suffix host (`char_surface` strips matched `ABUSED_HOSTING_SUFFIXES` so `.github.io`/`.vercel.app` abuse never poisons `github.com`/`apple.com` weights), Platt-calibrated Logistic Regression (`C=1.0`, `class_weight=None`, calibration `[1.48602, 0.570101]`).
+- **Auditable 8-precondition verified-domain policy (`is_verified_official_domain`):** caps scores on explicit `https://` URLs whose exact registrable domain matches `VERIFIED_OFFICIAL_DOMAINS` (`BRAND_OFFICIAL_DOMAINS` union) AND passes all checks (no IP, no `@`, no mixed-script punycode, port `None` or `443`, not abused hosting/shortener, no risky extension, no embedded `http://`/`https://` open-redirect parameter, zero triggered cues).
+- **6 URL cue IDs** in `src/edgeshield/indicators.py` (`detect_url_indicators`, keeping SMS `detect_indicators` unchanged): `IP_HOST_URL`, `PUNYCODE_OR_AT_URL`, `SUSPICIOUS_TLD_URL`, `DEEP_SUBDOMAIN_URL`, `BRAND_SPOOF_URL`, `RISKY_EXTENSION_URL` (plus reused `SHORTENER_LINK`).
 
 ---
 
-## 2. Time-Aware, Domain-Disjoint Dataset (`results/host/url_v1/dataset_manifest.json`)
+## 2. Time-Aware, Domain-Disjoint Real-URL Dataset (`results/host/url_v1/dataset_manifest.json`)
 
 - **Phishing URLs:** 30 timestamped snapshots of `openphish/public_feed` (cutoff `2026-11-17T00:00:08Z`):
-  - Earlier snapshots (`< 2026-11-17T00:00:08Z`, grouped by registrable domain) → `url_train.jsonl`, `url_calibration.jsonl`, `url_validation.jsonl`.
+  - Earlier snapshots (`< 2026-11-17T00:00:08Z`, grouped by registrable domain, capped `<= 50/reg_domain` in train) → `url_train.jsonl`, `url_calibration.jsonl`, `url_validation.jsonl`.
   - **Strictly future snapshots (`>= 2026-11-17T00:00:08Z`, zero domain overlap with earlier splits)** → `url_test_temporal.jsonl`.
-- **Benign URLs:** Sampled `7,500` domain-unique sites across `tranco-list.eu` top-100k (excluding `URL_SHORTENERS`, `ABUSED_HOSTING_SUFFIXES`, OpenPhish domains, dev, and holdout domains) paired with diverse procedural deep paths, numeric IDs, and neutral 1- and 2-level subdomains + curated Indian banking/government benign URLs.
+- **Real Benign URLs (zero procedurally fabricated paths or subdomains):**
+  - `5,400` domain-unique real crawled benign full URLs (`90%` HTTPS, `10%` HTTP, non-empty real path/query) from `ealvaradob/phishing-dataset` (`urls.json`, Apache-2.0, `label=0`), + `2,400` domain-disjoint real root URLs (`90%` HTTPS) from `tranco-list.eu` top-100k, + `32` curated Indian banking/gov benign URLs + `40` Indian KYC/UPI/APK/typosquat synthetic dev phishing URLs (`url_indian_dev.jsonl`).
 - **Partition Counts (`0` registrable-domain overlap across dev, `test_temporal`, and `url_holdout`):**
-  - `url_train`: `9,506` (`5,349` phish / `4,157` benign)
-  - `url_calibration`: `1,598` (`473` phish / `1,125` benign)
-  - `url_validation`: `1,673` (`773` phish / `900` benign)
-  - `url_test_temporal`: `1,827` (`477` future phish / `1,350` unseen benign)
+  - `url_train`: `6,896` (`2,574` phish / `4,322` benign)
+  - `url_calibration`: `1,643` (`473` phish / `1,170` benign)
+  - `url_validation`: `1,709` (`773` phish / `936` benign) — `88.94%` acc, `97.89%` prec, `83.96%` `SCAM` recall (`90.39%` F1), `1.50%` FPR (`14/936`), `0.97346` ROC-AUC, `0.05686` Brier
+  - `url_test_temporal`: `1,881` (`477` future OpenPhish / `1,404` unseen real benign)
   - `data/synthetic/url_holdout.jsonl`: `200` (`100` unseen Indian + global phish / `100` unseen Indian + global benign)
 
 ---
 
 ## 3. Measured Evaluation (`results/host/url_v1/evaluation_report.json`)
 
-| Evaluation Set | n (Benign / Phish) | Acc | Prec | Rec (`SCAM`) | `SCAM+UNC` Catch | FPR | ROC-AUC | Brier | Median Latency | Confusion `[[TN,U,FP],[FN,U,TP]]` |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| **`url_validation`** (`C=4.0`, `[0.30, 0.70]`) | `1,673` (`900` / `773`) | 90.85% | 98.25% | 87.19% | 95.21% | **1.33%** | 0.99055 | 0.04015 | — | — |
-| **`test_temporal`** (Future OpenPhish + Tranco) | `1,827` (`1,350` / `477`) | 90.26% | 92.18% | 79.04% | **93.08%** (`444/477`) | **2.37%** | **0.98600** | 0.04303 | **0.495 ms** | `[[1272, 46, 32], [33, 67, 377]]` |
-| **`url_holdout_200`** (Unseen Indian + Global) | `200` (`100` / `100`) | **94.50%** | 98.04% | **100.00%** | **100.00%** | **2.00%** | **1.00000** | 0.02028 | **0.488 ms** | `[[89, 9, 2], [0, 0, 100]]` |
-| **`url_holdout_indian_subset`** | `75` (`25` / `50`) | **98.67%** | **100.00%** | **100.00%** | **100.00%** | **0.00%** (`0/25`) | **1.00000** | 0.00749 | **0.492 ms** | `[[24, 1, 0], [0, 0, 50]]` |
+On an apples-to-apples real-world `test_temporal` comparison (`1,404` unseen real `ealvaradob` + Tranco root benign URLs vs `477` future OpenPhish URLs), the earlier synthetic-path model (`c3621d1`) scored **`0.83934` ROC-AUC with `29.9%` FPR (`420/1,404` false alarms)**, whereas training format `102` on real crawled benign URLs raises `test_temporal` ROC-AUC to **`0.93168` (+9.23 pp)** and cuts FPR **22× to `1.35%` (`19/1,404`)**:
+
+| Evaluation Set | Policy Mode | n (Benign / Phish) | Acc | Prec | Rec (`SCAM`) | `SCAM+UNC` Catch | FPR | ROC-AUC | Brier | Median Latency | Confusion `[[TN,U,FP],[FN,U,TP]]` |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| **`test_temporal`** | Verified Policy | `1,881` (`1,404` / `477`) | 83.47% | 93.36% | 55.97% | **79.66%** (`380/477`) | **1.35%** | **0.93168** | 0.07891 | **0.562 ms** | `[[1303, 82, 19], [97, 113, 267]]` |
+| **`test_temporal`** | Raw ML Only | `1,881` (`1,404` / `477`) | 83.47% | 93.36% | 55.97% | **79.66%** (`380/477`) | **1.35%** | **0.93168** | 0.07891 | **0.551 ms** | `[[1303, 82, 19], [97, 113, 267]]` |
+| **`url_holdout_200`** | Verified Policy | `200` (`100` / `100`) | **99.50%** | **100.00%** | **100.00%** | **100.00%** | **0.00%** | **1.00000** | 0.00286 | **0.568 ms** | `[[99, 1, 0], [0, 0, 100]]` |
+| **`url_holdout_200`** | Raw ML Only | `200` (`100` / `100`) | **99.50%** | **100.00%** | **100.00%** | **100.00%** | **0.00%** | **1.00000** | 0.00286 | **0.555 ms** | `[[99, 1, 0], [0, 0, 100]]` |
+| **`url_holdout_indian_subset`** | Both Modes | `75` (`25` / `50`) | **100.00%** | **100.00%** | **100.00%** | **100.00%** | **0.00%** | **1.00000** | 0.00068 | **0.595 ms** | `[[25, 0, 0], [0, 0, 50]]` |
 
 ---
 
 ## 4. Extensive Stress-Test Suite (`results/host/url_v1/stress_test_report.json`)
 
-Executed `129` targeted benign & adversarial phishing URLs plus `14` malformed/dangerous schemes and `3` prompt-injection sentinel checks (`0.497 ms` median / `0.585 ms` p95 latency):
+Executed `139` targeted benign & adversarial phishing URLs plus `14` malformed/dangerous schemes, `11` verified-domain policy bypass checks, and `3` prompt-injection sentinel checks (`0.605 ms` median / `0.736 ms` p95 latency):
 
-- **Hard Benign URLs (`79` total — `65` `LEGITIMATE`, `10` `UNCERTAIN`, `4` `SCAM` = `5.06%` FPR):**
-  - `indian_banking_logins` (`14/14` `LEGITIMATE`, **0 FP**, **0 `UNCERTAIN`** — includes HDFC, SBI, ICICI, Axis, Kotak, IndusInd, Yes Bank, Canara, BoB, PNB, Federal, IDFC First, Union Bank)
-  - `indian_gov_upi_telecom` (`18/18`: `15` `LEGITIMATE`, `3` `UNCERTAIN`, **0 FP**)
-  - `kyc_phishing_edu_news` (`12/12`: `11` `LEGITIMATE`, `1` `UNCERTAIN`, **0 FP** — RBI KYC FAQ, Times of India KYC rules, The Hindu UPI fraud article, StackOverflow OTP Q&A, OWASP/Wikipedia/Cloudflare)
-  - `global_auth_login` (`8`: `5` `LEGITIMATE`, **3 FP**: `github.com/login` `0.9233`, `login.microsoftonline.com/...` `0.9220`, `appleid.apple.com/sign-in` `0.9251`)
-  - `deep_tech_cloud_commerce` (`27`: `20` `LEGITIMATE`, `6` `UNCERTAIN`, **1 FP**: `huggingface.co/meta-llama/Llama-3.2-1B-Instruct` `0.9081`)
-- **Hard Adversarial Phishing URLs (`50/50` = `100.0%` `SCAM` recall, `0` `UNCERTAIN`, `0` misses):**
+- **Hard Benign URLs (`79` total — `77` `LEGITIMATE`, `2` `UNCERTAIN`, `0` (`0.00%`) `SCAM` false positives):**
+  - `indian_banking_logins`: `14/14` `LEGITIMATE`, **0 FP**
+  - `indian_gov_upi_telecom`: `18/18` `LEGITIMATE`, **0 FP**
+  - `global_auth_login`: `8/8` `LEGITIMATE`, **0 FP** (`github.com/login`, `appleid.apple.com/sign-in`, and `huggingface.co/meta-llama/Llama-3.2-1B-Instruct` all dropped from `>0.90` to `<0.025` purely in Raw ML; `login.microsoftonline.com` dropped from `0.9220` to `0.3686` Raw ML / `0.1500` with Verified Policy)
+  - `kyc_phishing_edu_news`: `12/12` `LEGITIMATE`, **0 FP**
+  - `deep_tech_cloud_commerce`: `25/27` `LEGITIMATE`, `2` `UNCERTAIN` (`zoom.us/j/98765432100` `0.4321`, `localhost:8000` `0.5712`), **0 FP**
+- **Hard Adversarial Phishing URLs (`60/60` = `100.0%` `SCAM` recall, `0` `UNCERTAIN`, `0` misses):**
   - `indian_bank_kyc_upi_gov`: `19/19` `SCAM`
   - `ip_obfuscation` (IPv4, IPv6, hex IP, integer IP): `5/5` `SCAM`
   - `at_and_punycode` (`@` credential tricks & mixed-script `xn--` homoglyphs): `4/4` `SCAM`
-  - `shorteners_subdomains_extensions` (`bit.ly`, `tinyurl.com`, `is.gd`, `rb.gy`, `cutt.ly`, `rebrand.ly`, deep subdomains, `.apk`, `.pdf.exe`): `10/10` `SCAM`
-  - `abused_hosting_and_evasion` (`.web.app`, `.firebaseapp.com`, `.pages.dev`, `.ngrok-free.app`, `.vercel.app`, uppercase, NFKC fullwidth Unicode, missing scheme): `12/12` `SCAM`
-- **Security & Fuzz Checks:** `14/14` malformed/unsafe inputs rejected (`javascript:`, `data:`, `file://`, null byte, bidi override, newlines, spaces, oversize, empty), `0` prompt-injection sentinel leaks, `0` socket/DNS calls attempted.
-- **Host ExecuTorch Llama E2E (`results/host/url_v1/e2e_url_host_llama.txt`):** `4/4` `--mode url --demo` cases + `--url-stdin --json` passed `Source: Llama (validated) | Status: ACCEPTED`.
+  - `shorteners_subdomains_extensions`: `10/10` `SCAM`
+  - `abused_hosting_and_evasion`: `12/12` `SCAM`
+  - `typosquat_and_leetspeak` (`web-coinbese.com`, `api-google-docs.com`, `on1inesbi-kyc.com`, `hdfcbnak-verify.com`, `paypa1-secure.com`, `g00gle-docs-share.com`, `rnicrosoft-auth.com`, `arnazon-india-order.com`, `icic1bank-kyc.com`, `paytrn-wallet-refund.com`): `10/10` `SCAM`
+- **Security & Fuzz Checks:** `14/14` malformed/unsafe inputs rejected, `11/11` verified-policy bypass checks passed (`http://`, `@`, `.apk`, `.github.io`, subdomain spoof, open-redirect `next=http://`, non-443 port, punycode), `0` prompt-injection sentinel leaks, `0` socket/DNS calls attempted.
+- **Host ExecuTorch Llama E2E (`results/host/url_v1/e2e_url_host_llama.txt`):** `4/4` `--mode url --demo` cases + `2/2` `--url-stdin --json` cases (`sbi.kyc-verify-account.xyz` and typosquat `web-coinbese.com` at `0.9719` `SCAM`) passed offline `x86_64` ExecuTorch Llama 3.2 1B SpinQuant INT4 with `Source: Llama (validated) | Status: ACCEPTED`.
 
 ---
 
@@ -95,6 +102,6 @@ bash scripts/host_python.sh -m edgeshield.cli --mode url --repeat
 
 ## 6. Limitations
 
-1. **Compromised legitimate domains:** Because EdgeShield inspects URL strings strictly offline (zero DNS/WHOIS/HTML fetching), compromised benign-looking websites without phishing keywords or structural anomalies account for the ~6.9% (`33/477`) `LEGITIMATE` misses in `test_temporal`.
-2. **Global-brand host char-ngram false alarms without an allowlist:** Because OpenPhish contains heavy abuse of `github.io`, `apple`, `microsoft`, and `meta` strings while offline URL scoring intentionally avoids hardcoding a global domain allowlist, `github.com/login`, `login.microsoftonline.com`, `appleid.apple.com`, and `huggingface.co/meta-llama` scored as false positives in stress testing.
-3. **Non-calibrated probability & host-only status:** Scores (`EXPERIMENTAL_TIME_SPLIT_URL_MODEL`) are not calibrated against real-world mobile click prevalence, and Raspberry Pi 5 hardware verification for `--mode url` remains pending before merging into `main`.
+1. **Compromised legitimate or generic non-brand domains:** Because EdgeShield inspects URL strings strictly offline (zero DNS/WHOIS/HTML fetching), compromised generic websites or phishing URLs on unrelated domains without brand/auth/TLD/structural anomalies account for the `~20.3%` (`97/477`) `LEGITIMATE` misses in future OpenPhish `test_temporal` (where all `abused_hosting` domains were disjointly held out in earlier splits).
+2. **Typosquat scope:** Edit-distance typosquatting uses Damerau-Levenshtein `<= 1` (plus leetspeak/digraph normalization and compound brand+lure splitting) over distinctive `>= 5`-character brand stems; very short 3-character names (`sbi`, `bob`, `pnb`) and `>= 2`-edit alphabetic distortions are intentionally excluded to avoid false positives on everyday English words.
+3. **Non-calibrated probability & host-only status:** Scores (`EXPERIMENTAL_TIME_SPLIT_URL_MODEL`) reflect time-split research benchmarks rather than real-world mobile click prevalence, and Raspberry Pi 5 hardware verification for `--mode url` remains pending before merging into `main`.

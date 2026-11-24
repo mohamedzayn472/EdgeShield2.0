@@ -24,6 +24,7 @@ from edgeshield.url_detector import (  # noqa: E402
     band_for_score,
     extract_structural_features,
     save_url_artifact,
+    scale_structural_matrix,
     tokenize_url_for_tfidf,
 )
 
@@ -69,17 +70,21 @@ def main() -> None:
     x_ca, y_ca = _load_split("calibration")
     x_va, y_va = _load_split("validation")
 
+    raw_tr = np.asarray([extract_structural_features(u) for u in x_tr], dtype=np.float64)
+    raw_ca = np.asarray([extract_structural_features(u) for u in x_ca], dtype=np.float64)
+    raw_va = np.asarray([extract_structural_features(u) for u in x_va], dtype=np.float64)
     scaler = StandardScaler()
-    s_tr = sparse.csr_matrix(scaler.fit_transform([extract_structural_features(u) for u in x_tr]) / 5.0)
-    s_ca = sparse.csr_matrix(scaler.transform([extract_structural_features(u) for u in x_ca]) / 5.0)
-    s_va = sparse.csr_matrix(scaler.transform([extract_structural_features(u) for u in x_va]) / 5.0)
+    scaler.fit(raw_tr)
+    s_tr = scale_structural_matrix(raw_tr, scaler.mean_, scaler.scale_)
+    s_ca = scale_structural_matrix(raw_ca, scaler.mean_, scaler.scale_)
+    s_va = scale_structural_matrix(raw_va, scaler.mean_, scaler.scale_)
 
     tok_tr = [tokenize_url_for_tfidf(u) for u in x_tr]
     tok_ca = [tokenize_url_for_tfidf(u) for u in x_ca]
     tok_va = [tokenize_url_for_tfidf(u) for u in x_va]
 
-    word_vec = TfidfVectorizer(analyzer="word", ngram_range=(1, 2), sublinear_tf=True, max_features=12000, min_df=5)
-    char_vec = TfidfVectorizer(analyzer="char", ngram_range=(3, 5), sublinear_tf=True, max_features=20000, min_df=4)
+    word_vec = TfidfVectorizer(analyzer="word", ngram_range=(1, 2), sublinear_tf=True, max_features=20000, min_df=2)
+    char_vec = TfidfVectorizer(analyzer="char", ngram_range=(3, 5), sublinear_tf=True, max_features=30000, min_df=2)
 
     w_tr = word_vec.fit_transform([t[0] for t in tok_tr])
     c_tr = char_vec.fit_transform([t[1] for t in tok_tr])
@@ -132,7 +137,7 @@ def main() -> None:
         "intercept": float(clf.intercept_[0]),
         "calibration": [a, b],
         "thresholds": [low, high],
-        "train_config": {"C": c_val, "class_weight": "balanced"},
+        "train_config": {"C": c_val, "class_weight": None},
     }
     sha = save_url_artifact(OUT_MODEL, artifact)
     # Smoke-verify reload via UrlDetectorV1.load

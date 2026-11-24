@@ -598,6 +598,7 @@ ABUSED_HOSTING_SUFFIXES = (
     ".web.app", ".firebaseapp.com", ".pages.dev", ".vercel.app",
     ".ngrok-free.app", ".workers.dev", ".netlify.app", ".r2.dev",
     ".herokuapp.com", ".blogspot.com", ".github.io",
+    ".weebly.com", ".gitbook.io", ".replit.app", ".trycloudflare.com", ".framer.app",
 )
 BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
     "sbi": ("sbi.co.in", "onlinesbi.sbi", "bank.sbi", "sbi.co"),
@@ -609,6 +610,7 @@ BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
     "axis": ("axisbank.com", "axisbank.co.in"),
     "axisbank": ("axisbank.com", "axisbank.co.in"),
     "kotak": ("kotak.com", "kotakbank.com"),
+    "kotakbank": ("kotak.com", "kotakbank.com"),
     "canarabank": ("canarabank.com", "canarabank.in"),
     "bob": ("bankofbaroda.in", "bobibanking.com"),
     "pnb": ("pnbindia.in", "netpnb.com"),
@@ -627,18 +629,120 @@ BRAND_OFFICIAL_DOMAINS: dict[str, tuple[str, ...]] = {
     "fastag": ("ihmcl.co.in", "npci.org.in"),
     "irctc": ("irctc.co.in",),
     "indiapost": ("indiapost.gov.in",),
+    "digilocker": ("digilocker.gov.in",),
+    "flipkart": ("flipkart.com",),
+    "coinbase": ("coinbase.com",),
+    "facebook": ("facebook.com", "fb.com"),
+    "instagram": ("instagram.com",),
+    "linkedin": ("linkedin.com",),
+    "dropbox": ("dropbox.com",),
+    "fedex": ("fedex.com",),
     "paypal": ("paypal.com",),
     "microsoft": ("microsoft.com", "live.com", "office.com", "microsoftonline.com"),
     "apple": ("apple.com", "icloud.com"),
-    "google": ("google.com",),
+    "google": ("google.com", "googleapis.com", "googleusercontent.com", "gstatic.com", "googlevideo.com"),
     "netflix": ("netflix.com",),
-    "amazon": ("amazon.com", "amazon.in"),
+    "amazon": ("amazon.com", "amazon.in", "amazonaws.com"),
     "whatsapp": ("whatsapp.com",),
     "github": ("github.com",),
 }
+VERIFIED_OFFICIAL_DOMAINS: frozenset[str] = frozenset(
+    dom for doms in BRAND_OFFICIAL_DOMAINS.values() for dom in doms
+)
+
+_LEET_L_MAP = str.maketrans({"0": "o", "1": "l", "3": "e", "4": "a", "5": "s", "7": "t", "8": "b"})
+_LEET_I_MAP = str.maketrans({"0": "o", "1": "i", "3": "e", "4": "a", "5": "s", "7": "t", "8": "b"})
+
+TYPOSQUAT_FUZZY_BRANDS: frozenset[str] = frozenset({
+    "onlinesbi", "hdfcbank", "icicibank", "axisbank", "kotakbank", "canarabank",
+    "indusind", "yesbank", "paytm", "phonepe", "uidai", "incometax", "parivahan",
+    "echallan", "irctc", "indiapost", "digilocker", "flipkart", "paypal",
+    "microsoft", "google", "amazon", "netflix", "whatsapp", "github",
+    "coinbase", "facebook", "instagram", "linkedin", "dropbox", "fedex",
+    "icici", "fastag",
+})
+TYPOSQUAT_LEET_ONLY_BRANDS: frozenset[str] = TYPOSQUAT_FUZZY_BRANDS | {"apple", "icloud", "aadhaar", "kotak"}
+_TYPOSQUAT_COLLISION_ALLOWLIST: frozenset[str] = frozenset({
+    "kodak", "goggle", "boogle", "papal", "fasta", "cloud", "apply", "ample", "maple",
+    "icic", "gitlab", "dropbot", "linkedit", "amason", "netflux", "codebase",
+    "basecoin", "facework", "phoneme",
+})
+_COMPOUND_LURE_AFFIXES: tuple[str, ...] = (
+    "login", "signin", "verify", "kyc", "ekyc", "secure", "auth", "account",
+    "update", "support", "wallet", "bank", "docs", "pay", "mail", "web",
+    "app", "portal", "alert", "claim", "refund", "unlock", "unblock",
+    "retail", "online", "id",
+)
 _BRAND_LURE_TOKENS = frozenset({"kyc", "ekyc", "netbanking", "webscr"})
 _GENERIC_AUTH_TOKENS = frozenset({"login", "signin", "verify", "update", "secure", "account", "unlock", "unblock"})
 _INT_OR_HEX_IP_RE = re.compile(r"^(?:0x[0-9a-f]+|0[0-7]+|\d+)$", re.I)
+
+
+def _normalize_leet_variants(token: str) -> tuple[str, str]:
+    v_l = token.translate(_LEET_L_MAP).replace("rn", "m").replace("vv", "w")
+    v_i = token.translate(_LEET_I_MAP).replace("rn", "m").replace("vv", "w")
+    return v_l, v_i
+
+
+def _damerau_levenshtein_le1(a: str, b: str) -> bool:
+    """Return True if optimal string alignment (Damerau-Levenshtein) distance between a and b is <= 1."""
+    if a == b:
+        return True
+    la, lb = len(a), len(b)
+    if abs(la - lb) > 1:
+        return False
+    if la == lb:
+        diffs = [i for i in range(la) if a[i] != b[i]]
+        if len(diffs) == 1:
+            return True
+        if len(diffs) == 2 and diffs[1] == diffs[0] + 1:
+            i, j = diffs
+            return a[i] == b[j] and a[j] == b[i]
+        return False
+    short, long = (a, b) if la < lb else (b, a)
+    i = j = 0
+    skipped = False
+    while i < len(short) and j < len(long):
+        if short[i] == long[j]:
+            i += 1
+            j += 1
+        elif skipped:
+            return False
+        else:
+            skipped = True
+            j += 1
+    return True
+
+
+def detect_brand_typosquat(host: str, reg_domain: str, is_trusted_gov_bank: bool = False) -> bool:
+    """Detect leetspeak, compound brand+lure, or edit-1 typosquatting in non-TLD host tokens."""
+    if is_trusted_gov_bank or not host:
+        return False
+    labels = [lbl for lbl in host.lower().split(".") if lbl]
+    non_tld_surface = ".".join(labels[:-1]) if len(labels) >= 2 else host.lower()
+    host_tokens = re.findall(r"[a-z0-9]+", non_tld_surface)
+    for tok in host_tokens:
+        if len(tok) < 5 or tok in _TYPOSQUAT_COLLISION_ALLOWLIST:
+            continue
+        v_l, v_i = _normalize_leet_variants(tok)
+        for v in (v_l, v_i):
+            if v != tok:
+                for brand in TYPOSQUAT_LEET_ONLY_BRANDS:
+                    if reg_domain in BRAND_OFFICIAL_DOMAINS.get(brand, ()):
+                        continue
+                    if v == brand or (len(brand) >= 6 and brand in v):
+                        return True
+        for brand in TYPOSQUAT_FUZZY_BRANDS:
+            if reg_domain in BRAND_OFFICIAL_DOMAINS.get(brand, ()):
+                continue
+            if len(brand) >= 6 and tok != brand and brand in tok:
+                remainder = tok.replace(brand, "", 1)
+                if any(remainder == afx or remainder.startswith(afx) or remainder.endswith(afx) for afx in _COMPOUND_LURE_AFFIXES):
+                    return True
+            if tok != brand and v_l != brand and v_i != brand:
+                if abs(len(v_l) - len(brand)) <= 1 and (_damerau_levenshtein_le1(v_l, brand) or _damerau_levenshtein_le1(v_i, brand)):
+                    return True
+    return False
 
 
 def _is_ip_host(host: str) -> bool:
@@ -772,11 +876,14 @@ def detect_url_indicators(url: str) -> tuple[str, ...]:
         or has_nonstd_port
         or has_abused_hosting
     )
-    for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items():
-        if brand in all_tokens and reg_domain not in official_domains and not is_trusted_gov_bank:
-            if brand in host_tokens or (all_tokens & (_BRAND_LURE_TOKENS | _GENERIC_AUTH_TOKENS)):
-                brand_spoof = True
-                break
+    if detect_brand_typosquat(host, reg_domain, is_trusted_gov_bank):
+        brand_spoof = True
+    if not brand_spoof:
+        for brand, official_domains in BRAND_OFFICIAL_DOMAINS.items():
+            if brand in all_tokens and reg_domain not in official_domains and not is_trusted_gov_bank:
+                if brand in host_tokens or (all_tokens & (_BRAND_LURE_TOKENS | _GENERIC_AUTH_TOKENS)):
+                    brand_spoof = True
+                    break
     if not brand_spoof and (host_tokens & _BRAND_LURE_TOKENS) and not is_trusted_gov_bank and has_risky_host:
         if not any(reg_domain in doms for doms in BRAND_OFFICIAL_DOMAINS.values()):
             brand_spoof = True
@@ -789,3 +896,33 @@ def detect_url_indicators(url: str) -> tuple[str, ...]:
         found.add("BRAND_SPOOF_URL")
 
     return tuple(name for name in DESCRIPTIONS if name in found)
+
+
+def is_verified_official_domain(url: str) -> bool:
+    """Strictly verify an explicit HTTPS URL matches a known official registrable domain without anomalies."""
+    parts = parse_url_parts(url)
+    host = str(parts["host"])
+    reg_domain = str(parts["reg_domain"])
+    labels = list(parts["labels"])  # type: ignore[arg-type]
+    path_lower = str(parts["path"]).lower()
+    query_lower = str(parts["query"]).lower()
+
+    if parts["scheme"] != "https":
+        return False
+    if parts["is_ip"] or parts["has_at"] or has_homoglyph_punycode(labels):
+        return False
+    if parts["port"] not in (None, 443):
+        return False
+    if host.endswith(ABUSED_HOSTING_SUFFIXES) or host in URL_SHORTENERS:
+        return False
+    if any(
+        path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
+        for ext in RISKY_EXTENSIONS
+    ):
+        return False
+    pq = f"{path_lower}?{query_lower}" if query_lower else path_lower
+    if any(scheme in pq for scheme in ("http://", "https://", "http%3a", "https%3a")):
+        return False
+    if reg_domain not in VERIFIED_OFFICIAL_DOMAINS:
+        return False
+    return detect_url_indicators(url) == ()

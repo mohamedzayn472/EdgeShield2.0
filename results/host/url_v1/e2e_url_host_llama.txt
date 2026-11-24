@@ -1,5 +1,6 @@
+=== HOST EXECUTORCH LLAMA --mode url --demo ===
 EdgeShield | Private intelligence. Safer decisions.
-Device: Linux x86_64 | Detector: loaded (e8726e42bb50)
+Device: Linux x86_64 | Detector: loaded (779cf74fd2ac)
 ExecuTorch: configured; inference not yet verified in this session
 Network: application uses local processing; connectivity and traffic NOT VERIFIED.
 Privacy: URL is not saved or fetched. Zero DNS/HTTP requests. Lower risk does not prove safety.
@@ -9,13 +10,13 @@ Experimental time-split URL detector. Human review and real-world validation are
 Synthetic URL: https://www.onlinesbi.sbi/sbijava/retail/html/faq.html
 
 Threat band: LEGITIMATE
-Experimental time-split URL risk score (not real-world calibrated): 0.000
+Experimental time-split URL risk score (not real-world calibrated): 0.003
 Indicators: none
 DO: The URL detector estimates lower risk. Confirm the domain spelling before entering sensitive details.
-Detector: 1.65 ms | Evidence: 0.04 ms
+Detector: 2.79 ms | Evidence: 0.03 ms
 WHY: The detector estimates lower risk, without authenticating the sender.
 Source: Llama (validated) | Status: ACCEPTED
-Llama execution: 3154.22 ms | Validation: 0.55 ms | Total: 3156.46 ms
+Llama execution: 3228.40 ms | Validation: 0.39 ms | Total: 3231.62 ms
 
 === Demo 2/4: Phishing Indian bank KYC subdomain spoof ===
 Synthetic URL: http://sbi.kyc-verify-account.xyz/netbanking/login.php?session=9281
@@ -25,10 +26,10 @@ Experimental time-split URL risk score (not real-world calibrated): 1.000
 Indicators: SUSPICIOUS_TLD_URL, BRAND_SPOOF_URL
 Indicator details: An elevated-risk top-level domain appears; Brand-like login or verification path wording appears
 DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.
-Detector: 1.27 ms | Evidence: 0.04 ms
+Detector: 1.54 ms | Evidence: 0.10 ms
 WHY: The detector estimates elevated risk. Brand-like login or verification path wording appears.
 Source: Llama (validated) | Status: ACCEPTED
-Llama execution: 3352.06 ms | Validation: 0.07 ms | Total: 3353.44 ms
+Llama execution: 3489.27 ms | Validation: 0.09 ms | Total: 3491.01 ms
 
 === Demo 3/4: Legitimate NPCI UPI information URL ===
 Synthetic URL: https://www.npci.org.in/what-we-do/upi/product-overview
@@ -37,10 +38,10 @@ Threat band: LEGITIMATE
 Experimental time-split URL risk score (not real-world calibrated): 0.000
 Indicators: none
 DO: The URL detector estimates lower risk. Confirm the domain spelling before entering sensitive details.
-Detector: 1.57 ms | Evidence: 0.04 ms
+Detector: 1.26 ms | Evidence: 0.02 ms
 WHY: The detector estimates lower risk, without authenticating the sender.
 Source: Llama (validated) | Status: ACCEPTED
-Llama execution: 3201.71 ms | Validation: 0.08 ms | Total: 3203.41 ms
+Llama execution: 3235.22 ms | Validation: 0.04 ms | Total: 3236.54 ms
 
 === Demo 4/4: Phishing numeric IP executable download URL ===
 Synthetic URL: http://198.51.100.42:8080/parivahan/echallan-update.apk
@@ -50,9 +51,15 @@ Experimental time-split URL risk score (not real-world calibrated): 1.000
 Indicators: IP_HOST_URL, BRAND_SPOOF_URL, RISKY_EXTENSION_URL
 Indicator details: A numeric network address host appears; Brand-like login or verification path wording appears; Executable or archive download path wording appears
 DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.
-Detector: 1.37 ms | Evidence: 0.04 ms
+Detector: 2.56 ms | Evidence: 0.07 ms
 WHY: The detector estimates elevated risk. A numeric network address host appears.
 Source: Llama (validated) | Status: ACCEPTED
-Llama execution: 3350.47 ms | Validation: 0.07 ms | Total: 3351.95 ms
-{"event": "detection", "quality_status": "EXPERIMENTAL_TIME_SPLIT_URL_MODEL", "detector_sha256": "e8726e42bb5023bca3952945ad5abc086a94cabac14eccfee63f4301ea711728", "evidence": {"band": "SCAM", "score": 0.9998619585074024, "indicators": ["SUSPICIOUS_TLD_URL", "BRAND_SPOOF_URL"], "schema_version": 1}, "score_label": "Experimental time-split URL risk score (not real-world calibrated)", "model_version": "edgeshield-url-char-lexical-lr-v1", "detector_ms": 1.460681000025943, "evidence_ms": 0.041227999645343516, "advice": "DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.", "mode": "url"}
-{"event": "explanation", "why": "WHY: The detector estimates elevated risk. Brand-like login or verification path wording appears.", "source": "Llama (validated)", "reason": "ACCEPTED", "llama_ms": 3401.5039240002807, "validation_ms": 0.3570339995349059}
+Llama execution: 3491.89 ms | Validation: 0.08 ms | Total: 3494.61 ms
+
+=== HOST EXECUTORCH LLAMA --url-stdin --json (KYC TLD spoof) ===
+{"event": "detection", "quality_status": "EXPERIMENTAL_TIME_SPLIT_URL_MODEL", "detector_sha256": "779cf74fd2ac1ac8c634649a468c7dea57eeb66d15d5c20574bf5072faa1f4a0", "evidence": {"band": "SCAM", "score": 0.9999994563774535, "indicators": ["SUSPICIOUS_TLD_URL", "BRAND_SPOOF_URL"], "schema_version": 1}, "score_label": "Experimental time-split URL risk score (not real-world calibrated)", "model_version": "edgeshield-url-char-lexical-lr-v1", "detector_ms": 1.6978519997792318, "evidence_ms": 0.08587299998907838, "advice": "DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.", "mode": "url"}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. Brand-like login or verification path wording appears.", "source": "Llama (validated)", "reason": "ACCEPTED", "llama_ms": 3437.202013999922, "validation_ms": 0.5761800002801465}
+
+=== HOST EXECUTORCH LLAMA --url-stdin --json (Typosquat spoof) ===
+{"event": "detection", "quality_status": "EXPERIMENTAL_TIME_SPLIT_URL_MODEL", "detector_sha256": "779cf74fd2ac1ac8c634649a468c7dea57eeb66d15d5c20574bf5072faa1f4a0", "evidence": {"band": "SCAM", "score": 0.9718609218312246, "indicators": ["BRAND_SPOOF_URL"], "schema_version": 1}, "score_label": "Experimental time-split URL risk score (not real-world calibrated)", "model_version": "edgeshield-url-char-lexical-lr-v1", "detector_ms": 2.2883680003360496, "evidence_ms": 0.07098500009306008, "advice": "DO: Do not visit this URL or enter credentials. Navigate via an independent bookmark or official app instead.", "mode": "url"}
+{"event": "explanation", "why": "WHY: The detector estimates elevated risk. Brand-like login or verification path wording appears.", "source": "Llama (validated)", "reason": "ACCEPTED", "llama_ms": 3426.014892999774, "validation_ms": 0.6573640002898173}

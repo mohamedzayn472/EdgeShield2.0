@@ -1,4 +1,4 @@
-"""Prepare time-aware OpenPhish + Tranco + Indian-context URL datasets with strict domain-disjoint splits."""
+"""Prepare time-aware OpenPhish + real crawled benign URLs + Tranco roots with strict domain-disjoint splits."""
 from __future__ import annotations
 
 from collections import defaultdict
@@ -8,6 +8,7 @@ import io
 import json
 from pathlib import Path
 import random
+import shutil
 import sys
 import urllib.request
 import zipfile
@@ -15,7 +16,15 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from edgeshield.indicators import ABUSED_HOSTING_SUFFIXES, URL_SHORTENERS, parse_url_parts  # noqa: E402
+from edgeshield.indicators import (  # noqa: E402
+    ABUSED_HOSTING_SUFFIXES,
+    RISKY_EXTENSIONS,
+    SUSPICIOUS_TLDS,
+    URL_SHORTENERS,
+    has_homoglyph_punycode,
+    parse_url_parts,
+)
+from edgeshield.url_detector import normalize_url  # noqa: E402
 
 RAW_DIR = ROOT / "data" / "raw" / "url_feeds"
 PROCESSED_DIR = ROOT / "data" / "processed"
@@ -24,66 +33,8 @@ MANIFEST_PATH = ROOT / "results" / "host" / "url_v1" / "dataset_manifest.json"
 
 OPENPHISH_COMMITS_URL = "https://api.github.com/repos/openphish/public_feed/commits?per_page=60"
 TRANCO_ZIP_URL = "https://tranco-list.eu/top-1m.csv.zip"
+EALVARADOB_URLS_URL = "https://huggingface.co/datasets/ealvaradob/phishing-dataset/resolve/main/urls.json"
 HEADERS = {"User-Agent": "EdgeShield-URL-Research/1.0"}
-
-BENIGN_SUBDOMAINS = (
-    "docs", "en", "support", "portal", "blog", "help", "news", "app", "api",
-    "community", "developer", "mail", "shop", "m", "static", "media", "data",
-    "research", "learn", "open", "web", "info", "status", "cloud", "forum",
-    "accounts", "netbanking", "console", "selfcare",
-)
-BENIGN_TWO_SUBDOMAINS = (
-    "console.cloud", "portal.services", "en.m", "my.account", "secure.portal",
-    "docs.dev", "help.support", "apis.cloud",
-)
-_PATH_WORDS = (
-    "news", "tech", "science", "world", "business", "finance", "health", "education",
-    "sports", "culture", "library", "reference", "manual", "tutorial", "stable",
-    "modules", "releases", "projects", "packages", "questions", "tags", "topics",
-    "publications", "conferences", "research", "academics", "english", "personal",
-    "services", "products", "learning", "standards", "about", "help", "support",
-    "contact", "faq", "overview", "index", "details", "summary", "article",
-    "report", "policy", "press", "events", "careers", "community", "blog",
-    "catalog", "features", "security", "install", "getting", "started", "guide",
-    "archive", "history", "system", "network", "software", "platform", "tools",
-    "analysis", "design", "theory", "models", "dataset", "digital", "payments",
-    "banking", "privacy", "terms", "general", "portal", "thread", "post", "item",
-    "login", "signin", "account", "accounts", "verify", "update", "secure",
-    "netbanking", "kyc", "auth", "dashboard", "tracking", "billing", "settings",
-    "oauth", "selfcare", "retail", "corp", "console", "apis", "rules",
-)
-_PATH_EXTS = ("", "", "", "/", "/", ".html", ".html", ".aspx", ".php", ".pdf")
-
-
-def _generate_benign_path(rng: random.Random, idx: int) -> str:
-    if idx % 5 == 0:
-        return "/"
-    if idx % 9 == 0:
-        # Realistic numeric ID paths (like meeting IDs, Q&A IDs, news articles).
-        prefix = rng.choice(("questions", "j", "article", "post", "records", "items"))
-        num = str(rng.randint(100000, 99999999))
-        tail = rng.choice(("", f"/{rng.choice(_PATH_WORDS)}-{rng.choice(_PATH_WORDS)}", ".html", ".ece", ".cms"))
-        return f"/{prefix}/{num}{tail}"
-    n_segs = rng.choice((1, 2, 2, 3, 3, 4))
-    segs: list[str] = []
-    for seg_i in range(n_segs):
-        if seg_i > 0 and rng.random() < 0.22:
-            segs.append(str(rng.choice((rng.randint(2019, 2026), rng.randint(100, 999999)))))
-        elif rng.random() < 0.35:
-            segs.append(f"{rng.choice(_PATH_WORDS)}-{rng.choice(_PATH_WORDS)}")
-        else:
-            segs.append(rng.choice(_PATH_WORDS))
-    ext = rng.choice(_PATH_EXTS)
-    path = "/" + "/".join(segs)
-    if ext == "/" and not path.endswith("/"):
-        path += "/"
-    elif ext not in ("", "/"):
-        path += ext
-    if rng.random() < 0.18:
-        q_key = rng.choice(("page", "lang", "id", "sort", "tab"))
-        q_val = rng.choice(("2", "en", "popular", "recent", str(rng.randint(10, 999))))
-        path += f"?{q_key}={q_val}"
-    return path
 
 INDIAN_BENIGN_URLS = (
     # Banking & Financial
@@ -152,15 +103,20 @@ HOLDOUT_INDIAN_BENIGN_URLS = (
 )
 
 
-def _fetch_bytes(url: str, dest: Path) -> bytes:
+def _download_to_file(url: str, dest: Path, *, timeout: int = 20) -> Path:
     if dest.is_file() and dest.stat().st_size > 0:
-        return dest.read_bytes()
+        return dest
     dest.parent.mkdir(parents=True, exist_ok=True)
+    tmp_dest = dest.with_suffix(dest.suffix + ".tmp")
     req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=20) as resp:
-        data = resp.read()
-    dest.write_bytes(data)
-    return data
+    with urllib.request.urlopen(req, timeout=timeout) as resp, tmp_dest.open("wb") as out:
+        shutil.copyfileobj(resp, out, length=1024 * 1024)
+    tmp_dest.replace(dest)
+    return dest
+
+
+def _fetch_bytes(url: str, dest: Path, *, timeout: int = 20) -> bytes:
+    return _download_to_file(url, dest, timeout=timeout).read_bytes()
 
 
 def _sha256_file(path: Path) -> str:
@@ -169,6 +125,109 @@ def _sha256_file(path: Path) -> str:
         for chunk in iter(lambda: f.read(1024 * 1024), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def _is_clean_crawled_benign(url: str, excluded: set[str]) -> tuple[bool, str]:
+    try:
+        clean = normalize_url(url)
+    except ValueError:
+        return False, ""
+    parts = parse_url_parts(clean)
+    host = str(parts["host"])
+    reg_dom = str(parts["reg_domain"])
+    tld = str(parts["tld"])
+    path_lower = str(parts["path"]).lower()
+    query_lower = str(parts["query"]).lower()
+    if not host or "." not in host or not reg_dom or not tld:
+        return False, ""
+    if host.endswith(".arpa") or parts["is_ip"] or parts["has_at"]:
+        return False, ""
+    if has_homoglyph_punycode(list(parts["labels"])):  # type: ignore[arg-type]
+        return False, ""
+    if host in URL_SHORTENERS or host.endswith(ABUSED_HOSTING_SUFFIXES) or tld in SUSPICIOUS_TLDS:
+        return False, ""
+    if len(str(parts["path"]).strip("/")) == 0 and not query_lower:
+        return False, ""
+    if any(
+        path_lower.endswith(ext) or f"{ext}?" in path_lower or f"{ext}&" in query_lower or query_lower.endswith(ext)
+        for ext in RISKY_EXTENSIONS
+    ):
+        return False, ""
+    pq = f"{path_lower}?{query_lower}" if query_lower else path_lower
+    if any(marker in pq for marker in ("http://", "https://", "http%3a", "https%3a")):
+        return False, ""
+    if host in excluded or reg_dom in excluded:
+        return False, ""
+    return True, reg_dom
+
+
+def _download_ealvaradob_benign(n_urls: int = 5400, excluded_domains: set[str] | None = None) -> list[dict]:
+    excluded = excluded_domains or set()
+    raw_path = _download_to_file(EALVARADOB_URLS_URL, RAW_DIR / "ealvaradob_urls.json", timeout=120)
+    data = json.loads(raw_path.read_text(encoding="utf-8", errors="ignore"))
+    rng = random.Random(20261124)
+
+    https_by_dom: dict[str, str] = {}
+    http_by_dom: dict[str, str] = {}
+    bare_by_dom: dict[str, str] = {}
+
+    for item in data:
+        if int(item.get("label", -1)) != 0:
+            continue
+        raw_u = str(item.get("text", "")).strip()
+        if not raw_u:
+            continue
+        lower = raw_u.lower()
+        if lower.startswith("https://"):
+            ok, reg_dom = _is_clean_crawled_benign(raw_u, excluded)
+            if ok and reg_dom not in https_by_dom:
+                https_by_dom[reg_dom] = raw_u
+        elif lower.startswith("http://"):
+            ok, reg_dom = _is_clean_crawled_benign(raw_u, excluded)
+            if ok and reg_dom not in http_by_dom:
+                http_by_dom[reg_dom] = raw_u
+        elif "://" not in raw_u and "/" in raw_u:
+            cand = f"https://{raw_u}"
+            ok, reg_dom = _is_clean_crawled_benign(cand, excluded)
+            if ok and reg_dom not in bare_by_dom:
+                bare_by_dom[reg_dom] = cand
+
+    https_items = list(https_by_dom.items())
+    http_items = list(http_by_dom.items())
+    bare_items = list(bare_by_dom.items())
+    rng.shuffle(https_items)
+    rng.shuffle(http_items)
+    rng.shuffle(bare_items)
+
+    https_target = int(n_urls * 0.90)
+    used_reg: set[str] = set()
+    records: list[dict] = []
+
+    for reg_dom, url in https_items:
+        if len(records) >= https_target:
+            break
+        used_reg.add(reg_dom)
+        records.append({"url": url, "label": 0, "source": "ealvaradob_benign_crawled", "reg_domain": reg_dom})
+
+    if len(records) < https_target:
+        for reg_dom, url in bare_items:
+            if len(records) >= https_target:
+                break
+            if reg_dom in used_reg:
+                continue
+            used_reg.add(reg_dom)
+            records.append({"url": url, "label": 0, "source": "ealvaradob_benign_crawled", "reg_domain": reg_dom})
+
+    for reg_dom, url in http_items:
+        if len(records) >= n_urls:
+            break
+        if reg_dom in used_reg:
+            continue
+        used_reg.add(reg_dom)
+        records.append({"url": url, "label": 0, "source": "ealvaradob_benign_crawled", "reg_domain": reg_dom})
+
+    rng.shuffle(records)
+    return records
 
 
 def _download_openphish_snapshots() -> list[dict]:
@@ -205,7 +264,7 @@ def _download_openphish_snapshots() -> list[dict]:
     return records
 
 
-def _download_tranco_benign(n_domains: int = 7500, excluded_domains: set[str] | None = None) -> list[dict]:
+def _download_tranco_benign(n_domains: int = 2400, excluded_domains: set[str] | None = None) -> list[dict]:
     excluded = excluded_domains or set()
     zip_path = RAW_DIR / "tranco_top1m.zip"
     raw_zip = _fetch_bytes(TRANCO_ZIP_URL, zip_path)
@@ -223,7 +282,10 @@ def _download_tranco_benign(n_domains: int = 7500, excluded_domains: set[str] | 
                 dom = row[1].strip().lower()
                 if dom.endswith(".arpa") or f".{dom}".endswith(ABUSED_HOSTING_SUFFIXES):
                     continue
-                reg_dom = str(parse_url_parts(f"https://{dom}/")["reg_domain"])
+                parts = parse_url_parts(f"https://{dom}/")
+                reg_dom = str(parts["reg_domain"])
+                if str(parts["tld"]) in SUSPICIOUS_TLDS:
+                    continue
                 if dom in excluded or reg_dom in excluded or reg_dom in seen_reg:
                     continue
                 # Sample across top 1..100,000 ranks for diversity.
@@ -235,24 +297,14 @@ def _download_tranco_benign(n_domains: int = 7500, excluded_domains: set[str] | 
 
     records = []
     for idx, (rank, dom) in enumerate(domains):
-        # Mix ~8% 2-subdomain, ~35% 1-subdomain, ~32% www., and ~25% bare domain.
-        mod = idx % 25
-        if mod < 2 and dom.count(".") == 1:
-            host = f"{BENIGN_TWO_SUBDOMAINS[idx % len(BENIGN_TWO_SUBDOMAINS)]}.{dom}"
-        elif mod < 11 and dom.count(".") == 1:
-            host = f"{BENIGN_SUBDOMAINS[idx % len(BENIGN_SUBDOMAINS)]}.{dom}"
-        elif mod < 19:
-            host = f"www.{dom}"
-        else:
-            host = dom
-        path = _generate_benign_path(rng, idx)
+        host = f"www.{dom}" if (idx % 5 < 3 and dom.count(".") == 1) else dom
         scheme = "https" if idx % 10 != 0 else "http"
-        url = f"{scheme}://{host}{path}"
+        url = f"{scheme}://{host}/"
         parts = parse_url_parts(url)
         records.append({
             "url": url,
             "label": 0,
-            "source": "tranco_top100k",
+            "source": "tranco_top100k_roots",
             "rank": rank,
             "reg_domain": parts["reg_domain"],
         })
@@ -297,6 +349,16 @@ def _build_indian_synthetic_datasets() -> tuple[list[dict], list[dict]]:
         "https://maple-kyc-portal.firebaseapp.com/auth",
         "https://xn--cedarbnk-05a.example/auth",
         "https://cedarbank.example@evil-login.top/verify",
+        "http://on1inesbi-retail.example/login",
+        "http://hdfcbnak-alert.example/kyc",
+        "http://paypa1-resolution.example/signin",
+        "http://rnicrosoft-verify.example/oauth",
+        "http://g00gle-security-check.example/auth",
+        "http://icic1bank-unblock.example/otp",
+        "http://parivhan-fine.example/pay",
+        "http://paytrn-wallet.example/claim",
+        "http://coinbese-wallet.example/auth",
+        "http://arnazon-order-hold.example/signin",
     ]
     for url in dev_phish:
         dev_rows.append({"url": url, "label": 1, "source": "indian_phish_dev", "reg_domain": parse_url_parts(url)["reg_domain"]})
@@ -422,22 +484,33 @@ def main() -> None:
     n_dom = len(dom_list)
     n_tr = int(n_dom * 0.70)
     n_ca = int(n_dom * 0.85)
-    phish_train = [r for d in dom_list[:n_tr] for r in by_dom[d]]
+    phish_train = [
+        r
+        for d in dom_list[:n_tr]
+        for r in sorted(by_dom[d], key=lambda row: (row["first_seen_utc"], row["url"]))[:50]
+    ]
     phish_cal = [r for d in dom_list[n_tr:n_ca] for r in by_dom[d]]
     phish_val = [r for d in dom_list[n_ca:] for r in by_dom[d]]
 
-    # Benign Tranco + Indian dev URLs (strictly excluding holdout, dev, shorteners, and any OpenPhish domains)
+    # Real crawled benign full URLs + Tranco top-100k roots (strictly excluding holdout, dev, shorteners, and OpenPhish domains)
     all_phish_domains = {r["reg_domain"] for r in openphish}
     dev_domains = {r["reg_domain"] for r in dev_rows}
-    tranco = _download_tranco_benign(n_domains=7500, excluded_domains=holdout_domains | all_phish_domains | dev_domains | URL_SHORTENERS)
-    n_ben = len(tranco)
+    base_excluded = holdout_domains | all_phish_domains | dev_domains | URL_SHORTENERS
+    ealvaradob_benign = _download_ealvaradob_benign(n_urls=5400, excluded_domains=base_excluded)
+    ealvaradob_domains = {r["reg_domain"] for r in ealvaradob_benign}
+    tranco_benign = _download_tranco_benign(n_domains=2400, excluded_domains=base_excluded | ealvaradob_domains)
+    benign_all = ealvaradob_benign + tranco_benign
+    assert len({r["reg_domain"] for r in benign_all}) == len(benign_all), "Duplicate benign registrable domain!"
+    rng.shuffle(benign_all)
+
+    n_ben = len(benign_all)
     b_tr = int(n_ben * 0.55)
     b_ca = int(n_ben * 0.70)
     b_va = int(n_ben * 0.82)
-    ben_train = tranco[:b_tr]
-    ben_cal = tranco[b_tr:b_ca]
-    ben_val = tranco[b_ca:b_va]
-    ben_test = tranco[b_va:]
+    ben_train = benign_all[:b_tr]
+    ben_cal = benign_all[b_tr:b_ca]
+    ben_val = benign_all[b_ca:b_va]
+    ben_test = benign_all[b_va:]
 
     train_rows = phish_train + ben_train + dev_rows
     cal_rows = phish_cal + ben_cal
@@ -461,11 +534,12 @@ def main() -> None:
     }
 
     manifest = {
-        "created_at_utc": "2026-11-24T07:45:00Z",
+        "created_at_utc": "2026-11-24T08:35:00Z",
         "sources": {
             "openphish": "https://github.com/openphish/public_feed (30 timestamped snapshots)",
-            "tranco": "https://tranco-list.eu/top-1m.csv.zip (sampled top 50k domains with realistic deep paths)",
-            "indian_synthetic": "Curated Indian banking/gov benign + Indian KYC/UPI/APK synthetic phishing patterns",
+            "ealvaradob_phishing_dataset_urls_json": "https://huggingface.co/datasets/ealvaradob/phishing-dataset (Apache-2.0 real crawled benign full URLs, label=0)",
+            "tranco_top100k_roots": "https://tranco-list.eu/top-1m.csv.zip (real root URLs only, zero fabricated paths)",
+            "indian_synthetic": "Curated Indian banking/gov benign + Indian KYC/UPI/APK/typosquat synthetic phishing patterns",
         },
         "time_cutoff_utc": cutoff_ts,
         "counts": {

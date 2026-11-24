@@ -1,164 +1,161 @@
 {
   "model_version": "edgeshield-url-char-lexical-lr-v1",
-  "detector_sha256": "e8726e42bb5023bca3952945ad5abc086a94cabac14eccfee63f4301ea711728",
+  "detector_sha256": "779cf74fd2ac1ac8c634649a468c7dea57eeb66d15d5c20574bf5072faa1f4a0",
   "thresholds": [
     0.3,
-    0.7
+    0.65
   ],
   "datasets": {
     "test_temporal": {
-      "n": 1827,
-      "negative_n": 1350,
+      "n": 1881,
+      "negative_n": 1404,
       "positive_n": 477,
       "confusion_matrix_2x3": [
         [
-          1272,
-          46,
-          32
+          1303,
+          82,
+          19
         ],
         [
-          33,
-          67,
-          377
+          97,
+          113,
+          267
         ]
       ],
-      "accuracy": 0.9026,
-      "precision": 0.9218,
-      "recall": 0.7904,
-      "false_positive_rate": 0.0237,
-      "f1": 0.851,
-      "abstention_rate": 0.0619,
-      "roc_auc": 0.986,
-      "brier": 0.04303,
+      "accuracy": 0.8347,
+      "precision": 0.9336,
+      "recall": 0.5597,
+      "false_positive_rate": 0.0135,
+      "f1": 0.6999,
+      "abstention_rate": 0.1037,
+      "verified_domain_applied_count": 4,
+      "roc_auc": 0.93168,
+      "brier": 0.07891,
       "latency_ms": {
-        "median": 0.4954,
-        "p95": 0.6575,
-        "max": 1.5057
+        "median": 0.5623,
+        "p95": 0.6559,
+        "max": 2.0821
       },
       "false_alarms_sample": [
         {
-          "url": "http://ouest-france.fr/",
-          "score": 0.7162,
-          "source": "tranco_top100k",
+          "url": "http://www.yama96.jp/",
+          "score": 0.8144,
+          "source": "tranco_top100k_roots",
           "cues": []
         },
         {
-          "url": "https://24heures.ch/",
-          "score": 0.8148,
-          "source": "tranco_top100k",
+          "url": "http://www.nwhl.zone/roster/show/2758652",
+          "score": 0.8027,
+          "source": "ealvaradob_benign_crawled",
           "cues": []
         },
         {
-          "url": "https://www.nordlayer.com/",
-          "score": 0.7639,
-          "source": "tranco_top100k",
+          "url": "https://my-lightning-container.com/",
+          "score": 0.6639,
+          "source": "tranco_top100k_roots",
           "cues": []
         },
         {
-          "url": "http://www.cyberark-saas.com/",
-          "score": 0.7388,
-          "source": "tranco_top100k",
+          "url": "https://adobe-identity.com/",
+          "score": 0.9271,
+          "source": "tranco_top100k_roots",
           "cues": []
         },
         {
-          "url": "https://www.cloooudlayer.com/",
-          "score": 0.7759,
-          "source": "tranco_top100k",
+          "url": "https://www.firefox-portal-detection.com/",
+          "score": 0.8299,
+          "source": "tranco_top100k_roots",
           "cues": []
         },
         {
-          "url": "https://www.warszawawpigulce.pl/j/63055429.html",
-          "score": 0.8074,
-          "source": "tranco_top100k",
+          "url": "https://postcodefinder.guide/address/bb09aee06ca1fe769439135d44375095/",
+          "score": 0.6777,
+          "source": "ealvaradob_benign_crawled",
           "cues": []
         },
         {
-          "url": "https://info.icloud-content.com/",
-          "score": 0.7642,
-          "source": "tranco_top100k",
+          "url": "https://www.bk-feedback-uk.com/(X(1)S(hnrmziabxtlzgq0rpipyby1g))/Index.aspx?AspxAutoDetectCookieSupport=1",
+          "score": 0.7365,
+          "source": "ealvaradob_benign_crawled",
           "cues": []
         },
         {
-          "url": "https://www.bysex.click/accounts.html",
-          "score": 0.7823,
-          "source": "tranco_top100k",
-          "cues": [
-            "SUSPICIOUS_TLD_URL"
-          ]
-        },
-        {
-          "url": "https://flixpatrol.com/",
-          "score": 0.7789,
-          "source": "tranco_top100k",
+          "url": "https://fled-project.info/admin",
+          "score": 0.8553,
+          "source": "ealvaradob_benign_crawled",
           "cues": []
         },
         {
-          "url": "https://networktechnologysolutions.com/",
-          "score": 0.8474,
-          "source": "tranco_top100k",
+          "url": "http://www.native-languages.org/indiana",
+          "score": 0.6991,
+          "source": "ealvaradob_benign_crawled",
+          "cues": []
+        },
+        {
+          "url": "http://www.1024tera.com/",
+          "score": 0.9505,
+          "source": "tranco_top100k_roots",
           "cues": []
         }
       ],
       "misses_sample": [
         {
-          "url": "http://ananeosi-support.com/",
-          "score": 0.0554,
-          "source": "openphish_public_feed",
-          "cues": []
-        },
-        {
-          "url": "http://pulsebux.com/",
-          "score": 0.2695,
-          "source": "openphish_public_feed",
-          "cues": []
-        },
-        {
-          "url": "http://wechatjp.org/",
-          "score": 0.1168,
+          "url": "http://conatem.com/adobeStudio.html",
+          "score": 0.0649,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
           "url": "https://atron-solutions.com/RKS/",
-          "score": 0.2962,
+          "score": 0.0622,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
-          "url": "http://pageforge.fr/p/mail",
-          "score": 0.014,
+          "url": "https://easypark.mllioq.com/",
+          "score": 0.1548,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
-          "url": "https://www.awscfdns.com/customer-preferences/edit",
-          "score": 0.0176,
+          "url": "https://eepoint.wtwco.us/ess/bnpp/Login/Index",
+          "score": 0.1472,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
-          "url": "https://www.trap-portal.app/",
-          "score": 0.0674,
+          "url": "https://login.agentforce.cc/",
+          "score": 0.193,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
-          "url": "http://api-google-docs.com/",
-          "score": 0.1173,
-          "source": "openphish_public_feed",
-          "cues": [
-            "BRAND_SPOOF_URL"
-          ]
-        },
-        {
-          "url": "http://cdn-pdfviewer.com/",
-          "score": 0.2965,
+          "url": "https://magalu.lpad.dev/",
+          "score": 0.124,
           "source": "openphish_public_feed",
           "cues": []
         },
         {
-          "url": "http://snipvex.com/",
-          "score": 0.2661,
+          "url": "https://rbx.tg/pAynW-c7",
+          "score": 0.0108,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://urlshorter.cc/x_IW0Fi",
+          "score": 0.0541,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://usa-icloud.com/identity/login",
+          "score": 0.1752,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://user.mxwillow.com/6a7339f06fd6ce7cc631514d/l/LAG9H3w3fnFOWAyeH?rn=%23cGVuc2lvbkBzdGVhbW55LmNvbQ",
+          "score": 0.253,
           "source": "openphish_public_feed",
           "cues": []
         }
@@ -170,9 +167,9 @@
       "positive_n": 100,
       "confusion_matrix_2x3": [
         [
-          89,
-          9,
-          2
+          99,
+          1,
+          0
         ],
         [
           0,
@@ -180,33 +177,21 @@
           100
         ]
       ],
-      "accuracy": 0.945,
-      "precision": 0.9804,
+      "accuracy": 0.995,
+      "precision": 1.0,
       "recall": 1.0,
-      "false_positive_rate": 0.02,
-      "f1": 0.9901,
-      "abstention_rate": 0.045,
+      "false_positive_rate": 0.0,
+      "f1": 1.0,
+      "abstention_rate": 0.005,
+      "verified_domain_applied_count": 8,
       "roc_auc": 1.0,
-      "brier": 0.02028,
+      "brier": 0.00286,
       "latency_ms": {
-        "median": 0.4884,
-        "p95": 0.6057,
-        "max": 0.6806
+        "median": 0.5677,
+        "p95": 0.7116,
+        "max": 1.8445
       },
-      "false_alarms_sample": [
-        {
-          "url": "https://github.com/login",
-          "score": 0.9233,
-          "source": "global_benign_holdout",
-          "cues": []
-        },
-        {
-          "url": "https://huggingface.co/meta-llama",
-          "score": 0.8485,
-          "source": "global_benign_holdout",
-          "cues": []
-        }
-      ],
+      "false_alarms_sample": [],
       "misses_sample": []
     },
     "url_holdout_indian_subset": {
@@ -215,8 +200,8 @@
       "positive_n": 50,
       "confusion_matrix_2x3": [
         [
-          24,
-          1,
+          25,
+          0,
           0
         ],
         [
@@ -225,18 +210,242 @@
           50
         ]
       ],
-      "accuracy": 0.9867,
+      "accuracy": 1.0,
       "precision": 1.0,
       "recall": 1.0,
       "false_positive_rate": 0.0,
       "f1": 1.0,
-      "abstention_rate": 0.0133,
+      "abstention_rate": 0.0,
+      "verified_domain_applied_count": 5,
       "roc_auc": 1.0,
-      "brier": 0.00749,
+      "brier": 0.00068,
       "latency_ms": {
-        "median": 0.4922,
-        "p95": 0.6199,
-        "max": 0.7912
+        "median": 0.595,
+        "p95": 0.765,
+        "max": 2.1984
+      },
+      "false_alarms_sample": [],
+      "misses_sample": []
+    }
+  },
+  "datasets_raw_ml": {
+    "test_temporal": {
+      "n": 1881,
+      "negative_n": 1404,
+      "positive_n": 477,
+      "confusion_matrix_2x3": [
+        [
+          1303,
+          82,
+          19
+        ],
+        [
+          97,
+          113,
+          267
+        ]
+      ],
+      "accuracy": 0.8347,
+      "precision": 0.9336,
+      "recall": 0.5597,
+      "false_positive_rate": 0.0135,
+      "f1": 0.6999,
+      "abstention_rate": 0.1037,
+      "verified_domain_applied_count": 0,
+      "roc_auc": 0.93168,
+      "brier": 0.07891,
+      "latency_ms": {
+        "median": 0.5508,
+        "p95": 0.6341,
+        "max": 2.0694
+      },
+      "false_alarms_sample": [
+        {
+          "url": "http://www.yama96.jp/",
+          "score": 0.8144,
+          "source": "tranco_top100k_roots",
+          "cues": []
+        },
+        {
+          "url": "http://www.nwhl.zone/roster/show/2758652",
+          "score": 0.8027,
+          "source": "ealvaradob_benign_crawled",
+          "cues": []
+        },
+        {
+          "url": "https://my-lightning-container.com/",
+          "score": 0.6639,
+          "source": "tranco_top100k_roots",
+          "cues": []
+        },
+        {
+          "url": "https://adobe-identity.com/",
+          "score": 0.9271,
+          "source": "tranco_top100k_roots",
+          "cues": []
+        },
+        {
+          "url": "https://www.firefox-portal-detection.com/",
+          "score": 0.8299,
+          "source": "tranco_top100k_roots",
+          "cues": []
+        },
+        {
+          "url": "https://postcodefinder.guide/address/bb09aee06ca1fe769439135d44375095/",
+          "score": 0.6777,
+          "source": "ealvaradob_benign_crawled",
+          "cues": []
+        },
+        {
+          "url": "https://www.bk-feedback-uk.com/(X(1)S(hnrmziabxtlzgq0rpipyby1g))/Index.aspx?AspxAutoDetectCookieSupport=1",
+          "score": 0.7365,
+          "source": "ealvaradob_benign_crawled",
+          "cues": []
+        },
+        {
+          "url": "https://fled-project.info/admin",
+          "score": 0.8553,
+          "source": "ealvaradob_benign_crawled",
+          "cues": []
+        },
+        {
+          "url": "http://www.native-languages.org/indiana",
+          "score": 0.6991,
+          "source": "ealvaradob_benign_crawled",
+          "cues": []
+        },
+        {
+          "url": "http://www.1024tera.com/",
+          "score": 0.9505,
+          "source": "tranco_top100k_roots",
+          "cues": []
+        }
+      ],
+      "misses_sample": [
+        {
+          "url": "http://conatem.com/adobeStudio.html",
+          "score": 0.0649,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://atron-solutions.com/RKS/",
+          "score": 0.0622,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://easypark.mllioq.com/",
+          "score": 0.1548,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://eepoint.wtwco.us/ess/bnpp/Login/Index",
+          "score": 0.1472,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://login.agentforce.cc/",
+          "score": 0.193,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://magalu.lpad.dev/",
+          "score": 0.124,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://rbx.tg/pAynW-c7",
+          "score": 0.0108,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://urlshorter.cc/x_IW0Fi",
+          "score": 0.0541,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://usa-icloud.com/identity/login",
+          "score": 0.1752,
+          "source": "openphish_public_feed",
+          "cues": []
+        },
+        {
+          "url": "https://user.mxwillow.com/6a7339f06fd6ce7cc631514d/l/LAG9H3w3fnFOWAyeH?rn=%23cGVuc2lvbkBzdGVhbW55LmNvbQ",
+          "score": 0.253,
+          "source": "openphish_public_feed",
+          "cues": []
+        }
+      ]
+    },
+    "url_holdout_200": {
+      "n": 200,
+      "negative_n": 100,
+      "positive_n": 100,
+      "confusion_matrix_2x3": [
+        [
+          99,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          100
+        ]
+      ],
+      "accuracy": 0.995,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "f1": 1.0,
+      "abstention_rate": 0.005,
+      "verified_domain_applied_count": 0,
+      "roc_auc": 1.0,
+      "brier": 0.00286,
+      "latency_ms": {
+        "median": 0.555,
+        "p95": 0.7314,
+        "max": 1.9976
+      },
+      "false_alarms_sample": [],
+      "misses_sample": []
+    },
+    "url_holdout_indian_subset": {
+      "n": 75,
+      "negative_n": 25,
+      "positive_n": 50,
+      "confusion_matrix_2x3": [
+        [
+          25,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          50
+        ]
+      ],
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "false_positive_rate": 0.0,
+      "f1": 1.0,
+      "abstention_rate": 0.0,
+      "verified_domain_applied_count": 0,
+      "roc_auc": 1.0,
+      "brier": 0.00068,
+      "latency_ms": {
+        "median": 0.5835,
+        "p95": 0.7183,
+        "max": 2.3037
       },
       "false_alarms_sample": [],
       "misses_sample": []
