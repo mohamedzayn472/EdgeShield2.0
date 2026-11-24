@@ -1,6 +1,6 @@
 # EdgeShield Standalone Phishing URL Detection (`url_detector_v1`)
 
-**Branch:** `feat/phishing-url` (local experimental branch; `main` V8 SMS submission remains untouched)  
+**Status:** In-progress experimental prototype included on `main` (`--mode url`, `models/url_detector_v1.json`) for judge reference; primary Phase 1 SMS default (`--mode sms`, `models/detector_v8.json`) remains completely unchanged.  
 **Model:** `edgeshield-url-char-lexical-lr-v1` (`format: 102`, `models/url_detector_v1.json`, `1,736,915` bytes, SHA-256 `779cf74fd2ac1ac8c634649a468c7dea57eeb66d15d5c20574bf5072faa1f4a0`, thresholds `[0.30, 0.65]`)
 
 ---
@@ -84,7 +84,21 @@ Executed `139` targeted benign & adversarial phishing URLs plus `14` malformed/d
 
 ---
 
-## 5. Usage
+## 5. Physical Raspberry Pi 5 (8 GB) Prototype Handover & Controlled Network Checks
+
+In addition to the Ubuntu `x86_64` host benchmarks in Sections 3–4 (`results/host/url_v1/`), the format-102 URL prototype was evaluated on a **physical Raspberry Pi 5 Model B Rev 1.1 (8 GB RAM, AArch64, Debian GNU/Linux 13 Trixie, kernel `6.18.50+rpt-rpi-2712`, GLIBC `2.41`, Python `3.13.5`)**, with raw device logs and packet captures archived on the Pi 5 handover USB (`edgeshield_url_transfer/`, `url-v1-device/SHA256SUMS`: `12/12 OK`, `network-traffic/SHA256SUMS`: `8/8 OK`):
+
+- **Unit & Stress Tests:** `82/82` URL unit tests passed (`0` failed, `1.35 s`); `139`-URL stress suite scored `77/79` benign `LEGITIMATE`, `2` benign `UNCERTAIN` (`zoom.us`, `localhost:8000`), **`0/79` benign `SCAM` FP**, **`60/60` (`100%`)** phishing `SCAM`, `14/14` malformed rejected, `11/11` policy-bypass verified, `0` sentinel leaks, `0` network calls attempted (`1.1098 ms` med / `1.3329 ms` p95 / `3.2401 ms` max latency).
+- **Temporal & Separate Holdouts:**
+  - **Temporal (`1,881`: `1,404` neg / `477` pos):** `83.47%` acc, `93.36%` prec, **`55.97%` `SCAM` recall** (+`113` `UNCERTAIN`, `97` missed as `LEGITIMATE`), `1.35%` FPR, `69.99%` F1, `10.37%` abstention, `0.93168` ROC-AUC, `0.07891` Brier, confusion `[[1303, 82, 19], [97, 113, 267]]`, latency `1.0983 ms` med / `1.2618 ms` p95 / `2.1916 ms` max.
+  - **General Holdout (`200`, separate slice):** `99.50%` acc, `100%` prec, `100%` recall, `0%` FPR, `0.50%` abstention, `1.000` ROC-AUC, `0.00286` Brier, `1.1019 ms` med / `1.3278 ms` p95 / `3.4057 ms` max.
+  - **Indian Holdout (`75`, separate slice):** `100%` acc, `100%` prec, `100%` recall, `0%` FPR, `1.000` ROC-AUC, `0.00068` Brier, `1.1501 ms` med / `1.3762 ms` p95 / `1.4396 ms` max.
+- **ExecuTorch Llama Integration & Resources:** `4/4` URL demo cases returned `Validated / ACCEPTED` (~`2.20 ms` avg detector, ~`6.286 s` avg Llama; `ACCEPTED` confirms validator acceptance only, never URL safety). Standalone check (`http://sbi.kyc-verify-account.xyz/netbanking/login.php?session=9281`) scored `SCAM` (`0.9999996`, `3.1838 ms` detector, `0.1566 ms` evidence, `6,652.0643 ms` Llama `ACCEPTED`, `0.5261 ms` validation). Measured resources: User CPU `40.89 s`, System `1.98 s`, Elapsed `27.04 s` (`158%` CPU), Max RSS **`1,409,328 KB` (~`1.34 GiB`)**, `0` swap, `0` socket messages, `~52–66 °C` later checks, final **`throttled=0x0`**.
+- **Controlled Network Checks (`tcpdump 4.99.5` + `strace -f -e trace=network`, `wlan0` `192.168.137.45`):** Baseline/background runs (`baseline.pcap` `334` pkts, `edgeshield_run.pcap` `609` pkts, `edgeshield_isolated.pcap` `315` pkts) contained background browser/OS traffic (`chatgpt.com`, etc.); after terminating Chromium, a **`45 s` controlled capture during the full `4/4` Llama demo (`edgeshield_no_chromium.pcap`) recorded `0` packets (`0` dropped)**, while a control ping capture (`capture_control.pcap`, `5` pkts) confirmed `tcpdump` operation and `strace` (`edgeshield_process_network.trace`) matched **`0`** `socket()`, `connect()`, `sendto()`, or `recvfrom()` calls.
+
+---
+
+## 6. Usage
 
 ```bash
 # Built-in 4-case synthetic URL demo (offline template fallback or --runtime-config for Llama)
@@ -100,8 +114,8 @@ bash scripts/host_python.sh -m edgeshield.cli --mode url --repeat
 
 ---
 
-## 6. Limitations
+## 7. Limitations
 
-1. **Compromised legitimate or generic non-brand domains:** Because EdgeShield inspects URL strings strictly offline (zero DNS/WHOIS/HTML fetching), compromised generic websites or phishing URLs on unrelated domains without brand/auth/TLD/structural anomalies account for the `~20.3%` (`97/477`) `LEGITIMATE` misses in future OpenPhish `test_temporal` (where all `abused_hosting` domains were disjointly held out in earlier splits).
-2. **Typosquat scope:** Edit-distance typosquatting uses Damerau-Levenshtein `<= 1` (plus leetspeak/digraph normalization and compound brand+lure splitting) over distinctive `>= 5`-character brand stems; very short 3-character names (`sbi`, `bob`, `pnb`) and `>= 2`-edit alphabetic distortions are intentionally excluded to avoid false positives on everyday English words.
-3. **Non-calibrated probability & host-only status:** Scores (`EXPERIMENTAL_TIME_SPLIT_URL_MODEL`) reflect time-split research benchmarks rather than real-world mobile click prevalence, and Raspberry Pi 5 hardware verification for `--mode url` remains pending before merging into `main`.
+1. **Moderate temporal recall (`55.97%`):** On the `1,881`-URL time-split temporal set, `97/477` (`20.34%`) positive URLs scored `LEGITIMATE` (primarily compromised generic domains lacking brand/auth/TLD/structural anomalies, with zero `abused_hosting` overlap) and `113/477` scored `UNCERTAIN`. Do **not** report temporal evaluation as 100% phishing detection; General Holdout (`200`) and Indian Holdout (`75`) are separate benchmark sets and do not prove universal accuracy.
+2. **Offline string-only & typosquat scope:** Zero DNS, WHOIS, TLS cert, or HTML retrieval is performed; typosquatting uses Damerau-Levenshtein `<= 1` (plus leetspeak/digraph normalization and compound brand+lure splitting) over distinctive `>= 5`-character brand stems only (excluding short 3-character names such as `sbi`, `bob`, `pnb`), and `2/79` benign stress URLs (`zoom.us`, `localhost:8000`) scored `UNCERTAIN`.
+3. **Scoped network evidence & prototype status:** The controlled `45 s` no-Chromium `tcpdump` (`0` pkts) and `strace` (`0` monitored `socket`/`connect`/`sendto`/`recvfrom` matches) establish zero observed traffic/calls in those specific runs rather than universal network-inability proof; scores (`EXPERIMENTAL_TIME_SPLIT_URL_MODEL`) are not real-world prevalence-calibrated probabilities; and raw Pi 5 (8 GB) handover files live on the USB archive (`edgeshield_url_transfer/`) while prototype code, model, and host benchmarks are included on `main` for judge reference.

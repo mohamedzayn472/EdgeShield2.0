@@ -1181,22 +1181,19 @@ mentoring slides 03 and 11, which recommend a complete
 on-device security workflow and identify scam SMS as a
 valid primary scenario.
 
-| Security application | Phase / Branch | Implementation status |
+| Security application | Phase / Mode | Implementation status |
 | :--- | :--- | :--- |
-| Pasted SMS scam detection | Phase 1 (`main`) | ✅ VERIFIED |
-| Evidence-constrained SMS advisory | Phase 1 (`main`) | ✅ VERIFIED |
-| Standalone phishing URL detection | In Progress (`feat/phishing-url`) | 🚧 IN PROGRESS — Pi 5 (8 GB) prototype benchmarked |
+| Pasted SMS scam detection | Phase 1 (`--mode sms`, default on `main`) | ✅ VERIFIED |
+| Evidence-constrained SMS advisory | Phase 1 (`--mode sms`, default on `main`) | ✅ VERIFIED |
+| Standalone phishing URL detection | In Progress (`--mode url` prototype on `main`) | 🚧 IN PROGRESS — code & host metrics on `main`; Pi 5 (8 GB) prototype benchmarked |
 | Network traffic anomaly & intrusion detection | Phase 2 blueprint | 📐 DESIGNED — `NOT_IMPLEMENTED` ([Plan](docs/NETWORK_TRAFFIC_PLAN.md)) |
 | Malware analysis | Future scope | ⚠️ DEFERRED |
 
-On `main`, EdgeShield implements pasted SMS analysis only.
-A `LINK_PRESENT` cue within an SMS is not independent URL
-classification and must not be interpreted as a completed
-phishing URL detection capability.
+On `main`, the Phase 1 verified default (`--mode sms` with frozen `models/detector_v8.json`) analyzes pasted SMS messages. A `LINK_PRESENT` cue within an SMS is not independent URL classification. For judge reference, `main` also includes the **in-progress** standalone Phishing URL prototype (`--mode url`, `models/url_detector_v1.json`, [docs/PHISHING_URL_DETECTION.md](docs/PHISHING_URL_DETECTION.md), host artifacts in [results/host/url_v1/](results/host/url_v1/)).
 
 ### Multi-Surface PS3 Progress (Phishing URLs & Phase 2 Network Plan)
 
-Alongside our completed **16 GB Raspberry Pi 5** offline SMS submission (`main`), we evaluated an **in-progress** standalone Phishing URL prototype (`UrlDetectorV1`, separate branch `feat/phishing-url`) on a **physical Raspberry Pi 5 Model B Rev 1.1 (8 GB, AArch64, Debian 13 Trixie, `6.18.50+rpt-rpi-2712`, `glibc 2.41`, Python `3.13.5`)**, and finalized our **Phase 2 Network Traffic Plan (`NOT_IMPLEMENTED`)**:
+Alongside our completed **16 GB Raspberry Pi 5** offline SMS submission (`--mode sms`), we included our **in-progress** standalone Phishing URL prototype (`UrlDetectorV1`, `--mode url`, [docs/PHISHING_URL_DETECTION.md](docs/PHISHING_URL_DETECTION.md)) on `main` with measurements recorded on a **physical Raspberry Pi 5 Model B Rev 1.1 (8 GB, AArch64, Debian 13 Trixie, `6.18.50+rpt-rpi-2712`, `glibc 2.41`, Python `3.13.5`)** and host benchmarks in [results/host/url_v1/](results/host/url_v1/), and finalized our **Phase 2 Network Traffic Plan (`NOT_IMPLEMENTED`)**:
 
 #### Phishing URL Prototype — Measured Pi 5 (8 GB) Benchmarks (`In Progress`, USB Archive `edgeshield_url_transfer/`)
 
@@ -1272,10 +1269,10 @@ from outstanding validation.
 - Synthetic and UCI spam-proxy evaluations do not establish real-world Indian SMS fraud accuracy; scores are not calibrated real-world probabilities.
 - Human review of synthetic labels, real-world Indian SMS calibration, and the 5-person clarity study remain pending.
 - Indicator matches are observable lexical cues, never verified sender identities; low risk never establishes safety, and validator acceptance does not prove detector truth.
-- Sustained passive cooling triggered thermal throttling (`83.7 °C`, `throttled_after=0xe0008`) in the historical V2 benchmark (sustained V8 thermal testing pending); current Phase 1 `main` analyzes pasted SMS only.
+- Sustained passive cooling triggered thermal throttling (`83.7 °C`, `throttled_after=0xe0008`) in the historical V2 benchmark (sustained V8 thermal testing pending); the Phase 1 verified default (`--mode sms`) analyzes pasted SMS only.
 
-#### 2. Phishing URLs (`UrlDetectorV1` — In Progress on Separate Pi 5 8 GB Branch)
-- Prototype remains on `feat/phishing-url` (not merged into `main`), with raw Pi 5 8 GB evidence archived on USB (`edgeshield_url_transfer/`, `12/12` + `8/8 OK`).
+#### 2. Phishing URLs (`UrlDetectorV1` — In Progress Prototype on `main` / Pi 5 8 GB)
+- Prototype code (`--mode url`), `models/url_detector_v1.json`, and host benchmarks ([results/host/url_v1/](results/host/url_v1/)) are included on `main` for judge reference ([docs/PHISHING_URL_DETECTION.md](docs/PHISHING_URL_DETECTION.md)), while raw Pi 5 8 GB handover artifacts remain preserved on USB (`edgeshield_url_transfer/`, `12/12` + `8/8 OK`).
 - Temporal evaluation recall is **`55.97%`** (`97/477` positive URLs classified `LEGITIMATE`, `113/477` `UNCERTAIN`) and must not be presented as 100% detection; General (`200`) and Indian (`75`) holdouts are separate benchmark slices.
 - `2/79` benign stress-test URLs (`zoom.us`, `localhost:8000`) returned `UNCERTAIN`.
 - Offline string inspection performs zero DNS/WHOIS/HTML verification, and typosquat checks cover distinctive `>= 5`-character brand stems only.
@@ -1294,7 +1291,7 @@ flowchart TD
     B["Human label review &<br/>real-world SMS calibration"]
     C["Sustained V8 thermal evaluation"]
 
-    E["In Progress (feat/phishing-url)<br/>Standalone URL classifier (Pi 5 8 GB prototype benchmarked)"]
+    E["In Progress (--mode url on main)<br/>Standalone URL classifier (Pi 5 8 GB prototype benchmarked)"]
     F["Phase 2 Plan (Designed, NOT_IMPLEMENTED)<br/>Header-only C-ring NIDS + EpisodeCoalescer"]
     G["Future Scope<br/>Local malware analysis"]
 
@@ -1310,7 +1307,7 @@ flowchart TD
 | :--- | :--- | :--- |
 | Detector validation | Human label review and real-world calibration | ⚠️ PENDING |
 | Thermal validation | Sustained V8 evaluation and assessment of cooling requirements | ⚠️ PENDING |
-| Phishing URLs (`feat/phishing-url`) | Improve temporal recall (`55.97%` baseline on Pi 5 8 GB) before merging into `main` | 🚧 IN PROGRESS |
+| Phishing URLs (`--mode url`) | Improve temporal recall (`55.97%` baseline on Pi 5 8 GB; [Docs](docs/PHISHING_URL_DETECTION.md)) | 🚧 IN PROGRESS |
 | Phase 2 — Network intrusion | Implement `NetDetectorV1`, `libpcap`/`NFStream` C-ring, and `EpisodeCoalescer` ([Plan](docs/NETWORK_TRAFFIC_PLAN.md)) | 📐 DESIGNED (`NOT_IMPLEMENTED`) |
 | Phase 2 — Malware | Local malware-analysis capabilities | ⚠️ DEFERRED |
 
@@ -1536,6 +1533,7 @@ Additional source attribution is documented in
 | [V2 Results](docs/V2_RESULTS.md) | Historical detector results |
 | [Security & Privacy](docs/SECURITY.md) | Privacy boundary and security considerations |
 | [Limitations](docs/LIMITATIONS.md) | Known limitations across all three PS3 pillars |
+| [Phishing URL Prototype](docs/PHISHING_URL_DETECTION.md) | In-progress `--mode url` classifier, host & Pi 5 (8 GB) benchmarks, and limits |
 | [Phase 2 Network Traffic Plan](docs/NETWORK_TRAFFIC_PLAN.md) | Phase 2 `--mode net` architecture, datasets, and roadmap (`NOT_IMPLEMENTED`) |
 
 </details>
