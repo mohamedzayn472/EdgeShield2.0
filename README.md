@@ -6,6 +6,8 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying · Built with Llama**
 
+**Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
+
 ## What you can try
 
 | Capability | Status | Evidence |
@@ -14,7 +16,7 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 | Phishing URL detection | Experimental CLI mode. Scores the structure of one URL locally without visiting the site. Includes host results and a documented 8 GB Pi 5 trial. | [Prototype and device notes](docs/PHISHING_URL_DETECTION.md) · [Host results](results/host/url_v1/) |
 | Network traffic analysis | Phase 2 design for detecting anomalous traffic. Packet acquisition, classifier deployment and device benchmarks are planned. | [Network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
 
-## Try the demos
+## Run the V8 SMS demo
 
 From the repository root on Linux with Python 3.10–3.13, install the pinned dependencies once. The built-in demos run locally and use a labeled template explanation until you configure the licensed Llama runtime.
 
@@ -24,8 +26,13 @@ python3 -m venv .venv
 python -m pip install -r requirements/host.txt
 python -m pip install --no-build-isolation --no-deps -e .
 edgeshield --demo
-edgeshield --mode url --demo
 ```
+
+The demo runs four English and Hinglish SMS examples. Look for `Detector: loaded (4d3481555460)` in the startup banner to confirm V8. Each example prints a threat band, indicators, recommended action and explanation source. On a host without the Llama runtime, `Template fallback` is expected.
+
+To check V8 specifically, run `python -m pytest -q tests/test_detector_v8.py` in the same environment. The [full verification](#verify-the-submission) also covers earlier detectors and the URL prototype.
+
+**Optional URL demo:** `edgeshield --mode url --demo` runs the separate experimental phishing detector.
 
 For an interactive session, use `edgeshield --repeat` for SMS or `edgeshield --mode url --repeat` for URLs. To run the model-backed demo on a prepared Pi, follow the [Pi 5 deployment guide](docs/PI5_DEPLOYMENT.md) and run `bash deploy/pi5/launch.sh --demo`.
 
