@@ -8,6 +8,17 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
 
+## Judge’s guide to datasets and evidence
+
+| What to inspect | Open on GitHub |
+| --- | --- |
+| **V8 training data** · 3,431 training SMS (2,770 UCI + 661 synthetic), plus 682 for calibration and 1,331 for validation | [Synthetic English/Hinglish development data](data/synthetic/v8_development.jsonl) · [UCI download and local preparation](data/README.md) · [Recorded split counts](results/host/v8/training_validation.json) |
+| **V8 test data** · 264 fresh synthetic SMS. V8 classified 238 of 240 labeled cases correctly. The other 24 were ambiguous. | [Read the holdout messages](data/synthetic/v8_holdout.jsonl) · [Evaluation protocol](docs/V8_EVALUATION_PROTOCOL.md) · [Scored results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) |
+| **Model and implementation** | [Frozen V8 model](models/detector_v8.json) · [Training script](scripts/train_detector_v8.py) · [Assessment code](src/edgeshield/pipeline.py) · [V8 tests](tests/test_detector_v8.py) |
+| **Physical Raspberry Pi 5 run** | [Device benchmark](results/pi5/v8-device-20261124/v8_offline_benchmark.json) · [Network trace](results/pi5/v8-device-20261124/v8_offline_network.trace) · [Deployment guide](docs/PI5_DEPLOYMENT.md) |
+| **Experimental phishing URL data** · 6,896 training URLs | [Indian development examples](data/synthetic/url_indian_dev.jsonl) · [URL holdout](data/synthetic/url_holdout.jsonl) · [Sources and split counts](results/host/url_v1/dataset_manifest.json) |
+| **Technical report and future work** | [Report with architecture diagram](docs/REPORT.md#2-system-architecture-and-safeguards) · [Phase 2 network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
+
 ## What you can try
 
 | Capability | Status | Evidence |
