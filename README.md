@@ -6,21 +6,19 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying · Built with Llama**
 
-[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Download final technical report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf)
+[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Final report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Read online](docs/REPORT.md) · [Download project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip)
 
 **Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
 
-## How to view the submission files
+## Reviewer access — report and evidence
 
-GitHub's built-in preview may display **“Unable to render code block”** for large model/evaluation JSON files or fail to preview a PDF. The file can still be downloaded.
+> **Recommended viewing method:** [Download the complete project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip), extract it, and open `Team_Tolerator_Edgeshield_ARM_SoC.pdf` in any PDF reader. This also provides every tracked dataset, model artifact and benchmark record for local inspection without running the application.
 
-1. **Technical report:** [Download the final 18-page PDF directly](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf), then open it in your browser's PDF reader or a local PDF viewer. Alternatively, [read the technical report in GitHub Markdown](docs/REPORT.md).
-2. **Datasets, frozen model and evaluation results:** Open the file from the judge's guide below. If the preview fails, select **Raw**, **View raw**, or the **Download raw file** icon. Open the downloaded `.json` or `.jsonl` in VS Code or another text editor. JSONL contains one JSON record per line.
-3. **Download everything:** On the [repository home page](https://github.com/mohamedzayn472/EdgeShield2.0), select **Code → Download ZIP**, extract the archive, and browse the files locally. No model execution is required to inspect the evidence.
+For individual files, open the GitHub file page and select **Download raw file** (top-right download icon), **Raw**, or **View raw**. Save PDFs locally; open JSON and JSONL files in a text editor such as VS Code. If an embedded browser does not preview a file, open the link in a regular browser or use the ZIP above. The [online technical report](docs/REPORT.md) is also available without downloading.
 
 ## Judge’s guide to datasets and evidence
 
-| What to inspect | Open on GitHub |
+| What to inspect | Review materials / downloads |
 | --- | --- |
 | **V8 training data** · 3,431 training SMS (2,770 UCI + 661 synthetic), plus 682 for calibration and 1,331 for validation | [Synthetic English/Hinglish development data](data/synthetic/v8_development.jsonl) · [UCI download and local preparation](data/README.md) · [Recorded split counts](results/host/v8/training_validation.json) |
 | **V8 test data** · 264 fresh synthetic SMS. V8 classified 238 of 240 labeled cases correctly. The other 24 were ambiguous. | [Read the holdout messages](data/synthetic/v8_holdout.jsonl) · [Evaluation protocol](docs/V8_EVALUATION_PROTOCOL.md) · [Scored results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) ([raw download](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/results/host/v8/v3_v5_v6_v7_v8_evaluation.json)) |
@@ -59,19 +57,9 @@ For an interactive session, use `edgeshield --repeat` for SMS or `edgeshield --m
 
 ## How the Pi assesses an SMS
 
-```mermaid
-flowchart TD
-    SMS["SMS entered on the Pi"] --> D["Detector V8 · TF-IDF + logistic regression"]
-    SMS --> C["Extract indicator IDs"]
-    D -->|Risk band| A["Show verdict and recommended action"]
-    D -->|Band and score| E["Privacy boundary · typed evidence"]
-    C --> E
-    E -->|Evidence only| L["Local Llama via ExecuTorch"]
-    L --> V{"Explanation passes validation?"}
-    V -->|Yes| Y["Show validated explanation"]
-    V -->|No| F["Show template fallback"]
-    E -->|Runtime unavailable or skipped| F
-```
+![EdgeShield offline Raspberry Pi 5 system architecture](docs/edgeshield-architecture.jpeg)
+
+[Open full-size architecture figure](docs/edgeshield-architecture.jpeg) · [Detailed architecture and safeguards](docs/ARCHITECTURE.md)
 
 The risk verdict appears before Llama runs. For example, if an SMS asks the user to share an OTP, the evidence record can carry the cue `OTP_REQUEST`. The OTP digits and original wording stay outside the model prompt. [Evidence schema](src/edgeshield/evidence.py) · [Assessment code](src/edgeshield/pipeline.py)
 
