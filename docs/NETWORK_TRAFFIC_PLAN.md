@@ -14,7 +14,7 @@ EdgeShield unifies all three Problem Statement 3 threat surfaces behind one shar
 
 | PS3 Threat Surface | Module & Artifact | Current Status | Dataset & Validation Scope | Raspberry Pi 5 Evidence / Design Budget |
 | :--- | :--- | :--- | :--- | :--- |
-| **1. Scam SMS / Smishing** *(Primary Workflow)* | `DetectorV8`<br/>`detector_v8.py`<br/>`detector_v8.json` | ✅ **COMPLETE & VERIFIED** | UCI SMS Spam + family-disjoint English/Hinglish banking, OTP, UPI, delivery & KYC holdouts (`v8_holdout`: **99.17%** acc, **0.83%** FPR) | Physical **Pi 5 (16 GB)** offline verified (`0` `AF_INET`/`AF_INET6` syscalls, **1.80 ms** med detector, **6.51 s** med full Llama, `5/5` & `91/91` validated, **1.44 GB** RSS, `0 B` swap) |
+| **1. Scam SMS / Smishing** *(Primary Workflow)* | `DetectorV8`<br/>`detector_v8.py`<br/>`detector_v8.json` | ✅ **COMPLETE & VERIFIED** | UCI SMS Spam + family-disjoint English/Hinglish banking, OTP, UPI, delivery & KYC holdouts (`v8_holdout`: **99.17%** acc, **0.83%** FPR) | Physical **Pi 5 (16 GB)** offline verified (zero `AF_INET`/`AF_INET6` trace matches in the recorded V8 run, **1.80 ms** med detector, **6.51 s** med full response, `5/5` V8 explanations validated; `91/91` belongs to the archived V2 sustained run, **1.44 GB** RSS, `0 B` swap) |
 | **2. Phishing URLs** *(Prototype on `main`)* | `UrlDetectorV1`<br/>`--mode url`<br/>`url_detector_v1.json` | 🚧 **IN PROGRESS (BENCHMARKED)** | 30 timestamped OpenPhish snapshots (temporal `1,881`: **55.97%** `SCAM` recall, **1.35%** FPR, `0.93168` ROC-AUC) + separate general (`200`: **99.50%**) & Indian (`75`: **100%**) holdouts + `139`-URL stress suite | Physical **Pi 5 (8 GB)** prototype evaluated (`82/82` unit tests, **1.10–1.15 ms** med detector, `4/4` Llama `ACCEPTED` ~`6.286 s`, `1.34 GiB` RSS, `0` swap, `0` pkts in 45 s no-Chromium `tcpdump`, `0` matched `strace` syscalls) |
 | **3. Network Traffic** *(Phase 2 Blueprint)* | `NetDetectorV1`<br/>`--mode net`<br/>`net_detector_v1.json` | 📐 **DESIGNED (`NOT_IMPLEMENTED`)** | DistriNet-corrected CICIDS2017 + UNSW-NB15 via Extended NetFlow (`NF-v2`), NSL-KDD baseline-only sanity, + consented Indian LAN calibration | Planned around measured Pi 5 Cortex-A76 CPU budget (`Cores 0–1` C-ring flow sensor; `Cores 2–3` coalesced Llama advisory) |
 
@@ -75,7 +75,7 @@ flowchart LR
     subgraph S2["02 · Privacy Boundary"]
         direction TB
         C1["Typed Evidence<br/>band + score + cue IDs<br/>(schema_version = 1)"]
-        C2["EXCLUDED FROM LLM<br/>Raw PCAP, IPs, MACs,<br/>Ports, DNS/SNI & Payloads<br/>(Prompt-Injection Immune)"]
+        C2["EXCLUDED FROM LLM<br/>Raw PCAP, IPs, MACs,<br/>Ports, DNS/SNI & Payloads<br/>(Evidence-only prompt boundary)"]
     end
 
     subgraph S3["03 · Llama & Action (Cores 2–3)"]
