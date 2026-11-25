@@ -78,7 +78,7 @@ The risk verdict appears before Llama runs. For example, if an SMS asks the user
 | V8 synthetic SMS holdout | **238/240 correct**. Of 120 scams, 119 were flagged and one was uncertain. One of 120 legitimate messages was flagged. The evaluation excluded 24 ambiguous examples. | [Evaluation results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) |
 | URL temporal test | **267/477** positive URLs flagged (**55.97% recall**). Another 113 were uncertain and 97 received the legitimate band. The separate curated holdouts use different samples. | [URL evaluation](results/host/url_v1/evaluation_report.json) |
 
-Synthetic evaluation does not establish real-world accuracy. Explanation validation checks whether the wording follows the evidence. Human clarity testing and sustained thermal testing of V8 remain open. The earlier sustained V2 run reached **83.7 °C** under passive cooling. [Limitations](docs/LIMITATIONS.md)
+Synthetic evaluation does not establish real-world accuracy. Explanation validation checks whether the wording follows the evidence. Human clarity testing and sustained thermal testing of V8 remain open. V8 peaked at **72.7 °C over 48.18 s**. The earlier V2 run reached **83.7 °C over 605.4 s** and throttled under passive cooling. [Compare the two measured runs](docs/REPORT.md#sustained-v8-operation). [Limitations](docs/LIMITATIONS.md)
 
 ## Verify the submission
 

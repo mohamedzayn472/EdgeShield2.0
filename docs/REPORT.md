@@ -85,6 +85,22 @@ All 12 files in `results/pi5/archive/20261118-B0-full/` pass `sha256sum -c SHA25
 | Swap usage / min available RAM | **0 bytes** swap used (`Swaps: 0`) · 15.83 GB min available RAM | `benchmark.json`, `process-resources.txt` |
 | Thermals & throttling (passive heatsink) | Start 59.3 °C (`0x0`) → Peak **83.7 °C** (p95 82.6 °C) → `throttled_after=0xe0008` | Open board, passive heatsink (`benchmark.json`, `system-before.txt`, `system-after.txt`) |
 
+### Sustained V8 operation
+
+The physical Pi 5 completed five offline V8 requests over 48.18 seconds. A ten-minute V8 run was unavailable before submission. The earlier V2 run provides a comparison for continuous use on a passively cooled Pi 5.
+
+| Measured on the Pi 5 | V8 offline run | V2 sustained run |
+| --- | ---: | ---: |
+| Requests / elapsed time | 5 / 48.18 s | 91 / 605.4 s |
+| Full response, median / p95 | 6.51 / 6.85 s | 6.70 / 6.81 s |
+| Validated explanations | 5/5 | 91/91 |
+| Peak temperature | 72.7 °C | 83.7 °C |
+| End-of-run throttle flags | `0x0` | `0xe0008` |
+
+**Engineering assessment.** Both versions spent seconds generating each advisory and milliseconds scoring the SMS. Their short-response timings make the V2 run relevant when planning repeated V8 inference. The V2 board throttled under continuous load, so thermal throttling is a credible risk for V8 with passive cooling. Five V8 requests provide too little thermal history to estimate a ten-minute peak temperature, time to throttling, or sustained p95 latency.
+
+Recorded evidence: [V8 offline benchmark](https://github.com/mohamedzayn472/EdgeShield2.0/blob/main/results/pi5/v8-device-20261124/v8_offline_benchmark.json) · [V2 sustained benchmark](https://github.com/mohamedzayn472/EdgeShield2.0/blob/main/results/pi5/archive/20261118-B0-full/benchmark.json).
+
 ### Cooling, Throttling, and Performance Notes
 
 - **Subprocess reload design:** Each message invokes `llama_main` as an isolated child process, so total wall time (`6.81 s` p95) includes per-call SHA-256 verification, `.pte` model load (`~1.22 s` median), prompt tokenization + prefill (`~3.20 s` median TTFT), and token decode (`13.49 tokens/s` median). The detector verdict and deterministic `DO:` advice appear immediately in `<2 ms` before the advisory call finishes.
