@@ -6,7 +6,7 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying · Built with Llama**
 
-[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Final report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Read online](docs/REPORT.md) · [Download project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip)
+[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Official submission report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Quick technical reference (online)](docs/QUICK_REFERENCE.md) · [Download project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip)
 
 **Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
 
@@ -14,7 +14,7 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 > **Recommended viewing method:** [Download the complete project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip), extract it, and open `Team_Tolerator_Edgeshield_ARM_SoC.pdf` in any PDF reader. This also provides every tracked dataset, model artifact and benchmark record for local inspection without running the application.
 
-For individual files, open the GitHub file page and select **Download raw file** (top-right download icon), **Raw**, or **View raw**. Save PDFs locally; open JSON and JSONL files in a text editor such as VS Code. If an embedded browser does not preview a file, open the link in a regular browser or use the ZIP above. The [online technical report](docs/REPORT.md) is also available without downloading.
+For individual files, open the GitHub file page and select **Download raw file** (top-right download icon), **Raw**, or **View raw**. Save PDFs locally; open JSON and JSONL files in a text editor such as VS Code. If an embedded browser does not preview a file, open the link in a regular browser or use the ZIP above. The [quick technical reference](docs/QUICK_REFERENCE.md) is a supplementary GitHub-readable engineering guide, not the official report. The 18-page PDF is the formal Phase 1 submission.
 
 ## Judge’s guide to datasets and evidence
 
@@ -25,7 +25,7 @@ For individual files, open the GitHub file page and select **Download raw file**
 | **Model and implementation** | [Frozen V8 model](models/detector_v8.json) ([raw download](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/models/detector_v8.json)) · [Training script](scripts/train_detector_v8.py) · [Assessment code](src/edgeshield/pipeline.py) · [V8 tests](tests/test_detector_v8.py) |
 | **Physical Raspberry Pi 5 run** | [Device benchmark](results/pi5/v8-device-20261124/v8_offline_benchmark.json) · [Network trace](results/pi5/v8-device-20261124/v8_offline_network.trace) · [Deployment guide](docs/PI5_DEPLOYMENT.md) |
 | **Experimental phishing URL data** · 6,896 training URLs | [Indian development examples](data/synthetic/url_indian_dev.jsonl) · [URL holdout](data/synthetic/url_holdout.jsonl) · [Sources and split counts](results/host/url_v1/dataset_manifest.json) |
-| **Technical report and future work** | [Download final submission report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Report with architecture diagram](docs/REPORT.md#2-system-architecture-and-safeguards) · [Phase 2 network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
+| **Technical report and future work** | [Download official submission report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Quick reference with architecture diagram](docs/QUICK_REFERENCE.md#2-system-architecture-and-safeguards) · [Phase 2 network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
 
 ## What you can try
 
@@ -74,7 +74,7 @@ The risk verdict appears before Llama runs. For example, if an SMS asks the user
 | V8 synthetic SMS holdout | **238/240 correct**. Of 120 scams, 119 were flagged and one was uncertain. One of 120 legitimate messages was flagged. The evaluation excluded 24 ambiguous examples. | [Evaluation results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) ([raw download](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/results/host/v8/v3_v5_v6_v7_v8_evaluation.json)) |
 | URL temporal test | **267/477** positive URLs flagged (**55.97% recall**). Another 113 were uncertain and 97 received the legitimate band. The separate curated holdouts use different samples. | [URL evaluation](results/host/url_v1/evaluation_report.json) |
 
-Synthetic evaluation does not establish real-world accuracy. Explanation validation checks whether the wording follows the evidence. Human clarity testing and sustained thermal testing of V8 remain open. V8 peaked at **72.7 °C over 48.18 s**. The earlier V2 run reached **83.7 °C over 605.4 s** and throttled under passive cooling. [Compare the two measured runs](docs/REPORT.md#sustained-v8-operation). [Limitations](docs/LIMITATIONS.md)
+Synthetic evaluation does not establish real-world accuracy. Explanation validation checks whether the wording follows the evidence. Human clarity testing and sustained thermal testing of V8 remain open. V8 peaked at **72.7 °C over 48.18 s**. The earlier V2 run reached **83.7 °C over 605.4 s** and throttled under passive cooling. [Compare the two measured runs](docs/QUICK_REFERENCE.md#sustained-v8-operation). [Limitations](docs/LIMITATIONS.md)
 
 ## Verify the submission
 
@@ -88,7 +88,7 @@ python scripts/package_bundle.py --source-only
 
 | Review material | Location |
 | --- | --- |
-| Technical report and architecture | [Download final PDF](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Detailed Markdown report](docs/REPORT.md) · [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/SECURITY.md) |
+| Technical report and architecture | [Official submission PDF](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Supplementary quick reference](docs/QUICK_REFERENCE.md) · [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/SECURITY.md) |
 | Training data and evaluation | [Data provenance](docs/SOURCES_DATA.md) · [V8 protocol](docs/V8_EVALUATION_PROTOCOL.md) |
 | Hardware setup and model access | [Pi 5 deployment](docs/PI5_DEPLOYMENT.md) · [ExecuTorch setup](docs/EXECUTORCH.md) |
 | Project status | [Engineering evidence](PROJECT_STATUS.md) |
