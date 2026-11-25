@@ -24,21 +24,9 @@ EdgeShield enforces a strict architectural separation between **detection**, **e
 
 Full component boundaries and threat modeling are detailed in [ARCHITECTURE.md](ARCHITECTURE.md) and [SECURITY.md](SECURITY.md).
 
-```text
-User SMS (hidden terminal input / --stdin)
-   │
-   ▼
-[Local Detector V8 + Cue Rules]  ──►  Immediate verdict (SCAM / UNCERTAIN / LEGITIMATE)
-   │                                  + Deterministic DO: recommendation (app-owned)
-   │  Typed Evidence ONLY (band, score, enumerated cue IDs; NO raw SMS/URL/sender)
-   ▼
-[ExecuTorchAdvisor subprocess]   ──►  Llama 3.2 1B SpinQuant INT4 EO8 on Pi 5 CPU (XNNPACK)
-   │
-   ▼
-[Strict Explanation Validator]   ──►  ACCEPTED  ──►  WHY: ... [Source: Llama (validated)]
-                                 ──►  REJECTED / ERROR / POLICY SKIP
-                                                ──►  WHY: ... [Source: Template fallback]
-```
+![EdgeShield 2.0 architecture on Raspberry Pi 5, showing the SMS verdict, typed evidence boundary, local Llama explanation and validated or fallback output](edgeshield-architecture.jpeg)
+
+*Figure 1. EdgeShield’s on-device workflow. The latency and network measurements refer to the [recorded offline Raspberry Pi 5 run](../results/pi5/v8-device-20261124/).*
 
 Key safety properties verified by automated tests (`261 passed, 0 failed` on Ubuntu x86_64 host, 20 Nov 2026; `tests/test_safety.py`, `tests/test_runtime.py`, `tests/test_pipeline_integration.py`, `tests/test_packaging.py`):
 
