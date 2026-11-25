@@ -16,13 +16,13 @@ Refer to `PROJECT_STATUS.md`, `docs/REPORT.md`, and `results/pi5/STATUS.json` fo
 ## Scope and interpretation
 
 - [x] **Target hardware eligibility (`VERIFIED`):** Raspberry Pi 5 (CPU-only Arm Linux) is explicitly listed on the official Bharat AI-SoC Challenge page (`docs/SOURCES.md`).
-- [x] **Phase 1 SMS scope & future-work disclosure (`VERIFIED`):** Reconciled across `README.md`, `docs/REPORT.md`, `submission/*`, explicitly listing standalone URL classification, network intrusion detection, and malware analysis as future work.
+- [x] The SMS detector is the default. Standalone phishing URL inspection is available as an experimental mode. Network traffic analysis is a Phase 2 design.
 - [x] **Evaluation limits, misses, and throttling disclosed (`VERIFIED`):** Synthetic/spam-proxy limits, non-calibrated scores, and B0 passive thermal throttling (`83.7 °C`, `0xe0008`) documented.
 - [ ] **Optional/residual research items (disclosed as limitations):** Independent human label review of synthetic corpus and 5-person clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`, `PENDING_PARTICIPANTS`).
 
 ## Deliverables and submission
 
 - [x] **Project root `LICENSE` & "Built with Llama" attribution added (`PENDING_CONTRIBUTOR_SIGNOFF`):** Root `LICENSE` sets MIT for EdgeShield original source code & original V8 detector (subject to contributor/ownership confirmation), preserves Meta Llama 3.2 Community License (`models/llama/LICENSE_AND_NOTICE.md`) and ExecuTorch BSD license, and adds "Built with Llama" attribution in `README.md` and `docs/REPORT.md`.
-- [ ] **Disconnected Pi 5 demo video (`MISSING`):** Record and review actual physical Pi 5 playback showing disconnected state and at least one visible `Llama (validated)` response.
+- [ ] Verify the final demo link and its playback from a judge-accessible account.
 - [ ] **Final Report PDF/DOCX (≤ 10 MB) & team details (`PENDING — TEAMMATE 2`):** Populate team/mentor details, incorporate V8 + Pi 5 results, export PDF/DOCX (≤ 10 MB) for upload, and commit final report into public GitHub repo.
-- [ ] **Public GitHub publication & official form submission (`PENDING — TEAMMATE 2`):** Push curated repository (verify public access, zero gated weights/build artifacts), submit through official challenge form, and save receipt to `submission/RECEIPT.md`.
+- [ ] **Public GitHub publication & official form submission (`PENDING — TEAMMATE 2`):** Verify the final repository link and public artifacts, submit through official challenge form, and save receipt to `submission/RECEIPT.md`.

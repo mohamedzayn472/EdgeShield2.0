@@ -1,5 +1,7 @@
 """Terminal interface. SMS input never appears in argv, logs, or output."""
 import argparse
+import getpass
+import warnings
 import json
 import platform
 import sys
@@ -116,7 +118,13 @@ def main(argv=None):
                     print("Use --stdin for piped input.", file=sys.stderr)
                     return 2
                 prompt_label = "Paste URL (empty to exit): " if mode == "url" else "Paste SMS (empty to exit): "
-                text = input(prompt_label)
+                try:
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("error", getpass.GetPassWarning)
+                        text = getpass.getpass(prompt_label)
+                except getpass.GetPassWarning:
+                    print("Hidden terminal input unavailable. Use --stdin.", file=sys.stderr)
+                    return 2
                 if not text.strip():
                     return 0
             try:

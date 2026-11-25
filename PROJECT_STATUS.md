@@ -13,9 +13,9 @@
   - Sustained B0 (`605.4 s`, `n=91`): **91/91** validator-accepted (**0 fallbacks**), **6.70 s** median / **6.81 s** p95 full response (`1.22 s` load, `3.20 s` TTFT, `13.49 tok/s` decode), **1.44 GB** (`1.34 GiB`) peak RSS, **0 B** swap, **83.7 °C** peak (`throttled=0xe0008`).
   - Disconnected offline run (`offline-20261119/`, `6/6 OK`): `eth0`/`wlan0` `DOWN`, empty `routes.json`, **5/5** `Llama (validated)`, **0 `AF_INET`/`AF_INET6` calls** in `network.trace`, `73.25 °C` max (`throttled=0x0`).
 - `VERIFIED (HOST SHELL & PACKAGING CHECKS)`: All `7/7` Pi 5 deployment scripts (`deploy/pi5/*.sh`) pass `bash -n`; clean-bundle extraction and installation verified in `results/host/v8/p4_clean_bundle_verification.txt` (`361 passed, 1 skipped` in `6.57 s`).
-- `MISSING (DEMO VIDEO)`: On-device disconnected Pi 5 recording showing `eth0`/`wlan0` `DOWN` and at least one visible `Llama (validated)` response.
-- `BLOCKED (TEAM / PORTAL ACTIONS)`: Contributor/ownership sign-off on MIT `LICENSE` (added at repo root with third-party Meta Llama 3.2 Community License & ExecuTorch BSD notices), team/mentor details, `offline_competition_test.sh` transfer from Pi 5, clean-folder `setup.sh --offline` check, PDF/DOCX report export (`<= 10 MB`), public GitHub push, and official form submission (`submission/RECEIPT.md`).
+- **Demo:** Verify the final demo link and its playback from a judge-accessible account.
+- `BLOCKED (TEAM / PORTAL ACTIONS)`: Contributor/ownership sign-off on MIT `LICENSE` (added at repo root with third-party Meta Llama 3.2 Community License & ExecuTorch BSD notices), team/mentor details, `offline_competition_test.sh` transfer from Pi 5, clean-folder `setup.sh --offline` check, PDF/DOCX report export (`<= 10 MB`), and official form submission (`submission/RECEIPT.md`).
 - `PENDING_PARTICIPANTS`: Independent human label review of synthetic examples and 5-person clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`).
-- `NOT_IMPLEMENTED (FUTURE SCOPE)`: Standalone phishing URL classification, network intrusion detection, and malware analysis (per PS3 mentoring slides 03 and 11).
+- The SMS detector is the default. Standalone phishing URL inspection is available as an experimental mode. Network traffic analysis is a Phase 2 design. [URL results](results/host/url_v1/) · [Network plan](docs/NETWORK_TRAFFIC_PLAN.md)
 
 See [Technical Report](docs/REPORT.md), [Pi 5 Deployment](docs/PI5_DEPLOYMENT.md), [Submission Checklist](submission/CHECKLIST.md), and [Pi 5 Status](results/pi5/STATUS.json).

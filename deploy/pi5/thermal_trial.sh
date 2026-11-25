@@ -76,7 +76,7 @@ done
 }
 [[ -f "$MANIFEST" ]] || { echo "Manifest not found: $MANIFEST" >&2; exit 2; }
 [[ -x "$PYTHON_BIN" ]] || { echo "Python interpreter not executable: $PYTHON_BIN" >&2; exit 2; }
-command -v /usr/bin/time >/dev/null || { echo 'Install GNU time (sudo apt install time).' >&2; exit 2; }
+gnu_time=$(type -P time) || { echo 'Install GNU time (sudo apt install time).' >&2; exit 2; }
 command -v setsid >/dev/null || { echo 'Missing setsid utility.' >&2; exit 2; }
 
 COOLING_NOTE="${COOLING_NOTE:-unknown}"
@@ -239,7 +239,7 @@ if [[ -n "$START_BELOW_C" ]]; then
 fi
 
 setsid bash -c 'trap "" TERM INT; exec "$@"' _ \
-  /usr/bin/time -v -o "$TRIAL_DIR/process-resources.txt" \
+  "$gnu_time" -v -o "$TRIAL_DIR/process-resources.txt" \
   "$PYTHON_BIN" -m edgeshield.benchmarking \
   --runtime-config "$MANIFEST" \
   --advisory-policy "$ADVISORY_POLICY" \

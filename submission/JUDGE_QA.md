@@ -13,7 +13,7 @@ Yes—on a physical **Raspberry Pi 5 Model B Rev 1.1 (16 GB, CPU-only, `aarch64`
 Yes. The official Bharat AI-SoC Challenge 2026–27 page explicitly lists Raspberry Pi 5 and Arm-based Linux devices (`docs/SOURCES.md`).
 
 **Does this satisfy all PS3 capabilities?**  
-Phase 1 focuses on one complete, testable on-device scam SMS workflow, aligned with the supplied PS3 mentoring slides 03 and 11 (which name scam SMS as a valid primary scenario). Standalone phishing URL classification, network intrusion detection, and malware analysis are explicitly scoped as future work.
+Phase 1 focuses on one complete, testable on-device scam SMS workflow, aligned with the supplied PS3 mentoring slides 03 and 11 (which name scam SMS as a valid primary scenario). The standalone URL detector is experimental. Network traffic analysis is planned for Phase 2.
 
 **What are your actual Pi 5 latency, memory, and thermal numbers?**  
 Measured on our physical CPU-only Raspberry Pi 5 (16 GB, open board, passive heatsink; `results/pi5/archive/20261118-B0-full/`):

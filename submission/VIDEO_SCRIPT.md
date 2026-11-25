@@ -4,7 +4,7 @@
 
 **Status (20 Nov 2026):** The script is ready to record. The disconnected Pi 5 offline evidence files are audited and `VERIFIED` in `results/pi5/offline-20261119/` (`5/5` validated, zero `AF_INET`/`AF_INET6`). The recorded demo video still needs to be captured and reviewed.
 
-**0:00–0:20 — Problem and Phase 1 scope.** “EdgeShield helps users inspect suspicious SMS locally without cloud dependency. Following PS3 mentoring guidance (slides 03 and 11), our Phase 1 prototype delivers one complete on-device scam SMS workflow. Standalone URL classification, network intrusion detection, and malware analysis are future work.” Show title card and the physical Raspberry Pi 5 terminal.
+**0:00–0:20 — Problem and Phase 1 scope.** “EdgeShield helps users inspect suspicious SMS locally without cloud dependency. Following PS3 mentoring guidance (slides 03 and 11), our Phase 1 prototype delivers one complete on-device scam SMS workflow. The standalone URL detector is experimental. Network traffic analysis is planned for Phase 2.” Show title card and the physical Raspberry Pi 5 terminal.
 
 **0:20–0:45 — Physical Pi 5 hardware, disconnected state, and runtime.** Film the physical **Raspberry Pi 5 Model B (16 GB, CPU-only, passive heatsink)** and the unplugged Ethernet port. From the Pi’s local console, show the device model and the interface flags. Turn off Wi-Fi and confirm the non-loopback interfaces lack the `UP` flag before recording the live inference.
 

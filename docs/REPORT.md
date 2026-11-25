@@ -181,7 +181,7 @@ Source: `results/host/v2/heldout_evaluation.json` (reproduced bit-for-bit on Ubu
 1. **Synthetic & spam-proxy data limits:** The fresh holdout consists of AI-assisted fictional messages and UCI spam serves as a proxy for scams. These metrics do **not** establish real-world Indian SMS fraud accuracy.
 2. **False reassurance risk (10 misses, 0 abstentions):** The narrow validation-selected uncertainty band (`[0.25, 0.275]`) produced zero abstentions on the holdout, leaving all 10 missed scams labeled `LEGITIMATE`.
 3. **Pending human studies:** Independent human label review of synthetic examples, representative consented real-message evaluation, and the 5-person explanation clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`) remain pending.
-4. **Deferred PS3 capabilities:** Standalone phishing URL classification, network intrusion detection, and malware analysis remain future work.
+4. The SMS detector is the default. Standalone phishing URL inspection is available as an experimental mode. Network traffic analysis is a Phase 2 design.
 
 ---
 
@@ -289,5 +289,5 @@ bash deploy/pi5/offline_verify.sh
 ## 9. Remaining Release Gates (As of 24 November 2026)
 
 - **Pi 5 V8 + ExecuTorch Llama (`VERIFIED`):** Completed offline in `results/pi5/v8-device-20261124/` (`8/8 OK`) on 16 GB Pi 5, plus separate in-progress URL prototype handover on 8 GB Pi 5 and Phase 2 Network Traffic Plan documented in Section 7 and [NETWORK_TRAFFIC_PLAN.md](NETWORK_TRAFFIC_PLAN.md).
-- **Disconnected Pi 5 demo video (`MISSING`):** Record and review actual on-device playback showing disconnected network state and at least one visible `Llama (validated)` response.
+- **Demonstration video:** Verify the final demo link and its playback from a judge-accessible account.
 - **License, PDF/DOCX export & GitHub publication:** Root `LICENSE` (MIT for original EdgeShield code/V8 detector; Meta Llama 3.2 Community License for Llama weights/tokenizer; BSD for ExecuTorch; "Built with Llama" attribution added). Populate team/mentor details, export final report as PDF/DOCX (`<= 10 MB`), confirm final public repository state, submit through official form, and archive `submission/RECEIPT.md`.

@@ -16,7 +16,7 @@ Legitimate OTPs, bank alerts, payment notices, and delivery messages can share c
 
 ## 3. Phase 1 scope
 
-The user pastes an SMS and receives a risk verdict, observable cues, a Llama explanation when available, and a recommended action. The workflow runs locally on the Pi. Standalone phishing URL classification, network intrusion monitoring, and malware analysis are future work.
+The user pastes an SMS and receives a risk verdict, observable cues, a Llama explanation when available, and a recommended action. The workflow runs locally on the Pi. The standalone URL detector is experimental. Network traffic analysis is planned for Phase 2.
 
 ## 4. On-device architecture
 
@@ -28,7 +28,7 @@ Use the [architecture diagram](../docs/ARCHITECTURE.md) to show the evidence bou
 
 ## 5. Detector evaluation
 
-Use these identical-row synthetic holdout figures (`results/host/v8/v3_v5_v6_v7_v8_evaluation.json`), noting clearly that **archived Pi 5 B0 & offline Llama tests measured V2 (`f37c3dd9...`)**, **V8 (`4d348155...`)** is verified offline on Pi 5 in detector-only mode (`results/pi5/v8-offline-20261124/`), and **V8 + Llama on Pi 5** is `PENDING_HARDWARE`:
+Use these identical-row synthetic holdout figures (`results/host/v8/v3_v5_v6_v7_v8_evaluation.json`), noting clearly that **archived Pi 5 B0 & offline Llama tests measured V2 (`f37c3dd9...`)**, **V8 (`4d348155...`)** is verified offline on Pi 5 in detector-only mode (`results/pi5/v8-offline-20261124/`), and **V8 + Llama on Pi 5** produced five validated explanations in the [device run](../results/pi5/v8-device-20261124/):
 
 | Synthetic holdout (`V8 [0.55, 0.675]`) | Version | Scams detected | Legitimate messages flagged | Abstentions |
 |---|---|---:|---:|---:|
@@ -74,12 +74,12 @@ The detector figure measures model inference in a detector-only run (`benchmark-
 
 **Demo video (`MISSING`):** Record the disconnected physical Pi 5 running V8 (`4d348155...`) analyzing a fictional scam SMS and a legitimate transactional SMS, visibly showing `eth0`/`wlan0` `DOWN`, risk verdict, at least one `Llama (validated)` explanation, and suggested `DO:` action.
 
-State the limits that affect interpretation: archived Pi 5 B0 & offline Llama metrics measured V2 (`f37c3dd9...`), whereas V8 (`4d348155...`) awaits on-device Pi 5 Llama capture (`PENDING_HARDWARE`); continuous 605.4 s passive B0 inference reached thermal throttling (`83.7 °C`, `0xe0008`); synthetic/UCI spam data does not prove real-world Indian fraud accuracy; and Phase 1 analyzes user-supplied SMS (URL, IDS, and malware are future work).
+The five-request V8 run measures short-burst latency. The 605.4-second passive-cooling run used V2 and reached 83.7 °C. Synthetic holdout scores do not establish real-world SMS accuracy.
 
 ## 10. Final submission checklist
 
 - [x] Archive disconnected Pi 5 V8 detector-only offline tests (`results/pi5/v8-offline-20261124/`: `361/362` pytest, `50` repeated batch runs `2.4321 ms` avg) and V2 Llama offline proof (`results/pi5/offline-20261119/`: `6/6 OK`, `5/5` validated, zero `AF_INET`/`AF_INET6`).
-- [ ] Run V8 (`4d348155...`) + ExecuTorch Llama on the physical Pi 5 (`PENDING_HARDWARE`) and record/review the disconnected Pi 5 demo video showing at least one visible `Llama (validated)` response.
+- [ ] Verify the final demo link and its playback from a judge-accessible account.
 - [ ] Export the reconciled technical report as PDF/DOCX (`<= 10 MB`), add root `LICENSE`, push clean public GitHub repo (including final report), submit portal form, and save `submission/RECEIPT.md`.
 - [ ] Approve project root `LICENSE`, confirm team/mentor details on Slide 1, and review the curated release deliverables before upload.
 - [ ] Publish the reviewed project on GitHub with team authorization and verify public reviewer access.

@@ -12,6 +12,7 @@ REQUIRED_DEFAULT_FILES = (
     f"{DEFAULT_DETECTOR_REL}.sha256",
 )
 TOP_FILES = {"README.md", "PROJECT_STATUS.md", "pyproject.toml", ".gitignore", ".gitattributes", "LICENSE"}
+README_ASSETS = {"hero.gif", "technology.png", "metrics.png", "llama.png", "hero-static.png"}
 TOP_DIRS = {"src", "scripts", "tests", "requirements", "configs", "docs", "deploy", "executorch", "submission", "results", "wheelhouse"}
 EXCLUDED_PARTS = {"__pycache__", ".pytest_cache", "raw", "processed", "llama", "licensed", "upstream"}
 
@@ -43,6 +44,8 @@ def included(path):
         return False
     if path.name in {"tokenizer.model", "tokenizer.json", "llama_main"}:
         return False
+    if rel.parent.as_posix() == "assets/readme":
+        return rel.name in README_ASSETS
     return (rel.parts[0] in TOP_DIRS or str(rel) in TOP_FILES or
             rel.parts[0] == "data" and (len(rel.parts) == 2 or rel.parts[1] == "synthetic") or
             rel.parts[0] == "models" and path.name in {
@@ -113,7 +116,7 @@ def _runtime_provenance(rel: str) -> dict[str, str]:
     return {"role": "runtime_asset", "provenance": "Staged target runtime asset"}
 
 
-def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None]:
+def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None, dict | None]:
     llama_dir = ROOT / "models" / "llama"
     expected_relpaths = [
         "models/llama/llama3_2.pte",
@@ -154,6 +157,7 @@ def _build_private_runtime_bundle(dest: Path) -> tuple[dict, dict | None]:
         "entries": entries,
     }
     manifest_path = llama_dir / "RUNTIME_MANIFEST.json"
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(json.dumps(runtime_manifest, indent=2), encoding="utf-8")
 
     archive_info = None
@@ -189,7 +193,7 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     candidates = [ROOT / name for name in TOP_FILES]
-    for name in TOP_DIRS | {"data", "models"}:
+    for name in TOP_DIRS | {"assets/readme", "data", "models"}:
         base = ROOT / name
         if base.exists():
             candidates.extend(base.rglob("*"))

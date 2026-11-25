@@ -56,6 +56,6 @@ The initial subprocess design may reload weights for each message. Persistence s
 
 ## Scope and product decisions
 
-Phase 1 targets pasted SMS. Independent URL classification, network capture/intrusion detection, malware behavior analysis, automatic SMS integration and a dashboard are deferred. Link presence in an SMS is not URL reputation analysis. The architecture can accept future structured evidence providers, but they need their own datasets, tests and performance measurements.
+The SMS detector is the default. Standalone phishing URL inspection is available as an experimental mode. Network traffic analysis is a Phase 2 design.
 
 The intended audience is a non-expert reviewing a suspicious request. Commercial deployment would require representative consented data, multilingual evaluation, usability evidence, maintenance and independent security assessment. None of those follows automatically from a hackathon prototype.

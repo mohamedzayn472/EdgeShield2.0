@@ -2,7 +2,7 @@
 
 **Verified primary target:** **Raspberry Pi 5 Model B Rev 1.1, 16 GB RAM, CPU-only, 64-bit `aarch64` Debian GNU/Linux 13 (Trixie), Python 3.13.5, `glibc 2.41`**.
 
-The current release candidate defaults to **Detector V3** (`models/detector_v3.json`, SHA-256 `b2b2126b872c43eb02ccdef41a7f5040cf86cfd0dc1bfb31f98ef13733d50910`), alongside the exported SpinQuant model (`llama3_2.pte`), tokenizer (`tokenizer.model`), evidence firewall, explanation validator, and deterministic advice. Physical Pi 5 smoke testing (`4/4` `Llama (validated)`), 605.4 s sustained B0 benchmarking (`91/91` validated, `6.81 s` p95 full response, `1.44 GB` / `1.34 GiB` peak runner RSS, `0 B` swap, `83.7 °C` peak with throttling `0xe0008`), and disconnected offline verification (`5/5` validated, `6.80 s` p95, `0` `AF_INET`/`AF_INET6` syscalls) were measured on **Detector V2** (`models/detector_v2.json`, SHA-256 `f37c3dd9060b89ead7ea6bbf1c393b22fff7cfc18ed5d85126e977e03daea6a6`) and are archived in `results/pi5/archive/20261118-B0-full/` and `results/pi5/offline-20261119/`. Physical Pi 5 device verification of **Detector V3 (`b2b2126b...`)** remains `PENDING_HARDWARE`.
+Detector V8 is the default. The [24 November V8 device run](../results/pi5/v8-device-20261124/) records five validated offline Llama explanations on the 16 GB Pi 5. The [605-second sustained run](../results/pi5/archive/20261118-B0-full/) used Detector V2.
 
 > Note: `deploy/pi5/setup.sh` enforces a minimum `>=3 GiB` visible RAM check so smaller Pi 5 boards (such as 4 GB models) can also be trialed; verified competition measurements were collected on the **16 GB** Pi 5 Model B Rev 1.1.
 
