@@ -1,6 +1,6 @@
 # Dataset and model card — original baseline
 
-> This document preserves the initial detector's dataset and training methodology. The current default is frozen Detector V8, which adds family-separated synthetic English/Hinglish development data to the UCI spam proxy. For current splits, calibration, thresholds, holdout and promotion gates, see the [V8 evaluation protocol](V8_EVALUATION_PROTOCOL.md) and [technical report](REPORT.md). The historical baseline statements below do not describe V8.
+> This document preserves the initial detector's dataset and training methodology. The current default is frozen Detector V8, which adds family-separated synthetic English/Hinglish development data to the UCI spam proxy. For current splits, calibration, thresholds, holdout and promotion gates, see the [V8 evaluation protocol](V8_EVALUATION_PROTOCOL.md) and [quick technical reference](QUICK_REFERENCE.md). The historical baseline statements below do not describe V8.
 
 The baseline is trained on UCI SMS Spam Collection, attributed to Almeida, T. & Hidalgo, J. (2011), DOI 10.24432/C5CC84. The official dataset page identifies CC BY 4.0 licensing. The downloaded archive and processed partitions are local development data, excluded from the distributable application and source bundle; reacquire with the documented public URL. UCI contains historical public messages that can include identifiers. Do not use it as demo SMS or put its raw contents into logs.
 
