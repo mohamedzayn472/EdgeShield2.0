@@ -6,6 +6,8 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying · Built with Llama**
 
+[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Download the final technical report (DOCX)](docs/EdgeShield_Report.docx)
+
 **Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
 
 ## Judge’s guide to datasets and evidence
