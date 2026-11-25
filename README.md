@@ -6,20 +6,28 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying · Built with Llama**
 
-[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Final technical report (PDF)](Team_Tolerator_Edgeshield_ARM_SoC.pdf)
+[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Download final technical report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf)
 
 **Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
+
+## How to view the submission files
+
+GitHub's built-in preview may display **“Unable to render code block”** for large model/evaluation JSON files or fail to preview a PDF. The file can still be downloaded.
+
+1. **Technical report:** [Download the final 18-page PDF directly](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf), then open it in your browser's PDF reader or a local PDF viewer. Alternatively, [read the technical report in GitHub Markdown](docs/REPORT.md).
+2. **Datasets, frozen model and evaluation results:** Open the file from the judge's guide below. If the preview fails, select **Raw**, **View raw**, or the **Download raw file** icon. Open the downloaded `.json` or `.jsonl` in VS Code or another text editor. JSONL contains one JSON record per line.
+3. **Download everything:** On the [repository home page](https://github.com/mohamedzayn472/EdgeShield2.0), select **Code → Download ZIP**, extract the archive, and browse the files locally. No model execution is required to inspect the evidence.
 
 ## Judge’s guide to datasets and evidence
 
 | What to inspect | Open on GitHub |
 | --- | --- |
 | **V8 training data** · 3,431 training SMS (2,770 UCI + 661 synthetic), plus 682 for calibration and 1,331 for validation | [Synthetic English/Hinglish development data](data/synthetic/v8_development.jsonl) · [UCI download and local preparation](data/README.md) · [Recorded split counts](results/host/v8/training_validation.json) |
-| **V8 test data** · 264 fresh synthetic SMS. V8 classified 238 of 240 labeled cases correctly. The other 24 were ambiguous. | [Read the holdout messages](data/synthetic/v8_holdout.jsonl) · [Evaluation protocol](docs/V8_EVALUATION_PROTOCOL.md) · [Scored results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) |
-| **Model and implementation** | [Frozen V8 model](models/detector_v8.json) · [Training script](scripts/train_detector_v8.py) · [Assessment code](src/edgeshield/pipeline.py) · [V8 tests](tests/test_detector_v8.py) |
+| **V8 test data** · 264 fresh synthetic SMS. V8 classified 238 of 240 labeled cases correctly. The other 24 were ambiguous. | [Read the holdout messages](data/synthetic/v8_holdout.jsonl) · [Evaluation protocol](docs/V8_EVALUATION_PROTOCOL.md) · [Scored results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) ([raw download](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/results/host/v8/v3_v5_v6_v7_v8_evaluation.json)) |
+| **Model and implementation** | [Frozen V8 model](models/detector_v8.json) ([raw download](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/models/detector_v8.json)) · [Training script](scripts/train_detector_v8.py) · [Assessment code](src/edgeshield/pipeline.py) · [V8 tests](tests/test_detector_v8.py) |
 | **Physical Raspberry Pi 5 run** | [Device benchmark](results/pi5/v8-device-20261124/v8_offline_benchmark.json) · [Network trace](results/pi5/v8-device-20261124/v8_offline_network.trace) · [Deployment guide](docs/PI5_DEPLOYMENT.md) |
 | **Experimental phishing URL data** · 6,896 training URLs | [Indian development examples](data/synthetic/url_indian_dev.jsonl) · [URL holdout](data/synthetic/url_holdout.jsonl) · [Sources and split counts](results/host/url_v1/dataset_manifest.json) |
-| **Technical report and future work** | [Final submission report (PDF)](Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Report with architecture diagram](docs/REPORT.md#2-system-architecture-and-safeguards) · [Phase 2 network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
+| **Technical report and future work** | [Download final submission report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Report with architecture diagram](docs/REPORT.md#2-system-architecture-and-safeguards) · [Phase 2 network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
 
 ## What you can try
 
@@ -75,7 +83,7 @@ The risk verdict appears before Llama runs. For example, if an SMS asks the user
 | --- | --- | --- |
 | V8 SMS detector latency | **1.80 ms median** on the 16 GB Pi 5. Full advisory response took **6.51 s median** and **6.85 s p95** across five requests. | [Benchmark JSON](results/pi5/v8-device-20261124/v8_offline_benchmark.json) |
 | Offline advisory | **5/5** explanations passed validation with zero fallbacks. Ethernet and Wi-Fi were down. The trace contained zero IPv4/IPv6 socket matches during the recorded run. | [Device evidence and trace](results/pi5/v8-device-20261124/) |
-| V8 synthetic SMS holdout | **238/240 correct**. Of 120 scams, 119 were flagged and one was uncertain. One of 120 legitimate messages was flagged. The evaluation excluded 24 ambiguous examples. | [Evaluation results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) |
+| V8 synthetic SMS holdout | **238/240 correct**. Of 120 scams, 119 were flagged and one was uncertain. One of 120 legitimate messages was flagged. The evaluation excluded 24 ambiguous examples. | [Evaluation results](results/host/v8/v3_v5_v6_v7_v8_evaluation.json) ([raw download](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/results/host/v8/v3_v5_v6_v7_v8_evaluation.json)) |
 | URL temporal test | **267/477** positive URLs flagged (**55.97% recall**). Another 113 were uncertain and 97 received the legitimate band. The separate curated holdouts use different samples. | [URL evaluation](results/host/url_v1/evaluation_report.json) |
 
 Synthetic evaluation does not establish real-world accuracy. Explanation validation checks whether the wording follows the evidence. Human clarity testing and sustained thermal testing of V8 remain open. V8 peaked at **72.7 °C over 48.18 s**. The earlier V2 run reached **83.7 °C over 605.4 s** and throttled under passive cooling. [Compare the two measured runs](docs/REPORT.md#sustained-v8-operation). [Limitations](docs/LIMITATIONS.md)
@@ -92,7 +100,7 @@ python scripts/package_bundle.py --source-only
 
 | Review material | Location |
 | --- | --- |
-| Technical report and architecture | [Final PDF](Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Detailed Markdown report](docs/REPORT.md) · [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/SECURITY.md) |
+| Technical report and architecture | [Download final PDF](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Detailed Markdown report](docs/REPORT.md) · [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/SECURITY.md) |
 | Training data and evaluation | [Data provenance](docs/SOURCES_DATA.md) · [V8 protocol](docs/V8_EVALUATION_PROTOCOL.md) |
 | Hardware setup and model access | [Pi 5 deployment](docs/PI5_DEPLOYMENT.md) · [ExecuTorch setup](docs/EXECUTORCH.md) |
 | Project status | [Engineering evidence](PROJECT_STATUS.md) |
