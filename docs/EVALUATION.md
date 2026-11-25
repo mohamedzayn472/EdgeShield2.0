@@ -1,4 +1,6 @@
-# Evaluation preregistration
+# Evaluation preregistration — original baseline
+
+> Historical protocol registered before the initial detector evaluation. For the current V8 protocol, see [V8_EVALUATION_PROTOCOL.md](V8_EVALUATION_PROTOCOL.md); for subsequent measured host and physical-device results, see [PROJECT_STATUS.md](../PROJECT_STATUS.md) and [Pi 5 status](../results/pi5/STATUS.json). Pending states in this historical protocol refer to the original registration date, not current submission status.
 
 Protocol registered 2026-11-16 before training and before final heldout execution.
 
