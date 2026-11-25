@@ -16,4 +16,4 @@
 - `PENDING_PARTICIPANTS`: Independent human label review of synthetic examples and 5-person clarity study (`docs/CLARITY_STUDY_INSTRUMENT.md`).
 - The SMS detector is the default. Standalone phishing URL inspection is available as an experimental mode. Network traffic analysis is a Phase 2 design. [URL results](results/host/url_v1/) · [Network plan](docs/NETWORK_TRAFFIC_PLAN.md)
 
-See [Technical Report](docs/REPORT.md), [Pi 5 Deployment](docs/PI5_DEPLOYMENT.md), and [Pi 5 Status](results/pi5/STATUS.json).
+See [Official submission report (PDF)](Team_Tolerator_Edgeshield_ARM_SoC.pdf), [Quick Technical Reference](docs/QUICK_REFERENCE.md), [Pi 5 Deployment](docs/PI5_DEPLOYMENT.md), and [Pi 5 Status](results/pi5/STATUS.json).
