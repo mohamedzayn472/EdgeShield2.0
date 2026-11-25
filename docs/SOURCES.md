@@ -22,9 +22,3 @@ Last verified: **19 November 2026**, Asia/Calcutta (initial capture 15 November 
 - **UNVERIFIED / MISSING:** missing source, permission, artifact, or experiment.
 
 For execution status use `PASSED`, `VERIFIED`, `OPERATOR-REPORTED`, `MISSING`, `FAILED`, `PENDING_PARTICIPANTS`, `BLOCKED`, or `NOT_IMPLEMENTED`. A documented command is not evidence that it executed. A host test is not a Pi test. Checksum identity checks integrity, not source authenticity.
-
-## Open items for the team lead to confirm and record
-
-1. Inspect the official submission form (account/portal access) for exact field limits, report format, video host/duration/size limits, and team/college nomination/faculty mentor requirements.
-2. Approve the project's open-source `LICENSE` file for public GitHub distribution (while keeping gated Meta Llama weights/tokenizer excluded and documenting lawful Meta license acquisition).
-3. Record every resolved portal check and final submission receipt with date in `submission/RECEIPT.md`.

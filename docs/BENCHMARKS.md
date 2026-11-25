@@ -1,6 +1,6 @@
 # Reproducible measurement protocol
 
-All laptop measurements are **HOST TESTS**. All Raspberry Pi performance fields are `PENDING_HARDWARE` until executed on the physical Pi 4. Empty measurements mean unknown, not zero. See the machine-generated files under `results/` and the root status tracker for actual execution evidence.
+The [V8 device archive](../results/pi5/v8-device-20261124/) records the five-request offline Pi 5 run. The [V2 sustained benchmark](../results/pi5/archive/20261118-B0-full/) covers a separate 605-second run. Laptop measurements below are historical host results.
 
 ## Record conditions before measurement
 
@@ -41,7 +41,7 @@ Record instrument wording, order, missing answers and counts. Report distributio
 
 ## Executed Ubuntu x86_64 host measurements (17 November 2026)
 
-*All metrics below are HOST TESTS on Ubuntu 22.04.5 LTS `x86_64` (AMD Ryzen 5 8645HS, 12 logical CPUs, 14 GiB RAM, Python 3.10.12). Raspberry Pi 4 hardware measurements remain `PENDING_HARDWARE`.*
+*All metrics below are HOST TESTS on Ubuntu 22.04.5 LTS `x86_64` (AMD Ryzen 5 8645HS, 12 logical CPUs, 14 GiB RAM, Python 3.10.12).*
 
 - **Detector-only (100 reps, `results/host/ubuntu/benchmark_argon_detector.json`):** `detector_ms` mean `0.625 ms`, median `0.554 ms`, p95 `0.989 ms`; `evidence_ms` mean `0.047 ms`, median `0.043 ms`; `total_ms` mean `0.684 ms`, median `0.615 ms`, p95 `1.066 ms`.
 - **Cold startup & memory (`results/host/ubuntu/optimization_study.json`):** Cold CLI subprocess (import + `load_detector` + 1 `assess`) median `509.59 ms` (p95 `634.80 ms`), Python peak RSS `111.46 MiB`; `load_detector` single-pass JSON+SHA256 `29.96 ms` cold vs `0.985 ms` cached hit; `llama_main` child peak RSS `1627.86 MiB` (`GNU time -v`).

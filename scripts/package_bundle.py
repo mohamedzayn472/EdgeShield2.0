@@ -12,8 +12,8 @@ REQUIRED_DEFAULT_FILES = (
     f"{DEFAULT_DETECTOR_REL}.sha256",
 )
 TOP_FILES = {"README.md", "PROJECT_STATUS.md", "pyproject.toml", ".gitignore", ".gitattributes", "LICENSE"}
-README_ASSETS = {"hero.gif", "technology.png", "metrics.png", "llama.png", "hero-static.png"}
-TOP_DIRS = {"src", "scripts", "tests", "requirements", "configs", "docs", "deploy", "executorch", "submission", "results", "wheelhouse"}
+README_ASSETS = {"hero.gif", "technology.png"}
+TOP_DIRS = {"src", "scripts", "tests", "requirements", "configs", "docs", "deploy", "executorch", "results", "wheelhouse"}
 EXCLUDED_PARTS = {"__pycache__", ".pytest_cache", "raw", "processed", "llama", "licensed", "upstream"}
 
 EXECUTORCH_REVISION = "985c1ceccc8bb8b6a32294f71aeb5d2f299562f7"

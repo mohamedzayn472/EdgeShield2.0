@@ -9,7 +9,7 @@ Follows [docs/BENCHMARKS.md](BENCHMARKS.md) § "Five-person clarity study".
 ## 1. Study Rules & Privacy Constraints
 
 1. **Participants:** Recruit 5 consenting adults (no minors, no team model authors). Record only anonymized participant IDs (`P1`–`P5`); collect no private SMS, phone numbers, or personally identifying details.
-2. **Stimuli:** Use fixed synthetic examples only (drawn from the frozen 20-case comparison IDs in `results/host/ubuntu/twenty_case_llama_vs_template.json` or `docs/DEMO_SCRIPT.md`).
+2. **Stimuli:** Use fixed synthetic examples only (drawn from the frozen 20-case comparison IDs in `results/host/ubuntu/twenty_case_llama_vs_template.json`).
 3. **Blinding & Randomization:** Show the two explanation styles (`Template fallback` vs `Llama (validated)`) side-by-side as **Option A** and **Option B** with randomized A/B assignment per item and **without disclosing which source generated each line**. Do not coach participants to prefer Llama.
 4. **Honest Reporting:** Record exact wording shown, order, missing answers, per-item counts, medians, and qualitative misunderstandings. Five convenience participants do not establish population-level usability.
 

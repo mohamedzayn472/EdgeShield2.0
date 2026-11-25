@@ -283,11 +283,3 @@ bash deploy/pi5/launch.sh --repeat
 # From a local console with Wi-Fi off and Ethernet unplugged:
 bash deploy/pi5/offline_verify.sh
 ```
-
----
-
-## 9. Remaining Release Gates (As of 24 November 2026)
-
-- **Pi 5 V8 + ExecuTorch Llama (`VERIFIED`):** Completed offline in `results/pi5/v8-device-20261124/` (`8/8 OK`) on 16 GB Pi 5, plus separate in-progress URL prototype handover on 8 GB Pi 5 and Phase 2 Network Traffic Plan documented in Section 7 and [NETWORK_TRAFFIC_PLAN.md](NETWORK_TRAFFIC_PLAN.md).
-- **Demonstration video:** Verify the final demo link and its playback from a judge-accessible account.
-- **License, PDF/DOCX export & GitHub publication:** Root `LICENSE` (MIT for original EdgeShield code/V8 detector; Meta Llama 3.2 Community License for Llama weights/tokenizer; BSD for ExecuTorch; "Built with Llama" attribution added). Populate team/mentor details, export final report as PDF/DOCX (`<= 10 MB`), confirm final public repository state, submit through official form, and archive `submission/RECEIPT.md`.

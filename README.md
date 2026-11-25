@@ -63,6 +63,6 @@ python scripts/package_bundle.py --source-only
 | Technical report and architecture | [Report](docs/REPORT.md) · [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/SECURITY.md) |
 | Training data and evaluation | [Data provenance](docs/SOURCES_DATA.md) · [V8 protocol](docs/V8_EVALUATION_PROTOCOL.md) |
 | Hardware setup and model access | [Pi 5 deployment](docs/PI5_DEPLOYMENT.md) · [ExecuTorch setup](docs/EXECUTORCH.md) |
-| Project and submission status | [Engineering evidence](PROJECT_STATUS.md) · [Submission checklist](submission/CHECKLIST.md) |
+| Project status | [Engineering evidence](PROJECT_STATUS.md) |
 
 Original EdgeShield code is distributed under the [project license](LICENSE). Meta Llama weights and tokenizer require separate access and are excluded from the public bundle. [Third-party runtime sources](docs/SOURCES_RUNTIME.md)
