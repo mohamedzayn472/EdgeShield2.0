@@ -36,11 +36,23 @@ To check V8 specifically, run `python -m pytest -q tests/test_detector_v8.py` in
 
 For an interactive session, use `edgeshield --repeat` for SMS or `edgeshield --mode url --repeat` for URLs. To run the model-backed demo on a prepared Pi, follow the [Pi 5 deployment guide](docs/PI5_DEPLOYMENT.md) and run `bash deploy/pi5/launch.sh --demo`.
 
-## How an assessment works
+## How the Pi assesses an SMS
 
-1. The detector returns a score and one of three bands, `LEGITIMATE`, `UNCERTAIN` or `SCAM`. A low score cannot establish that a message or site is safe.
-2. The application turns observable cues into a typed evidence record. The raw input stays outside the Llama prompt. Application code chooses the recommended action.
-3. ExecuTorch runs quantized Llama 3.2 1B locally on the Arm CPU. Accepted output is labeled `Llama (validated)`. If generation is unavailable or fails validation, the user sees `Template fallback`.
+```mermaid
+flowchart TD
+    SMS["SMS entered on the Pi"] --> D["Detector V8 · TF-IDF + logistic regression"]
+    SMS --> C["Extract indicator IDs"]
+    D -->|Risk band| A["Show verdict and recommended action"]
+    D -->|Band and score| E["Privacy boundary · typed evidence"]
+    C --> E
+    E -->|Evidence only| L["Local Llama via ExecuTorch"]
+    L --> V{"Explanation passes validation?"}
+    V -->|Yes| Y["Show validated explanation"]
+    V -->|No| F["Show template fallback"]
+    E -->|Runtime unavailable or skipped| F
+```
+
+The risk verdict appears before Llama runs. For example, if an SMS asks the user to share an OTP, the evidence record can carry the cue `OTP_REQUEST`. The OTP digits and original wording stay outside the model prompt. [Evidence schema](src/edgeshield/evidence.py) · [Assessment code](src/edgeshield/pipeline.py)
 
 ![EdgeShield technology stack](assets/readme/technology.png)
 
