@@ -6,15 +6,17 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying · Built with Llama**
 
-[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Official submission report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Quick technical reference (online)](docs/QUICK_REFERENCE.md) · [Download project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip)
+[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Download official submission report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Quick technical reference (online)](docs/QUICK_REFERENCE.md) · [Download project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip)
 
 **Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
 
 ## Reviewer access — report and evidence
 
-> **Recommended viewing method:** [Download the complete project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip), extract it, and open `Team_Tolerator_Edgeshield_ARM_SoC.pdf` in any PDF reader. This also provides every tracked dataset, model artifact and benchmark record for local inspection without running the application.
+**Official submission:** [Download the final 18-page technical report (PDF)](https://raw.githubusercontent.com/mohamedzayn472/EdgeShield2.0/main/Team_Tolerator_Edgeshield_ARM_SoC.pdf). Open the downloaded PDF in your preferred reader. No repository download, extraction or software installation is required.
 
-For individual files, open the GitHub file page and select **Download raw file** (top-right download icon), **Raw**, or **View raw**. Save PDFs locally; open JSON and JSONL files in a text editor such as VS Code. If an embedded browser does not preview a file, open the link in a regular browser or use the ZIP above. The [quick technical reference](docs/QUICK_REFERENCE.md) is a supplementary GitHub-readable engineering guide, not the official report. The 18-page PDF is the formal Phase 1 submission.
+The [quick technical reference](docs/QUICK_REFERENCE.md) is a supplementary engineering guide for browsing implementation details and evidence on GitHub, not the official submission report.
+
+For datasets, models and benchmark files, use the links below. If GitHub's preview is unavailable, select **Raw**, **View raw** or **Download raw file**, then open the downloaded file in a text editor. The [complete project ZIP](https://github.com/mohamedzayn472/EdgeShield2.0/archive/refs/heads/main.zip) is optional for reviewers who want to inspect or run the entire project locally.
 
 ## Judge’s guide to datasets and evidence
 
