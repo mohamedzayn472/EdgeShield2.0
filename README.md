@@ -6,7 +6,7 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 
 **Bharat AI-SoC Challenge 2026–27 · PS3 · Open Qualifying · Built with Llama**
 
-[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Download the final technical report (DOCX)](docs/EdgeShield_Report.docx)
+[Watch the Raspberry Pi 5 demo (Google Drive, 1 min 59 s)](https://drive.google.com/file/d/13Q4j9QwjhtV7gm1LMB2PJhMGTWMVEbHA/view?usp=sharing) · [Final technical report (PDF)](Team_Tolerator_Edgeshield_ARM_SoC.pdf)
 
 **Judges: [run the V8 SMS demo](#run-the-v8-sms-demo).** V8 loads automatically. V1–V7 are available for historical comparisons and regression testing.
 
@@ -19,7 +19,7 @@ EdgeShield helps a user decide what to do with a suspicious text on a Raspberry 
 | **Model and implementation** | [Frozen V8 model](models/detector_v8.json) · [Training script](scripts/train_detector_v8.py) · [Assessment code](src/edgeshield/pipeline.py) · [V8 tests](tests/test_detector_v8.py) |
 | **Physical Raspberry Pi 5 run** | [Device benchmark](results/pi5/v8-device-20261124/v8_offline_benchmark.json) · [Network trace](results/pi5/v8-device-20261124/v8_offline_network.trace) · [Deployment guide](docs/PI5_DEPLOYMENT.md) |
 | **Experimental phishing URL data** · 6,896 training URLs | [Indian development examples](data/synthetic/url_indian_dev.jsonl) · [URL holdout](data/synthetic/url_holdout.jsonl) · [Sources and split counts](results/host/url_v1/dataset_manifest.json) |
-| **Technical report and future work** | [Report with architecture diagram](docs/REPORT.md#2-system-architecture-and-safeguards) · [Phase 2 network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
+| **Technical report and future work** | [Final submission report (PDF)](Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Report with architecture diagram](docs/REPORT.md#2-system-architecture-and-safeguards) · [Phase 2 network traffic plan](docs/NETWORK_TRAFFIC_PLAN.md) |
 
 ## What you can try
 
@@ -92,7 +92,7 @@ python scripts/package_bundle.py --source-only
 
 | Review material | Location |
 | --- | --- |
-| Technical report and architecture | [Report](docs/REPORT.md) · [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/SECURITY.md) |
+| Technical report and architecture | [Final PDF](Team_Tolerator_Edgeshield_ARM_SoC.pdf) · [Detailed Markdown report](docs/REPORT.md) · [Architecture](docs/ARCHITECTURE.md) · [Privacy](docs/SECURITY.md) |
 | Training data and evaluation | [Data provenance](docs/SOURCES_DATA.md) · [V8 protocol](docs/V8_EVALUATION_PROTOCOL.md) |
 | Hardware setup and model access | [Pi 5 deployment](docs/PI5_DEPLOYMENT.md) · [ExecuTorch setup](docs/EXECUTORCH.md) |
 | Project status | [Engineering evidence](PROJECT_STATUS.md) |
